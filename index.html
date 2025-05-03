@@ -12,7 +12,7 @@
     <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-2xl font-bold">Wei-Ping Chan</h1>
       <nav class="space-x-4">
-        <a href="#intro" class="hover:text-blue-500">Home</a>
+        <a class="text-blue-500">Home</a>
         <a href="projects.html" class="hover:text-blue-500">Projects</a>
         <a href="illustrations.html" class="hover:text-blue-500">Illustrations</a>
         <a href="blog.html" class="hover:text-blue-500">Blog</a>
@@ -23,84 +23,107 @@
   </header>
 
   <!-- Intro Section -->
-  <section id="intro" class="text-center py-12">
-    <img src="https://drive.google.com/thumbnail?id=1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME&sz=s500" alt="Wei-Ping Chan Photo" class="mx-auto block">
-    <h2 class="text-4x1 font-bold">Wei-Ping Chan (He/him)</h2>
-    <h2 class="text-2xl font-semibold">Exploratory Data Scientist | Interdisciplinary Researcher | From Nature to Finance & Health</h2>
-    <div class="max-w-3xl mx-auto text-left">
-      <p class="mt-2 text-lg">
-        I am a research scientist specializing in <span class="font-semibold text-blue-600">data science</span>, 
-        <span class="font-semibold text-blue-600">AI</span>, and computational modeling, with a strong focus on 
-        <span class="font-semibold text-blue-600">exploratory analysis</span>, uncovering patterns, and developing <span class="font-semibold text-blue-600">theoretical insights</span>. My interdisciplinary 
-        approach—integrating <span class="font-semibold text-blue-600">ecology</span>, 
-        <span class="font-semibold text-blue-600">evolution</span>, environmental science, and AI—has led to new 
-        discoveries and novel technologies.
-      </p>
-      <p class="mt-2 text-lg">
-        My expertise includes <span class="font-semibold text-blue-600">digitization</span>, 
-        spectral data analysis, insect flight mechanisms, and 
-        multi-modal AI applications. With over a decade of 
-        programming experience, I work extensively with <span class="font-semibold text-blue-600">spatiotemporal data</span>, 
-        <span class="font-semibold text-blue-600">computer vision</span>, and 
-        <span class="font-semibold text-blue-600">causal inference</span>, building scalable analytical frameworks 
-        to drive scientific innovation and real-world applications.
-      </p>
+  <section id="intro" class="py-12 grid grid-cols-4 gap-4 items-center">
+    <!-- Empty Left Column -->
+    <div></div>
+    <!-- Photo Column -->
+    <div class="text-center">
+      <img src="https://drive.google.com/thumbnail?id=1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME&sz=s500" alt="Wei-Ping Chan Photo" class="mx-auto block">
     </div>
+    <!-- Text Column -->
+    <div>
+      <h2 class="text-4xl font-bold">Wei-Ping Chan</h2>
+      <h2 class="text-2xl font-semibold">Exploratory Data Scientist | Interdisciplinary Researcher | From Nature to Finance & Health</h2>
+      <div class="mt-4 text-lg">
+        <p>
+          I am a research scientist specializing in <span class="font-semibold text-blue-600">data science</span>, 
+          <span class="font-semibold text-blue-600">AI</span>, and computational modeling, with a strong focus on 
+          <span class="font-semibold text-blue-600">exploratory analysis</span>, uncovering patterns, and developing <span class="font-semibold text-blue-600">theoretical insights</span>. My interdisciplinary 
+          approach—integrating <span class="font-semibold text-blue-600">ecology</span>, 
+          <span class="font-semibold text-blue-600">evolution</span>, environmental science, and AI—has led to new 
+          discoveries and novel technologies.
+        </p>
+        <p class="mt-4">
+          My expertise includes <span class="font-semibold text-blue-600">digitization</span>, 
+          spectral data analysis, insect flight mechanisms, and 
+          multi-modal AI applications. With over a decade of 
+          programming experience, I work extensively with <span class="font-semibold text-blue-600">spatiotemporal data</span>, 
+          <span class="font-semibold text-blue-600">computer vision</span>, and 
+          <span class="font-semibold text-blue-600">causal inference</span>, building scalable analytical frameworks 
+          to drive scientific innovation and real-world applications.
+        </p>
+      </div>
+    </div>
+    <!-- Empty Right Column -->
+    <div></div>
   </section>
 
   <!-- Summary Sections -->
   <div class="max-w-6xl mx-auto px-4">
-      <section id="technical-skills" class="py-8 bg-gray-100">
+    <section id="technical-skills" class="py-8 bg-gray-100">
       <h3 class="text-3xl font-bold mb-6 text-center text-blue-600">Technical Skills</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Programming -->
-        <div class="bg-white shadow-lg rounded-lg p-6">
-          <p class="font-bold text-lg text-blue-500 mb-4">Programming</p>
-          <ul class="list-disc list-inside text-gray-700">
-            <li>Python</li>
-            <li>R</li>
-            <li>MATLAB</li>
-            <li>Wolfram Mathematica</li>
-            <li>Spark</li>
-            <li>SQL</li>
-          </ul>
+        <div class="bg-white shadow-lg rounded-lg flex">
+          <img src="https://drive.google.com/thumbnail?id=1MHtkS5dd_oe3BkMysLvjvMQMQDvUjSL_&sz=s500" alt="Programming" class="w-1/2 object-cover rounded-l-lg">
+          <div class="p-6">
+            <p class="font-bold text-lg text-blue-500 mb-4">Programming</p>
+            <ul class="list-disc list-inside text-gray-700">
+              <li>Python</li>
+              <li>R</li>
+              <li>MATLAB</li>
+              <li>Wolfram Mathematica</li>
+              <li>Spark</li>
+              <li>SQL</li>
+            </ul>
+          </div>
         </div>
         <!-- Data Analysis -->
-        <div class="bg-white shadow-lg rounded-lg p-6">
-          <p class="font-bold text-lg text-blue-500 mb-4">Data Analysis</p>
-          <ul class="list-disc list-inside text-gray-700">
-            <li>Machine Learning</li>
-            <li>Computer Vision</li>
-            <li>Causal Inference</li>
-            <li>Natural Language Processing</li>
-            <li>Statistical Modeling</li>
-            <li>Predictive Analytics</li>
-          </ul>
+        <div class="bg-white shadow-lg rounded-lg flex">
+          <img src="https://drive.google.com/thumbnail?id=1OgdJyv5owRvho7zou49ots24I3VTFHTM&sz=s500" alt="Data Analysis" class="w-1/2 object-cover rounded-l-lg">
+          <div class="p-6">
+            <p class="font-bold text-lg text-blue-500 mb-4">Data Analysis</p>
+            <ul class="list-disc list-inside text-gray-700">
+              <li>Machine Learning</li>
+              <li>Computer Vision</li>
+              <li>Causal Inference</li>
+              <li>NLP</li>
+              <li>Statistical Modeling</li>
+              <li>Predictive Analytics</li>
+            </ul>
+          </div>
         </div>
         <!-- Software & Tools -->
-        <div class="bg-white shadow-lg rounded-lg p-6">
-          <p class="font-bold text-lg text-blue-500 mb-4">Software & Tools</p>
-          <ul class="list-disc list-inside text-gray-700">
-            <li>ArcGIS</li>
-            <li>Tableau</li>
-            <li>Scikit-learn</li>
-            <li>ENVI</li>
-            <li>Adobe Illustrator</li>
-            <li>Adobe Photoshop</li>
-          </ul>
+        <div class="bg-white shadow-lg rounded-lg flex">
+          <img src="https://drive.google.com/thumbnail?id=19XKLMEz18iRE0juokyOAGymopLCSrT0h&sz=s800" alt="Software & Tools" class="w-1/2 object-cover rounded-l-lg">
+          <div class="p-6">
+            <p class="font-bold text-lg text-blue-500 mb-4">Software & Tools</p>
+            <ul class="list-disc list-inside text-gray-700">
+              <li>ArcGIS</li>
+              <li>Tableau</li>
+              <li>Scikit-learn</li>
+              <li>ENVI</li>
+              <li>Adobe Illustrator</li>
+              <li>Adobe Photoshop</li>
+            </ul>
+          </div>
         </div>
         <!-- Research Methods -->
-        <div class="bg-white shadow-lg rounded-lg p-6">
-          <p class="font-bold text-lg text-blue-500 mb-4">Research Methods</p>
-          <ul class="list-disc list-inside text-gray-700">
-            <li>Ecological Modeling</li>
-            <li>Evolutionary Inference</li>
-            <li>Numerical Simulation</li>
-            <li>Experimental Design</li>
-          </ul>
+        <div class="bg-white shadow-lg rounded-lg flex">
+          <img src="https://drive.google.com/thumbnail?id=1ONp1CdscRYKcLmipyxx9jUis16ApgF_i&sz=s500" alt="Research Methods" class="w-1/2 object-cover rounded-l-lg">
+          <div class="p-6">
+            <p class="font-bold text-lg text-blue-500 mb-4">Research Methods</p>
+            <ul class="list-disc list-inside text-gray-700">
+              <li>Ecological Modeling</li>
+              <li>Evolutionary Inference</li>
+              <li>Numerical Simulation</li>
+              <li>Experimental Design</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
+  </div>
 
     <section id="datasets" class="py-8">
       <h3 class="text-3xl font-bold mb-6 text-center text-blue-600">Datasets I Have Worked With</h3>
@@ -206,6 +229,20 @@
       <a href="projects.html" class="text-blue-600 hover:underline">View Projects →</a>
     </section>
 
+      <!-- Selected Publications -->
+      <section class="py-8">
+        <h3 class="text-2xl font-bold mb-4">Selected Publications</h3>
+        <p class="text-gray-600">Explore my research contributions and published works in various fields.</p>
+        <ul class="list-disc list-inside text-gray-700 mt-4">
+            <li>PA Lin, <strong>WP Chan (co-first)</strong> et al., 2025, <a href="https://royalsocietypublishing.org/doi/full/10.1098/rspb.2024.2426" class="text-blue-600 hover:underline" target="_blank">The Salient Aroma Hypothesis: Host plant specialization is linked with plant volatile availability in Lepidoptera</a>, <strong><em>Proc. R. Soc. B</em></strong> 292: 20242426.</li>
+          <li><strong>WP Chan</strong> et al., 2024, <a href="https://doi.org/10.1038/s41586-024-07264-9" class="text-blue-600 hover:underline" target="_blank">Climate velocities and species tracking in global mountain regions</a>, <strong><em>Nature</em></strong>, 629, 114–120.</li>
+          <li>Z Wang, <strong>WP Chan (co-first)</strong> et al., 2023, <a href="https://www.sciencedirect.com/science/article/pii/S0006320723001933" class="text-blue-600 hover:underline" target="_blank">One in five butterfly species sold online across borders</a>, <strong><em>Biological Conservation</em></strong> 283: 110092.</li>
+          <li><strong>WP Chan</strong> et al., 2022, <a href="https://www.nature.com/articles/s42003-022-04282-z" class="text-blue-600 hover:underline" target="_blank">A high throughput multispectral imaging system for museum specimens</a>, <strong><em>Communications Biology</em></strong> 5(1), 1318.</li>
+            <li><strong>WP Chan</strong> et al., 2016, <a href="https://www.science.org/doi/abs/10.1126/science.aab4119" class="text-blue-600 hover:underline" target="_blank">Seasonal and daily climate variation have opposite effects on species elevational range size</a>, <strong><em>Science</em></strong>, 351, 1427-1439.</li>
+        </ul>
+        <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" class="text-blue-600 hover:underline">View full publication list on Google Scholar →</a>
+      </section>
+
     <!-- Illustrations Summary -->
     <section class="py-8">
       <h3 class="text-2xl font-bold mb-4">Illustrations</h3>
@@ -233,8 +270,18 @@
   <section id="contact" class="py-12">
     <div class="max-w-6xl mx-auto px-4">
       <h3 class="text-2xl font-bold mb-6">Contact</h3>
-      <p>Email: <a href="mailto:your.email@example.com" class="text-blue-600">your.email@example.com</a></p>
-      <p class="mt-2">GitHub | LinkedIn | Google Scholar</p>
+      <p>Email: <a href="mailto:wpchanwork@gmail.com" class="text-blue-600">wpchanwork@gmail.com</a></p>
+      <p class="mt-2">
+        <a href="https://github.com/wpchanwork" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" class="inline-block w-5 h-5 mr-1"> 
+        </a> | 
+        <a href="https://www.linkedin.com/in/wei-ping-chan" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" class="inline-block w-5 h-5 mr-1"> 
+        </a> | 
+        <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+          Google Scholar
+        </a>
+      </p></p>
     </div>
   </section>
 
