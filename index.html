@@ -1,353 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wei-Ping Chan</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+  <style>
+    body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('https://lh3.googleusercontent.com/d/124uAIhpSnJAKTy0gnV0ixWPs2SCq7uQe');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+    }
+    .button {
+    margin-top: 120px; /* Increased margin-top to move the button further down */
+    margin-right: 220px; /* Added margin-left to move the button to the left */
+    padding: 10px 20px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    }
+    .button:hover {
+      transform: scale(1.2);
+      font-weight: bold;
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
-  <!-- Navbar -->
-  <header class="bg-white shadow">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Wei-Ping Chan</h1>
-      <nav class="space-x-4">
-        <span class="text-gray-500">Home</span>
-        <a href="projects.html" class="hover:text-blue-500">Projects</a>
-        <a href="illustrations.html" class="hover:text-blue-500">Illustrations</a>
-        <a href="blog.html" class="hover:text-blue-500">Blog</a>
-        <a href="colleberators.html" class="hover:text-blue-500">Collaborations</a>
-        <a href="#about" class="hover:text-blue-500">About</a>
-        <a href="#contact" class="hover:text-blue-500">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Intro Section -->
-  <section id="intro" class="py-12 grid grid-cols-4 gap-4 items-center">
-    <!-- Empty Left Column -->
-    <div></div>
-    <!-- Photo Column -->
-    <div class="text-center">
-      <img src="https://drive.google.com/thumbnail?id=1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME&sz=s500" alt="Wei-Ping Chan Photo" class="mx-auto block">
-    </div>
-    <!-- Text Column -->
-    <div>
-      <h2 class="text-4xl font-bold">Wei-Ping Chan</h2>
-      <h2 class="text-2xl font-semibold">Exploratory Data Scientist | Interdisciplinary Researcher | From Nature to Finance & Health</h2>
-      <div class="mt-4 text-lg">
-        <p>
-          I am a research scientist specializing in <span class="font-semibold text-blue-600">data science</span>, 
-          <span class="font-semibold text-blue-600">AI</span>, and computational modeling, with a strong focus on 
-          <span class="font-semibold text-blue-600">exploratory analysis</span>, uncovering patterns, and developing <span class="font-semibold text-blue-600">theoretical insights</span>. My interdisciplinary 
-          approach—integrating <span class="font-semibold text-blue-600">ecology</span>, 
-          <span class="font-semibold text-blue-600">evolution</span>, environmental science, and AI—has led to new 
-          discoveries and novel technologies.
-        </p>
-        <p class="mt-4">
-          My expertise includes <span class="font-semibold text-blue-600">digitization</span>, 
-          spectral data analysis, insect flight mechanisms, and 
-          multi-modal AI applications. With over a decade of 
-          programming experience, I work extensively with <span class="font-semibold text-blue-600">spatiotemporal data</span>, 
-          <span class="font-semibold text-blue-600">computer vision</span>, and 
-          <span class="font-semibold text-blue-600">causal inference</span>, building scalable analytical frameworks 
-          to drive scientific innovation and real-world applications.
-        </p>
-      </div>
-    </div>
-    <!-- Empty Right Column -->
-    <div></div>
-  </section>
-
-  <!-- Summary Sections -->
-  <div class="max-w-6xl mx-auto px-4">
-    <section id="technical-skills" class="py-8 bg-gray-50">
-      <h3 class="text-3xl font-bold mb-6 text-center text-blue-600">Technical Skills</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Programming -->
-        <div class="bg-white shadow-lg rounded-lg flex">
-          <img src="https://drive.google.com/thumbnail?id=1MHtkS5dd_oe3BkMysLvjvMQMQDvUjSL_&sz=s500" alt="Programming" class="w-1/2 object-cover rounded-l-lg">
-          <div class="p-6">
-            <p class="font-bold text-lg text-blue-500 mb-4">Programming</p>
-            <ul class="list-disc list-inside text-gray-700">
-              <li>Python</li>
-              <li>R</li>
-              <li>MATLAB</li>
-              <li>Wolfram Mathematica</li>
-              <li>Spark</li>
-              <li>SQL</li>
-              <li>IDL</li>
-              <li>Shell Script</li>
-              <li>(Visual Basic)</li>
-            </ul>
-          </div>
-        </div>
-        <!-- Data Analysis -->
-        <div class="bg-white shadow-lg rounded-lg flex">
-          <img src="https://drive.google.com/thumbnail?id=1OgdJyv5owRvho7zou49ots24I3VTFHTM&sz=s500" alt="Data Analysis" class="w-1/2 object-cover rounded-l-lg">
-          <div class="p-6">
-            <p class="font-bold text-lg text-blue-500 mb-4">Data Analysis</p>
-            <ul class="list-disc list-inside text-gray-700">
-              <li>Machine Learning</li>
-              <li>Computer Vision</li>
-              <li>Causal Inference</li>
-              <li>NLP</li>
-              <li>Statistical Modeling</li>
-              <li>Predictive Analytics</li>
-              <li>Time-Series Analysis</li>
-              <li>Spatiotemporal Analysis</li>
-              <li>High-Dimensional Data</li>
-            </ul>
-          </div>
-        </div>
-        <!-- Software & Tools -->
-        <div class="bg-white shadow-lg rounded-lg flex">
-          <img src="https://drive.google.com/thumbnail?id=19XKLMEz18iRE0juokyOAGymopLCSrT0h&sz=s800" alt="Software & Tools" class="w-1/2 object-cover rounded-l-lg">
-          <div class="p-6">
-            <p class="font-bold text-lg text-blue-500 mb-4">Software & Tools</p>
-            <ul class="list-disc list-inside text-gray-700">
-              <li>ArcGIS</li>
-              <li>Tableau</li>
-              <li>Scikit-learn</li>
-              <li>ArcGIS</li>
-              <li>ENVI</li>
-              <li>SPSS</li>
-              <li>Git</li>
-              <li>Adobe Illustrator</li>
-              <li>Adobe Photoshop</li>
-              <li>Adobe Lightroom</li>
-              <li>Adobe Premiere Pro</li>
-              <li>(Unreal Engine 5)</li>
-            </ul>
-          </div>
-        </div>
-        <!-- Research Methods -->
-        <div class="bg-white shadow-lg rounded-lg flex">
-          <img src="https://drive.google.com/thumbnail?id=1ONp1CdscRYKcLmipyxx9jUis16ApgF_i&sz=s500" alt="Research Methods" class="w-1/2 object-cover rounded-l-lg">
-          <div class="p-6">
-            <p class="font-bold text-lg text-blue-500 mb-4">Research Methods</p>
-            <ul class="list-disc list-inside text-gray-700">
-              <li>Ecological Modeling</li>
-              <li>Evolutionary Inference</li>
-              <li>Numerical Simulation</li>
-              <li>Experimental Design</li>
-              <li>Data Mining</li>
-              <li>Cross-Boundary Insights</li>
-              <li>Field Work</li>
-              <li>Workflow Optimization</li>
-              <li>Project Management</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+<body>
+  <div class="overlay">
+    <button class="button" onclick="redirectToIndex()">Know More About Me</button>
   </div>
 
-    <section id="datasets" class="py-8 max-w-7xl mx-auto px-4">
-      <h3 class="text-3xl font-bold mb-6 text-center text-blue-600">Datasets I Have Worked With</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Geospatial Data -->
-      <div class="bg-black shadow-lg rounded-lg flex">
-        <div class="p-6">
-        <p class="font-bold text-lg text-white mb-4">Geospatial and Environmental Data</p>
-        <ul class="list-disc list-inside text-white">
-          <li>Satellite Imagery <br>&emsp;(MODIS, Landsat, VIIRS)</li>
-          <li>Gridded Environmental Data <br>&emsp;(Land Use)</li>
-          <li>Gridded Climate Data <br>&emsp;(CRU, CHELSA)</li>
-          <li>Weather Station Data <br>&emsp;(GHCN, METAR)</li>
-          <li>Topographic Data <br>&emsp;(EarthEnv)</li>
-        </ul>
-        </div>
-        <img src="https://drive.google.com/thumbnail?id=1MXvwEGAzuvjh9rJ-l7To6fspfrRIX-TO&sz=s500" alt="Geospatial Data" class="w-1/2 object-cover rounded-r-lg object-right">
-      </div>
-      <!-- Biological Data -->
-      <div class="bg-black shadow-lg rounded-lg flex">
-        <div class="p-6">
-        <p class="font-bold text-lg text-white mb-4">Biological and Genetic Data</p>
-        <ul class="list-disc list-inside text-white">
-          <li>DNA Sequencing Data</li>
-          <li>Phylogenetic Trees</li>
-          <li>Stable Isotope Data</li>
-          <li>Species Occurrence Records<br>&emsp;(iNaturalist, GBIF)</li>
-          <li>Experimental Results</li>
-        </ul>
-        </div>
-        <img src="https://drive.google.com/thumbnail?id=1hauuiwPEf-efVLKqUrBJc7h52_htRMj8&sz=s500" alt="Biological Data" class="w-1/2 object-cover rounded-r-lg">
-      </div>
-      <!-- Visual Data -->
-      <div class="bg-black shadow-lg rounded-lg flex">
-        <div class="p-6">
-        <p class="font-bold text-lg text-white mb-4">Visual Data</p>
-        <ul class="list-disc list-inside text-white">
-          <li>Photographs (TIFF, JPG, PNG)</li>
-          <li>Multispectral Imagery</li>
-          <li>Video Recordings<br>&emsp;(30, 60, 120, 450, 900 fps)</li>
-          <li>Spectral Data</li>
-        </ul>
-        </div>
-        <img src="https://drive.google.com/thumbnail?id=1yAwWKzIXxjpmplDElV4d6PUNLNxwUlQT&sz=s500" alt="Visual Data" class="w-1/2 object-cover rounded-r-lg">
-      </div>
-      <!-- Computational Data -->
-      <div class="bg-black shadow-lg rounded-lg flex">
-        <div class="p-6">
-        <p class="font-bold text-lg text-white mb-4">Computational and Simulated Data</p>
-        <ul class="list-disc list-inside text-white">
-          <li>Computational Fluid Dynamics <br>&emsp;Simulations</li>
-          <li>Signal Processing Data<br>&emsp; (Analog and Digital)</li>
-          <li>Web Content<br>&emsp; (News, Images, Stock Market)</li>
-        </ul>
-        </div>
-        <img src="https://drive.google.com/thumbnail?id=1DZBcllfFVBLqxRpt1ZBUICvvcD1zb1Qm&sz=s500" alt="Computational Data" class="w-1/2 object-cover rounded-r-lg">
-      </div>
-      </div>
-    </section>
+  <script>
+    // Redirect to home.html after 20 seconds
+    setTimeout(() => {
+      window.location.href = 'home.html';
+    }, 20000);
 
-    <div class="grid grid-cols-5 gap-4 py-8">
-      <!-- Empty Left Column -->
-      <div></div>
-      <!-- Middle Content Column -->
-      <div class="col-span-3">
-        <!-- Projects Summary -->
-        <section class="py-8">
-          <h3 class="text-2xl font-bold mb-4">Projects</h3>
-          <p class="text-gray-600">Explore my research and creative projects, including studies on physical environemnts, species distribution, mophological quantifications and more.</p>
-          <a href="projects.html" class="text-blue-600 hover:underline">View Projects →</a>
-        </section>
-
-        <!-- Selected Publications -->
-        <section class="py-8">
-          <h3 class="text-2xl font-bold mb-4">Selected Publications</h3>
-          <p class="text-gray-600">Explore my research contributions and published works in various fields.</p>
-          <ul class="list-disc list-inside text-gray-700 mt-4">
-            <li>PA Lin, <strong>WP Chan (co-first)</strong> et al., 2025, <a href="https://royalsocietypublishing.org/doi/full/10.1098/rspb.2024.2426" class="text-blue-600 hover:underline" target="_blank">The Salient Aroma Hypothesis: Host plant specialization is linked with plant volatile availability in Lepidoptera</a>, <strong><em>Proc. R. Soc. B</em></strong> 292: 20242426.</li>
-            <li><strong>WP Chan</strong> et al., 2024, <a href="https://doi.org/10.1038/s41586-024-07264-9" class="text-blue-600 hover:underline" target="_blank">Climate velocities and species tracking in global mountain regions</a>, <strong><em>Nature</em></strong>, 629, 114–120.</li>
-            <li>Z Wang, <strong>WP Chan (co-first)</strong> et al., 2023, <a href="https://www.sciencedirect.com/science/article/pii/S0006320723001933" class="text-blue-600 hover:underline" target="_blank">One in five butterfly species sold online across borders</a>, <strong><em>Biological Conservation</em></strong> 283: 110092.</li>
-            <li><strong>WP Chan</strong> et al., 2022, <a href="https://www.nature.com/articles/s42003-022-04282-z" class="text-blue-600 hover:underline" target="_blank">A high throughput multispectral imaging system for museum specimens</a>, <strong><em>Communications Biology</em></strong> 5(1), 1318.</li>
-            <li><strong>WP Chan</strong> et al., 2016, <a href="https://www.science.org/doi/abs/10.1126/science.aab4119" class="text-blue-600 hover:underline" target="_blank">Seasonal and daily climate variation have opposite effects on species elevational range size</a>, <strong><em>Science</em></strong>, 351, 1427-1439.</li>
-          </ul>
-          <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" class="text-blue-600 hover:underline">View full publication list on Google Scholar →</a>
-        </section>
-
-        <!-- Illustrations Summary -->
-        <section class="py-8">
-          <h3 class="text-2xl font-bold mb-4">Illustrations</h3>
-          <p class="text-gray-600">Discover my artistic explorations and illustrations inspired by nature and technology.</p>
-          <a href="illustrations.html" class="text-blue-600 hover:underline">View Illustrations →</a>
-        </section>
-
-        <!-- Blog Summary -->
-        <section class="py-8">
-          <h3 class="text-2xl font-bold mb-4">Blog / Thoughts</h3>
-          <p class="text-gray-600">Read my reflections on research, creativity, and the intersection of science and art.</p>
-          <a href="blog.html" class="text-blue-600 hover:underline">Read Blog →</a>
-        </section>
-      </div>
-      <!-- Empty Right Column -->
-      <div></div>
-    </div>
-  </div>
-
-  <!-- About Me Section -->
-  <section id="about" class="py-12 bg-gray-100">
-    <div class="max-w-6xl mx-auto px-4">
-      <h3 class="text-2xl font-bold mb-6">About Me</h3>
-      <p>I’m a research scientist at Harvard University with a passion for discovering patterns in nature and crafting creative systems. With a background spanning ecology, AI, and design, I love working where science meets art.</p>
-      
-      <!-- Professional Experience -->
-      <h4 class="text-xl font-bold mt-8 mb-4">Professional Experience</h4>
-      <ul class="list-inside text-gray-700">
-        <li class="flex justify-between">
-          <div>
-        <strong>Research Scientist</strong> / Museum of Comparative Zoology, Harvard University - Cambridge, MA, USA
-          </div>
-          <em>Feb 2025 - Current</em>
-        </li>
-        <ul class="list-disc list-inside ml-6">
-          <li>Will fill in corresponding project later</li>
-        </ul>
-        <li class="mt-4 flex justify-between">
-          <div>
-        <strong>Postdoctoral Fellow</strong> / Roland Institute at Harvard, Harvard University - Cambridge, MA, USA
-          </div>
-          <em>Jun 2023 – Jan 2025</em>
-        </li>
-        <ul class="list-disc list-inside ml-6">
-          <li>Will fill in corresponding project later</li>
-        </ul>
-        <li class="mt-4 flex justify-between">
-          <div>
-        <strong>Research Assistant</strong> / Biodiversity Research Center, Academia Sinica - Taipei, Taiwan
-          </div>
-          <em>Aug 2011 – Jul 2016</em>
-        </li>
-        <ul class="list-disc list-inside ml-6">
-          <li>Will fill in corresponding project later</li>
-        </ul>
-      </ul>
-
-      <!-- Education -->
-      <h4 class="text-xl font-bold mt-8 mb-4">Education</h4>
-      <div class="space-y-6">
-        <!-- Doctorate -->
-        <div class="flex justify-between">
-          <div>
-        <p class="font-bold text-lg">Doctorate:</p>
-        <p class="text-gray-700">Organismic and Evolutionary Biology, Harvard University - Cambridge, MA, USA</p>
-        <p class="text-gray-600 italic">Thesis: Evolution and diversification of Lepidoptera; Advisor: Naomi E. Pierce</p>
-        <p class="text-gray-600 italic mt-2">Award: Kao Fellowship (2018) and Peirce Fellowship (2017).</p>
-          </div>
-          <p class="text-gray-500">Aug 2017 – May 2023</p>
-        </div>
-        <!-- Postgraduate Degree -->
-        <div class="flex justify-between">
-          <div>
-        <p class="font-bold text-lg">Postgraduate Degree:</p>
-        <p class="text-gray-700">Data Science and Management, Taipei Medical University - Taipei, Taiwan</p>
-        <p class="text-gray-600 italic mt-2">Award: Academic Achievement Award (First Place).</p>
-          </div>
-          <p class="text-gray-500">Jul 2016 – Jul 2017</p>
-        </div>
-        <!-- Masters -->
-        <div class="flex justify-between">
-          <div>
-        <p class="font-bold text-lg">Master of Science:</p>
-        <p class="text-gray-700">Forestry and Resource Conservation, National Taiwan University - Taipei, Taiwan</p>
-        <p class="text-gray-600 italic">Thesis: Regional scale high resolution δ18O prediction in precipitation using MODIS EVI; Advisor: Hsiao-Wei Yuan & Sheng-Feng Shen</p>
-          </div>
-          <p class="text-gray-500">Sep 2009 – Jul 2011</p>
-        </div>
-        <!-- Bachelor of Science -->
-        <div class="flex justify-between">
-          <div>
-        <p class="font-bold text-lg">Bachelor of Science:</p>
-        <p class="text-gray-700">Forestry and Resource Conservation, National Taiwan University - Taipei, Taiwan</p>
-          </div>
-          <p class="text-gray-500">Sep 2005 – Jul 2009</p>
-        </div>
-      </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-12">
-    <div class="max-w-6xl mx-auto px-4">
-      <h3 class="text-2xl font-bold mb-6">Contact</h3>
-      <p class="text-md font-bold">I’d love to connect with you! Whether you’re interested in academic or business collaborations, technology discussions, knowledge exchange, investment opportunities, or academic mentorship, feel free to reach out.</p>
-      <p class="mt-4">Email: <a href="mailto:wpchanwork@gmail.com" class="text-blue-600">wpchanwork@gmail.com</a></p>
-      <p class="mt-2">
-        <a href="https://github.com/wpchanwork" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
-          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" class="inline-block w-5 h-5 mr-1"> 
-        </a> | 
-        <a href="https://www.linkedin.com/in/wei-ping-chan" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
-          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" class="inline-block w-5 h-5 mr-1"> 
-        </a> | 
-        <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
-          Google Scholar
-        </a>
-      </p></p>
-    </div>
-  </section>
-
+    // Redirect when the button is clicked
+    function redirectToIndex() {
+      window.location.href = 'home.html';
+    }
+  </script>
 </body>
 </html>
