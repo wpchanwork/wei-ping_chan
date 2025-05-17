@@ -3,54 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wei-Ping Chan's website</title>
+  <title hidden>Wei-Ping Chan's Website</title>
+  <meta name="description" content="Welcome to Wei-Ping Chan's personal website.">
+  <!-- Include W3.CSS -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <style>
     body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-image: url('https://lh3.googleusercontent.com/d/124uAIhpSnJAKTy0gnV0ixWPs2SCq7uQe');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-size: cover;
-    font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      background-image: url('https://lh3.googleusercontent.com/d/124uAIhpSnJAKTy0gnV0ixWPs2SCq7uQe');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
     }
     .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      height: 100%;
       color: white;
       text-align: center;
     }
     .button {
-    margin-top: 120px; /* Increased margin-top to move the button further down */
-    margin-right: 220px; /* Added margin-left to move the button to the left */
-    padding: 10px 20px;
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
     }
     .button:hover {
       transform: scale(1.2);
       font-weight: bold;
     }
+    /* Media query for smaller screens */
+    @media (max-width: 768px) {
+      body {
+      background-size: auto 100%; /* Fit the image to 75% of the height */
+      background-position: calc(50% + 180px) center; /* Move the image 200px to the right and center vertically */
+      }
+      .overlay {
+      padding: 10px; /* Add padding for smaller screens */
+      }
+    }
+    @media (max-width: 480px) {
+      body {
+      background-size: auto 100%; /* Fit the image to the full height */
+      background-position: calc(50% + 180px) center; /* Center the image */
+      }
+      .overlay {
+      padding: 10px; /* Add padding for smaller screens */
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <button class="button" onclick="redirectToIndex()">Know More About Me</button>
+  <div class="w3-container overlay">
+    <button class="button w3-hover-opacity" onclick="redirectToIndex()">Know More About Me</button>
   </div>
 
   <script>

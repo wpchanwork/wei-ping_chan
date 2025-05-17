@@ -11,31 +11,50 @@
   <header class="bg-white shadow">
     <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-2xl font-bold">Wei-Ping Chan</h1>
-      <nav class="space-x-4">
+      <!-- Hamburger Menu for Mobile -->
+      <div class="md:hidden">
+        <button id="menu-toggle" class="text-gray-800 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+      <!-- Navigation Links -->
+      <nav id="menu" class="hidden md:flex space-x-4">
         <span class="text-gray-500">Home</span>
         <a href="projects.html" class="hover:text-blue-500">Projects</a>
-        <a href="illustrations.html" class="hover:text-blue-500">Illustrations</a>
-        <a href="blog.html" class="hover:text-blue-500">Blog</a>
         <a href="colleberators.html" class="hover:text-blue-500">Collaborations</a>
         <a href="#about" class="hover:text-blue-500">About</a>
         <a href="#contact" class="hover:text-blue-500">Contact</a>
       </nav>
     </div>
   </header>
+  
+  <script>
+    // Toggle menu visibility on mobile
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    menuToggle.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      menuToggle.classList.toggle('absolute');
+      menuToggle.classList.toggle('top-4');
+      menuToggle.classList.toggle('right-4');
+    });
+  </script>
 
   <!-- Intro Section -->
-  <section id="intro" class="py-12 grid grid-cols-4 gap-4 items-center">
-    <!-- Empty Left Column -->
-    <div></div>
+  <section id="intro" class="py-12 grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
     <!-- Photo Column -->
-    <div class="text-center">
-      <img src="https://drive.google.com/thumbnail?id=1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME&sz=s500" alt="Wei-Ping Chan Photo" class="mx-auto block">
+    <div class="text-center md:col-span-5">
+      <img src="https://drive.google.com/thumbnail?id=1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME&sz=s500" alt="Wei-Ping Chan Photo" class="mx-auto block rounded-full w-40 h-40 md:w-64 md:h-64 object-cover">
     </div>
+    <!-- Blank Column -->
+    <div class="hidden md:block"></div>
     <!-- Text Column -->
-    <div>
-      <h2 class="text-4xl font-bold">Wei-Ping Chan</h2>
-      <h2 class="text-2xl font-semibold">Exploratory Data Scientist | Interdisciplinary Researcher | From Nature to Finance & Health</h2>
-      <div class="mt-4 text-lg">
+    <div class="md:col-span-3 text-center md:text-left md:pr-8">
+      <h2 class="text-3xl md:text-4xl font-bold">Wei-Ping Chan</h2>
+      <h2 class="text-xl md:text-2xl font-semibold mt-2">Exploratory Data Scientist | Interdisciplinary Researcher | From Nature to Finance & Health</h2>
+      <div class="mt-4 text-base md:text-lg">
         <p>
           I am a research scientist specializing in <span class="font-semibold text-blue-600">data science</span>, 
           <span class="font-semibold text-blue-600">AI</span>, and computational modeling, with a strong focus on 
@@ -55,8 +74,8 @@
         </p>
       </div>
     </div>
-    <!-- Empty Right Column -->
-    <div></div>
+    <!-- Blank Column -->
+    <div class="hidden md:block"></div>
   </section>
 
   <!-- Summary Sections -->
@@ -250,102 +269,92 @@
   <!-- About Me Section -->
   <section id="about" class="py-12 bg-gray-100">
     <div class="max-w-6xl mx-auto px-4">
-      <h3 class="text-2xl font-bold mb-6">About Me</h3>
-      <p>I’m a research scientist at Harvard University with a passion for discovering patterns in nature and crafting creative systems. With a background spanning ecology, AI, and design, I love working where science meets art.</p>
-      
+      <h3 class="text-3xl font-bold text-center text-blue-600 mb-6">About Me</h3>
+      <p class="text-gray-700 text-left mb-8">
+        I’m a research scientist at Harvard University with a passion for discovering patterns in nature and crafting creative systems. With a background spanning ecology, AI, and design, I love working where science meets art.
+      </p>
+
       <!-- Professional Experience -->
-      <h4 class="text-xl font-bold mt-8 mb-4">Professional Experience</h4>
-      <ul class="list-inside text-gray-700">
-        <li class="flex justify-between">
-          <div>
-        <strong>Research Scientist</strong> / Museum of Comparative Zoology, Harvard University - Cambridge, MA, USA
-          </div>
-          <em>Feb 2025 - Current</em>
+      <h4 class="text-2xl font-semibold text-blue-500 mb-4">Professional Experience</h4>
+      <ul class="space-y-6">
+        <li>
+          <p class="font-bold">Research Scientist</p>
+          <p class="text-gray-600">Museum of Comparative Zoology, Harvard University - Cambridge, MA, USA</p>
+          <p class="text-sm text-gray-500">Feb 2025 - Current</p>
+          <ul class="list-disc list-inside text-gray-700 mt-2">
+            <li>Developed AI-powered hardware and software to digitize museum specimens in 3D.</li>
+          </ul>
         </li>
-        <ul class="list-disc list-inside ml-6">
-          <li>Will fill in corresponding project later</li>
-        </ul>
-        <li class="mt-4 flex justify-between">
-          <div>
-        <strong>Postdoctoral Fellow</strong> / Roland Institute at Harvard, Harvard University - Cambridge, MA, USA
-          </div>
-          <em>Jun 2023 – Jan 2025</em>
+        <li>
+          <p class="font-bold">Postdoctoral Fellow</p>
+          <p class="text-gray-600">Roland Institute at Harvard, Harvard University - Cambridge, MA, USA</p>
+          <p class="text-sm text-gray-500">Jun 2023 – Jan 2025</p>
+          <ul class="list-disc list-inside text-gray-700 mt-2">
+            <li>Led the development of computer vision techniques and field experiments to investigate the impacts of artificial light at night (ALAN) on moth populations and behaviors.</li>
+          </ul>
         </li>
-        <ul class="list-disc list-inside ml-6">
-          <li>Will fill in corresponding project later</li>
-        </ul>
-        <li class="mt-4 flex justify-between">
-          <div>
-        <strong>Research Assistant</strong> / Biodiversity Research Center, Academia Sinica - Taipei, Taiwan
-          </div>
-          <em>Aug 2011 – Jul 2016</em>
+        <li>
+          <p class="font-bold">Research Assistant</p>
+          <p class="text-gray-600">Biodiversity Research Center, Academia Sinica - Taipei, Taiwan</p>
+          <p class="text-sm text-gray-500">Aug 2011 – Jul 2016</p>
+          <ul class="list-disc list-inside text-gray-700 mt-2">
+            <li>Applied statistical modeling, causal inference, and spatiotemporal analysis to examine species distribution, biodiversity metrics, and environmental response.</li>
+          </ul>
         </li>
-        <ul class="list-disc list-inside ml-6">
-          <li>Will fill in corresponding project later</li>
-        </ul>
       </ul>
 
       <!-- Education -->
-      <h4 class="text-xl font-bold mt-8 mb-4">Education</h4>
+      <h4 class="text-2xl font-semibold text-blue-500 mt-12 mb-4">Education</h4>
       <div class="space-y-6">
-        <!-- Doctorate -->
-        <div class="flex justify-between">
-          <div>
-        <p class="font-bold text-lg">Doctorate:</p>
-        <p class="text-gray-700">Organismic and Evolutionary Biology, Harvard University - Cambridge, MA, USA</p>
-        <p class="text-gray-600 italic">Thesis: Evolution and diversification of Lepidoptera; Advisor: Naomi E. Pierce</p>
-        <p class="text-gray-600 italic mt-2">Award: Kao Fellowship (2018) and Peirce Fellowship (2017).</p>
-          </div>
-          <p class="text-gray-500">Aug 2017 – May 2023</p>
+        <div>
+          <p class="font-bold">Doctorate:</p>
+          <p class="text-gray-600">Organismic and Evolutionary Biology, Harvard University - Cambridge, MA, USA</p>
+          <p class="text-sm text-gray-500">Thesis: Evolution and diversification of Lepidoptera; Advisor: Naomi E. Pierce</p>
+          <p class="text-sm text-gray-500">Award: Kao Fellowship (2018) and Peirce Fellowship (2017).</p>
+          <p class="text-sm text-gray-500">Aug 2017 – May 2023</p>
         </div>
-        <!-- Postgraduate Degree -->
-        <div class="flex justify-between">
-          <div>
-        <p class="font-bold text-lg">Postgraduate Degree:</p>
-        <p class="text-gray-700">Data Science and Management, Taipei Medical University - Taipei, Taiwan</p>
-        <p class="text-gray-600 italic mt-2">Award: Academic Achievement Award (First Place).</p>
-          </div>
-          <p class="text-gray-500">Jul 2016 – Jul 2017</p>
+        <div>
+          <p class="font-bold">Postgraduate Degree:</p>
+          <p class="text-gray-600">Data Science and Management, Taipei Medical University - Taipei, Taiwan</p>
+          <p class="text-sm text-gray-500">Award: Academic Achievement Award (First Place).</p>
+          <p class="text-sm text-gray-500">Jul 2016 – Jul 2017</p>
         </div>
-        <!-- Masters -->
-        <div class="flex justify-between">
-          <div>
-        <p class="font-bold text-lg">Master of Science:</p>
-        <p class="text-gray-700">Forestry and Resource Conservation, National Taiwan University - Taipei, Taiwan</p>
-        <p class="text-gray-600 italic">Thesis: Regional scale high resolution δ18O prediction in precipitation using MODIS EVI; Advisor: Hsiao-Wei Yuan & Sheng-Feng Shen</p>
-          </div>
-          <p class="text-gray-500">Sep 2009 – Jul 2011</p>
+        <div>
+          <p class="font-bold">Master of Science:</p>
+          <p class="text-gray-600">Forestry and Resource Conservation, National Taiwan University - Taipei, Taiwan</p>
+          <p class="text-sm text-gray-500">Thesis: Regional scale high resolution δ18O prediction in precipitation using MODIS EVI; Advisor: Hsiao-Wei Yuan & Sheng-Feng Shen</p>
+          <p class="text-sm text-gray-500">Sep 2009 – Jul 2011</p>
         </div>
-        <!-- Bachelor of Science -->
-        <div class="flex justify-between">
-          <div>
-        <p class="font-bold text-lg">Bachelor of Science:</p>
-        <p class="text-gray-700">Forestry and Resource Conservation, National Taiwan University - Taipei, Taiwan</p>
-          </div>
-          <p class="text-gray-500">Sep 2005 – Jul 2009</p>
+        <div>
+          <p class="font-bold">Bachelor of Science:</p>
+          <p class="text-gray-600">Forestry and Resource Conservation, National Taiwan University - Taipei, Taiwan</p>
+          <p class="text-sm text-gray-500">Sep 2005 – Jul 2009</p>
         </div>
-      </div>
       </div>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-12">
+  <section id="contact" class="py-12 bg-gray-100">
     <div class="max-w-6xl mx-auto px-4">
-      <h3 class="text-2xl font-bold mb-6">Contact</h3>
-      <p class="text-md font-bold">I’d love to connect with you! Whether you’re interested in academic or business collaborations, technology discussions, knowledge exchange, investment opportunities, or academic mentorship, feel free to reach out.</p>
-      <p class="mt-4">Email: <a href="mailto:wpchanwork@gmail.com" class="text-blue-600">wpchanwork@gmail.com</a></p>
-      <p class="mt-2">
-        <a href="https://github.com/wpchanwork" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
-          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" class="inline-block w-5 h-5 mr-1"> 
-        </a> | 
-        <a href="https://www.linkedin.com/in/wei-ping-chan" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
-          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" class="inline-block w-5 h-5 mr-1"> 
-        </a> | 
-        <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+      <h3 class="text-3xl font-bold text-left text-blue-600 mb-6">Contact</h3>
+      <p class="text-gray-700 text-left mb-8">
+        I’d love to connect with you! Whether you’re interested in academic or business collaborations, technology discussions, knowledge exchange, investment opportunities, or academic mentorship, feel free to reach out.
+      </p>
+      <p class="text-center text-lg text-gray-700 mb-6">
+        Email: <a href="mailto:wpchanwork@gmail.com" class="text-blue-600 hover:underline">wpchanwork@gmail.com</a>
+      </p>
+      <div class="flex justify-center space-x-6">
+        <a href="https://github.com/wpchanwork" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-gray-800">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" class="w-6 h-6 inline-block"> GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/wei-ping-chan" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-gray-800">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 inline-block"> LinkedIn
+        </a>
+        <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-gray-800">
           Google Scholar
         </a>
-      </p></p>
+      </div>
     </div>
   </section>
 

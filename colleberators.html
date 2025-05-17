@@ -3,24 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects - Wei-Ping Chan</title>
+  <title>Wei-Ping Chan</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- Navbar -->
   <header class="bg-white shadow">
     <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-2xl font-bold">Wei-Ping Chan</h1>
-      <nav class="space-x-4">
+      <!-- Hamburger Menu for Mobile -->
+      <div class="md:hidden">
+        <button id="menu-toggle" class="text-gray-800 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+      <!-- Navigation Links -->
+      <nav id="menu" class="hidden md:flex space-x-4">
         <a href="home.html" class="hover:text-blue-500">Home</a>
         <a href="projects.html" class="hover:text-blue-500">Projects</a>
-        <a href="illustrations.html" class="hover:text-blue-500">Illustrations</a>
-        <a href="blog.html" class="hover:text-blue-500">Blog</a>
-        <span class="text-gray-500">Collaborations</span>
-        <a href="home.html#about" class="hover:text-blue-500">About</a>
-        <a href="home.html#contact" class="hover:text-blue-500">Contact</a>
+        <a href="home.html" class="hover:text-blue-500">Collaborations</a>
+        <a href="#about" class="hover:text-blue-500">About</a>
+        <a href="#contact" class="hover:text-blue-500">Contact</a>
       </nav>
     </div>
   </header>
+  
+  <script>
+    // Toggle menu visibility on mobile
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    menuToggle.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      menuToggle.classList.toggle('absolute');
+      menuToggle.classList.toggle('top-4');
+      menuToggle.classList.toggle('right-4');
+    });
+  </script>
 
   <section class="py-12 text-center">
     <div class="max-w-6xl mx-auto px-4">
