@@ -3,53 +3,682 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wei-Ping Chan</title>
+  <title>Collaboration Map — Wei-Ping Chan</title>
+  <meta name="description" content="An interactive map of Wei-Ping Chan's research collaborators and their institutions worldwide." />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Leaflet (interactive map, no API key required) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .hero-gradient { background: linear-gradient(135deg, #14294b 0%, #0f1f3d 100%); }
+    .nav-link {
+      padding: .45rem .85rem; border-radius: .5rem; color: #475569; font-weight: 500;
+      transition: background .15s ease, color .15s ease;
+    }
+    .nav-link:hover { background: #eef2f7; color: #14294b; }
+    .nav-active {
+      padding: .45rem .85rem; border-radius: .5rem;
+      background: #14294b; color: #fff; font-weight: 600;
+    }
+
+    /* Map */
+    #map { height: 68vh; min-height: 380px; max-height: 560px; width: 100%; }
+    .leaflet-popup-content { margin: 12px 14px; }
+
+    /* Avatar (placeholder photo) */
+    .av { position: relative; overflow: hidden; border-radius: 9999px; flex-shrink: 0; }
+    .av-ini {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 700;
+    }
+    .av-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    /* Collaborator card */
+    .collab-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 640px) { .collab-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px){ .collab-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .collab-card {
+      display: flex; gap: .9rem; align-items: flex-start;
+      background: #fff; border-radius: 1rem; padding: 1rem 1.1rem;
+      box-shadow: 0 4px 14px -6px rgba(30,41,59,.25); cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .collab-card:hover { transform: translateY(-3px); box-shadow: 0 14px 26px -10px rgba(30,41,59,.32); }
+    .collab-name { font-weight: 700; line-height: 1.2; }
+    .collab-inst { font-size: .8rem; color: #475569; margin-top: .15rem; }
+    .collab-loc  { font-size: .72rem; color: #94a3b8; margin-top: .2rem; }
+    .collab-tags { margin-top: .5rem; display: flex; flex-wrap: wrap; gap: .3rem; }
+    .tag {
+      font-size: .62rem; padding: .15rem .45rem; border-radius: 9999px;
+      background: #f1f5f9; color: #475569; white-space: nowrap;
+    }
+    .tag-new  { background: #ecfdf5; color: #047857; font-weight: 600; }
+    .tag-note { background: #eff6ff; color: #1d4ed8; font-weight: 600; }
+
+    .group-head {
+      display: flex; align-items: center; gap: .55rem;
+      font-size: 1.15rem; font-weight: 700; color: #1e293b;
+      border-left: 4px solid; padding-left: .6rem; margin-bottom: 1rem;
+    }
+    .dot { width: .7rem; height: .7rem; border-radius: 9999px; display: inline-block; }
+
+    /* Field filter buttons */
+    .filter-btn {
+      font-size: .75rem; padding: .35rem .8rem; border-radius: 9999px;
+      border: 1px solid #e2e8f0; background: #fff; color: #475569;
+      cursor: pointer; transition: all .15s ease; display: inline-flex;
+      align-items: center; gap: .4rem;
+    }
+    .filter-btn:hover { border-color: #cbd5e1; }
+    .filter-btn.active { color: #fff; border-color: transparent; font-weight: 600; }
+
+    /* Author chip (publications section) */
+    .chip {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .35rem .7rem; border-radius: 9999px;
+      font-size: .8rem; line-height: 1; white-space: nowrap;
+      background: #f1f5f9; color: #334155; border: 1px solid #e2e8f0;
+    }
+    .chip-you { background: #14294b; color: #fff; border-color: #14294b; font-weight: 600; }
+    .chip-cofirst { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; font-weight: 600; }
+    .chip-senior  { background: #fef3c7; color: #92400e; border-color: #fde68a; font-weight: 600; }
+    .chip-more { background: transparent; color: #94a3b8; border: 1px dashed #cbd5e1; font-style: italic; }
+    .chip-tag {
+      font-size: .6rem; text-transform: uppercase; letter-spacing: .04em;
+      padding: .1rem .35rem; border-radius: 9999px; background: rgba(0,0,0,.08);
+    }
+    .pub-card { transition: transform .2s ease, box-shadow .2s ease; }
+    .pub-card:hover { transform: translateY(-4px); box-shadow: 0 18px 35px -12px rgba(30,41,59,.28); }
+
+    /* Hero contact buttons */
+    .hero-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      border-radius: 9999px; padding: .55rem 1.1rem; font-size: .85rem;
+      transition: all .15s ease;
+    }
+    .hero-btn-outline { border: 1.5px solid rgba(255,255,255,.7); color: #fff; }
+    .hero-btn-outline:hover { background: #fff; color: #1d4ed8; }
+    .hero-btn-solid { background: #fff; color: #1d4ed8; font-weight: 600; }
+    .hero-btn-solid:hover { background: #eff6ff; }
+
+    /* Field-work photo marquee */
+    .marquee {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    }
+    .marquee-track { display: flex; gap: 1rem; width: max-content; }
+    .marquee-track.left  { animation: scrollLeft  60s linear infinite; }
+    .marquee-track.right { animation: scrollRight 60s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes scrollLeft  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
+    @keyframes scrollRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    .photo-card {
+      position: relative; flex-shrink: 0;
+      width: 240px; height: 165px; border-radius: 1rem; overflow: hidden;
+      background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+      box-shadow: 0 10px 22px -12px rgba(30,41,59,.5);
+    }
+    @media (min-width: 768px) { .photo-card { width: 300px; height: 205px; } }
+    .photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .photo-ph {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; color: #6366f1;
+    }
+    .photo-cap {
+      position: absolute; left: 0; right: 0; bottom: 0; color: #fff;
+      font-size: .75rem; line-height: 1.3; padding: 1.6rem .8rem .65rem;
+      background: linear-gradient(transparent, rgba(15,23,42,.82));
+    }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
   <!-- Navbar -->
-  <header class="bg-white shadow">
+  <header class="bg-white shadow sticky top-0 z-30">
     <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Wei-Ping Chan</h1>
-      <!-- Hamburger Menu for Mobile -->
+      <a href="home.html" class="text-2xl font-bold">Wei-Ping Chan</a>
       <div class="md:hidden">
-        <button id="menu-toggle" class="text-gray-800 focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <button id="menu-toggle" aria-label="Toggle menu" class="text-gray-800 focus:outline-none">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
         </button>
       </div>
-      <!-- Navigation Links -->
-      <nav id="menu" class="hidden md:flex space-x-4">
-        <a href="home.html" class="hover:text-blue-500">Home</a>
-        <a href="projects.html" class="hover:text-blue-500">Projects</a>
-        <span class="text-gray-500">Collaborations</span>
-        <a href="home.html#about" class="hover:text-blue-500">About</a>
-        <a href="home.html#contact" class="hover:text-blue-500">Contact</a>
+      <nav id="menu" class="hidden md:flex md:items-center md:space-x-1 absolute md:static top-16 left-0 right-0 bg-white md:bg-transparent shadow md:shadow-none flex-col md:flex-row px-3 md:px-0 py-3 md:py-0 space-y-1 md:space-y-0">
+        <a href="home.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <span class="nav-link nav-active">Collaborations</span>
+        <a href="home.html#background" class="nav-link">Background</a>
+        <a href="home.html#contact" class="nav-link">Contact</a>
       </nav>
     </div>
   </header>
-  
   <script>
-    // Toggle menu visibility on mobile
     const menuToggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
-    menuToggle.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-      menuToggle.classList.toggle('absolute');
-      menuToggle.classList.toggle('top-4');
-      menuToggle.classList.toggle('right-4');
-    });
+    menuToggle.addEventListener('click', () => menu.classList.toggle('hidden'));
   </script>
 
-  <section class="py-12 text-center">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-6">Collaborations</h2>
-      <div class="bg-yellow-100 p-6 rounded-xl shadow">
-        <h3 class="text-xl font-semibold text-yellow-800">🚧 Under Construction 🚧</h3>
-        <p class="text-gray-700 mt-4">This section is currently being built. Please check back later for updates!</p>
+  <!-- Hero -->
+  <section class="hero-gradient text-white">
+    <div class="max-w-6xl mx-auto px-4 py-14 text-center">
+      <h2 class="text-3xl md:text-5xl font-bold">Collaboration Map</h2>
+      <p class="mt-4 text-blue-100 max-w-2xl mx-auto text-base md:text-lg">
+        Science is a team effort. Explore the mentors, co-authors, and partners who
+        have shaped my research — and where in the world they work.
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a href="mailto:wpchanwork@gmail.com" class="hero-btn hero-btn-outline">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          wpchanwork@gmail.com
+        </a>
+        <a href="https://sos-commons.vercel.app/research" target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn-solid">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+          </svg>
+          SOS Research Unit
+        </a>
+      </div>
+      <div class="mt-8 flex flex-wrap justify-center gap-6 md:gap-10">
+        <div><p class="text-3xl md:text-4xl font-bold" id="stat-people">—</p>
+          <p class="text-xs md:text-sm text-blue-100 uppercase tracking-wide">Collaborators</p></div>
+        <div><p class="text-3xl md:text-4xl font-bold" id="stat-countries">—</p>
+          <p class="text-xs md:text-sm text-blue-100 uppercase tracking-wide">Countries</p></div>
+        <div><p class="text-3xl md:text-4xl font-bold" id="stat-fields">—</p>
+          <p class="text-xs md:text-sm text-blue-100 uppercase tracking-wide">Research fields</p></div>
       </div>
     </div>
   </section>
+
+  <!-- Field-work photo marquee -->
+  <section class="bg-gray-100 py-12">
+    <div class="max-w-6xl mx-auto px-4 text-center mb-8">
+      <h3 class="text-2xl md:text-3xl font-bold text-gray-800">From the Field</h3>
+      <p class="text-gray-500 mt-2">
+        Group photos and snapshots from collaborative field research around the world.
+        <span class="block text-xs text-gray-400 mt-1">Hover to pause · scrolls automatically</span>
+      </p>
+    </div>
+    <div class="marquee mb-4"><div class="marquee-track left"  id="photo-row-1"></div></div>
+    <div class="marquee">      <div class="marquee-track right" id="photo-row-2"></div></div>
+  </section>
+
+  <!-- Map + filter -->
+  <section class="max-w-6xl mx-auto px-4 py-10">
+    <div class="text-center mb-5">
+      <h3 class="text-2xl md:text-3xl font-bold text-gray-800">Where my collaborators work</h3>
+      <p class="text-gray-500 mt-2">Tap a marker for details, or filter by research field. Markers are coloured by field.</p>
+    </div>
+    <div id="filters" class="flex flex-wrap justify-center gap-2 mb-5"></div>
+    <div id="map" class="rounded-2xl shadow-lg z-0"></div>
+  </section>
+
+  <!-- Collaborator cards grouped by field -->
+  <section class="max-w-6xl mx-auto px-4 pb-6">
+    <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-2">Collaborators by Research Field</h3>
+    <p class="text-center text-gray-500 mb-8">Tap a card to locate that collaborator on the map.</p>
+    <div id="collab-sections"></div>
+  </section>
+
+  <!-- Collaborations by Publication -->
+  <section class="max-w-6xl mx-auto px-4 py-8">
+    <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-800">Collaborations by Publication</h3>
+    <p class="text-center text-gray-500 mt-2 mb-6">The leading and senior co-authors of each study, in author order.</p>
+    <div class="flex flex-wrap justify-center gap-3 mb-10 text-xs">
+      <span class="chip chip-you">Wei-Ping Chan (me)</span>
+      <span class="chip chip-cofirst">Co-first author</span>
+      <span class="chip chip-senior">Senior author</span>
+      <span class="chip">Co-author</span>
+      <span class="chip chip-more">+ N more co-authors</span>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <article class="pub-card bg-white rounded-2xl shadow-md p-6 flex flex-col">
+        <div class="flex justify-between items-center mb-3">
+          <span class="text-xs font-bold text-white bg-blue-600 rounded-full px-3 py-1">2025</span>
+          <span class="text-sm italic text-gray-500">Proc. R. Soc. B</span>
+        </div>
+        <h4 class="font-semibold text-lg leading-snug mb-4">
+          <a href="https://doi.org/10.1098/rspb.2025.2319" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
+            Historical behavioural data disentangle evolutionary and environmental drivers of recent declines in insect attraction to light
+          </a>
+        </h4>
+        <div class="flex flex-wrap gap-2 mt-auto">
+          <span class="chip chip-you">Wei-Ping Chan</span>
+          <span class="chip">Imogen Daszak</span>
+          <span class="chip chip-more">+9 more co-authors</span>
+          <span class="chip chip-senior">Avalon C. S. Owens</span>
+        </div>
+      </article>
+
+      <article class="pub-card bg-white rounded-2xl shadow-md p-6 flex flex-col">
+        <div class="flex justify-between items-center mb-3">
+          <span class="text-xs font-bold text-white bg-blue-600 rounded-full px-3 py-1">2025</span>
+          <span class="text-sm italic text-gray-500">Proc. R. Soc. B</span>
+        </div>
+        <h4 class="font-semibold text-lg leading-snug mb-4">
+          <a href="https://royalsocietypublishing.org/doi/full/10.1098/rspb.2024.2426" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
+            The Salient Aroma Hypothesis: Host plant specialization is linked with plant volatile availability in Lepidoptera
+          </a>
+        </h4>
+        <div class="flex flex-wrap gap-2 mt-auto">
+          <span class="chip chip-cofirst">Po-An Lin <span class="chip-tag">co-first</span></span>
+          <span class="chip chip-you">Wei-Ping Chan</span>
+          <span class="chip chip-more">+4 more co-authors</span>
+          <span class="chip">Naomi E. Pierce</span>
+          <span class="chip chip-senior">Gary Felton</span>
+        </div>
+      </article>
+
+      <article class="pub-card bg-white rounded-2xl shadow-md p-6 flex flex-col">
+        <div class="flex justify-between items-center mb-3">
+          <span class="text-xs font-bold text-white bg-indigo-600 rounded-full px-3 py-1">2024</span>
+          <span class="text-sm italic text-gray-500">Nature</span>
+        </div>
+        <h4 class="font-semibold text-lg leading-snug mb-4">
+          <a href="https://doi.org/10.1038/s41586-024-07264-9" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
+            Climate velocities and species tracking in global mountain regions
+          </a>
+        </h4>
+        <div class="flex flex-wrap gap-2 mt-auto">
+          <span class="chip chip-you">Wei-Ping Chan</span>
+          <span class="chip">Jonathan Lenoir</span>
+          <span class="chip chip-more">+2 more co-authors</span>
+          <span class="chip">I-Ching Chen</span>
+          <span class="chip chip-senior">Sheng-Feng Shen</span>
+        </div>
+      </article>
+
+      <article class="pub-card bg-white rounded-2xl shadow-md p-6 flex flex-col">
+        <div class="flex justify-between items-center mb-3">
+          <span class="text-xs font-bold text-white bg-blue-600 rounded-full px-3 py-1">2023</span>
+          <span class="text-sm italic text-gray-500">Biological Conservation</span>
+        </div>
+        <h4 class="font-semibold text-lg leading-snug mb-4">
+          <a href="https://www.sciencedirect.com/science/article/pii/S0006320723001933" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
+            One in five butterfly species sold online across borders
+          </a>
+        </h4>
+        <div class="flex flex-wrap gap-2 mt-auto">
+          <span class="chip chip-cofirst">Zhengyang Wang <span class="chip-tag">co-first</span></span>
+          <span class="chip chip-you">Wei-Ping Chan</span>
+          <span class="chip chip-more">+2 more co-authors</span>
+          <span class="chip">Naomi E. Pierce</span>
+          <span class="chip">David J. Lohman</span>
+          <span class="chip chip-senior">Weilin Meng</span>
+        </div>
+      </article>
+
+      <article class="pub-card bg-white rounded-2xl shadow-md p-6 flex flex-col">
+        <div class="flex justify-between items-center mb-3">
+          <span class="text-xs font-bold text-white bg-blue-600 rounded-full px-3 py-1">2022</span>
+          <span class="text-sm italic text-gray-500">Communications Biology</span>
+        </div>
+        <h4 class="font-semibold text-lg leading-snug mb-4">
+          <a href="https://www.nature.com/articles/s42003-022-04282-z" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
+            A high throughput multispectral imaging system for museum specimens
+          </a>
+        </h4>
+        <div class="flex flex-wrap gap-2 mt-auto">
+          <span class="chip chip-you">Wei-Ping Chan</span>
+          <span class="chip">Richard Rabideau Childers</span>
+          <span class="chip">Sorcha Ashe</span>
+          <span class="chip chip-more">+8 more co-authors</span>
+          <span class="chip">Nanfang Yu</span>
+          <span class="chip chip-senior">Naomi E. Pierce</span>
+        </div>
+      </article>
+
+      <article class="pub-card bg-white rounded-2xl shadow-md p-6 flex flex-col">
+        <div class="flex justify-between items-center mb-3">
+          <span class="text-xs font-bold text-white bg-indigo-600 rounded-full px-3 py-1">2016</span>
+          <span class="text-sm italic text-gray-500">Science</span>
+        </div>
+        <h4 class="font-semibold text-lg leading-snug mb-4">
+          <a href="https://www.science.org/doi/abs/10.1126/science.aab4119" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
+            Seasonal and daily climate variation have opposite effects on species elevational range size
+          </a>
+        </h4>
+        <div class="flex flex-wrap gap-2 mt-auto">
+          <span class="chip chip-you">Wei-Ping Chan</span>
+          <span class="chip">I-Ching Chen</span>
+          <span class="chip">Robert K. Colwell</span>
+          <span class="chip chip-more">+1 more co-author</span>
+          <span class="chip">Cho-ying Huang</span>
+          <span class="chip chip-senior">Sheng-Feng Shen</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-6xl mx-auto px-4 py-12 text-center">
+    <div class="bg-white rounded-2xl shadow-md p-8">
+      <h3 class="text-xl md:text-2xl font-bold text-gray-800">Interested in collaborating?</h3>
+      <p class="text-gray-600 mt-2 mb-6">I welcome interdisciplinary projects across science, data, and design.</p>
+      <a href="home.html#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition">
+        Get in touch
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER (shared across pages) ===================== -->
+  <footer class="bg-gray-900 text-gray-300">
+    <div class="max-w-6xl mx-auto px-4 py-10 text-center">
+      <p class="text-xl font-bold text-white">Wei-Ping Chan</p>
+      <p class="text-sm text-gray-400 mt-1">Exploratory Data Scientist · Interdisciplinary Researcher</p>
+      <div class="flex justify-center gap-6 mt-5">
+        <a href="https://github.com/wpchanwork" target="_blank" rel="noopener noreferrer" class="hover:text-white">GitHub</a>
+        <a href="https://www.linkedin.com/in/wei-ping-chan" target="_blank" rel="noopener noreferrer" class="hover:text-white">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" target="_blank" rel="noopener noreferrer" class="hover:text-white">Google Scholar</a>
+        <a href="https://sos-commons.vercel.app/research" target="_blank" rel="noopener noreferrer" class="hover:text-white">SOS Research</a>
+      </div>
+      <p class="text-xs text-gray-500 mt-6">
+        Map data © OpenStreetMap contributors, © CARTO · Collaborator data from published citations &amp; Google Scholar
+      </p>
+      <p class="text-xs text-gray-500 mt-1">© 2026 Wei-Ping Chan. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  /* ============================================================
+     RESEARCH FIELDS  (label + marker colour)
+     ============================================================ */
+  const FIELDS = {
+    evo: { label: "Evolution & Animal Behavior",     color: "#7c3aed" },
+    eco: { label: "Ecology & Biogeography",          color: "#059669" },
+    ent: { label: "Entomology & Chemical Ecology",   color: "#d97706" },
+    con: { label: "Biodiversity & Conservation",     color: "#0d9488" },
+    bot: { label: "Botany & Phylogenomics",          color: "#65a30d" },
+    phy: { label: "Physics & Imaging",               color: "#2563eb" }
+  };
+
+  /* ============================================================
+     COLLABORATORS
+     To add a photo: upload it to Google Drive (set sharing to
+     "Anyone with the link"), then paste the file ID into the
+     photoId field below. Until a photoId is provided, an initials
+     placeholder is shown automatically.
+     ============================================================ */
+  const COLLAB = [
+    { name:"Naomi E. Pierce", field:"evo", photoId:"",
+      inst:"Museum of Comparative Zoology, Harvard University",
+      loc:"Cambridge, MA, USA", lat:42.3782, lng:-71.1156,
+      note:"Doctoral advisor",
+      pubs:["Proc. R. Soc. B 2025","Biol. Conserv. 2023","Commun. Biol. 2022"] },
+
+    { name:"Avalon C. S. Owens", field:"evo", photoId:"",
+      inst:"The Rowland Institute at Harvard",
+      loc:"Cambridge, MA, USA", lat:42.3626, lng:-71.1003,
+      pubs:["Proc. R. Soc. B 2025"] },
+
+    { name:"Imogen Daszak", field:"evo", photoId:"",
+      inst:"The Rowland Institute at Harvard / Northeastern University",
+      loc:"Boston, MA, USA", lat:42.3500, lng:-71.0892,
+      pubs:["Proc. R. Soc. B 2025"] },
+
+    { name:"Qian Tang", field:"con", photoId:"",
+      inst:"The Rowland Institute at Harvard",
+      loc:"Cambridge, MA, USA", lat:42.3610, lng:-71.0975,
+      pubs:[] },
+
+    { name:"Richard Rabideau Childers", field:"evo", photoId:"",
+      inst:"Harvard University",
+      loc:"Cambridge, MA, USA", lat:42.3770, lng:-71.1167,
+      pubs:["Commun. Biol. 2022"] },
+
+    { name:"Sheng-Feng Shen", field:"eco", photoId:"",
+      inst:"Biodiversity Research Center, Academia Sinica",
+      loc:"Taipei, Taiwan", lat:25.0420, lng:121.6147,
+      note:"Master's co-advisor",
+      pubs:["Nature 2024","Science 2016"] },
+
+    { name:"I-Ching Chen", field:"eco", photoId:"",
+      inst:"Department of Life Sciences, National Cheng Kung University",
+      loc:"Tainan, Taiwan", lat:22.9999, lng:120.2179,
+      pubs:["Nature 2024","Science 2016"] },
+
+    { name:"Po-An Lin", field:"ent", photoId:"",
+      inst:"Department of Entomology, National Taiwan University",
+      loc:"Taipei, Taiwan", lat:25.0174, lng:121.5398,
+      pubs:["Proc. R. Soc. B 2025"] },
+
+    { name:"Cheng-Chia Tsai", field:"phy", photoId:"",
+      inst:"Columbia University",
+      loc:"New York, NY, USA", lat:40.8060, lng:-73.9610,
+      pubs:["Commun. Biol. 2022"] },
+
+    { name:"Edward R. Soucy", field:"phy", photoId:"",
+      inst:"Center for Brain Science, Harvard University",
+      loc:"Cambridge, MA, USA", lat:42.3760, lng:-71.1138,
+      pubs:["Commun. Biol. 2022"] },
+
+    { name:"Akito Y. Kawahara", field:"evo", photoId:"",
+      inst:"Florida Museum of Natural History, University of Florida",
+      loc:"Gainesville, FL, USA", lat:29.6357, lng:-82.3702,
+      pubs:["Nat. Ecol. Evol. 2023"] },
+
+    { name:"Shipher Wu", field:"con", photoId:"",
+      inst:"National Taiwan Museum",
+      loc:"Taipei, Taiwan", lat:25.0429, lng:121.5150,
+      pubs:[] },
+
+    { name:"Syuan-Jyun Sun", field:"evo", photoId:"",
+      inst:"National Taiwan University",
+      loc:"Taipei, Taiwan", lat:25.0190, lng:121.5415,
+      pubs:[] },
+
+    { name:"Jonathan Lenoir", field:"eco", photoId:"",
+      inst:"CNRS / Université de Picardie Jules Verne",
+      loc:"Amiens, France", lat:49.8941, lng:2.2958,
+      pubs:["Nature 2024"] },
+
+    { name:"Robert K. Colwell", field:"eco", photoId:"",
+      inst:"University of Connecticut",
+      loc:"Storrs, CT, USA", lat:41.8077, lng:-72.2540,
+      pubs:["Science 2016"] },
+
+    { name:"David J. Lohman", field:"con", photoId:"",
+      inst:"City College of New York, CUNY",
+      loc:"New York, NY, USA", lat:40.8200, lng:-73.9493,
+      pubs:["Biol. Conserv. 2023"] },
+
+    { name:"Zhengyang Wang", field:"con", photoId:"",
+      inst:"Sichuan University",
+      loc:"Chengdu, China", lat:30.6310, lng:104.0830,
+      pubs:["Biol. Conserv. 2023"] },
+
+    { name:"Nanfang Yu", field:"phy", photoId:"",
+      inst:"Department of Applied Physics, Columbia University",
+      loc:"New York, NY, USA", lat:40.8075, lng:-73.9626,
+      pubs:["Commun. Biol. 2022"] },
+
+    { name:"Liming Cai", field:"bot", photoId:"",
+      inst:"University of Florida",
+      loc:"Gainesville, FL, USA", lat:29.6436, lng:-82.3549,
+      pubs:["Proc. R. Soc. B 2025"] },
+
+    { name:"Shawan Chowdhury", field:"con", photoId:"",
+      inst:"Monash University",
+      loc:"Melbourne, Australia", lat:-37.9105, lng:145.1340,
+      pubs:[] },
+
+    { name:"Akbar John", field:"con", photoId:"",
+      inst:"College of Marine Science and Aquatic Biology, University of Khorfakkan",
+      loc:"Sharjah, United Arab Emirates", lat:25.3392, lng:56.3420,
+      pubs:[] }
+  ];
+
+  /* ---------- helpers ---------- */
+  function initials(name){
+    const p = name.replace(/[^A-Za-z\s-]/g,'').trim().split(/[\s-]+/).filter(Boolean);
+    if(p.length===1) return p[0][0].toUpperCase();
+    return (p[0][0]+p[p.length-1][0]).toUpperCase();
+  }
+  function avatar(c, px){
+    const img = c.photoId
+      ? `<img class="av-img" src="https://drive.google.com/thumbnail?id=${c.photoId}&sz=s200" alt="${c.name}" onerror="this.style.display='none'">`
+      : '';
+    return `<div class="av" style="width:${px}px;height:${px}px;background:${FIELDS[c.field].color};">
+              <span class="av-ini" style="font-size:${Math.round(px*0.36)}px;">${initials(c.name)}</span>${img}
+            </div>`;
+  }
+  function tagsHTML(c){
+    const note = c.note ? `<span class="tag tag-note">${c.note}</span>` : '';
+    const pubs = (c.pubs && c.pubs.length)
+      ? c.pubs.map(p=>`<span class="tag">${p}</span>`).join('')
+      : `<span class="tag tag-new">Active collaboration</span>`;
+    return note + pubs;
+  }
+
+  /* ---------- map ---------- */
+  const map = L.map('map', { scrollWheelZoom:false }).setView([28,30], 2);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains:'abcd', maxZoom:18
+  }).addTo(map);
+
+  const markers = COLLAB.map(c => {
+    const m = L.circleMarker([c.lat,c.lng], {
+      radius:9, weight:2.5, color:'#ffffff',
+      fillColor:FIELDS[c.field].color, fillOpacity:1
+    });
+    m.bindPopup(
+      `<div style="min-width:200px">
+         <div style="display:flex;gap:.6rem;align-items:center;">
+           ${avatar(c,48)}
+           <div>
+             <div style="font-weight:700;font-size:.95rem;">${c.name}</div>
+             <div style="font-size:.72rem;color:#7c3aed;font-weight:600;">${FIELDS[c.field].label}</div>
+           </div>
+         </div>
+         <div style="font-size:.78rem;color:#475569;margin-top:.5rem;">${c.inst}</div>
+         <div style="font-size:.72rem;color:#94a3b8;margin-top:.15rem;">📍 ${c.loc}</div>
+         <div style="margin-top:.5rem;display:flex;flex-wrap:wrap;gap:.3rem;">${tagsHTML(c)}</div>
+       </div>`
+    );
+    return m;
+  });
+  markers.forEach(m => m.addTo(map));
+  map.fitBounds(L.featureGroup(markers).getBounds().pad(0.15));
+
+  /* ---------- collaborator cards (grouped by field) ---------- */
+  let sectionsHTML = '';
+  Object.keys(FIELDS).forEach(key => {
+    const members = COLLAB.map((c,i)=>({c,i})).filter(x=>x.c.field===key);
+    if(!members.length) return;
+    sectionsHTML += `<div data-group="${key}" class="mb-10">
+      <h4 class="group-head" style="border-color:${FIELDS[key].color};">
+        <span class="dot" style="background:${FIELDS[key].color};"></span>${FIELDS[key].label}
+      </h4>
+      <div class="collab-grid">
+        ${members.map(x=>`
+          <div class="collab-card" data-field="${x.c.field}" data-idx="${x.i}">
+            ${avatar(x.c,56)}
+            <div class="collab-info">
+              <p class="collab-name">${x.c.name}</p>
+              <p class="collab-inst">${x.c.inst}</p>
+              <p class="collab-loc">📍 ${x.c.loc}</p>
+              <div class="collab-tags">${tagsHTML(x.c)}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+  });
+  document.getElementById('collab-sections').innerHTML = sectionsHTML;
+
+  document.querySelectorAll('.collab-card').forEach(el => {
+    el.addEventListener('click', () => {
+      const i = +el.dataset.idx;
+      document.getElementById('map').scrollIntoView({behavior:'smooth', block:'center'});
+      map.flyTo([COLLAB[i].lat, COLLAB[i].lng], 6, {duration:1});
+      setTimeout(()=>markers[i].openPopup(), 900);
+    });
+  });
+
+  /* ---------- field filter ---------- */
+  const filterBox = document.getElementById('filters');
+  function makeBtn(key, label, color){
+    const b = document.createElement('button');
+    b.className = 'filter-btn';
+    b.dataset.key = key;
+    b.innerHTML = (color ? `<span class="dot" style="background:${color};"></span>` : '') + label;
+    b.addEventListener('click', () => applyFilter(key));
+    filterBox.appendChild(b);
+    return b;
+  }
+  makeBtn('all','All collaborators','');
+  Object.keys(FIELDS).forEach(k => makeBtn(k, FIELDS[k].label, FIELDS[k].color));
+
+  function applyFilter(key){
+    markers.forEach((m,i) => {
+      const show = key==='all' || COLLAB[i].field===key;
+      if(show){ if(!map.hasLayer(m)) m.addTo(map); }
+      else if(map.hasLayer(m)) map.removeLayer(m);
+    });
+    document.querySelectorAll('[data-group]').forEach(el => {
+      el.style.display = (key==='all' || el.dataset.group===key) ? '' : 'none';
+    });
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      const on = b.dataset.key===key;
+      b.classList.toggle('active', on);
+      b.style.background = on ? (b.dataset.key==='all' ? '#1e293b' : FIELDS[b.dataset.key].color) : '#fff';
+    });
+    const visible = markers.filter(m => map.hasLayer(m));
+    if(visible.length) map.fitBounds(L.featureGroup(visible).getBounds().pad(0.2));
+  }
+  applyFilter('all');
+
+  /* ---------- hero stats ---------- */
+  document.getElementById('stat-people').textContent = COLLAB.length;
+  document.getElementById('stat-countries').textContent =
+    new Set(COLLAB.map(c => c.loc.split(',').pop().trim())).size;
+  document.getElementById('stat-fields').textContent =
+    new Set(COLLAB.map(c => c.field)).size;
+
+  /* ============================================================
+     FIELD-WORK PHOTOS  (two-row scrolling marquee)
+     To add a photo: upload it to Google Drive (set sharing to
+     "Anyone with the link"), paste the file ID into photoId, and
+     edit the caption. Add or remove entries freely — the two rows
+     and the seamless loop adjust automatically.
+     ============================================================ */
+  const PHOTOS = [
+    { caption:"Field photo 1 — add location & year", photoId:"" },
+    { caption:"Field photo 2 — add location & year", photoId:"" },
+    { caption:"Field photo 3 — add location & year", photoId:"" },
+    { caption:"Field photo 4 — add location & year", photoId:"" },
+    { caption:"Field photo 5 — add location & year", photoId:"" },
+    { caption:"Field photo 6 — add location & year", photoId:"" },
+    { caption:"Field photo 7 — add location & year", photoId:"" },
+    { caption:"Field photo 8 — add location & year", photoId:"" }
+  ];
+
+  function photoCard(p){
+    const body = p.photoId
+      ? `<img src="https://drive.google.com/thumbnail?id=${p.photoId}&sz=s800" alt="${p.caption}" onerror="this.style.display='none'">`
+      : `<div class="photo-ph">
+           <svg width="34" height="34" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"
+               d="M3 9a2 2 0 012-2h.93a2 2 0 001.66-.9l.82-1.2A2 2 0 0110.07 4h3.86a2 2 0 011.66.9l.82 1.2a2 2 0 001.66.9H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+             <circle cx="12" cy="13" r="3.2" stroke-width="1.6"/>
+           </svg>
+           <span style="font-size:.68rem;margin-top:.35rem;">Photo placeholder</span>
+         </div>`;
+    return `<figure class="photo-card">${body}<figcaption class="photo-cap">${p.caption}</figcaption></figure>`;
+  }
+
+  // Each track holds the photo set twice so the loop is seamless.
+  const set1 = PHOTOS.map(photoCard).join('');
+  const set2 = [...PHOTOS].reverse().map(photoCard).join('');
+  document.getElementById('photo-row-1').innerHTML = set1 + set1;
+  document.getElementById('photo-row-2').innerHTML = set2 + set2;
+  </script>
 </body>
 </html>

@@ -3,80 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title hidden>Wei-Ping Chan's Website</title>
+  <title>Wei-Ping Chan</title>
   <meta name="description" content="Welcome to Wei-Ping Chan's personal website.">
-  <!-- Include W3.CSS -->
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
       background-image: url('https://lh3.googleusercontent.com/d/124uAIhpSnJAKTy0gnV0ixWPs2SCq7uQe');
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
     }
     .overlay {
+      position: relative;
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      height: 100%;
-      color: white;
       text-align: center;
+      padding: 24px;
+      color: #fff;
+      background: linear-gradient(180deg, rgba(15,23,42,.55) 0%, rgba(15,23,42,.25) 45%, rgba(15,23,42,.65) 100%);
+    }
+    .eyebrow {
+      letter-spacing: .35em;
+      font-size: .8rem;
+      text-transform: uppercase;
+      opacity: .85;
+      margin-bottom: 14px;
+    }
+    .name {
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      text-shadow: 0 2px 20px rgba(0,0,0,.45);
+    }
+    .tagline {
+      margin-top: 14px;
+      font-size: clamp(.95rem, 2.4vw, 1.2rem);
+      font-weight: 300;
+      max-width: 36rem;
+      opacity: .95;
     }
     .button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: transparent;
-      color: white;
-      border: 2px solid white;
-      border-radius: 5px;
+      margin-top: 34px;
+      padding: 13px 30px;
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,.85);
+      border-radius: 9999px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 1rem;
+      letter-spacing: .03em;
+      transition: all .2s ease;
     }
     .button:hover {
-      transform: scale(1.2);
-      font-weight: bold;
+      background: #fff;
+      color: #14294b;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px -10px rgba(0,0,0,.6);
     }
-    /* Media query for smaller screens */
+    .hint {
+      position: absolute;
+      bottom: 22px;
+      font-size: .72rem;
+      opacity: .65;
+    }
     @media (max-width: 768px) {
       body {
-      background-size: auto 100%; /* Fit the image to 75% of the height */
-      background-position: calc(50% + 180px) center; /* Move the image 200px to the right and center vertically */
-      }
-      .overlay {
-      padding: 10px; /* Add padding for smaller screens */
-      }
-    }
-    @media (max-width: 480px) {
-      body {
-      background-size: auto 100%; /* Fit the image to the full height */
-      background-position: calc(50% + 180px) center; /* Center the image */
-      }
-      .overlay {
-      padding: 10px; /* Add padding for smaller screens */
+        background-size: auto 100%;
+        background-position: calc(50% + 180px) center;
       }
     }
   </style>
 </head>
 <body>
-  <div class="w3-container overlay">
-    <button class="button w3-hover-opacity" onclick="redirectToIndex()">Know More About Me</button>
+  <div class="overlay">
+    <p class="eyebrow">Welcome</p>
+    <h1 class="name">Wei-Ping Chan</h1>
+    <p class="tagline">Exploratory Data Scientist &amp; Interdisciplinary Researcher — From Nature to Society</p>
+    <button class="button" onclick="redirectToIndex()">Know More About Me →</button>
+    <p class="hint">Entering automatically in a few seconds…</p>
   </div>
 
   <script>
-    // Redirect to home.html after 20 seconds
-    setTimeout(() => {
-      window.location.href = 'home.html';
-    }, 20000);
-
-    // Redirect when the button is clicked
-    function redirectToIndex() {
-      window.location.href = 'home.html';
-    }
+    setTimeout(() => { window.location.href = 'home.html'; }, 20000);
+    function redirectToIndex() { window.location.href = 'home.html'; }
   </script>
 </body>
 </html>

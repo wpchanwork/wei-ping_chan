@@ -3,316 +3,371 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wei-Ping Chan</title>
+  <title>Projects — Wei-Ping Chan</title>
+  <meta name="description" content="Research and creative projects by Wei-Ping Chan." />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    .hero-gradient { background: linear-gradient(135deg, #14294b 0%, #0f1f3d 100%); }
+    .accent-bar { width: 4rem; height: .25rem; border-radius: 9999px; background: #14294b; }
+    .card-hover { transition: transform .2s ease, box-shadow .2s ease; }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 24px 42px -16px rgba(30,41,59,.35); }
+    .nav-link {
+      padding: .45rem .85rem; border-radius: .5rem; color: #475569; font-weight: 500;
+      transition: background .15s ease, color .15s ease;
+    }
+    .nav-link:hover { background: #eef2f7; color: #14294b; }
+    .nav-active {
+      padding: .45rem .85rem; border-radius: .5rem;
+      background: #14294b; color: #fff; font-weight: 600;
+    }
+    .cat-head {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: 1.5rem; font-weight: 700; color: #1e293b;
+      border-left: 5px solid #14294b; padding-left: .7rem; margin-bottom: 1.5rem;
+    }
+    .tag-line { font-size: .8rem; color: #64748b; }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
-    <!-- Navbar -->
-    <header class="bg-white shadow">
-      <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold">Wei-Ping Chan</h1>
-        <!-- Hamburger Menu for Mobile -->
-        <div class="md:hidden">
-          <button id="menu-toggle" class="text-gray-800 focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-          </button>
-        </div>
-        <!-- Navigation Links -->
-        <nav id="menu" class="hidden md:flex space-x-4">
-          <a href="home.html" class="hover:text-blue-500">Home</a>
-          <span class="text-gray-500">Projects</span>
-          <a href="colleberators.html" class="hover:text-blue-500">Collaborations</a>
-          <a href="home.html#about" class="hover:text-blue-500">About</a>
-          <a href="home.html#contact" class="hover:text-blue-500">Contact</a>
-        </nav>
-      </div>
-    </header>
-    
-    <script>
-      // Toggle menu visibility on mobile
-      const menuToggle = document.getElementById('menu-toggle');
-      const menu = document.getElementById('menu');
-      menuToggle.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-        menuToggle.classList.toggle('absolute');
-        menuToggle.classList.toggle('top-4');
-        menuToggle.classList.toggle('right-4');
-      });
-    </script>
-  <section class="py-12">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-6">Projects</h2>
 
-      <!-- Category: Nonprofit Organizations -->
-      <div class="mb-16"> 
-        <h3 class="text-2xl font-semibold mb-4">Nonprofit Organizations</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-            <img src="https://drive.google.com/thumbnail?id=1Exxihq3GW0vXpW33fZBvBE2KU7WB5Bvj&sz=s500" alt="SOS" class="rounded-lg mb-6 w-full h-64 object-cover object-top">
-            <div class="flex justify-between items-center">
-              <a href="https://sos-commons.vercel.app/" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">
-                <h4 class="font-semibold text-xl mb-2">Sustainability Of Sustainability</h4>
+  <!-- ===================== NAVBAR (shared across pages) ===================== -->
+  <header class="bg-white shadow sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="home.html" class="text-2xl font-bold">Wei-Ping Chan</a>
+      <div class="md:hidden">
+        <button id="menu-toggle" aria-label="Toggle menu" class="text-gray-800 focus:outline-none">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+      <nav id="menu" class="hidden md:flex md:items-center md:space-x-1 absolute md:static top-16 left-0 right-0 bg-white md:bg-transparent shadow md:shadow-none flex-col md:flex-row px-3 md:px-0 py-3 md:py-0 space-y-1 md:space-y-0">
+        <a href="home.html" class="nav-link">Home</a>
+        <span class="nav-link nav-active">Projects</span>
+        <a href="colleberators.html" class="nav-link">Collaborations</a>
+        <a href="home.html#background" class="nav-link">Background</a>
+        <a href="home.html#contact" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    menuToggle.addEventListener('click', () => menu.classList.toggle('hidden'));
+  </script>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero-gradient text-white">
+    <div class="max-w-6xl mx-auto px-4 py-14 md:py-16 text-center">
+      <h2 class="text-3xl md:text-5xl font-bold">Projects</h2>
+      <p class="mt-4 text-blue-100 max-w-2xl mx-auto text-base md:text-lg">
+        Research and creative work spanning organizations, start-ups, evolution and behavior,
+        climate science, and interdisciplinary exploration.
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-4 py-12">
+
+    <!-- Nonprofit Organizations -->
+    <div class="mb-16">
+      <h3 class="cat-head">Nonprofit Organizations</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1Exxihq3GW0vXpW33fZBvBE2KU7WB5Bvj&sz=s500" alt="SOS" class="w-full h-60 object-cover object-top">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <a href="https://sos-commons.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                <h4 class="font-semibold text-xl">Sustainability Of Sustainability</h4>
               </a>
-              <span class="text-sm text-gray-600 italic">Cambridge, MA, USA</span>
+              <span class="text-sm text-gray-500 italic whitespace-nowrap">Cambridge, MA</span>
             </div>
-            <p class="text-sm text-gray-600 italic text-right">2025 - Now</p>
-            <p class="text-sm text-gray-600 italic">"Sustainability isn't self-sustaining"</p>
-            <p class="text-lg text-gray-600">
-              SOS builds shared meaning, readable patterns, and working mechanisms so sustainability can persist and scale in the real world.</p>
-            <p class="text-sm text-gray-700 italic">Meaning · Pattern · Mechanism</p>
+            <p class="text-sm text-gray-400 italic">2025 – Now</p>
+            <p class="text-sm text-gray-600 italic mt-2">"Sustainability isn't self-sustaining"</p>
+            <p class="text-gray-600 mt-2">SOS builds shared meaning, readable patterns, and working mechanisms so sustainability can persist and scale in the real world.</p>
+            <p class="tag-line italic mt-3">Meaning · Pattern · Mechanism</p>
           </div>
-        </div>
-      </div>
-
-      <!-- Category: Start-Up Projects -->
-      <div class="mb-16">
-        <h3 class="text-2xl font-semibold mb-4">Start-Ups</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1pev4bc7jvCoig44S2Acm-nvtJp6NvEHJ&sz=s500" alt="BioMuse-X" class="rounded-lg mb-6 w-full h-64 object-cover">
-        <div class="flex justify-between items-center">
-            <h4 class="font-semibold text-xl mb-2">BioMuse-X</h4>
-            <span class="text-sm text-gray-600 italic">Cambridge, MA, USA</span>
-        </div>
-        <p class="text-sm text-gray-600 italic text-right">2023 - 2025</p>
-        <p class="text-sm text-gray-600 italic">"Preserving Nature, Serving the Future"</p>
-        <p class="text-lg text-gray-600">
-          Investigating sustainable, energy-efficient materials using a unique dataset derived from hyperspectral imaging and electron microscopy.</p>
-        <p class="text-sm text-gray-700 italic">Functional Trait Analysis · Spectral Data · Scanning Electron Microscope</p>
-          </div>
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1rgnDTd0Icmy12oVyLRmXnGnsnkfCKtPh&sz=s500" alt="CropSky" class="rounded-lg mb-6 w-full h-64 object-cover">
-        <div class="flex justify-between items-center">
-          <h4 class="font-semibold text-xl mb-2 text-gray-600">CropSky</h4>
-          <span class="text-sm text-gray-600 italic">Taipei, Taiwan</span>
-        </div>
-        <p class="text-sm text-gray-600 italic text-right">2017 - 2020</p>
-        <p class="text-sm text-gray-600 italic">"Empowering Agriculture with Data-Driven Insights"</p>
-        <p class="text-lg text-gray-600">
-            Applied machine learning and ecological modeling to optimize crop forecasting and disease management, delivering actionable insights for agriculture.</p>
-        <p class="text-sm text-gray-600 italic">Machine Learning · Ecological Modeling · Crop Production · Scalable Analytics</p>
-          </div>
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1AHSaBv0woy9g-vauJugfTOerlmszMjUG&sz=s500" alt="PathoTracter" class="rounded-lg mb-6 w-full h-64 object-cover">
-        <div class="flex justify-between items-center">
-          <h4 class="font-semibold text-xl mb-2 text-gray-600">PathoTracter</h4>
-          <span class="text-sm text-gray-600 italic">London, UK</span>
-        </div>
-        <p class="text-sm text-gray-600 italic text-right">2015 - 2017</p>
-        <p class="text-sm text-gray-600 italic">"Innovating Pathogen Detection for a Safer Tomorrow"</p>
-        <p class="text-lg text-gray-600">
-            Leveraging advanced biochips, IoT-enabled sensors, and predictive analytics to revolutionize disease detection and forecast outbreaks with precision.</p>
-        <p class="text-sm text-gray-600 italic">Machine Learning · Biochips · IoT-enabled Sensors · Disease Detection</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Category: Specimen Morphological Quantification and High-Throughput Digitization -->
-      <div class="mb-12">
-        <h3 class="text-2xl font-semibold mb-4 text-left">High-Throughput Digitization and Morphological Quantification</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="hidden md:block"></div> <!-- Empty left column for larger screens -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          <img src="https://drive.google.com/thumbnail?id=1yAwWKzIXxjpmplDElV4d6PUNLNxwUlQT&sz=s500" alt="A high throughput multispectral imaging system for museum specimens" class="rounded-lg mb-6 w-full h-48 object-cover">
-          <a href="https://www.nature.com/articles/s42003-022-04282-z" class="text-blue-500 hover:underline" target="_blank">
-            A high throughput multispectral imaging system for museum specimens</a>
-          <span class="text-sm text-gray-600 italic self-end">2017</span>
-        </h4>
-        <p class="text-sm text-gray-600">Multispectral Imaging · High-Throughput Systems · Parallel Computing</p>
-          </div>
-          <div class="hidden md:block"></div> <!-- Empty right column for larger screens -->
-        </div>
-      </div>
-
-      <!-- Category: Evolution and Animal Behavior -->
-      <div class="mb-12">
-        <h3 class="text-2xl font-semibold mb-4">Evolution and Animal Behavior</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Project: Wing beat signatures -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1pkgFn_Mh-dFkQ7bkGNECNe_UFiJtyAWQ&sz=s500" alt="Wing beat signatures in moths" class="rounded-lg mb-6 w-full h-48 object-cover object-bottom">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          Wing beat signatures in butterflies and moths: investigating variations across sex, age, and taxonomic groups
-          <span class="text-sm text-gray-600 italic self-end">2024</span>
-        </h4>
-        <p class="text-sm text-gray-600">Computer Vision · Signal Processing · Statistical Modeling · Time-Series Analysis</p>
-          </div>
-
-        <!-- Project: Diminished light attraction -->
-        <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          <img src="https://drive.google.com/thumbnail?id=1ZBZeTvOmOkMWTNqokhT2FfjfcBly_1hp&sz=s500" alt="Diminished light attraction in moths" class="rounded-lg mb-6 w-full h-48 object-cover object-top">
-          <a href="https://doi.org/10.1098/rspb.2025.2319" class="text-blue-500 hover:underline" target="_blank">
-          Historical behavioural data disentangle evolutionary and environmental drivers of recent declines in insect attraction to light</a>
-          <span class="text-sm text-gray-600 italic self-end">2025</span>
-        </h4>
-        <p class="text-sm text-gray-600">Experimental Design · Statistical Modeling · Environmental Data</p>
-        </div>
-
-          <!-- Project: Multispectral colors evolution -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1a7jy5v7_bW8faBvZnEewJlMGqPf6ivYm&sz=s500" alt="The evolution of multispectral colors in Lepidoptera" class="rounded-lg mb-6 w-full h-48 object-cover">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          <a href="https://www.researchsquare.com/article/rs-7603116/v1" class="text-blue-500 hover:underline" target="_blank">
-          Day versus night and the evolution of sexual dimorphism in Lepidoptera</a>
-          <span class="text-sm text-gray-600 italic self-end">2022</span>
-        </h4>
-        <p class="text-sm text-gray-600">Multispectral Imaging · Evolution · High-Dimensional Data</p>
-          </div>
-
-          <!-- Project: Eyespot and false-head features -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1C4GhxI5P8BP0UHbObtTlp9tMPd6AEb9p&sz=s500" alt="The evolution of the eyespot and false-head features in Lepidoptera" class="rounded-lg mb-6 w-full h-48 object-cover object-bottom">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          The evolution of the eyespot and false-head features in Lepidoptera
-          <span class="text-sm text-gray-600 italic self-end">2022</span>
-        </h4>
-        <p class="text-sm text-gray-600">Computer Vision · Deep Learning · Evolutionary Modeling · Data Visualization</p>
-          </div>
-
-          <!-- Project: Sensory organs evolution -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1pnlb387m3eR5wB8NqueCGHvkK9afnFLk&sz=s500" alt="The evolution of sensory organs in Lepidoptera" class="rounded-lg mb-6 w-full h-48 object-cover object-bottom">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          <a href="https://www.researchsquare.com/article/rs-4203706/v1" class="text-blue-500 hover:underline" target="_blank">
-            The evolution of sensory organs (antenna and eyes) in Lepidoptera</a>
-          <span class="text-sm text-gray-600 italic self-end">2020</span>
-        </h4>
-        <p class="text-sm text-gray-600">Computer Vision · Visual Ecology · Numerical Modeling</p>
-          </div>
-
-          <!-- Project: Paired wing flight systems -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1eLV7eXm16pfFf5mFgYQiPPl5IhnfHvf_&sz=s500" alt="Selection on size has generated distinctive pairedwing flight systems for butterfly flight" class="rounded-lg mb-6 w-full h-48 object-cover">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          <a href="https://www.researchsquare.com/article/rs-2968821/v1" class="text-blue-500 hover:underline" target="_blank">
-            Selection on size has generated distinctive paired wing flight systems for butterfly flight</a>
-          <span class="text-sm text-gray-600 italic self-end">2018</span>
-        </h4>
-        <p class="text-sm text-gray-600">Computer Vision · Evolutionary Modeling · Morphological Extraction</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Category: Climate and Environmental Studies -->
-      <div class="mb-12">
-        <h3 class="text-2xl font-semibold mb-4">Climate and Environmental Studies</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Project: Typhoon Patterns -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1PzhILxW_cy5Hx7tbC_zYvDzWRtM01GMM&sz=s500" alt="Typhoon occurance and impact" class="rounded-lg mb-6 w-full h-48 object-cover object-bottom">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          Analyzing Typhoon Patterns: Frequency, Intensity, and Routes in Taiwan
-          <span class="text-sm text-gray-600 italic self-end">2016</span>
-        </h4>
-        <p class="text-sm text-gray-600">Meteological Data · Business Intelligence · Tableau</p>
-          </div>
-
-          <!-- Project: Temperature Ranges -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=18u9VkHaB57YDCq1FnN0Cw0CgiRNQruzN&sz=s500" alt="Seasonal and diurnal temperature ranges in mountains worldwide" class="rounded-lg mb-6 w-full h-48 object-cover">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          Seasonal and diurnal temperature ranges in global mountains
-          <span class="text-sm text-gray-600 italic self-end">2015</span>
-        </h4>
-        <p class="text-sm text-gray-600">Climate Data · Satellite Image Analysis · Meta Analysis · Causal Inference</p>
-          </div>
-
-          <!-- Project: Climate Change Velocity -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1AGz8S0ROL7deJOdqlsuMVvgl69f9QlwC&sz=s500" alt="The velocity of climate change in mountains worldwide" class="rounded-lg mb-6 w-full h-48 object-cover">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          <a href="https://doi.org/10.1038/s41586-024-07264-9" class="text-blue-500 hover:underline" target="_blank">
-            The velocity of climate change in mountains worldwide</a>
-          <span class="text-sm text-gray-600 italic self-end">2014</span>
-        </h4>
-        <p class="text-sm text-gray-600">Climate Data · Satellite Image Analysis · High-Dimensional Data · Data Visualization</p>
-          </div>
-
-          <!-- Project: Climatic Variability -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1fVwu4eAcYWZHJzG_7lU0Irukz2cPOHTT&sz=s500" alt="Opposite influences of seasonal and daily climatic variability on species range size" class="rounded-lg mb-6 w-full h-48 object-cover">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          <a href="https://www.science.org/doi/abs/10.1126/science.aab4119" class="text-blue-500 hover:underline" target="_blank">
-            Opposite influences of seasonal and daily climatic variability on species range size</a>
-          <span class="text-sm text-gray-600 italic self-end">2013</span>
-        </h4>
-        <p class="text-sm text-gray-600">Climate Data · Satellite Image Analysis · High-Dimensional Data · Causal Inference</p>
-          </div>
-
-          <!-- Project: Drought Stress -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1mbsUv1ADeRGPuClu4tWI9RkrNGj6YfDv&sz=s500" alt="Increasing drought stress and climate variability in high mountain ecosystems in Taiwan" class="rounded-lg mb-6 w-full h-48 object-cover">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          Increasing drought stress and climate variability in high mountain ecosystems in Taiwan
-          <span class="text-sm text-gray-600 italic self-end">2012</span>
-        </h4>
-        <p class="text-sm text-gray-600">Climate Data · Time-Series Analysis · Tree Ring · Stable Isotope</p>
-          </div>
-
-          <!-- Project: Stable Isotope Prediction -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1mKuLRJ_DYJEaNST_XaZeFuu55_2Ok6o4&sz=s500" alt="Stable Oxygen isotope" class="rounded-lg mb-6 w-full h-48 object-cover object-bottom">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-            Regional scale high resolution δ18O prediction in precipitation using MODIS EVI
-          <span class="text-sm text-gray-600 italic self-end">2010</span>
-        </h4>
-        <p class="text-sm text-gray-600">Stable Isotope · Remote Sensing · Geospatial Modeling</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Category: Interdisciplinary Studies and Projects -->
-      <div class="mb-12">
-        <h3 class="text-2xl font-semibold mb-4">Interdisciplinary Studies and Projects</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-          <!-- Project: History of Blue -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1hLNXdlZJu7KJ-EFkhJ5ZSxc_OUFaMviF&sz=s500" alt="Exploring the history of blue through museum art pieces" class="rounded-lg mb-6 w-full h-48 object-cover">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          Exploring the history of blue through museum art pieces
-          <span class="text-sm text-gray-600 italic self-end">2019</span>
-        </h4>
-        <p class="text-sm text-gray-600">Computer Vision · Business Intelligence · Data Visualization</p>
-          </div>
-
-          <!-- Project: Regional Weather and News -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=18UluKsiiPTcmyGjmKPyVimT3bMsdY5af&sz=s500" alt="Regional weather drives the topics of local news" class="rounded-lg mb-6 w-full h-48 object-cover">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          Regional weather drives the topics of local news
-          <span class="text-sm text-gray-600 italic self-end">2017</span>
-        </h4>
-        <p class="text-sm text-gray-600">Natural Language Processing · AI · Business Intelligence</p>
-          </div>
-
-          <!-- Project: Aurora Prediction -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1RA80WbUhliwaVL7FOleGpaui-ggBS0Y6&sz=s500" alt="Predicting aurora intensity using machine learning and space weather data" class="rounded-lg mb-6 w-full h-48 object-cover">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          Predicting aurora intensity using machine learning and space weather data
-          <span class="text-sm text-gray-600 italic self-end">2017</span>
-        </h4>
-        <p class="text-sm text-gray-600">Machine Learning · Space Weather · Predictive Analytics</p>
-          </div>
-
-          <!-- Project: Beetle Behavior Tracking -->
-          <div class="bg-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
-        <img src="https://drive.google.com/thumbnail?id=1ZgzXgE7GjYfS8uQ0nwXpJUlCJGLKuHPo&sz=s500" alt="Video tracking system for the corpus used by burying beetles" class="rounded-lg mb-6 w-full h-48 object-cover">
-        <h4 class="font-semibold text-xl mb-2 flex flex-col">
-          Video tracking system for the corpus used by burying beetles
-          <span class="text-sm text-gray-600 italic self-end">2016</span>
-        </h4>
-        <p class="text-sm text-gray-600">Computer Vision · Behavioral Analysis · Optimization</p>
-          </div>
-
         </div>
       </div>
     </div>
-  </section>
+
+    <!-- Start-Ups -->
+    <div class="mb-16">
+      <h3 class="cat-head">Start-Ups</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1pev4bc7jvCoig44S2Acm-nvtJp6NvEHJ&sz=s500" alt="BioMuse-X" class="w-full h-52 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-xl">BioMuse-X</h4>
+              <span class="text-sm text-gray-500 italic whitespace-nowrap">Cambridge, MA</span>
+            </div>
+            <p class="text-sm text-gray-400 italic">2023 – 2025</p>
+            <p class="text-sm text-gray-600 italic mt-2">"Preserving Nature, Serving the Future"</p>
+            <p class="text-gray-600 mt-2">Investigating sustainable, energy-efficient materials using a unique dataset derived from hyperspectral imaging and electron microscopy.</p>
+            <p class="tag-line italic mt-3">Functional Trait Analysis · Spectral Data · Scanning Electron Microscope</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1rgnDTd0Icmy12oVyLRmXnGnsnkfCKtPh&sz=s500" alt="CropSky" class="w-full h-52 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-xl">CropSky</h4>
+              <span class="text-sm text-gray-500 italic whitespace-nowrap">Taipei, Taiwan</span>
+            </div>
+            <p class="text-sm text-gray-400 italic">2017 – 2020</p>
+            <p class="text-sm text-gray-600 italic mt-2">"Empowering Agriculture with Data-Driven Insights"</p>
+            <p class="text-gray-600 mt-2">Applied machine learning and ecological modeling to optimize crop forecasting and disease management, delivering actionable insights for agriculture.</p>
+            <p class="tag-line italic mt-3">Machine Learning · Ecological Modeling · Crop Production · Scalable Analytics</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1AHSaBv0woy9g-vauJugfTOerlmszMjUG&sz=s500" alt="PathoTracter" class="w-full h-52 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-xl">PathoTracter</h4>
+              <span class="text-sm text-gray-500 italic whitespace-nowrap">London, UK</span>
+            </div>
+            <p class="text-sm text-gray-400 italic">2015 – 2017</p>
+            <p class="text-sm text-gray-600 italic mt-2">"Innovating Pathogen Detection for a Safer Tomorrow"</p>
+            <p class="text-gray-600 mt-2">Leveraging advanced biochips, IoT-enabled sensors, and predictive analytics to revolutionize disease detection and forecast outbreaks with precision.</p>
+            <p class="tag-line italic mt-3">Machine Learning · Biochips · IoT-enabled Sensors · Disease Detection</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- High-Throughput Digitization -->
+    <div class="mb-16">
+      <h3 class="cat-head">High-Throughput Digitization &amp; Morphological Quantification</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="hidden md:block"></div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1yAwWKzIXxjpmplDElV4d6PUNLNxwUlQT&sz=s500" alt="A high throughput multispectral imaging system for museum specimens" class="w-full h-44 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <a href="https://www.nature.com/articles/s42003-022-04282-z" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                <h4 class="font-semibold text-lg">A high throughput multispectral imaging system for museum specimens</h4>
+              </a>
+              <span class="text-sm text-gray-500 italic">2017</span>
+            </div>
+            <p class="tag-line mt-2">Multispectral Imaging · High-Throughput Systems · Parallel Computing</p>
+          </div>
+        </div>
+        <div class="hidden md:block"></div>
+      </div>
+    </div>
+
+    <!-- Evolution and Animal Behavior -->
+    <div class="mb-16">
+      <h3 class="cat-head">Evolution &amp; Animal Behavior</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1pkgFn_Mh-dFkQ7bkGNECNe_UFiJtyAWQ&sz=s500" alt="Wing beat signatures in moths" class="w-full h-44 object-cover object-bottom">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-lg">Wing beat signatures in butterflies and moths: investigating variations across sex, age, and taxonomic groups</h4>
+              <span class="text-sm text-gray-500 italic">2024</span>
+            </div>
+            <p class="tag-line mt-2">Computer Vision · Signal Processing · Statistical Modeling · Time-Series Analysis</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1ZBZeTvOmOkMWTNqokhT2FfjfcBly_1hp&sz=s500" alt="Diminished light attraction in moths" class="w-full h-44 object-cover object-top">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <a href="https://doi.org/10.1098/rspb.2025.2319" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                <h4 class="font-semibold text-lg">Historical behavioural data disentangle evolutionary and environmental drivers of recent declines in insect attraction to light</h4>
+              </a>
+              <span class="text-sm text-gray-500 italic">2025</span>
+            </div>
+            <p class="tag-line mt-2">Experimental Design · Statistical Modeling · Environmental Data</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1a7jy5v7_bW8faBvZnEewJlMGqPf6ivYm&sz=s500" alt="Day versus night and the evolution of sexual dimorphism in Lepidoptera" class="w-full h-44 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <a href="https://www.researchsquare.com/article/rs-7603116/v1" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                <h4 class="font-semibold text-lg">Day versus night and the evolution of sexual dimorphism in Lepidoptera</h4>
+              </a>
+              <span class="text-sm text-gray-500 italic">2022</span>
+            </div>
+            <p class="tag-line mt-2">Multispectral Imaging · Evolution · High-Dimensional Data</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1C4GhxI5P8BP0UHbObtTlp9tMPd6AEb9p&sz=s500" alt="The evolution of the eyespot and false-head features in Lepidoptera" class="w-full h-44 object-cover object-bottom">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-lg">The evolution of the eyespot and false-head features in Lepidoptera</h4>
+              <span class="text-sm text-gray-500 italic">2022</span>
+            </div>
+            <p class="tag-line mt-2">Computer Vision · Deep Learning · Evolutionary Modeling · Data Visualization</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1pnlb387m3eR5wB8NqueCGHvkK9afnFLk&sz=s500" alt="The evolution of sensory organs in Lepidoptera" class="w-full h-44 object-cover object-bottom">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <a href="https://www.researchsquare.com/article/rs-4203706/v1" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                <h4 class="font-semibold text-lg">The evolution of sensory organs (antenna and eyes) in Lepidoptera</h4>
+              </a>
+              <span class="text-sm text-gray-500 italic">2020</span>
+            </div>
+            <p class="tag-line mt-2">Computer Vision · Visual Ecology · Numerical Modeling</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1eLV7eXm16pfFf5mFgYQiPPl5IhnfHvf_&sz=s500" alt="Paired wing flight systems for butterfly flight" class="w-full h-44 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <a href="https://www.researchsquare.com/article/rs-2968821/v1" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                <h4 class="font-semibold text-lg">Selection on size has generated distinctive paired wing flight systems for butterfly flight</h4>
+              </a>
+              <span class="text-sm text-gray-500 italic">2018</span>
+            </div>
+            <p class="tag-line mt-2">Computer Vision · Evolutionary Modeling · Morphological Extraction</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Climate and Environmental Studies -->
+    <div class="mb-16">
+      <h3 class="cat-head">Climate &amp; Environmental Studies</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1PzhILxW_cy5Hx7tbC_zYvDzWRtM01GMM&sz=s500" alt="Typhoon occurrence and impact" class="w-full h-44 object-cover object-bottom">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-lg">Analyzing Typhoon Patterns: Frequency, Intensity, and Routes in Taiwan</h4>
+              <span class="text-sm text-gray-500 italic">2016</span>
+            </div>
+            <p class="tag-line mt-2">Meteorological Data · Business Intelligence · Tableau</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=18u9VkHaB57YDCq1FnN0Cw0CgiRNQruzN&sz=s500" alt="Seasonal and diurnal temperature ranges in global mountains" class="w-full h-44 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-lg">Seasonal and diurnal temperature ranges in global mountains</h4>
+              <span class="text-sm text-gray-500 italic">2015</span>
+            </div>
+            <p class="tag-line mt-2">Climate Data · Satellite Image Analysis · Meta Analysis · Causal Inference</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1AGz8S0ROL7deJOdqlsuMVvgl69f9QlwC&sz=s500" alt="The velocity of climate change in mountains worldwide" class="w-full h-44 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <a href="https://doi.org/10.1038/s41586-024-07264-9" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                <h4 class="font-semibold text-lg">The velocity of climate change in mountains worldwide</h4>
+              </a>
+              <span class="text-sm text-gray-500 italic">2014</span>
+            </div>
+            <p class="tag-line mt-2">Climate Data · Satellite Image Analysis · High-Dimensional Data · Data Visualization</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1fVwu4eAcYWZHJzG_7lU0Irukz2cPOHTT&sz=s500" alt="Opposite influences of seasonal and daily climatic variability on species range size" class="w-full h-44 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <a href="https://www.science.org/doi/abs/10.1126/science.aab4119" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                <h4 class="font-semibold text-lg">Opposite influences of seasonal and daily climatic variability on species range size</h4>
+              </a>
+              <span class="text-sm text-gray-500 italic">2013</span>
+            </div>
+            <p class="tag-line mt-2">Climate Data · Satellite Image Analysis · High-Dimensional Data · Causal Inference</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1mbsUv1ADeRGPuClu4tWI9RkrNGj6YfDv&sz=s500" alt="Increasing drought stress and climate variability in high mountain ecosystems in Taiwan" class="w-full h-44 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-lg">Increasing drought stress and climate variability in high mountain ecosystems in Taiwan</h4>
+              <span class="text-sm text-gray-500 italic">2012</span>
+            </div>
+            <p class="tag-line mt-2">Climate Data · Time-Series Analysis · Tree Ring · Stable Isotope</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1mKuLRJ_DYJEaNST_XaZeFuu55_2Ok6o4&sz=s500" alt="Stable oxygen isotope prediction" class="w-full h-44 object-cover object-bottom">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-lg">Regional scale high resolution δ18O prediction in precipitation using MODIS EVI</h4>
+              <span class="text-sm text-gray-500 italic">2010</span>
+            </div>
+            <p class="tag-line mt-2">Stable Isotope · Remote Sensing · Geospatial Modeling</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interdisciplinary Studies and Projects -->
+    <div class="mb-8">
+      <h3 class="cat-head">Interdisciplinary Studies &amp; Projects</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1hLNXdlZJu7KJ-EFkhJ5ZSxc_OUFaMviF&sz=s500" alt="Exploring the history of blue through museum art pieces" class="w-full h-44 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-lg">Exploring the history of blue through museum art pieces</h4>
+              <span class="text-sm text-gray-500 italic">2019</span>
+            </div>
+            <p class="tag-line mt-2">Computer Vision · Business Intelligence · Data Visualization</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=18UluKsiiPTcmyGjmKPyVimT3bMsdY5af&sz=s500" alt="Regional weather drives the topics of local news" class="w-full h-44 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-lg">Regional weather drives the topics of local news</h4>
+              <span class="text-sm text-gray-500 italic">2017</span>
+            </div>
+            <p class="tag-line mt-2">Natural Language Processing · AI · Business Intelligence</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1RA80WbUhliwaVL7FOleGpaui-ggBS0Y6&sz=s500" alt="Predicting aurora intensity using machine learning and space weather data" class="w-full h-44 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-lg">Predicting aurora intensity using machine learning and space weather data</h4>
+              <span class="text-sm text-gray-500 italic">2017</span>
+            </div>
+            <p class="tag-line mt-2">Machine Learning · Space Weather · Predictive Analytics</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+          <img src="https://drive.google.com/thumbnail?id=1ZgzXgE7GjYfS8uQ0nwXpJUlCJGLKuHPo&sz=s500" alt="Video tracking system for the corpus used by burying beetles" class="w-full h-44 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-start gap-3">
+              <h4 class="font-semibold text-lg">Video tracking system for the corpus used by burying beetles</h4>
+              <span class="text-sm text-gray-500 italic">2016</span>
+            </div>
+            <p class="tag-line mt-2">Computer Vision · Behavioral Analysis · Optimization</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== FOOTER (shared across pages) ===================== -->
+  <footer class="bg-gray-900 text-gray-300">
+    <div class="max-w-6xl mx-auto px-4 py-10 text-center">
+      <p class="text-xl font-bold text-white">Wei-Ping Chan</p>
+      <p class="text-sm text-gray-400 mt-1">Exploratory Data Scientist · Interdisciplinary Researcher</p>
+      <div class="flex justify-center gap-6 mt-5">
+        <a href="https://github.com/wpchanwork" target="_blank" rel="noopener noreferrer" class="hover:text-white">GitHub</a>
+        <a href="https://www.linkedin.com/in/wei-ping-chan" target="_blank" rel="noopener noreferrer" class="hover:text-white">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" target="_blank" rel="noopener noreferrer" class="hover:text-white">Google Scholar</a>
+        <a href="https://sos-commons.vercel.app/research" target="_blank" rel="noopener noreferrer" class="hover:text-white">SOS Research</a>
+      </div>
+      <p class="text-xs text-gray-500 mt-6">© 2026 Wei-Ping Chan. All rights reserved.</p>
+    </div>
+  </footer>
+
 </body>
 </html>
