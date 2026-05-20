@@ -131,6 +131,16 @@
       font-size: .75rem; line-height: 1.3; padding: 1.6rem .8rem .65rem;
       background: linear-gradient(transparent, rgba(15,23,42,.82));
     }
+    /* Hover preview — a 2x floating clone of the hovered photo card. */
+    .photo-preview {
+      box-shadow: 0 28px 60px -10px rgba(15,23,42,.55);
+      animation: previewIn .18s ease-out;
+    }
+    .photo-preview .photo-cap { font-size: 1rem; padding: 2.4rem 1.1rem 1rem; }
+    @keyframes previewIn {
+      from { transform: scale(.9); opacity: 0; }
+      to   { transform: scale(1);  opacity: 1; }
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -648,21 +658,38 @@
      "Anyone with the link"), paste the file ID into photoId, and
      edit the caption. Add or remove entries freely — the two rows
      and the seamless loop adjust automatically.
+
+     For portrait / tall photos, add an `align` field to choose
+     which part of the photo stays visible when cropped to the card:
+       align: "top"     — anchor to the top    (heads visible)
+       align: "center"  — anchor to the middle (default, can omit)
+       align: "bottom"  — anchor to the bottom (feet/ground visible)
+     Example:
+       { caption:"...", photoId:"...", align:"top" }
      ============================================================ */
   const PHOTOS = [
-    { caption:"Field photo 1 — add location & year", photoId:"" },
-    { caption:"Field photo 2 — add location & year", photoId:"" },
-    { caption:"Field photo 3 — add location & year", photoId:"" },
-    { caption:"Field photo 4 — add location & year", photoId:"" },
-    { caption:"Field photo 5 — add location & year", photoId:"" },
-    { caption:"Field photo 6 — add location & year", photoId:"" },
-    { caption:"Field photo 7 — add location & year", photoId:"" },
-    { caption:"Field photo 8 — add location & year", photoId:"" }
+    { caption:"Field station | 2024", photoId:"1toQxDijaofIy73EkUnBAeZhD0NiF-bsZ" },
+    { caption:"Wing beat signature experiment | 2024", photoId:"1SZZpsKK7ACPEkuxQm-VgpUZdAZJ18bNs" },
+    { caption:"Cambridge | 2023", photoId:"1fS3zwCIdLqvvV48l2mOsIzEDajs06Aj-" },
+    { caption:"Maine | 2024", photoId:"12AOChYFpA89VFv-s585YwmR2aT1pr4-E" },
+    { caption:"Harvard University | 2026", photoId:"1SBZ2nfbURDJ1ZdQCYObke0RyIYspyYqB" },
+    { caption:"Plum Island | 2025", photoId:"1traecx9-ZQMdXyoSFyscRaQo6AUQaj07" },
+    { caption:"Goast flower | 2023", photoId:"1yVmxVk5w92bbRzUmFvUnxN5t2szi9K_-" },
+    { caption:"Plum Island | 2021", photoId:"10aZZM4mS8GOs49obbVJQQBIUt-p4aXvl" },
+    { caption:"Biodiversity Research Center | 2017", photoId:"1iSiJlJXSBXC-eD3gF-R5-sgTkULUZqBK" },
+    { caption:"Field work | 2023", photoId:"1uoYtGjcLYDgWitLbTHeVjjWU-s73OmIK", align:"top" },
+    { caption:"Harvard University | 2025", photoId:"1g3p4H9Ts5q5bdfLbor5ruWohxnbObBRs" },
+    { caption:"Field experiment | 2024", photoId:"1qARk7X7cqdsy9g1Y4_rRD-0SZd5g2qPe" },
+    { caption:"Maine | 2024", photoId:"1rvqb7Cig13XimwQs_V3GMAj_vtTWChFh" },
+    { caption:"National Cheng Kung University | 2017", photoId:"1yCZDdGWyd097uFis9MaQQL3XpfefFSUg" },
+    { caption:"National Taiwan University | 2017", photoId:"1ninkwzYrVZcvPnsCPvsvXH2zoj_6KMo-" },
+    { caption:"Plum Island | 2021", photoId:"15FFYfI3nKzGY1xYjm6SMDl42uUBXWIiP" }
   ];
 
   function photoCard(p){
+    const pos = p.align === 'top' ? 'top' : p.align === 'bottom' ? 'bottom' : 'center';
     const body = p.photoId
-      ? `<img src="https://drive.google.com/thumbnail?id=${p.photoId}&sz=s800" alt="${p.caption}" onerror="this.style.display='none'">`
+      ? `<img src="https://drive.google.com/thumbnail?id=${p.photoId}&sz=s800" alt="${p.caption}" style="object-position:${pos};" onerror="this.style.display='none'">`
       : `<div class="photo-ph">
            <svg width="34" height="34" fill="none" stroke="currentColor" viewBox="0 0 24 24">
              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"
@@ -674,11 +701,67 @@
     return `<figure class="photo-card">${body}<figcaption class="photo-cap">${p.caption}</figcaption></figure>`;
   }
 
-  // Each track holds the photo set twice so the loop is seamless.
-  const set1 = PHOTOS.map(photoCard).join('');
-  const set2 = [...PHOTOS].reverse().map(photoCard).join('');
-  document.getElementById('photo-row-1').innerHTML = set1 + set1;
-  document.getElementById('photo-row-2').innerHTML = set2 + set2;
+  // Shuffle helper.
+  function shuffle(arr){
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+  // Split PHOTOS into two DISJOINT sets — one per row — and use a
+  // SINGLE shuffle per row. Combined, this guarantees that at any
+  // visible moment no photo appears more than once across the whole
+  // marquee (including within the same row). The shuffle and split
+  // both reroll on every page load, so the order varies between visits.
+  const _shuffledAll = shuffle(PHOTOS);
+  const _split = Math.ceil(_shuffledAll.length / 2);
+  const setRow1 = _shuffledAll.slice(0, _split);
+  const setRow2 = _shuffledAll.slice(_split);
+  function buildHalf(set){
+    if (!set.length) return '';
+    return shuffle(set).map(photoCard).join('');
+  }
+  const half1 = buildHalf(setRow1);
+  const half2 = buildHalf(setRow2);
+  const row1El = document.getElementById('photo-row-1');
+  const row2El = document.getElementById('photo-row-2');
+  row1El.innerHTML = half1 + half1;
+  row2El.innerHTML = half2 + half2;
+  // Scale animation duration to the per-row card count (~5s per card)
+  // so scroll speed stays comfortable as PHOTOS grows or shrinks.
+  const _rowCardCount = Math.max(setRow1.length, setRow2.length);
+  const marqueeDur = Math.max(40, _rowCardCount * 5) + 's';
+  row1El.style.animationDuration = marqueeDur;
+  row2El.style.animationDuration = marqueeDur;
+
+  // Hover preview: clone the hovered card at 2x size as a floating overlay.
+  // The marquee row also pauses on hover via CSS, so the preview stays put.
+  let previewEl = null;
+  function showPreview(card){
+    if (previewEl) previewEl.remove();
+    const r = card.getBoundingClientRect();
+    const w = r.width * 2, h = r.height * 2;
+    const margin = 8;
+    let left = r.left + r.width / 2 - w / 2;
+    let top  = r.top  + r.height / 2 - h / 2;
+    left = Math.max(margin, Math.min(left, window.innerWidth  - w - margin));
+    top  = Math.max(margin, Math.min(top,  window.innerHeight - h - margin));
+    previewEl = card.cloneNode(true);
+    previewEl.classList.add('photo-preview');
+    previewEl.style.cssText =
+      'position:fixed;left:' + left + 'px;top:' + top + 'px;' +
+      'width:' + w + 'px;height:' + h + 'px;z-index:80;pointer-events:none;';
+    document.body.appendChild(previewEl);
+  }
+  function hidePreview(){
+    if (previewEl) { previewEl.remove(); previewEl = null; }
+  }
+  document.querySelectorAll('.photo-card').forEach(card => {
+    card.addEventListener('mouseenter', () => showPreview(card));
+    card.addEventListener('mouseleave', hidePreview);
+  });
   </script>
 </body>
 </html>
