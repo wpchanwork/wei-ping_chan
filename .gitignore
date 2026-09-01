@@ -1,1 +1,5 @@
-imgs/
+imgs/*
+# ...except the talk posters used by the Talks & Media section in home.html
+!imgs/HTSA_8x8_poster.jpg
+!imgs/WPC-poster_v3-01.jpg
+!imgs/MCZ-team_talk2026.png

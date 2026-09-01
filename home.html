@@ -26,6 +26,67 @@
       border-radius: 9999px; background: rgba(255,255,255,.18); color: #fff;
       border: 1px solid rgba(255,255,255,.35);
     }
+    /* --- Talks & Media --- */
+    .video-frame {
+      position: relative; width: 100%; padding-top: 56.25%; /* 16:9 */
+      background: #0f1f3d; overflow: hidden;
+    }
+    .video-frame > img,
+    .video-frame > iframe,
+    .video-frame > button {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
+    .video-frame > img { object-fit: cover; }
+    .video-play {
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(180deg, rgba(15,31,61,.10) 0%, rgba(15,31,61,.55) 100%);
+      cursor: pointer; transition: background .2s ease;
+    }
+    .video-play:hover { background: linear-gradient(180deg, rgba(15,31,61,.05) 0%, rgba(15,31,61,.35) 100%); }
+    .video-play svg { width: 4rem; height: 4rem; filter: drop-shadow(0 6px 14px rgba(0,0,0,.45)); transition: transform .2s ease; }
+    .video-play:hover svg { transform: scale(1.08); }
+    .talk-tag {
+      display: inline-block; font-size: .68rem; letter-spacing: .04em; text-transform: uppercase;
+      padding: .18rem .55rem; border-radius: 9999px; background: #eef2f7; color: #14294b; font-weight: 600;
+    }
+    .talk-tag-alt { background: #fff; color: #64748b; border: 1px solid #e2e8f0; }
+    .talk-speakers { font-size: .78rem; color: #64748b; line-height: 1.45; }
+    .talk-speakers strong { color: #14294b; }
+    .talk-extras {
+      margin-top: auto; display: flex; flex-direction: column; gap: .6rem;
+    }
+    /* separator as a flex item, so there is always a gap above it even when
+       margin-top:auto collapses to zero on the tallest card in a row */
+    .talk-extras::before {
+      content: ''; display: block; height: 1px; background: #eef2f7;
+      margin-top: 1.1rem;
+    }
+    .extra-heading {
+      font-size: .68rem; letter-spacing: .08em; text-transform: uppercase;
+      color: #94a3b8; font-weight: 600; margin-bottom: .1rem;
+    }
+    .extra-row {
+      display: flex; align-items: center; gap: .75rem; width: 100%;
+      border: 0; background: none; padding: 0; cursor: pointer; text-align: left; font: inherit;
+    }
+    .extra-thumb {
+      position: relative; display: block; flex-shrink: 0; overflow: hidden;
+      border-radius: .35rem; background: #eef2f7;
+      box-shadow: 0 4px 10px -4px rgba(15,31,61,.45); transition: transform .2s ease;
+    }
+    .extra-thumb-poster { width: 3rem; height: 4rem; object-fit: cover; }
+    .extra-thumb-clip   { width: 4.6rem; height: 2.6rem; }
+    .extra-thumb-clip img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .extra-thumb-play {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(15,31,61,.25);
+    }
+    .extra-thumb-play svg { width: 1.5rem; height: 1.5rem; }
+    .extra-row:hover .extra-thumb { transform: scale(1.06); }
+    .extra-label { display: block; font-size: .8rem; font-weight: 600; color: #14294b; }
+    .extra-hint  { display: block; font-size: .72rem; color: #94a3b8; }
+    .max-h-screen-80 { max-height: 80vh; }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -45,6 +106,7 @@
         <span class="nav-link nav-active">Home</span>
         <a href="projects.html" class="nav-link">Projects</a>
         <a href="colleberators.html" class="nav-link">Collaborations</a>
+        <a href="#talks" class="nav-link">Talks</a>
         <a href="#background" class="nav-link">Background</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
@@ -274,6 +336,259 @@
     </p>
   </section>
 
+  <!-- ===================== TALKS & MEDIA ===================== -->
+  <!--
+    HOW TO ADD A VIDEO
+    ------------------
+    Edit the VIDEOS list in the <script> at the end of this section. One entry per talk:
+
+      { id:       'dQw4w9WgXcQ',        // YouTube video ID or full URL  (REQUIRED)
+        title:    'English talk title',  // card headline                (REQUIRED)
+        titleZh:  '中文講題',             // optional second line, original-language title
+        event:    'Host / series',       // optional
+        date:     'Mar 2026',            // optional
+        tag:      'Public Talk',         // optional pill: Keynote / Invited Talk / Public Talk / Webinar / Interview
+        lang:     'Mandarin',            // optional pill: spoken language
+        speakers: ['A. Smith', 'B. Lee'],          // optional co-speakers; 'Wei-Ping Chan' is auto-bolded
+        speakersAffil: 'Shared affiliation',       // optional, printed once after the names
+        poster:   'imgs/my-poster.jpg',  // optional promo poster (see below)
+        clips:    [ { id: 'XXXXXXXXXXX', label: 'Animation shown in the talk' } ],  // optional extra videos
+        start:    125 }                  // optional, start playback at N seconds
+
+    Where is the video ID?
+      https://www.youtube.com/watch?v=XXXXXXXXXXX   ->  XXXXXXXXXXX
+      https://youtu.be/XXXXXXXXXXX                  ->  XXXXXXXXXXX
+      https://www.youtube.com/live/XXXXXXXXXXX      ->  XXXXXXXXXXX
+      https://www.youtube.com/shorts/XXXXXXXXXXX    ->  XXXXXXXXXXX
+    Pasting the whole URL as `id` also works (the ?si=... tracking tail is fine) - it is parsed automatically.
+
+    POSTERS AND EXTRA CLIPS
+      At the bottom of each card sits a "More from this talk" strip: the promo poster and any
+      extra clips (animations, demos, highlight reels) shown during the talk. Clicking either
+      opens it full-size in a lightbox, so the main recording is never interrupted.
+      Any of these work as the `poster` value - portrait, square or landscape all fit:
+        'imgs/runaway-poster.jpg'                              <- file in this repo (recommended)
+        'https://drive.google.com/file/d/FILE_ID/view'          <- Google Drive share link
+        'https://any.site/poster.png'                           <- any direct image URL
+      Leave `poster` / `clips` out and the strip simply does not appear.
+      NOTE: imgs/ is git-ignored except for the posters listed in .gitignore - add new poster
+      files there too, or they will 404 once the site is deployed.
+
+    Videos appear in the order written. Nothing else needs to be changed.
+  -->
+  <section id="talks" class="bg-gray-100 py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h3 class="text-3xl font-bold text-center text-gray-800">Talks &amp; Media</h3>
+      <div class="accent-bar mx-auto mt-3 mb-4"></div>
+      <p class="text-center text-gray-600 max-w-2xl mx-auto mb-10">
+        Invited lectures, conference talks, and public science outreach on biodiversity, climate,
+        and AI-driven research.
+      </p>
+
+      <div id="talks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+      <p id="talks-empty" class="hidden text-center text-gray-500">Talk recordings are being added &mdash; check back soon.</p>
+    </div>
+  </section>
+
+  <!-- Lightbox shared by every talk card (posters and extra clips) -->
+  <div id="media-lightbox" class="hidden fixed inset-0 z-50 bg-black bg-opacity-80 items-center justify-center p-4 md:p-8" role="dialog" aria-modal="true" aria-label="Talk media">
+    <button id="media-close" class="absolute top-4 right-5 text-white text-4xl leading-none opacity-80 hover:opacity-100" aria-label="Close">&times;</button>
+    <figure class="max-h-full w-full flex flex-col items-center">
+      <img id="media-img" src="" alt="" class="hidden max-h-screen-80 max-w-full object-contain rounded-lg shadow-2xl">
+      <div id="media-video" class="hidden w-full max-w-4xl video-frame rounded-lg shadow-2xl"></div>
+      <figcaption id="media-caption" class="text-gray-200 text-sm mt-4 text-center max-w-xl"></figcaption>
+    </figure>
+  </div>
+
+  <script>
+    /* ============ ADD YOUR TALKS HERE ============ */
+    const VIDEOS = [
+      {
+        id: 'https://youtu.be/CfP06qyFheU',
+        title: 'Planning for the Future of Biodiversity Digitization',
+        event: 'iDigBio — MCZ Team Talk',
+        date: 'April 9, 2026',
+        tag: 'Team Talk',
+        lang: 'English',
+        speakers: ['Breda Zimkus', 'Jon Woodward', 'Richard A. Rabideau Childers', 'Wei-Ping Chan'],
+        speakersAffil: 'Museum of Comparative Zoology, Harvard University',
+        poster: 'imgs/MCZ-team_talk2026.png',
+        clips: [
+          { id: 'https://youtu.be/hBzUoz5cXuk', label: 'Animation shown in the talk' }
+        ]
+      },
+      {
+        id: 'https://youtu.be/fUI6w0EqrtU',
+        title: 'Seeing the World from a Room Without Windows: Piecing a Blueprint for the Future Together in a Museum Basement',
+        titleZh: '從沒有窗的房間看見世界 — 在博物館的地下室，我把歷史拼成了未來藍圖',
+        event: 'Tzu Chi Foundation, Cambridge',
+        date: 'August 2025',
+        tag: 'Public Talk',
+        lang: 'Mandarin',
+        poster: 'imgs/WPC-poster_v3-01.jpg'
+      },
+      {
+        id: 'https://youtu.be/T7soI3Sh3-M',
+        title: 'Runaway: Global Climate Change and the Species Left Behind',
+        titleZh: '全球氣候變遷 — Runaway',
+        event: 'HTSA × MIT-ROCSA 8×8 Talks',
+        date: 'March 2025',
+        tag: 'Invited Talk',
+        lang: 'Mandarin',
+        poster: 'imgs/HTSA_8x8_poster.jpg'
+      },
+    ];
+    /* ============================================= */
+
+    (function renderTalks() {
+      const grid  = document.getElementById('talks-grid');
+      const empty = document.getElementById('talks-empty');
+      if (!VIDEOS.length) { empty.classList.remove('hidden'); return; }
+
+      // Accepts a bare 11-character ID or any common YouTube URL form.
+      const toId = (v) => {
+        const m = String(v).match(/(?:v=|youtu\.be\/|\/live\/|\/shorts\/|\/embed\/)([A-Za-z0-9_-]{11})/);
+        return m ? m[1] : String(v).trim();
+      };
+      // Local path, direct image URL, or Google Drive share link -> displayable image src.
+      const posterSrc = (p) => {
+        if (!p) return '';
+        if (/drive\.google\.com/.test(p)) {
+          const m = p.match(/[-\w]{25,}/);
+          if (m) return 'https://drive.google.com/thumbnail?id=' + m[0] + '&sz=s1600';
+        }
+        return p;
+      };
+      const esc = (t) => String(t == null ? '' : t)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      const thumb = (id) =>
+        '<img loading="lazy" alt="" src="https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg"' +
+        ' onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg\'">';
+      const playIcon =
+        '<svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+          '<path fill="#ffffff" fill-opacity=".92" d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.7a8.6 8.6 0 0 0-6 6A90 90 0 0 0 0 24a90 90 0 0 0 1.5 16.3 8.6 8.6 0 0 0 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.7a8.6 8.6 0 0 0 6-6A90 90 0 0 0 68 24a90 90 0 0 0-1.5-16.3z"/>' +
+          '<path fill="#14294b" d="M45 24 27 14v20z"/>' +
+        '</svg>';
+      // Names are printed as given; the site owner is highlighted.
+      const speakerLine = (v) => {
+        if (!v.speakers || !v.speakers.length) return '';
+        const names = v.speakers
+          .map((n) => /Wei-?Ping\s+Chan/i.test(n) ? '<strong>' + esc(n) + '</strong>' : esc(n))
+          .join(' · ');
+        return '<p class="talk-speakers mt-2">' + names +
+               (v.speakersAffil ? '<span class="block text-gray-400">' + esc(v.speakersAffil) + '</span>' : '') +
+               '</p>';
+      };
+
+      VIDEOS.forEach((v) => {
+        const id     = toId(v.id);
+        const title  = esc(v.title || 'Untitled talk');
+        const poster = posterSrc(v.poster);
+        const clips  = (v.clips || []).filter((c) => c && c.id);
+
+        const extras =
+          (poster
+            ? '<button class="extra-row" type="button" data-kind="poster">' +
+                '<img loading="lazy" class="extra-thumb extra-thumb-poster" src="' + esc(poster) + '" alt="Poster for ' + title + '">' +
+                '<span><span class="extra-label">Event poster</span><span class="extra-hint">Click to enlarge</span></span>' +
+              '</button>'
+            : '') +
+          clips.map((c, i) =>
+            '<button class="extra-row" type="button" data-kind="clip" data-i="' + i + '">' +
+              '<span class="extra-thumb extra-thumb-clip">' + thumb(toId(c.id)) + '<span class="extra-thumb-play">' + playIcon + '</span></span>' +
+              '<span><span class="extra-label">' + esc(c.label || 'Related clip') + '</span><span class="extra-hint">Click to play</span></span>' +
+            '</button>').join('');
+
+        const card = document.createElement('article');
+        card.className = 'bg-white rounded-2xl shadow-lg overflow-hidden card-hover flex flex-col';
+        card.innerHTML =
+          '<div class="video-frame">' + thumb(id) +
+            '<button class="video-play" aria-label="Play video: ' + title + '">' + playIcon + '</button>' +
+          '</div>' +
+          '<div class="p-5 flex-1 flex flex-col">' +
+            ((v.tag || v.lang)
+              ? '<div class="flex flex-wrap gap-2 mb-2">' +
+                  (v.tag  ? '<span class="talk-tag">' + esc(v.tag) + '</span>' : '') +
+                  (v.lang ? '<span class="talk-tag talk-tag-alt">' + esc(v.lang) + '</span>' : '') +
+                '</div>'
+              : '') +
+            '<p class="font-semibold text-gray-800 leading-snug">' + title + '</p>' +
+            (v.titleZh ? '<p class="text-sm text-gray-500 mt-1 leading-snug">' + esc(v.titleZh) + '</p>' : '') +
+            (v.event   ? '<p class="text-sm text-gray-600 mt-2">' + esc(v.event) + '</p>' : '') +
+            (v.date    ? '<p class="text-xs text-gray-400 mt-1">' + esc(v.date) + '</p>' : '') +
+            speakerLine(v) +
+            (extras
+              ? '<div class="talk-extras"><p class="extra-heading">More from this talk</p>' + extras + '</div>'
+              : '') +
+          '</div>';
+
+        // Click the thumbnail -> swap in the real player (keeps page load fast, no tracking until played).
+        const frame = card.querySelector('.video-frame');
+        frame.querySelector('.video-play').addEventListener('click', () => {
+          frame.innerHTML = embedHtml(id, title, v.start);
+        });
+
+        // Poster / extra clips open in the lightbox so the main recording keeps playing.
+        card.querySelectorAll('.extra-row').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            if (btn.dataset.kind === 'poster') {
+              openMedia({ type: 'image', src: poster, caption: v.title });
+            } else {
+              const c = clips[Number(btn.dataset.i)];
+              openMedia({ type: 'video', src: toId(c.id), caption: (c.label || '') + ' — ' + v.title });
+            }
+          });
+        });
+
+        grid.appendChild(card);
+      });
+    })();
+
+    function embedHtml(id, title, start) {
+      return '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0' +
+             (start ? '&start=' + start : '') + '"' +
+             ' title="' + title + '"' +
+             ' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"' +
+             ' referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+    }
+
+    /* ---- Lightbox: posters (image) and extra clips (video) ---- */
+    const lightbox = document.getElementById('media-lightbox');
+    const mediaImg = document.getElementById('media-img');
+    const mediaVid = document.getElementById('media-video');
+    const mediaCap = document.getElementById('media-caption');
+
+    function openMedia({ type, src, caption }) {
+      if (type === 'image') {
+        mediaImg.src = src;
+        mediaImg.alt = caption || 'Talk poster';
+        mediaImg.classList.remove('hidden');
+        mediaVid.classList.add('hidden');
+        mediaVid.innerHTML = '';
+      } else {
+        mediaVid.innerHTML = embedHtml(src, caption || 'Talk clip');
+        mediaVid.classList.remove('hidden');
+        mediaImg.classList.add('hidden');
+        mediaImg.src = '';
+      }
+      mediaCap.textContent = caption || '';
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMedia() {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      mediaImg.src = '';
+      mediaVid.innerHTML = '';   // stops playback
+      document.body.style.overflow = '';
+    }
+    document.getElementById('media-close').addEventListener('click', closeMedia);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeMedia(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) closeMedia(); });
+  </script>
+
   <!-- ===================== ABOUT ===================== -->
   <section id="background" class="bg-white py-16">
     <div class="max-w-5xl mx-auto px-4">
@@ -291,6 +606,12 @@
           </p>
           <p class="text-sm text-gray-400">Dec 2025 – Current</p>
           <p class="text-gray-700 mt-1">Leading the strategic vision and early development of an interdisciplinary nonprofit integrating science, art, and digital innovation to advance sustainability and public engagement.</p>
+        </div>
+        <div class="border-l-4 border-blue-500 pl-5">
+          <p class="font-bold">Associate</p>
+          <p class="text-gray-600">Department of Organismic and Evolutionary Biology (OEB), Harvard University &mdash; Cambridge, MA, USA</p>
+          <p class="text-sm text-gray-400">May 2026 &ndash; Current</p>
+          <p class="text-gray-700 mt-1">Affiliated researcher in organismic and evolutionary biology, collaborating on interdisciplinary research and mentoring within the department.</p>
         </div>
         <div class="border-l-4 border-blue-500 pl-5">
           <p class="font-bold">Research Scientist</p>
