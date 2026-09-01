@@ -27,24 +27,34 @@
       border: 1px solid rgba(255,255,255,.35);
     }
     /* --- Talks & Media --- */
-    .video-frame {
-      position: relative; width: 100%; padding-top: 56.25%; /* 16:9 */
+    /* Poster-forward card: the event poster is the visual, the recording is a
+       button underneath. Both open in the shared lightbox. */
+    .talk-hero {
+      position: relative; display: block; width: 100%; border: 0; cursor: pointer;
+      padding: 0; padding-top: 125%;              /* 4:5 stage, fits portrait and square posters */
       background: #0f1f3d; overflow: hidden;
     }
-    .video-frame > img,
-    .video-frame > iframe,
-    .video-frame > button {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    .talk-hero-bg {
+      position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+      background-size: cover; background-position: center;
+      filter: blur(26px) brightness(.5); transform: scale(1.2);
     }
-    .video-frame > img { object-fit: cover; }
-    .video-play {
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(180deg, rgba(15,31,61,.10) 0%, rgba(15,31,61,.55) 100%);
-      cursor: pointer; transition: background .2s ease;
+    .talk-hero-img {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: contain; padding: .5rem; transition: transform .25s ease;
     }
-    .video-play:hover { background: linear-gradient(180deg, rgba(15,31,61,.05) 0%, rgba(15,31,61,.35) 100%); }
-    .video-play svg { width: 4rem; height: 4rem; filter: drop-shadow(0 6px 14px rgba(0,0,0,.45)); transition: transform .2s ease; }
-    .video-play:hover svg { transform: scale(1.08); }
+    .talk-hero:hover .talk-hero-img { transform: scale(1.025); }
+    .talk-hero--poster { cursor: zoom-in; }
+    /* the cue stays out of the poster's way until the card is hovered */
+    .talk-hero-cue {
+      position: absolute; right: .6rem; bottom: .6rem; display: flex; align-items: center; gap: .3rem;
+      background: rgba(15,31,61,.78); color: #fff; font-size: .7rem; font-weight: 600;
+      padding: .3rem .62rem; border-radius: 9999px; opacity: 0; transition: opacity .2s ease;
+    }
+    .talk-hero:hover .talk-hero-cue { opacity: 1; }
+    .talk-hero-cue--static { opacity: .92; }   /* no poster: the play cue is the only affordance */
+    .talk-hero-cue svg { width: .85rem; height: .85rem; fill: currentColor; }
+
     .talk-tag {
       display: inline-block; font-size: .68rem; letter-spacing: .04em; text-transform: uppercase;
       padding: .18rem .55rem; border-radius: 9999px; background: #eef2f7; color: #14294b; font-weight: 600;
@@ -52,40 +62,52 @@
     .talk-tag-alt { background: #fff; color: #64748b; border: 1px solid #e2e8f0; }
     .talk-speakers { font-size: .78rem; color: #64748b; line-height: 1.45; }
     .talk-speakers strong { color: #14294b; }
-    .talk-extras {
-      margin-top: auto; display: flex; flex-direction: column; gap: .6rem;
-    }
+
+    .talk-actions { margin-top: auto; display: flex; flex-direction: column; gap: .6rem; }
     /* separator as a flex item, so there is always a gap above it even when
        margin-top:auto collapses to zero on the tallest card in a row */
-    .talk-extras::before {
-      content: ''; display: block; height: 1px; background: #eef2f7;
-      margin-top: 1.1rem;
+    .talk-actions::before {
+      content: ''; display: block; height: 1px; background: #eef2f7; margin-top: 1.1rem;
     }
-    .extra-heading {
-      font-size: .68rem; letter-spacing: .08em; text-transform: uppercase;
-      color: #94a3b8; font-weight: 600; margin-bottom: .1rem;
+    .watch-btn {
+      display: flex; align-items: center; justify-content: center; gap: .5rem; width: 100%;
+      border: 0; cursor: pointer; font: inherit; font-weight: 600; font-size: .88rem;
+      color: #fff; background: #14294b; border-radius: 9999px; padding: .65rem 1rem;
+      transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
     }
+    .watch-btn:hover {
+      background: #1d3a6b; transform: translateY(-1px);
+      box-shadow: 0 10px 20px -12px rgba(15,31,61,.9);
+    }
+    .watch-btn svg { width: 1.05rem; height: 1.05rem; fill: currentColor; flex-shrink: 0; }
+
     .extra-row {
-      display: flex; align-items: center; gap: .75rem; width: 100%;
+      display: flex; align-items: center; gap: .7rem; width: 100%;
       border: 0; background: none; padding: 0; cursor: pointer; text-align: left; font: inherit;
     }
     .extra-thumb {
       position: relative; display: block; flex-shrink: 0; overflow: hidden;
-      border-radius: .35rem; background: #eef2f7;
-      box-shadow: 0 4px 10px -4px rgba(15,31,61,.45); transition: transform .2s ease;
+      width: 4.2rem; height: 2.4rem; border-radius: .3rem; background: #eef2f7;
+      box-shadow: 0 4px 10px -5px rgba(15,31,61,.6); transition: transform .2s ease;
     }
-    .extra-thumb-poster { width: 3rem; height: 4rem; object-fit: cover; }
-    .extra-thumb-clip   { width: 4.6rem; height: 2.6rem; }
-    .extra-thumb-clip img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .extra-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .extra-thumb-play {
       position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(15,31,61,.25);
+      display: flex; align-items: center; justify-content: center; background: rgba(15,31,61,.25);
     }
-    .extra-thumb-play svg { width: 1.5rem; height: 1.5rem; }
+    .extra-thumb-play svg { width: 1.3rem; height: 1.3rem; }
     .extra-row:hover .extra-thumb { transform: scale(1.06); }
-    .extra-label { display: block; font-size: .8rem; font-weight: 600; color: #14294b; }
-    .extra-hint  { display: block; font-size: .72rem; color: #94a3b8; }
+    .extra-label { display: block; font-size: .78rem; font-weight: 600; color: #14294b; }
+    .extra-hint  { display: block; font-size: .7rem; color: #94a3b8; }
+
+    /* 16:9 stage used by the lightbox player */
+    .video-frame {
+      position: relative; width: 100%; padding-top: 56.25%;
+      background: #0f1f3d; overflow: hidden;
+    }
+    .video-frame > iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
     .max-h-screen-80 { max-height: 80vh; }
   </style>
 </head>
@@ -338,9 +360,11 @@
 
   <!-- ===================== TALKS & MEDIA ===================== -->
   <!--
-    HOW TO ADD A VIDEO
-    ------------------
-    Edit the VIDEOS list in the <script> at the end of this section. One entry per talk:
+    HOW TO ADD A TALK
+    -----------------
+    Each card leads with the event poster; the recording sits underneath as a
+    "Watch the talk" button and opens in a lightbox player.
+    Edit the VIDEOS list in the <script> at the end of this section - one entry per talk:
 
       { id:       'dQw4w9WgXcQ',        // YouTube video ID or full URL  (REQUIRED)
         title:    'English talk title',  // card headline                (REQUIRED)
@@ -350,8 +374,8 @@
         tag:      'Public Talk',         // optional pill: Keynote / Invited Talk / Public Talk / Webinar / Interview
         lang:     'Mandarin',            // optional pill: spoken language
         speakers: ['A. Smith', 'B. Lee'],          // optional co-speakers; 'Wei-Ping Chan' is auto-bolded
-        speakersAffil: 'Shared affiliation',       // optional, printed once after the names
-        poster:   'imgs/my-poster.jpg',  // optional promo poster (see below)
+        speakersAffil: 'Shared affiliation',       // optional, printed once under the names
+        poster:   'imgs/my-poster.jpg',  // the card's main visual (see below)
         clips:    [ { id: 'XXXXXXXXXXX', label: 'Animation shown in the talk' } ],  // optional extra videos
         start:    125 }                  // optional, start playback at N seconds
 
@@ -362,19 +386,22 @@
       https://www.youtube.com/shorts/XXXXXXXXXXX    ->  XXXXXXXXXXX
     Pasting the whole URL as `id` also works (the ?si=... tracking tail is fine) - it is parsed automatically.
 
-    POSTERS AND EXTRA CLIPS
-      At the bottom of each card sits a "More from this talk" strip: the promo poster and any
-      extra clips (animations, demos, highlight reels) shown during the talk. Clicking either
-      opens it full-size in a lightbox, so the main recording is never interrupted.
-      Any of these work as the `poster` value - portrait, square or landscape all fit:
+    POSTERS
+      The poster is shown whole (never cropped) on a blurred copy of itself, so portrait,
+      square and landscape posters all sit on the same 4:5 stage. Clicking it opens the
+      full-resolution poster. Accepted values:
         'imgs/runaway-poster.jpg'                              <- file in this repo (recommended)
         'https://drive.google.com/file/d/FILE_ID/view'          <- Google Drive share link
         'https://any.site/poster.png'                           <- any direct image URL
-      Leave `poster` / `clips` out and the strip simply does not appear.
+      No poster? The card falls back to the YouTube thumbnail as its visual - nothing breaks.
       NOTE: imgs/ is git-ignored except for the posters listed in .gitignore - add new poster
       files there too, or they will 404 once the site is deployed.
 
-    Videos appear in the order written. Nothing else needs to be changed.
+    EXTRA CLIPS
+      `clips` are the animations / demos shown during the talk. They appear as small rows
+      under the watch button and open in the same lightbox player.
+
+    Talks appear in the order written. Nothing else needs to be changed.
   -->
   <section id="talks" class="bg-gray-100 py-16">
     <div class="max-w-6xl mx-auto px-4">
@@ -391,7 +418,7 @@
     </div>
   </section>
 
-  <!-- Lightbox shared by every talk card (posters and extra clips) -->
+  <!-- Lightbox shared by every talk card (posters and videos) -->
   <div id="media-lightbox" class="hidden fixed inset-0 z-50 bg-black bg-opacity-80 items-center justify-center p-4 md:p-8" role="dialog" aria-modal="true" aria-label="Talk media">
     <button id="media-close" class="absolute top-4 right-5 text-white text-4xl leading-none opacity-80 hover:opacity-100" aria-label="Close">&times;</button>
     <figure class="max-h-full w-full flex flex-col items-center">
@@ -462,10 +489,11 @@
       };
       const esc = (t) => String(t == null ? '' : t)
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-      const thumb = (id) =>
-        '<img loading="lazy" alt="" src="https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg"' +
-        ' onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg\'">';
-      const playIcon =
+      const ytThumb = (id) => 'https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg';
+      const ytThumbFallback = (id) =>
+        ' onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg\'"';
+      const playTriangle = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+      const ytBadge =
         '<svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
           '<path fill="#ffffff" fill-opacity=".92" d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.7a8.6 8.6 0 0 0-6 6A90 90 0 0 0 0 24a90 90 0 0 0 1.5 16.3 8.6 8.6 0 0 0 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.7a8.6 8.6 0 0 0 6-6A90 90 0 0 0 68 24a90 90 0 0 0-1.5-16.3z"/>' +
           '<path fill="#14294b" d="M45 24 27 14v20z"/>' +
@@ -487,25 +515,26 @@
         const poster = posterSrc(v.poster);
         const clips  = (v.clips || []).filter((c) => c && c.id);
 
-        const extras =
-          (poster
-            ? '<button class="extra-row" type="button" data-kind="poster">' +
-                '<img loading="lazy" class="extra-thumb extra-thumb-poster" src="' + esc(poster) + '" alt="Poster for ' + title + '">' +
-                '<span><span class="extra-label">Event poster</span><span class="extra-hint">Click to enlarge</span></span>' +
-              '</button>'
-            : '') +
-          clips.map((c, i) =>
-            '<button class="extra-row" type="button" data-kind="clip" data-i="' + i + '">' +
-              '<span class="extra-thumb extra-thumb-clip">' + thumb(toId(c.id)) + '<span class="extra-thumb-play">' + playIcon + '</span></span>' +
-              '<span><span class="extra-label">' + esc(c.label || 'Related clip') + '</span><span class="extra-hint">Click to play</span></span>' +
-            '</button>').join('');
+        // The poster is the card's visual; without one, fall back to the video thumbnail.
+        const heroSrc = poster || ytThumb(id);
+        const hero =
+          '<button class="talk-hero' + (poster ? ' talk-hero--poster' : '') + '" type="button" aria-label="' +
+              (poster ? 'Enlarge poster: ' : 'Play video: ') + title + '">' +
+            '<span class="talk-hero-bg" style="background-image:url(\'' + esc(heroSrc) + '\')"></span>' +
+            '<img class="talk-hero-img" loading="lazy" alt="' +
+              (poster ? 'Poster for ' + title : '') + '" src="' + esc(heroSrc) + '"' +
+              (poster ? '' : ytThumbFallback(id)) + '>' +
+            '<span class="talk-hero-cue' + (poster ? '' : ' talk-hero-cue--static') + '">' +
+              (poster
+                ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6h-2V6.4l-3.3 3.3-1.4-1.4L17.6 5H15V3zM9 21H3v-6h2v2.6l3.3-3.3 1.4 1.4L6.4 19H9v2z"/></svg>Poster'
+                : playTriangle + 'Watch') +
+            '</span>' +
+          '</button>';
 
         const card = document.createElement('article');
         card.className = 'bg-white rounded-2xl shadow-lg overflow-hidden card-hover flex flex-col';
         card.innerHTML =
-          '<div class="video-frame">' + thumb(id) +
-            '<button class="video-play" aria-label="Play video: ' + title + '">' + playIcon + '</button>' +
-          '</div>' +
+          hero +
           '<div class="p-5 flex-1 flex flex-col">' +
             ((v.tag || v.lang)
               ? '<div class="flex flex-wrap gap-2 mb-2">' +
@@ -518,26 +547,34 @@
             (v.event   ? '<p class="text-sm text-gray-600 mt-2">' + esc(v.event) + '</p>' : '') +
             (v.date    ? '<p class="text-xs text-gray-400 mt-1">' + esc(v.date) + '</p>' : '') +
             speakerLine(v) +
-            (extras
-              ? '<div class="talk-extras"><p class="extra-heading">More from this talk</p>' + extras + '</div>'
-              : '') +
+            '<div class="talk-actions">' +
+              '<button class="watch-btn" type="button">' + playTriangle + 'Watch the talk</button>' +
+              clips.map((c, i) =>
+                '<button class="extra-row" type="button" data-i="' + i + '">' +
+                  '<span class="extra-thumb">' +
+                    '<img loading="lazy" alt="" src="' + ytThumb(toId(c.id)) + '"' + ytThumbFallback(toId(c.id)) + '>' +
+                    '<span class="extra-thumb-play">' + ytBadge + '</span>' +
+                  '</span>' +
+                  '<span><span class="extra-label">' + esc(c.label || 'Related clip') + '</span>' +
+                  '<span class="extra-hint">Click to play</span></span>' +
+                '</button>').join('') +
+            '</div>' +
           '</div>';
 
-        // Click the thumbnail -> swap in the real player (keeps page load fast, no tracking until played).
-        const frame = card.querySelector('.video-frame');
-        frame.querySelector('.video-play').addEventListener('click', () => {
-          frame.innerHTML = embedHtml(id, title, v.start);
+        // Poster -> full-size poster. No poster -> the hero plays the talk instead.
+        card.querySelector('.talk-hero').addEventListener('click', () => {
+          if (poster) openMedia({ type: 'image', src: poster, caption: v.title });
+          else openMedia({ type: 'video', src: id, caption: v.title, start: v.start });
         });
 
-        // Poster / extra clips open in the lightbox so the main recording keeps playing.
+        card.querySelector('.watch-btn').addEventListener('click', () => {
+          openMedia({ type: 'video', src: id, caption: v.title, start: v.start });
+        });
+
         card.querySelectorAll('.extra-row').forEach((btn) => {
           btn.addEventListener('click', () => {
-            if (btn.dataset.kind === 'poster') {
-              openMedia({ type: 'image', src: poster, caption: v.title });
-            } else {
-              const c = clips[Number(btn.dataset.i)];
-              openMedia({ type: 'video', src: toId(c.id), caption: (c.label || '') + ' — ' + v.title });
-            }
+            const c = clips[Number(btn.dataset.i)];
+            openMedia({ type: 'video', src: toId(c.id), caption: (c.label || 'Clip') + ' — ' + v.title });
           });
         });
 
@@ -553,13 +590,13 @@
              ' referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
     }
 
-    /* ---- Lightbox: posters (image) and extra clips (video) ---- */
+    /* ---- Lightbox: posters (image) and talks / clips (video) ---- */
     const lightbox = document.getElementById('media-lightbox');
     const mediaImg = document.getElementById('media-img');
     const mediaVid = document.getElementById('media-video');
     const mediaCap = document.getElementById('media-caption');
 
-    function openMedia({ type, src, caption }) {
+    function openMedia({ type, src, caption, start }) {
       if (type === 'image') {
         mediaImg.src = src;
         mediaImg.alt = caption || 'Talk poster';
@@ -567,7 +604,7 @@
         mediaVid.classList.add('hidden');
         mediaVid.innerHTML = '';
       } else {
-        mediaVid.innerHTML = embedHtml(src, caption || 'Talk clip');
+        mediaVid.innerHTML = embedHtml(src, caption || 'Talk video', start);
         mediaVid.classList.remove('hidden');
         mediaImg.classList.add('hidden');
         mediaImg.src = '';
