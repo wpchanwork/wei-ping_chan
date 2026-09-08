@@ -685,7 +685,7 @@
     { caption:"National Taiwan University | 2017", photoId:"1ninkwzYrVZcvPnsCPvsvXH2zoj_6KMo-" },
     { caption:"Plum Island | 2021", photoId:"15FFYfI3nKzGY1xYjm6SMDl42uUBXWIiP" },
     { caption:"Shipher | 2016", photoId:"1GPAP_Pbb1yFBmdTgz9b7SIqzl6FYEq5m", rotate:180 },
-    { caption:"Amy | 2022", photoId:"1qX5xYqG04pJ8atZAOOgdUJzvKfFjI59z", rotate:90 },
+    { caption:"Amy | 2022", photoId:"1qX5xYqG04pJ8atZAOOgdUJzvKfFjI59z", rotate:-90 },
     { caption:"Rachel | 2022", photoId:"1Gu84b5C20dAMPk5u7Dm7Bm7ms0MFgLwv" },
     { caption:"Pierce family | 2022", photoId:"1SiS3IeVLtW8q3Tfxtl2JD2_vtaGqohwW" },
     { caption:"Shinichi | 2022", photoId:"1iMPl9wcyu7I0gYetAHmgjRNRTgoh7vSX" },
@@ -711,7 +711,7 @@
     const pos = p.align === 'top' ? 'top' : p.align === 'bottom' ? 'bottom' : 'center';
     const rot = p.rotate ? `transform:rotate(${p.rotate}deg) scale(1.4);` : '';
     const body = p.photoId
-      ? `<img src="imgs/web/${p.photoId}.jpg" alt="${p.caption}" style="object-position:${pos};${rot}" onerror="this.style.display='none'">`
+      ? `<img src="imgs/web/${p.photoId}.jpg" alt="${p.caption}" style="object-position:${pos} !important;${rot}" onerror="this.style.display='none'">`
       : `<div class="photo-ph">
            <svg width="34" height="34" fill="none" stroke="currentColor" viewBox="0 0 24 24">
              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"
