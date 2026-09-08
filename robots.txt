@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wpchanwork.github.io/wei-ping_chan/sitemap.xml

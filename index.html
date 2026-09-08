@@ -1,96 +1,480 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wei-Ping Chan</title>
-  <meta name="description" content="Welcome to Wei-Ping Chan's personal website.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wei-Ping Chan — Data Scientist & Interdisciplinary Researcher</title>
+  <meta name="description" content="Wei-Ping Chan — Exploratory Data Scientist and Interdisciplinary Researcher. Specializing in AI, computational modeling, ecology, and evolution." />
+  <link rel="canonical" href="https://wpchanwork.github.io/wei-ping_chan/index.html">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta property="og:title" content="Wei-Ping Chan — Data Scientist & Interdisciplinary Researcher">
+  <meta property="og:description" content="Exploratory Data Scientist and Interdisciplinary Researcher. Specializing in AI, computational modeling, ecology, and evolution.">
+  <meta property="og:image" content="https://wpchanwork.github.io/wei-ping_chan/imgs/web/1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME.jpg">
+  <meta property="og:url" content="https://wpchanwork.github.io/wei-ping_chan/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wei-Ping Chan — Data Scientist & Interdisciplinary Researcher">
+  <meta name="twitter:description" content="Exploratory Data Scientist specializing in AI, computational modeling, ecology, and evolution.">
+  <meta name="twitter:image" content="https://wpchanwork.github.io/wei-ping_chan/imgs/web/1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME.jpg">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      min-height: 100vh;
-      background-image: url('https://lh3.googleusercontent.com/d/1RbbqevU8LwwauUS1pct3OJ3ERcl1w8Kt');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
+    /* === Page-specific styles === */
+    .hero-mosaic {
+      position: absolute; inset: 0;
+      background: url('imgs/All_940_Imgs-darkBG_20180715_img_combo.jpg') center/cover no-repeat;
+      opacity: 0.15; z-index: 0; transform: translateZ(0);
+      filter: blur(1px);
     }
-    .overlay {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 24px;
-      color: #fff;
-      background: linear-gradient(180deg, rgba(15,23,42,.55) 0%, rgba(15,23,42,.25) 45%, rgba(15,23,42,.65) 100%);
+    .profile-ring {
+      border-radius: 9999px; padding: 4px;
+      background: linear-gradient(135deg, var(--c-teal), var(--c-amber));
     }
-    .eyebrow {
-      letter-spacing: .35em;
-      font-size: .8rem;
-      text-transform: uppercase;
-      opacity: .85;
-      margin-bottom: 14px;
-    }
-    .name {
-      font-size: clamp(2.4rem, 7vw, 4.2rem);
-      font-weight: 800;
-      line-height: 1.1;
-      text-shadow: 0 2px 20px rgba(0,0,0,.45);
-    }
-    .tagline {
-      margin-top: 14px;
-      font-size: clamp(.95rem, 2.4vw, 1.2rem);
-      font-weight: 300;
-      max-width: 36rem;
-      opacity: .95;
-    }
-    .button {
-      margin-top: 34px;
-      padding: 13px 30px;
-      background: transparent;
-      color: #fff;
-      border: 2px solid rgba(255,255,255,.85);
-      border-radius: 9999px;
-      cursor: pointer;
-      font-size: 1rem;
-      letter-spacing: .03em;
-      transition: all .2s ease;
-    }
-    .button:hover {
-      background: #fff;
-      color: #14294b;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 26px -10px rgba(0,0,0,.6);
-    }
-    .hint {
-      position: absolute;
-      bottom: 22px;
-      font-size: .72rem;
-      opacity: .65;
-    }
-    @media (max-width: 768px) {
-      body {
-        background-size: auto 100%;
-        background-position: calc(50% + 180px) center;
-      }
-    }
+    .profile-ring img { border-radius: 9999px; display: block; }
+
+    /* Talks styles */
+    .talk-hero { position: relative; display: block; width: 100%; border: 0; cursor: pointer; padding: 0; padding-top: 125%; background: var(--c-deep); overflow: hidden; }
+    .talk-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: blur(26px) brightness(.5); transform: scale(1.2); }
+    .talk-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: .5rem; transition: transform .25s ease; }
+    .talk-hero:hover .talk-hero-img { transform: scale(1.025); }
+    .talk-hero--poster { cursor: zoom-in; }
+    .talk-hero-cue { position: absolute; right: .6rem; bottom: .6rem; display: flex; align-items: center; gap: .3rem; background: rgba(12,21,37,.78); color: #fff; font-size: .7rem; font-weight: 600; padding: .3rem .62rem; border-radius: 9999px; opacity: 0; transition: opacity .2s ease; }
+    .talk-hero:hover .talk-hero-cue { opacity: 1; }
+    .talk-hero-cue--static { opacity: .92; }
+    .talk-hero-cue svg { width: .85rem; height: .85rem; fill: currentColor; }
+    .talk-tag { display: inline-block; font-size: .68rem; letter-spacing: .04em; text-transform: uppercase; padding: .18rem .55rem; border-radius: 9999px; background: var(--c-surface-alt); color: var(--c-primary); font-weight: 600; }
+    .talk-tag-alt { background: #fff; color: var(--c-text-2); border: 1px solid var(--c-border); }
+    .talk-speakers { font-size: .78rem; color: var(--c-text-2); line-height: 1.45; }
+    .talk-speakers strong { color: var(--c-primary); }
+    .talk-actions { margin-top: auto; display: flex; flex-direction: column; gap: .6rem; }
+    .talk-actions::before { content: ''; display: block; height: 1px; background: var(--c-border); margin-top: 1.1rem; }
+    .watch-btn { display: flex; align-items: center; justify-content: center; gap: .5rem; width: 100%; border: 0; cursor: pointer; font: inherit; font-weight: 600; font-size: .88rem; color: #fff; background: var(--c-primary); border-radius: 9999px; padding: .65rem 1rem; transition: background .2s ease, transform .2s ease, box-shadow .2s ease; }
+    .watch-btn:hover { background: #1d3a6b; transform: translateY(-1px); box-shadow: 0 10px 20px -12px rgba(12,21,37,.9); }
+    .watch-btn svg { width: 1.05rem; height: 1.05rem; fill: currentColor; flex-shrink: 0; }
+    .extra-row { display: flex; align-items: center; gap: .7rem; width: 100%; border: 0; background: none; padding: 0; cursor: pointer; text-align: left; font: inherit; }
+    .extra-thumb { position: relative; flex-shrink: 0; overflow: hidden; width: 4.2rem; height: 2.4rem; border-radius: .3rem; background: var(--c-surface-alt); box-shadow: 0 4px 10px -5px rgba(12,21,37,.6); transition: transform .2s ease; }
+    .extra-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .extra-thumb-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(12,21,37,.25); }
+    .extra-thumb-play svg { width: 1.3rem; height: 1.3rem; }
+    .extra-row:hover .extra-thumb { transform: scale(1.06); }
+    .extra-label { display: block; font-size: .78rem; font-weight: 600; color: var(--c-primary); }
+    .extra-hint { display: block; font-size: .7rem; color: var(--c-text-3); }
+    .video-frame { position: relative; width: 100%; padding-top: 56.25%; background: var(--c-deep); overflow: hidden; }
+    .video-frame > iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .max-h-screen-80 { max-height: 80vh; }
+    .explore-card { position: relative; overflow: hidden; border-left: 4px solid var(--c-teal); }
+    .explore-card:nth-child(2) { border-left-color: var(--c-amber); }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <p class="eyebrow">Welcome</p>
-    <h1 class="name">Wei-Ping Chan</h1>
-    <p class="tagline">Exploratory Data Scientist &amp; Interdisciplinary Researcher — From Nature to Society</p>
-    <button class="button" onclick="redirectToIndex()">Know More About Me →</button>
-    <p class="hint">Entering automatically in a few seconds…</p>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="wpc-nav sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="wpc-nav-brand">Wei-Ping Chan</a>
+      <div class="md:hidden">
+        <button id="menu-toggle" aria-label="Toggle menu" class="focus:outline-none" style="color:var(--c-text)">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+      <nav id="menu" class="hidden md:flex md:items-center md:space-x-1 absolute md:static top-16 left-0 right-0 bg-white md:bg-transparent shadow md:shadow-none flex-col md:flex-row px-3 md:px-0 py-3 md:py-0 space-y-1 md:space-y-0">
+        <span class="nav-active">Home</span>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="collaborators.html" class="nav-link">Collaborations</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="#talks" class="nav-link">Talks</a>
+        <a href="#background" class="nav-link">Background</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('menu').classList.toggle('hidden'));</script>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero-immersive text-white">
+    <div class="hero-mosaic"></div>
+    <div class="max-w-6xl mx-auto px-4 py-20 md:py-28 flex flex-col md:flex-row items-center gap-10 md:gap-16">
+      <div class="profile-ring flex-shrink-0 reveal">
+        <img src="imgs/web/1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME.jpg" alt="Wei-Ping Chan" class="w-56 h-56 md:w-72 md:h-72 object-cover shadow-2xl">
+      </div>
+      <div class="text-center md:text-left reveal reveal-delay-1">
+        <p class="text-sm md:text-base uppercase tracking-widest" style="color:var(--c-teal)">From Nature to Society</p>
+        <h1 class="mt-2 text-white">Wei-Ping Chan</h1>
+        <p class="text-lg md:text-xl mt-3 font-medium" style="color:rgba(255,255,255,.75)">
+          Exploratory Data Scientist · Interdisciplinary Researcher
+        </p>
+        <div class="mt-5 flex flex-wrap justify-center md:justify-start gap-2">
+          <span class="chip-glow">Data Science</span>
+          <span class="chip-glow">AI &amp; Computer Vision</span>
+          <span class="chip-glow">Ecology &amp; Evolution</span>
+          <span class="chip-glow">Computational Modeling</span>
+        </div>
+        <div class="mt-6 flex flex-wrap justify-center md:justify-start items-center gap-4">
+          <a href="mailto:wpchanwork@gmail.com" class="btn-outline-white">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            wpchanwork@gmail.com
+          </a>
+        </div>
+        <div class="mt-4 flex flex-wrap justify-center md:justify-start items-center gap-4">
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/wei-ping-chan" target="_blank" rel="noopener noreferrer" title="LinkedIn" style="color:rgba(255,255,255,.7);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.7)'">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <!-- GitHub -->
+          <a href="https://github.com/wpchanwork" target="_blank" rel="noopener noreferrer" title="GitHub" style="color:rgba(255,255,255,.7);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.7)'">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+          <!-- Google Scholar -->
+          <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" target="_blank" rel="noopener noreferrer" title="Google Scholar" style="color:rgba(255,255,255,.7);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.7)'">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14Zm0-2a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path d="M12 11.5 24 4v7.5L12 19 0 11.5V4l12 7.5Z"/></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/_wpchan/" target="_blank" rel="noopener noreferrer" title="Instagram" style="color:rgba(255,255,255,.7);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.7)'">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INTRO ===================== -->
+  <section class="max-w-4xl mx-auto px-4 py-14">
+    <div class="card p-8 md:p-10 md:-mt-20 relative z-10 reveal">
+      <p class="text-base md:text-lg leading-relaxed">
+        I am a research scientist specializing in <strong style="color:var(--c-teal)">data science</strong>,
+        <strong style="color:var(--c-teal)">AI</strong>, and computational modeling, with a strong focus on
+        <strong style="color:var(--c-teal)">exploratory analysis</strong>, uncovering patterns, and developing
+        <strong style="color:var(--c-teal)">theoretical insights</strong>. My interdisciplinary approach—integrating
+        <strong style="color:var(--c-teal)">ecology</strong>, <strong style="color:var(--c-teal)">evolution</strong>,
+        environmental science, and AI—has led to new discoveries and novel technologies.
+      </p>
+      <p class="text-base md:text-lg leading-relaxed mt-4">
+        My expertise includes <strong style="color:var(--c-teal)">digitization</strong>, spectral data analysis,
+        insect flight mechanisms, and multi-modal AI applications. With over a decade of programming experience, I work
+        extensively with <strong style="color:var(--c-teal)">spatiotemporal data</strong>,
+        <strong style="color:var(--c-teal)">computer vision</strong>, and
+        <strong style="color:var(--c-teal)">causal inference</strong>, building scalable analytical frameworks
+        to drive scientific innovation and real-world applications.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== CAPABILITIES ===================== -->
+  <section class="max-w-6xl mx-auto px-4 py-10">
+    <h2 class="section-title reveal">What I Build &amp; Discover</h2>
+    <div class="accent-bar mx-auto mt-3 mb-10"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 reveal-stagger">
+      <div class="capability-card reveal" style="--i:0">
+        <div class="capability-icon" style="background:rgba(13,148,136,.1);color:var(--c-teal)">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+        </div>
+        <div>
+          <h4>Computer Vision &amp; Imaging Systems</h4>
+          <p>Built a high-throughput multispectral imaging system that digitizes museum specimens across 11 wavelength channels, processing 940+ specimens in parallel.</p>
+          <div class="capability-evidence">→ Communications Biology (2022)</div>
+        </div>
+      </div>
+      <div class="capability-card reveal" style="--i:1">
+        <div class="capability-icon" style="background:rgba(217,119,6,.1);color:var(--c-amber)">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+          <h4>Climate &amp; Spatiotemporal Analysis</h4>
+          <p>Mapped climate velocities across 17,000+ mountain regions worldwide, revealing where species can and cannot keep pace with warming.</p>
+          <div class="capability-evidence">→ Nature (2024) &amp; Science (2016)</div>
+        </div>
+      </div>
+      <div class="capability-card reveal" style="--i:2">
+        <div class="capability-icon" style="background:rgba(37,99,235,.1);color:var(--c-blue)">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <div>
+          <h4>Statistical Modeling &amp; Causal Inference</h4>
+          <p>Disentangled evolutionary vs. environmental drivers of moth light-attraction decline using 130+ years of historical behavioral data.</p>
+          <div class="capability-evidence">→ Proc. R. Soc. B (2025)</div>
+        </div>
+      </div>
+      <div class="capability-card reveal" style="--i:3">
+        <div class="capability-icon" style="background:rgba(124,58,237,.1);color:#7c3aed">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+        </div>
+        <div>
+          <h4>Programming &amp; Data Workflows</h4>
+          <p>Python, R, MATLAB, Spark, SQL. From signal processing of wing-beat frequencies to NLP pipelines analyzing how regional weather shapes news topics.</p>
+          <div class="capability-evidence">→ 15+ years across ecology, physics, and AI</div>
+        </div>
+      </div>
+      <div class="capability-card reveal" style="--i:4">
+        <div class="capability-icon" style="background:rgba(220,38,38,.08);color:var(--c-coral)">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+        </div>
+        <div>
+          <h4>Evolutionary &amp; Morphological Analysis</h4>
+          <p>Quantified wing shape evolution across 12,000+ Lepidoptera species using deep learning and phylogenetic comparative methods.</p>
+          <div class="capability-evidence">→ 6+ publications on insect morphology &amp; behavior</div>
+        </div>
+      </div>
+      <div class="capability-card reveal" style="--i:5">
+        <div class="capability-icon" style="background:rgba(101,163,13,.1);color:#65a30d">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div>
+          <h4>Science → Application Pipeline</h4>
+          <p>Co-founded CropSky (agritech ML), PathoTracter (pathogen IoT), and the SOS Foundation, translating ecological insights into societal tools.</p>
+          <div class="capability-evidence">→ 3 ventures bridging research and real-world impact</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TECHNICAL SKILLS (Detail) ===================== -->
+  <section class="max-w-6xl mx-auto px-4 py-10">
+    <h2 class="section-title reveal">Technical Skills</h2>
+    <div class="accent-bar mx-auto mt-3 mb-10"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <div class="skill-card reveal">
+        <img src="imgs/web/1MHtkS5dd_oe3BkMysLvjvMQMQDvUjSL_.jpg" alt="Programming" class="w-2/5 object-cover" loading="lazy">
+        <div class="p-5">
+          <p class="font-bold text-base mb-2" style="font-family:var(--f-display);color:var(--c-text)">Programming</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.35rem">
+            <span class="tag-sm">Python</span><span class="tag-sm">R</span><span class="tag-sm">MATLAB</span><span class="tag-sm">Wolfram Mathematica</span>
+            <span class="tag-sm">Spark</span><span class="tag-sm">SQL</span><span class="tag-sm">IDL</span><span class="tag-sm">Shell Script</span><span class="tag-sm" style="opacity:.55">(Visual Basic)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <img src="imgs/web/1OgdJyv5owRvho7zou49ots24I3VTFHTM.jpg" alt="Data Analysis" class="w-2/5 object-cover" loading="lazy">
+        <div class="p-5">
+          <p class="font-bold text-base mb-2" style="font-family:var(--f-display);color:var(--c-text)">Data Analysis</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.35rem">
+            <span class="tag-sm">Machine Learning</span><span class="tag-sm">Computer Vision</span><span class="tag-sm">Causal Inference</span><span class="tag-sm">NLP</span>
+            <span class="tag-sm">Statistical Modeling</span><span class="tag-sm">Predictive Analytics</span><span class="tag-sm">Time-Series Analysis</span>
+            <span class="tag-sm">Spatiotemporal Analysis</span><span class="tag-sm">High-Dimensional Data</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <img src="imgs/web/19XKLMEz18iRE0juokyOAGymopLCSrT0h.jpg" alt="Software &amp; Tools" class="w-2/5 object-cover" loading="lazy">
+        <div class="p-5">
+          <p class="font-bold text-base mb-2" style="font-family:var(--f-display);color:var(--c-text)">Software &amp; Tools</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.35rem">
+            <span class="tag-sm">ArcGIS</span><span class="tag-sm">Tableau</span><span class="tag-sm">Scikit-learn</span><span class="tag-sm">ENVI</span><span class="tag-sm">SPSS</span>
+            <span class="tag-sm">Git</span><span class="tag-sm">Adobe Illustrator</span><span class="tag-sm">Adobe Photoshop</span><span class="tag-sm">Adobe Lightroom</span>
+            <span class="tag-sm">Adobe Premiere Pro</span><span class="tag-sm" style="opacity:.55">(Unreal Engine 5)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <img src="imgs/web/1ONp1CdscRYKcLmipyxx9jUis16ApgF_i.jpg" alt="Research Methods" class="w-2/5 object-cover" loading="lazy">
+        <div class="p-5">
+          <p class="font-bold text-base mb-2" style="font-family:var(--f-display);color:var(--c-text)">Research Methods</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.35rem">
+            <span class="tag-sm">Ecological Modeling</span><span class="tag-sm">Evolutionary Inference</span><span class="tag-sm">Numerical Simulation</span>
+            <span class="tag-sm">Experimental Design</span><span class="tag-sm">Data Mining</span><span class="tag-sm">Cross-Boundary Insights</span>
+            <span class="tag-sm">Field Work</span><span class="tag-sm">Workflow Optimization</span><span class="tag-sm">Project Management</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== DATASETS ===================== -->
+  <section class="section-dark py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="section-title reveal">Datasets I Work With</h2>
+      <div class="accent-bar mx-auto mt-3 mb-10"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="rounded-2xl overflow-hidden flex reveal" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">
+          <div class="p-6">
+            <p class="font-bold text-lg mb-3" style="color:var(--c-teal)">Geospatial &amp; Environmental</p>
+            <ul class="text-sm space-y-1" style="color:rgba(255,255,255,.7)">
+              <li>Satellite Imagery (MODIS, Landsat, VIIRS)</li>
+              <li>Gridded Climate Data (CRU, CHELSA)</li>
+              <li>Weather Station Data (GHCN, METAR)</li>
+              <li>Topographic Data (EarthEnv)</li>
+            </ul>
+          </div>
+          <img src="imgs/web/1MXvwEGAzuvjh9rJ-l7To6fspfrRIX-TO.jpg" alt="Geospatial Data" class="w-2/5 object-cover" loading="lazy">
+        </div>
+        <div class="rounded-2xl overflow-hidden flex reveal" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">
+          <div class="p-6">
+            <p class="font-bold text-lg mb-3" style="color:var(--c-teal)">Biological &amp; Genetic</p>
+            <ul class="text-sm space-y-1" style="color:rgba(255,255,255,.7)">
+              <li>DNA Sequencing &amp; Phylogenetic Trees</li>
+              <li>Stable Isotope Data</li>
+              <li>Species Occurrence (iNaturalist, GBIF)</li>
+              <li>Experimental Results</li>
+            </ul>
+          </div>
+          <img src="imgs/web/1hauuiwPEf-efVLKqUrBJc7h52_htRMj8.jpg" alt="Biological Data" class="w-2/5 object-cover" loading="lazy">
+        </div>
+        <div class="rounded-2xl overflow-hidden flex reveal" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">
+          <div class="p-6">
+            <p class="font-bold text-lg mb-3" style="color:var(--c-teal)">Visual &amp; Spectral</p>
+            <ul class="text-sm space-y-1" style="color:rgba(255,255,255,.7)">
+              <li>Multispectral Imagery (11 channels)</li>
+              <li>High-Speed Video (30–900 fps)</li>
+              <li>Spectral Reflectance Data</li>
+              <li>SEM Micrographs</li>
+            </ul>
+          </div>
+          <img src="imgs/web/1yAwWKzIXxjpmplDElV4d6PUNLNxwUlQT.jpg" alt="Visual Data" class="w-2/5 object-cover" loading="lazy">
+        </div>
+        <div class="rounded-2xl overflow-hidden flex reveal" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)">
+          <div class="p-6">
+            <p class="font-bold text-lg mb-3" style="color:var(--c-teal)">Computational &amp; Simulated</p>
+            <ul class="text-sm space-y-1" style="color:rgba(255,255,255,.7)">
+              <li>CFD Simulations (insect flight)</li>
+              <li>Signal Processing (analog &amp; digital)</li>
+              <li>Web Content (news, images, markets)</li>
+            </ul>
+          </div>
+          <img src="imgs/web/1DZBcllfFVBLqxRpt1ZBUICvvcD1zb1Qm.jpg" alt="Computational Data" class="w-2/5 object-cover" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EXPLORE ===================== -->
+  <section class="max-w-6xl mx-auto px-4 py-14">
+    <h2 class="section-title reveal">Explore My Work</h2>
+    <div class="accent-bar mx-auto mt-3 mb-10"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a href="projects.html" class="card explore-card p-8 block reveal">
+        <h3 style="font-size:1.25rem;font-weight:700">Projects</h3>
+        <p class="mt-2" style="color:var(--c-text-2)">Research and creative projects spanning physical environments, species distribution, morphological quantification, and sustainable technology.</p>
+        <span class="mt-3 inline-block font-semibold" style="color:var(--c-teal)">View Projects →</span>
+      </a>
+      <a href="collaborators.html" class="card explore-card p-8 block reveal">
+        <h3 style="font-size:1.25rem;font-weight:700">Collaborations</h3>
+        <p class="mt-2" style="color:var(--c-text-2)">An interactive map of the mentors, co-authors, and partners who have shaped my research across 6+ countries.</p>
+        <span class="mt-3 inline-block font-semibold" style="color:var(--c-amber)">View Collaboration Map →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== PUBLICATIONS ===================== -->
+  <section class="max-w-4xl mx-auto px-4 py-10">
+    <h2 class="section-title reveal">Selected Publications</h2>
+    <div class="accent-bar mx-auto mt-3 mb-10"></div>
+    <ul class="space-y-4">
+      <li class="pub-item reveal"><strong>WP Chan</strong> et al., 2025, <a href="https://doi.org/10.1098/rspb.2025.2319" target="_blank">Historical behavioural data disentangle evolutionary and environmental drivers of recent declines in insect attraction to light</a>, <span class="pub-venue">Proc. R. Soc. B</span> 292: 20252319.</li>
+      <li class="pub-item reveal">PA Lin, <strong>WP Chan (co-first)</strong> et al., 2025, <a href="https://royalsocietypublishing.org/doi/full/10.1098/rspb.2024.2426" target="_blank">The Salient Aroma Hypothesis</a>, <span class="pub-venue">Proc. R. Soc. B</span> 292: 20242426.</li>
+      <li class="pub-item reveal"><strong>WP Chan</strong> et al., 2024, <a href="https://doi.org/10.1038/s41586-024-07264-9" target="_blank">Climate velocities and species tracking in global mountain regions</a>, <span class="pub-venue">Nature</span>, 629, 114–120.</li>
+      <li class="pub-item reveal">Z Wang, <strong>WP Chan (co-first)</strong> et al., 2023, <a href="https://www.sciencedirect.com/science/article/pii/S0006320723001933" target="_blank">One in five butterfly species sold online across borders</a>, <span class="pub-venue">Biological Conservation</span> 283: 110092.</li>
+      <li class="pub-item reveal"><strong>WP Chan</strong> et al., 2022, <a href="https://www.nature.com/articles/s42003-022-04282-z" target="_blank">A high throughput multispectral imaging system for museum specimens</a>, <span class="pub-venue">Communications Biology</span> 5(1), 1318.</li>
+      <li class="pub-item reveal"><strong>WP Chan</strong> et al., 2016, <a href="https://www.science.org/doi/abs/10.1126/science.aab4119" target="_blank">Seasonal and daily climate variation have opposite effects on species elevational range size</a>, <span class="pub-venue">Science</span>, 351, 1427–1429.</li>
+    </ul>
+    <p class="text-center mt-6 reveal">
+      <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" target="_blank" rel="noopener noreferrer" class="link-teal font-semibold">View full publication list on Google Scholar →</a>
+    </p>
+  </section>
+
+  <!-- ===================== TALKS & MEDIA ===================== -->
+  <section id="talks" style="background:var(--c-surface-alt)" class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="section-title reveal">Talks &amp; Media</h2>
+      <div class="accent-bar mx-auto mt-3 mb-4"></div>
+      <p class="section-subtitle mb-10 reveal">Invited lectures, conference talks, and public science outreach on biodiversity, climate, and AI-driven research.</p>
+      <div id="talks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <p id="talks-empty" class="hidden text-center" style="color:var(--c-text-3)">Talk recordings are being added — check back soon.</p>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="media-lightbox" class="hidden fixed inset-0 z-50 bg-black bg-opacity-80 items-center justify-center p-4 md:p-8" role="dialog" aria-modal="true" aria-label="Talk media">
+    <button id="media-close" class="absolute top-4 right-5 text-white text-4xl leading-none opacity-80 hover:opacity-100" aria-label="Close">&times;</button>
+    <figure class="max-h-full w-full flex flex-col items-center">
+      <img id="media-img" src="" alt="" class="hidden max-h-screen-80 max-w-full object-contain rounded-lg shadow-2xl">
+      <div id="media-video" class="hidden w-full max-w-4xl video-frame rounded-lg shadow-2xl"></div>
+      <figcaption id="media-caption" class="text-gray-200 text-sm mt-4 text-center max-w-xl"></figcaption>
+    </figure>
   </div>
 
   <script>
-    setTimeout(() => { window.location.href = 'home.html'; }, 20000);
-    function redirectToIndex() { window.location.href = 'home.html'; }
+    const VIDEOS=[{id:'https://youtu.be/CfP06qyFheU',title:'Planning for the Future of Biodiversity Digitization',event:'iDigBio — MCZ Team Talk',date:'April 9, 2026',tag:'Team Talk',lang:'English',speakers:['Breda Zimkus','Jon Woodward','Richard A. Rabideau Childers','Wei-Ping Chan'],speakersAffil:'Museum of Comparative Zoology, Harvard University',poster:'imgs/MCZ-team_talk2026.png',clips:[{id:'https://youtu.be/hBzUoz5cXuk',label:'Animation shown in the talk'}]},{id:'https://youtu.be/fUI6w0EqrtU',title:'Seeing the World from a Room Without Windows',titleZh:'從沒有窗的房間看見世界 — 在博物館的地下室，我把歷史拼成了未來藍圖',event:'Tzu Chi Foundation, Cambridge',date:'August 2025',tag:'Public Talk',lang:'Mandarin',poster:'imgs/WPC-poster_v3-01.jpg'},{id:'https://youtu.be/T7soI3Sh3-M',title:'Runaway: Global Climate Change and the Species Left Behind',titleZh:'全球氣候變遷 — Runaway',event:'HTSA × MIT-ROCSA 8×8 Talks',date:'March 2025',tag:'Invited Talk',lang:'Mandarin',poster:'imgs/HTSA_8x8_poster.jpg'}];
+    (function(){const grid=document.getElementById('talks-grid'),empty=document.getElementById('talks-empty');if(!VIDEOS.length){empty.classList.remove('hidden');return}const toId=v=>{const m=String(v).match(/(?:v=|youtu\.be\/|\/live\/|\/shorts\/|\/embed\/)([A-Za-z0-9_-]{11})/);return m?m[1]:String(v).trim()};const posterSrc=p=>{if(!p)return'';if(/drive\.google\.com/.test(p)){const m=p.match(/[-\w]{25,}/);if(m)return'https://drive.google.com/thumbnail?id='+m[0]+'&sz=s1600'}return p};const esc=t=>String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');const ytThumb=id=>'https://i.ytimg.com/vi/'+id+'/maxresdefault.jpg';const ytThumbFb=id=>' onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg\'"';const play='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';const ytB='<svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#fff" fill-opacity=".92" d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.7a8.6 8.6 0 0 0-6 6A90 90 0 0 0 0 24a90 90 0 0 0 1.5 16.3 8.6 8.6 0 0 0 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.7a8.6 8.6 0 0 0 6-6A90 90 0 0 0 68 24a90 90 0 0 0-1.5-16.3z"/><path fill="#14294b" d="M45 24 27 14v20z"/></svg>';const spkLine=v=>{if(!v.speakers||!v.speakers.length)return'';const n=v.speakers.map(n=>/Wei-?Ping\s+Chan/i.test(n)?'<strong>'+esc(n)+'</strong>':esc(n)).join(' · ');return'<p class="talk-speakers mt-2">'+n+(v.speakersAffil?'<span class="block" style="color:var(--c-text-3)">'+esc(v.speakersAffil)+'</span>':'')+'</p>'};VIDEOS.forEach(v=>{const id=toId(v.id),title=esc(v.title||'Untitled'),poster=posterSrc(v.poster),clips=(v.clips||[]).filter(c=>c&&c.id),heroSrc=poster||ytThumb(id);const hero='<button class="talk-hero'+(poster?' talk-hero--poster':'')+'" type="button" aria-label="'+(poster?'Enlarge poster: ':'Play: ')+title+'"><span class="talk-hero-bg" style="background-image:url(\''+esc(heroSrc)+'\')"></span><img class="talk-hero-img" loading="lazy" alt="" src="'+esc(heroSrc)+'"'+(poster?'':ytThumbFb(id))+'><span class="talk-hero-cue'+(poster?'':' talk-hero-cue--static')+'">'+(poster?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6h-2V6.4l-3.3 3.3-1.4-1.4L17.6 5H15V3zM9 21H3v-6h2v2.6l3.3-3.3 1.4 1.4L6.4 19H9v2z"/></svg>Poster':play+'Watch')+'</span></button>';const card=document.createElement('article');card.className='card overflow-hidden flex flex-col reveal';card.innerHTML=hero+'<div class="p-5 flex-1 flex flex-col">'+((v.tag||v.lang)?'<div class="flex flex-wrap gap-2 mb-2">'+(v.tag?'<span class="talk-tag">'+esc(v.tag)+'</span>':'')+(v.lang?'<span class="talk-tag talk-tag-alt">'+esc(v.lang)+'</span>':'')+'</div>':'')+'<p class="font-semibold leading-snug" style="color:var(--c-text)">'+title+'</p>'+(v.titleZh?'<p class="text-sm mt-1 leading-snug" style="color:var(--c-text-3)">'+esc(v.titleZh)+'</p>':'')+(v.event?'<p class="text-sm mt-2" style="color:var(--c-text-2)">'+esc(v.event)+'</p>':'')+(v.date?'<p class="text-xs mt-1" style="color:var(--c-text-3)">'+esc(v.date)+'</p>':'')+spkLine(v)+'<div class="talk-actions"><button class="watch-btn" type="button">'+play+'Watch the talk</button>'+clips.map((c,i)=>'<button class="extra-row" type="button" data-i="'+i+'"><span class="extra-thumb"><img loading="lazy" alt="" src="'+ytThumb(toId(c.id))+'"'+ytThumbFb(toId(c.id))+'><span class="extra-thumb-play">'+ytB+'</span></span><span><span class="extra-label">'+esc(c.label||'Related clip')+'</span><span class="extra-hint">Click to play</span></span></button>').join('')+'</div></div>';card.querySelector('.talk-hero').addEventListener('click',()=>{if(poster)openMedia({type:'image',src:poster,caption:v.title});else openMedia({type:'video',src:id,caption:v.title,start:v.start})});card.querySelector('.watch-btn').addEventListener('click',()=>openMedia({type:'video',src:id,caption:v.title,start:v.start}));card.querySelectorAll('.extra-row').forEach(btn=>{btn.addEventListener('click',()=>{const c=clips[Number(btn.dataset.i)];openMedia({type:'video',src:toId(c.id),caption:(c.label||'Clip')+' — '+v.title})})});grid.appendChild(card)})})();
+    function embedHtml(id,t,s){return'<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0'+(s?'&start='+s:'')+'" title="'+t+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'}
+    const lightbox=document.getElementById('media-lightbox'),mediaImg=document.getElementById('media-img'),mediaVid=document.getElementById('media-video'),mediaCap=document.getElementById('media-caption');
+    function openMedia({type,src,caption,start}){if(type==='image'){mediaImg.src=src;mediaImg.alt=caption||'';mediaImg.classList.remove('hidden');mediaVid.classList.add('hidden');mediaVid.innerHTML=''}else{mediaVid.innerHTML=embedHtml(src,caption||'',start);mediaVid.classList.remove('hidden');mediaImg.classList.add('hidden');mediaImg.src=''}mediaCap.textContent=caption||'';lightbox.classList.remove('hidden');lightbox.classList.add('flex');document.body.style.overflow='hidden'}
+    function closeMedia(){lightbox.classList.add('hidden');lightbox.classList.remove('flex');mediaImg.src='';mediaVid.innerHTML='';document.body.style.overflow=''}
+    document.getElementById('media-close').addEventListener('click',closeMedia);lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeMedia()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!lightbox.classList.contains('hidden'))closeMedia()});
+  </script>
+
+  <!-- ===================== BACKGROUND ===================== -->
+  <section id="background" class="py-16" style="background:var(--c-surface)">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="section-title reveal">Background</h2>
+      <div class="accent-bar mx-auto mt-3 mb-12"></div>
+      <h3 class="text-2xl font-bold mb-6 reveal" style="color:var(--c-teal)">Professional Experience</h3>
+      <div class="space-y-0 mb-14">
+        <div class="timeline-item reveal"><div class="timeline-dot"></div><p class="font-bold">Founding Director</p><p style="color:var(--c-text-2)"><a href="https://sos-commons.vercel.app/" target="_blank" rel="noopener noreferrer" class="link-teal">Sustainability Of Sustainability</a> — Cambridge, MA, USA</p><p class="text-sm" style="color:var(--c-text-3)">Dec 2025 – Current</p><p class="mt-1 text-sm" style="color:var(--c-text-2)">Leading the strategic vision and early development of an interdisciplinary nonprofit integrating science, art, and digital innovation to advance sustainability and public engagement.</p></div>
+        <div class="timeline-item reveal"><div class="timeline-dot"></div><p class="font-bold">Founder &amp; CEO <span class="font-normal text-sm" style="color:var(--c-text-3)">(Part-time)</span></p><p style="color:var(--c-text-2)">BioNarr — Delaware, USA</p><p class="text-sm" style="color:var(--c-text-3)">May 2026 – Current</p><p class="mt-1 text-sm" style="color:var(--c-text-2)">Developing integrated hardware and software systems for large-scale biodiversity intelligence and natural history digitization.</p></div>
+        <div class="timeline-item reveal"><div class="timeline-dot"></div><p class="font-bold">Associate</p><p style="color:var(--c-text-2)">Department of Organismic and Evolutionary Biology (OEB), Harvard University — Cambridge, MA, USA</p><p class="text-sm" style="color:var(--c-text-3)">May 2026 – Current</p><p class="mt-1 text-sm" style="color:var(--c-text-2)">Affiliated researcher in organismic and evolutionary biology, collaborating on interdisciplinary research and mentoring within the department.</p></div>
+        <div class="timeline-item reveal"><div class="timeline-dot"></div><p class="font-bold">Research Scientist</p><p style="color:var(--c-text-2)">Museum of Comparative Zoology, Harvard University — Cambridge, MA, USA</p><p class="text-sm" style="color:var(--c-text-3)">May 2025 – May 2026</p><p class="mt-1 text-sm" style="color:var(--c-text-2)">Developed AI-powered hardware and software to digitize museum specimens in 3D.</p></div>
+        <div class="timeline-item reveal"><div class="timeline-dot"></div><p class="font-bold">Postdoctoral Fellow</p><p style="color:var(--c-text-2)">Roland Institute at Harvard, Harvard University — Cambridge, MA, USA</p><p class="text-sm" style="color:var(--c-text-3)">Jun 2023 – May 2025</p><p class="mt-1 text-sm" style="color:var(--c-text-2)">Led the development of computer vision techniques and field experiments to investigate the impacts of artificial light at night (ALAN) on moth populations and behaviors.</p></div>
+        <div class="timeline-item reveal"><div class="timeline-dot"></div><p class="font-bold">Research Assistant</p><p style="color:var(--c-text-2)">Biodiversity Research Center, Academia Sinica — Taipei, Taiwan</p><p class="text-sm" style="color:var(--c-text-3)">Aug 2011 – Jul 2016</p><p class="mt-1 text-sm" style="color:var(--c-text-2)">Applied statistical modeling, causal inference, and spatiotemporal analysis to examine species distribution, biodiversity metrics, and environmental response.</p></div>
+      </div>
+      <h3 class="text-2xl font-bold mb-6 reveal" style="color:var(--c-amber)">Education</h3>
+      <div class="space-y-0">
+        <div class="timeline-item reveal"><div class="timeline-dot timeline-dot-alt"></div><p class="font-bold">Doctorate — Organismic and Evolutionary Biology</p><p style="color:var(--c-text-2)">Harvard University — Cambridge, MA, USA</p><p class="text-sm" style="color:var(--c-text-3)">Thesis: Evolution and diversification of Lepidoptera · Advisor: Naomi E. Pierce</p><p class="text-sm" style="color:var(--c-text-3)">Award: Kao Fellowship (2018) &amp; Peirce Fellowship (2017)</p><p class="text-sm" style="color:var(--c-text-3)">Aug 2017 – May 2023</p></div>
+        <div class="timeline-item reveal"><div class="timeline-dot timeline-dot-alt"></div><p class="font-bold">Postgraduate Degree — Data Science and Management</p><p style="color:var(--c-text-2)">Taipei Medical University — Taipei, Taiwan</p><p class="text-sm" style="color:var(--c-text-3)">Award: Academic Achievement Award (First Place)</p><p class="text-sm" style="color:var(--c-text-3)">Jul 2016 – Jul 2017</p></div>
+        <div class="timeline-item reveal"><div class="timeline-dot timeline-dot-alt"></div><p class="font-bold">Master of Science — Forestry and Resource Conservation</p><p style="color:var(--c-text-2)">National Taiwan University — Taipei, Taiwan</p><p class="text-sm" style="color:var(--c-text-3)">Thesis: Regional scale high resolution δ18O prediction in precipitation using MODIS EVI · Advisors: Hsiao-Wei Yuan &amp; Sheng-Feng Shen</p><p class="text-sm" style="color:var(--c-text-3)">Sep 2009 – Jul 2011</p></div>
+        <div class="timeline-item reveal"><div class="timeline-dot timeline-dot-alt"></div><p class="font-bold">Bachelor of Science — Forestry and Resource Conservation</p><p style="color:var(--c-text-2)">National Taiwan University — Taipei, Taiwan</p><p class="text-sm" style="color:var(--c-text-3)">Sep 2005 – Jul 2009</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section id="contact" class="hero-immersive text-white py-16">
+    <img src="imgs/All_940_Imgs-darkBG_20180715_img_combo.jpg" alt="" class="hero-bg-img" style="opacity:.1;filter:blur(1px)" loading="lazy">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-white reveal">Get in Touch</h2>
+      <div class="accent-bar-white mx-auto mt-3 mb-6"></div>
+      <p style="color:rgba(255,255,255,.7)" class="mb-8 reveal">Whether you're interested in academic or business collaborations, technology discussions, knowledge exchange, investment opportunities, or mentorship, I'd love to connect.</p>
+      <a href="mailto:wpchanwork@gmail.com" class="btn-primary reveal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        wpchanwork@gmail.com
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="wpc-footer">
+    <div class="max-w-6xl mx-auto px-4 py-10 text-center">
+      <p class="footer-brand">Wei-Ping Chan</p>
+      <p class="text-sm mt-1" style="color:#7a788a">Exploratory Data Scientist · Interdisciplinary Researcher</p>
+      <div class="flex justify-center items-center gap-5 mt-5">
+        <a href="https://www.linkedin.com/in/wei-ping-chan" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/wpchanwork" target="_blank" rel="noopener noreferrer" title="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" target="_blank" rel="noopener noreferrer" title="Google Scholar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14Zm0-2a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path d="M12 11.5 24 4v7.5L12 19 0 11.5V4l12 7.5Z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/_wpchan/" target="_blank" rel="noopener noreferrer" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <span style="color:#55536a">·</span>
+        <a href="https://sos-commons.vercel.app/research" target="_blank" rel="noopener noreferrer">SOS Research</a>
+        <a href="https://sos-ini.carrd.co/" target="_blank" rel="noopener noreferrer">SOS Foundation</a>
+      </div>
+      <p class="text-xs mt-6" style="color:#55536a">© 2026 Wei-Ping Chan. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll Reveal -->
+  <script>
+    const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:0.08});
+    document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
   </script>
 </body>
 </html>

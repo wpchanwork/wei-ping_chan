@@ -1,0 +1,372 @@
+/* ============================================================
+   WPC Design System — style.css
+   Shared across all pages. Loaded AFTER Tailwind CDN.
+   ============================================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* --- Design Tokens --- */
+:root {
+  /* Palette — extracted from research materials */
+  --c-deep:       #0c1525;   /* night sky (moth light-trap experiments) */
+  --c-primary:    #14294b;   /* deep navy — kept for continuity */
+  --c-teal:       #0d9488;   /* structural iridescence — butterfly wings */
+  --c-amber:      #d97706;   /* multispectral amber channel */
+  --c-coral:      #dc2626;   /* climate velocity warm shift (sparse use) */
+  --c-blue:       #2563eb;   /* data / links */
+
+  --c-bg:         #faf8f5;   /* warm white — specimen paper */
+  --c-surface:    #ffffff;
+  --c-surface-alt:#f5f0eb;   /* warm off-white cards */
+  --c-text:       #1a1a2e;
+  --c-text-2:     #5c5c6f;   /* secondary text */
+  --c-text-3:     #94909e;   /* tertiary / captions */
+  --c-border:     #e8e4de;
+
+  /* Typography */
+  --f-display: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --f-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --f-mono:    'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* --- Base Resets --- */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Typography --- */
+h1, h2, h3, .display-font { font-family: var(--f-display); }
+h1 { font-size: 3rem; line-height: 1.1; letter-spacing: -0.02em; }
+h2 { font-size: 2.25rem; line-height: 1.15; }
+h3 { font-size: 1.5rem; line-height: 1.25; }
+@media (min-width: 768px) {
+  h1 { font-size: 3.75rem; }
+  h2 { font-size: 2.75rem; }
+}
+code, .mono { font-family: var(--f-mono); font-size: 0.85em; }
+
+/* --- Shared Navbar --- */
+.wpc-nav {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--c-border);
+}
+.wpc-nav-brand {
+  font-family: var(--f-display);
+  font-size: 1.35rem;
+  color: var(--c-primary);
+  text-decoration: none;
+}
+.nav-link {
+  padding: .45rem .85rem;
+  border-radius: .5rem;
+  color: var(--c-text-2);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background .15s ease, color .15s ease;
+  text-decoration: none;
+}
+.nav-link:hover { background: var(--c-surface-alt); color: var(--c-primary); }
+.nav-active {
+  padding: .45rem .85rem;
+  border-radius: .5rem;
+  background: var(--c-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* --- Shared Footer --- */
+.wpc-footer {
+  background: var(--c-deep);
+  color: #a3a1b0;
+}
+.wpc-footer a { color: #a3a1b0; transition: color .15s; text-decoration: none; }
+.wpc-footer a:hover { color: #fff; }
+.wpc-footer .footer-brand {
+  font-family: var(--f-display);
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+/* --- Accent Bar --- */
+.accent-bar {
+  width: 4rem; height: .25rem; border-radius: 9999px;
+  background: linear-gradient(90deg, var(--c-teal), var(--c-amber));
+}
+.accent-bar-white {
+  width: 4rem; height: .25rem; border-radius: 9999px;
+  background: linear-gradient(90deg, rgba(255,255,255,.6), rgba(255,255,255,.3));
+}
+
+/* --- Skill Cards (Technical Skills section) --- */
+.skill-card {
+  background: var(--c-surface);
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  border-left: 3px solid #b2dfdb;
+  box-shadow: 0 2px 12px -4px rgba(20,20,40,.08);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.skill-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--c-teal);
+  box-shadow: 0 12px 28px -8px rgba(13,148,136,.15);
+}
+
+/* --- Cards --- */
+.card {
+  background: var(--c-surface);
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px -8px rgba(20,20,40,.12);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -16px rgba(20,20,40,.22);
+}
+.card-flat {
+  background: var(--c-surface);
+  border-radius: 1rem;
+  border: 1px solid var(--c-border);
+}
+
+/* --- Hero Gradients --- */
+.hero-immersive {
+  position: relative;
+  background: var(--c-deep);
+  overflow: hidden;
+}
+.hero-immersive::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(12,21,37,.6) 0%,
+    rgba(12,21,37,.35) 40%,
+    rgba(12,21,37,.75) 100%
+  );
+  z-index: 1;
+}
+.hero-immersive > * { position: relative; z-index: 2; }
+.hero-bg-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+  z-index: 0;
+}
+.hero-gradient-dark {
+  background: linear-gradient(135deg, var(--c-deep) 0%, var(--c-primary) 100%);
+}
+
+/* --- Chips / Tags --- */
+.chip-glow {
+  display: inline-block; font-size: .72rem; padding: .25rem .7rem;
+  border-radius: 9999px;
+  background: rgba(13,148,136,.15);
+  color: var(--c-teal);
+  border: 1px solid rgba(13,148,136,.3);
+  font-weight: 500;
+}
+.chip-outline {
+  display: inline-block; font-size: .72rem; padding: .25rem .7rem;
+  border-radius: 9999px;
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.85);
+  border: 1px solid rgba(255,255,255,.25);
+}
+.tag-sm {
+  display: inline-block; font-size: .7rem; padding: .2rem .6rem;
+  border-radius: 9999px;
+  background: var(--c-surface-alt);
+  color: var(--c-text-2);
+}
+
+/* --- Section Titles --- */
+.section-title {
+  font-family: var(--f-display);
+  text-align: center;
+  color: var(--c-text);
+}
+.section-subtitle {
+  text-align: center;
+  color: var(--c-text-2);
+  max-width: 36rem;
+  margin: 0.5rem auto 0;
+}
+
+/* --- Category Headers (projects page) --- */
+.cat-head {
+  display: flex; align-items: center; gap: .6rem;
+  font-family: var(--f-display);
+  font-size: 1.5rem; font-weight: 700; color: var(--c-text);
+  border-left: 4px solid var(--c-teal);
+  padding-left: .75rem; margin-bottom: 1.5rem;
+}
+
+/* --- Scroll Reveal Animations --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Staggered children */
+.reveal-stagger > .reveal { transition-delay: calc(var(--i, 0) * 0.08s); }
+
+/* --- Dark Sections --- */
+.section-dark {
+  background: var(--c-deep);
+  color: #e2e0ec;
+}
+.section-dark h3, .section-dark h2 { color: #fff; }
+.section-dark .accent-bar {
+  background: linear-gradient(90deg, var(--c-teal), var(--c-amber));
+}
+
+/* --- Capability Story Cards --- */
+.capability-card {
+  display: flex; gap: 1.5rem; align-items: flex-start;
+  padding: 1.5rem;
+  background: var(--c-surface);
+  border-radius: 1rem;
+  border: 1px solid var(--c-border);
+  transition: border-color .2s, box-shadow .2s;
+}
+.capability-card:hover {
+  border-color: var(--c-teal);
+  box-shadow: 0 8px 24px -12px rgba(13,148,136,.2);
+}
+.capability-icon {
+  flex-shrink: 0;
+  width: 3rem; height: 3rem;
+  border-radius: .75rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem;
+}
+.capability-card h4 {
+  font-family: var(--f-body);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: .35rem;
+}
+.capability-card p {
+  font-size: .88rem;
+  color: var(--c-text-2);
+  line-height: 1.55;
+}
+.capability-evidence {
+  margin-top: .5rem;
+  font-family: var(--f-mono);
+  font-size: .75rem;
+  color: var(--c-teal);
+  opacity: .85;
+}
+
+/* --- Timeline (Background section) --- */
+.timeline-item {
+  position: relative;
+  padding-left: 2rem;
+  padding-bottom: 1.75rem;
+  border-left: 2px solid var(--c-border);
+}
+.timeline-item:last-child { border-left-color: transparent; }
+.timeline-dot {
+  position: absolute;
+  left: -7px; top: 4px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--c-teal);
+  border: 2px solid var(--c-bg);
+}
+.timeline-dot-alt { background: var(--c-amber); }
+
+/* --- Publication Cards --- */
+.pub-item {
+  padding: 1.25rem 1.5rem;
+  background: var(--c-surface);
+  border-radius: 0.75rem;
+  border: 1px solid var(--c-border);
+  transition: border-color .2s, transform .2s;
+}
+.pub-item:hover {
+  border-color: var(--c-teal);
+  transform: translateY(-2px);
+}
+.pub-item a { color: var(--c-teal); text-decoration: none; }
+.pub-item a:hover { text-decoration: underline; }
+.pub-venue { font-style: italic; color: var(--c-text-3); font-size: .85rem; }
+
+/* --- Responsive helpers --- */
+@media (max-width: 767px) {
+  .capability-card { flex-direction: column; gap: .75rem; }
+  .hide-mobile { display: none; }
+}
+
+/* --- Smooth link underlines --- */
+a.link-teal {
+  color: var(--c-teal);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s;
+}
+a.link-teal:hover { border-bottom-color: var(--c-teal); }
+
+/* --- Button styles --- */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--c-teal);
+  color: #fff;
+  font-weight: 600;
+  padding: .7rem 1.5rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+.btn-primary:hover {
+  background: #0f766e;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -8px rgba(13,148,136,.4);
+}
+.btn-outline-white {
+  display: inline-flex; align-items: center; gap: .5rem;
+  border: 1.5px solid rgba(255,255,255,.5);
+  color: #fff;
+  font-weight: 500;
+  padding: .6rem 1.3rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background .2s, border-color .2s;
+}
+.btn-outline-white:hover {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.8);
+}
+
+/* --- Scroll reveal init script (inline at bottom of each page) --- */
+/*
+  Add this script to each page:
+
+  <script>
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }});
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+  </script>
+*/

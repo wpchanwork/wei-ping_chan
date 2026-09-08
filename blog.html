@@ -3,55 +3,349 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wei-Ping Chan</title>
+  <title>Blog — Wei-Ping Chan</title>
+  <meta name="description" content="Blog posts, social updates, and articles by Wei-Ping Chan — science, sustainability, and interdisciplinary stories." />
+  <link rel="canonical" href="https://wpchanwork.github.io/wei-ping_chan/blog.html">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta property="og:title" content="Blog — Wei-Ping Chan">
+  <meta property="og:description" content="Blog posts, social updates, and articles by Wei-Ping Chan.">
+  <meta property="og:image" content="https://wpchanwork.github.io/wei-ping_chan/imgs/web/1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME.jpg">
+  <meta property="og:url" content="https://wpchanwork.github.io/wei-ping_chan/blog.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hero-gradient { background: linear-gradient(135deg, var(--c-deep) 0%, var(--c-primary) 100%); }
+    .card-hover { transition: transform .2s ease, box-shadow .2s ease; }
+    .card-hover:hover { transform: translateY(-5px); box-shadow: 0 22px 40px -16px rgba(30,41,59,.32); }
+
+    /* Filter pills */
+    .filter-pill {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-size: .8rem; padding: .4rem .9rem; border-radius: 9999px;
+      border: 1.5px solid #e2e8f0; background: #fff; color: #475569;
+      cursor: pointer; transition: all .15s ease; font-weight: 500;
+    }
+    .filter-pill:hover { border-color: #cbd5e1; background: #f8fafc; }
+    .filter-pill.active { background: #14294b; color: #fff; border-color: #14294b; font-weight: 600; }
+    .filter-pill svg { width: 1rem; height: 1rem; }
+
+    /* Post card */
+    .post-card {
+      background: #fff; border-radius: 1rem; overflow: hidden;
+      box-shadow: 0 4px 14px -6px rgba(30,41,59,.18);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 35px -12px rgba(30,41,59,.28);
+    }
+
+    /* Social embed container */
+    .embed-frame {
+      width: 100%; border: 0; min-height: 400px;
+      background: #f8fafc; border-radius: .5rem;
+    }
+
+    /* Image gallery grid */
+    .gallery-grid { display: grid; gap: .5rem; }
+    .gallery-grid.g1 { grid-template-columns: 1fr; }
+    .gallery-grid.g2 { grid-template-columns: 1fr 1fr; }
+    .gallery-grid.g3 { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
+    .gallery-grid.g3 > :first-child { grid-column: 1 / -1; }
+    .gallery-grid.g4 { grid-template-columns: 1fr 1fr; }
+    .gallery-img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      border-radius: .5rem; cursor: pointer; transition: opacity .15s ease;
+    }
+    .gallery-img:hover { opacity: .88; }
+
+    /* Lightbox */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.85); align-items: center; justify-content: center; padding: 1rem; }
+    .lightbox.show { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: .5rem; }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
-  <!-- Navbar -->
-  <header class="bg-white shadow">
+
+  <!-- ===================== NAVBAR (shared across pages) ===================== -->
+  <header class="wpc-nav sticky top-0 z-30">
     <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Wei-Ping Chan</h1>
-      <!-- Hamburger Menu for Mobile -->
+      <a href="index.html" class="wpc-nav-brand">Wei-Ping Chan</a>
       <div class="md:hidden">
-        <button id="menu-toggle" class="text-gray-800 focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
+        <button id="menu-toggle" aria-label="Toggle menu" class="focus:outline-none" style="color:var(--c-text)">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </button>
       </div>
-      <!-- Navigation Links -->
-      <nav id="menu" class="hidden md:flex space-x-4">
-        <span class="text-gray-500">Home</span>
-        <a href="projects.html" class="hover:text-blue-500">Projects</a>
-        <a href="illustrations.html" class="hover:text-blue-500">Illustrations</a>
-        <a href="blog.html" class="hover:text-blue-500">Blog</a>
-        <a href="colleberators.html" class="hover:text-blue-500">Collaborations</a>
-        <a href="home.html#about" class="hover:text-blue-500">About</a>
-        <a href="home.html#contact" class="hover:text-blue-500">Contact</a>
+      <nav id="menu" class="hidden md:flex md:items-center md:space-x-1 absolute md:static top-16 left-0 right-0 bg-white md:bg-transparent shadow md:shadow-none flex-col md:flex-row px-3 md:px-0 py-3 md:py-0 space-y-1 md:space-y-0">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="collaborators.html" class="nav-link">Collaborations</a>
+        <span class="nav-active">Blog</span>
+        <a href="index.html#talks" class="nav-link">Talks</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
     </div>
   </header>
-  
   <script>
-    // Toggle menu visibility on mobile
     const menuToggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
-    menuToggle.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-      menuToggle.classList.toggle('absolute');
-      menuToggle.classList.toggle('top-4');
-      menuToggle.classList.toggle('right-4');
-    });
+    menuToggle.addEventListener('click', () => menu.classList.toggle('hidden'));
   </script>
 
-  <section class="py-12 text-center">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-6">Blog</h2>
-      <div class="bg-yellow-100 p-6 rounded-xl shadow">
-        <h3 class="text-xl font-semibold text-yellow-800">🚧 Under Construction 🚧</h3>
-        <p class="text-gray-700 mt-4">This section is currently being built. Please check back later for updates!</p>
-      </div>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero-gradient text-white">
+    <div class="max-w-6xl mx-auto px-4 py-14 md:py-16 text-center">
+      <h2 class="text-3xl md:text-5xl font-bold">Blog</h2>
+      <p class="mt-4 text-blue-100 max-w-2xl mx-auto text-base md:text-lg">
+        Stories, updates, and reflections on science, sustainability, and the spaces in between.
+      </p>
     </div>
   </section>
+
+  <!-- ===================== FILTER ===================== -->
+  <section class="max-w-4xl mx-auto px-4 pt-10 pb-4 reveal">
+    <div id="filters" class="flex flex-wrap justify-center gap-2"></div>
+  </section>
+
+  <!-- ===================== POSTS ===================== -->
+  <section class="max-w-4xl mx-auto px-4 pb-16 reveal">
+    <div id="posts-grid" class="space-y-8"></div>
+    <p id="posts-empty" class="hidden text-center text-gray-400 py-16">No posts yet — check back soon.</p>
+  </section>
+
+  <!-- Image lightbox -->
+  <div id="img-lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button onclick="closeLightbox()" class="absolute top-4 right-5 text-white text-4xl leading-none opacity-80 hover:opacity-100" aria-label="Close">&times;</button>
+    <img id="lb-img" src="" alt="">
+  </div>
+
+  <!-- ===================== FOOTER (shared across pages) ===================== -->
+  <footer class="wpc-footer">
+    <div class="max-w-6xl mx-auto px-4 py-10 text-center">
+      <p class="footer-brand">Wei-Ping Chan</p>
+      <p class="text-sm mt-1" style="color:#7a788a">Exploratory Data Scientist · Interdisciplinary Researcher</p>
+      <div class="flex justify-center gap-6 mt-5">
+        <a href="https://github.com/wpchanwork" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/wei-ping-chan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+        <a href="https://sos-commons.vercel.app/research" target="_blank" rel="noopener noreferrer">SOS Research</a>
+      </div>
+      <p class="text-xs mt-6" style="color:#55536a">&copy; 2026 Wei-Ping Chan. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ============ ADD YOUR POSTS HERE ============
+       Each post is one entry in the POSTS array.
+
+       SUPPORTED TYPES:
+
+       1. Social embed (Instagram, Facebook, Threads):
+          { type: 'embed',
+            platform: 'instagram',        // 'instagram' | 'facebook' | 'threads'
+            url: 'https://www.instagram.com/p/ABC123/',
+            caption: 'Optional text shown above the embed',
+            date: 'Sep 2026',
+            tags: ['SOS', 'Sustainability'] }
+
+       2. Article / blog post:
+          { type: 'article',
+            title: 'My Article Title',
+            body: '<p>HTML content here...</p>',
+            date: 'Sep 2026',
+            tags: ['Research'],
+            link: 'https://example.com/full-article',   // optional "Read more" link
+            linkLabel: 'Read on SOS' }                   // optional label for the link
+
+       3. Image post:
+          { type: 'images',
+            images: [
+              { src: 'imgs/web/photo1.jpg', alt: 'Description' },
+              { src: 'imgs/web/photo2.jpg', alt: 'Description' }
+            ],
+            caption: 'Text about these images',
+            date: 'Sep 2026',
+            tags: ['Field Work'] }
+
+       Tags are used for filtering. Add any tag you like;
+       the filter pills are generated automatically.
+    ============================================= */
+
+    const POSTS = [
+      // Example posts (replace with real content):
+
+      /*
+      {
+        type: 'article',
+        title: 'Welcome to My Blog',
+        body: '<p>This is where I'll share updates about my research, SOS Foundation activities, and thoughts on science and sustainability.</p>',
+        date: 'Sep 2026',
+        tags: ['Update']
+      },
+      {
+        type: 'embed',
+        platform: 'instagram',
+        url: 'https://www.instagram.com/p/EXAMPLE/',
+        caption: 'A recent field update from the museum.',
+        date: 'Aug 2026',
+        tags: ['SOS', 'Field Work']
+      },
+      */
+    ];
+
+    /* ============================================= */
+
+    const esc = t => String(t??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+    // Collect unique tags
+    const allTags = [...new Set(POSTS.flatMap(p => p.tags || []))].sort();
+
+    // Render filter pills
+    const filterBox = document.getElementById('filters');
+    function makeFilter(tag, label) {
+      const btn = document.createElement('button');
+      btn.className = 'filter-pill' + (tag === 'all' ? ' active' : '');
+      btn.dataset.tag = tag;
+      btn.textContent = label;
+      btn.addEventListener('click', () => applyFilter(tag));
+      filterBox.appendChild(btn);
+    }
+    if (allTags.length > 1) {
+      makeFilter('all', 'All');
+      allTags.forEach(t => makeFilter(t, t));
+    }
+
+    let activeFilter = 'all';
+    function applyFilter(tag) {
+      activeFilter = tag;
+      document.querySelectorAll('.filter-pill').forEach(b => {
+        b.classList.toggle('active', b.dataset.tag === tag);
+      });
+      document.querySelectorAll('.post-entry').forEach(el => {
+        const tags = JSON.parse(el.dataset.tags || '[]');
+        el.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
+      });
+    }
+
+    // Platform-specific embed scripts (loaded once)
+    const loadedScripts = {};
+    function loadEmbedScript(platform) {
+      const urls = {
+        instagram: 'https://www.instagram.com/embed.js',
+        facebook: 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0',
+        threads: 'https://www.threads.net/embed.js'
+      };
+      if (loadedScripts[platform] || !urls[platform]) return;
+      loadedScripts[platform] = true;
+      const s = document.createElement('script');
+      s.src = urls[platform];
+      s.async = true;
+      s.defer = true;
+      document.body.appendChild(s);
+    }
+
+    function embedHTML(post) {
+      const url = esc(post.url);
+      switch (post.platform) {
+        case 'instagram':
+          loadEmbedScript('instagram');
+          return `<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="${url}" style="max-width:540px;width:100%;margin:0 auto;"></blockquote>`;
+        case 'facebook':
+          loadEmbedScript('facebook');
+          return `<div class="fb-post" data-href="${url}" data-width="500"></div>`;
+        case 'threads':
+          loadEmbedScript('threads');
+          return `<blockquote class="text-post-media" data-text-post-permalink="${url}" style="max-width:540px;width:100%;margin:0 auto;"></blockquote>`;
+        default:
+          return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">View post &rarr;</a>`;
+      }
+    }
+
+    function galleryHTML(images) {
+      const n = Math.min(images.length, 4);
+      const cls = 'gallery-grid g' + n;
+      return `<div class="${cls}">${images.slice(0, 4).map((img, i) =>
+        `<img class="gallery-img" src="${esc(img.src)}" alt="${esc(img.alt || '')}"
+              style="aspect-ratio:${n===1?'16/9':'4/3'}" onclick="openLightbox('${esc(img.src)}','${esc(img.alt)}')">`
+      ).join('')}${images.length > 4 ? `<p class="text-sm text-gray-400 text-center">+${images.length - 4} more</p>` : ''}</div>`;
+    }
+
+    // Render posts
+    const grid = document.getElementById('posts-grid');
+    const empty = document.getElementById('posts-empty');
+    if (!POSTS.length) {
+      empty.classList.remove('hidden');
+    } else {
+      POSTS.forEach(post => {
+        const card = document.createElement('article');
+        card.className = 'post-entry post-card';
+        card.dataset.tags = JSON.stringify(post.tags || []);
+
+        let content = '';
+        // Date and tags header
+        const tagsLine = (post.tags || []).map(t => `<span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">${esc(t)}</span>`).join(' ');
+        const header = `<div class="flex flex-wrap items-center gap-2 mb-3">
+          ${post.date ? `<span class="text-xs text-gray-400">${esc(post.date)}</span>` : ''}
+          ${post.platform ? `<span class="text-xs font-semibold uppercase tracking-wide text-gray-500">${esc(post.platform)}</span>` : ''}
+          ${tagsLine}
+        </div>`;
+
+        if (post.type === 'embed') {
+          content = `<div class="p-6">
+            ${header}
+            ${post.caption ? `<p class="text-gray-700 mb-4">${esc(post.caption)}</p>` : ''}
+            <div class="flex justify-center">${embedHTML(post)}</div>
+          </div>`;
+        } else if (post.type === 'article') {
+          content = `<div class="p-6">
+            ${header}
+            ${post.title ? `<h3 class="text-xl font-bold text-gray-800 mb-3">${esc(post.title)}</h3>` : ''}
+            <div class="prose prose-sm max-w-none text-gray-700">${post.body || ''}</div>
+            ${post.link ? `<a href="${esc(post.link)}" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-blue-600 hover:underline font-semibold">${esc(post.linkLabel || 'Read more')} &rarr;</a>` : ''}
+          </div>`;
+        } else if (post.type === 'images') {
+          content = `<div class="p-6">
+            ${header}
+            ${galleryHTML(post.images || [])}
+            ${post.caption ? `<p class="text-gray-700 mt-4">${esc(post.caption)}</p>` : ''}
+          </div>`;
+        }
+
+        card.innerHTML = content;
+        grid.appendChild(card);
+      });
+
+      // Re-process embeds
+      setTimeout(() => {
+        if (window.instgrm) window.instgrm.Embeds.process();
+        if (window.FB) window.FB.XFBML.parse();
+      }, 1500);
+    }
+
+    // Lightbox
+    function openLightbox(src, alt) {
+      const lb = document.getElementById('img-lightbox');
+      const img = document.getElementById('lb-img');
+      img.src = src; img.alt = alt || '';
+      lb.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      const lb = document.getElementById('img-lightbox');
+      lb.classList.remove('show');
+      document.getElementById('lb-img').src = '';
+      document.body.style.overflow = '';
+    }
+    document.getElementById('img-lightbox').addEventListener('click', e => { if (e.target === e.currentTarget) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+
+  <script>
+  const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+  </script>
 </body>
 </html>
