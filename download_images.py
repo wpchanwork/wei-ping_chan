@@ -10,7 +10,7 @@ import os, sys, requests, time
 from pathlib import Path
 
 try:
-    from PIL import Image
+    from PIL import Image, ImageOps
     from io import BytesIO
     HAS_PIL = True
 except ImportError:
@@ -121,6 +121,7 @@ def download_one(fid, max_w, outname):
             return False
         if HAS_PIL:
             img = Image.open(BytesIO(r.content))
+            img = ImageOps.exif_transpose(img)  # fix rotation from EXIF
             if img.mode in ('RGBA', 'P'):
                 img = img.convert('RGB')
             w, h = img.size
