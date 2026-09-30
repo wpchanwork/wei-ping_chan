@@ -41,7 +41,6 @@ IMAGES = [
 
     # === projects.html ===
     ("1Exxihq3GW0vXpW33fZBvBE2KU7WB5Bvj", 600, None),   # SOS
-    ("1pev4bc7jvCoig44S2Acm-nvtJp6NvEHJ", 600, None),   # BioMuse-X
     ("1rgnDTd0Icmy12oVyLRmXnGnsnkfCKtPh", 600, None),   # CropSky
     ("1AHSaBv0woy9g-vauJugfTOerlmszMjUG", 600, None),   # PathoTracter
     ("1pkgFn_Mh-dFkQ7bkGNECNe_UFiJtyAWQ", 600, None),   # wing beat
