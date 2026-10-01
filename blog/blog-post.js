@@ -113,7 +113,7 @@
   }
 
   const TITLES = {
-    en: (post.title && post.title.en) + ' — Wei-Ping Chan',
+    en: (post.title && post.title.en) + ' | Wei-Ping Chan',
     zh: (post.title && post.title.zh) + '｜Wei-Ping Chan'
   };
 
