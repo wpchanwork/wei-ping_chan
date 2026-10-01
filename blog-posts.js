@@ -16,9 +16,8 @@ window.BLOG_POSTS = [
     slug: 'what-if-research-and-learning-no-longer-revolve-around-universities',
     url: 'blog/what-if-research-and-learning-no-longer-revolve-around-universities.html',
     date: '2026-10-01',
-    // Placeholder cover — replace with the final image when ready.
-    cover: 'imgs/web/splash-bg.jpg',
-    coverPosition: '30% 50%',
+    cover: 'imgs/web/blog-universities-cover.jpg',
+    coverPosition: '42% 30%',
     tags: ['Education', 'AI', 'Research'],
     title: {
       en: 'What If Research and Learning No Longer Revolve Around Universities?',

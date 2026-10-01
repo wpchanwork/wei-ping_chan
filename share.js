@@ -23,9 +23,7 @@
     linkedin: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>',
     facebook: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.026 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971H15.83c-1.491 0-1.956.93-1.956 1.886v2.264h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>',
     threads: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>',
-    line: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863a.631.631 0 0 1 0 1.261H17.61v1.125h1.755a.63.63 0 1 1 0 1.259h-2.386a.631.631 0 0 1-.627-.629V8.108c0-.345.282-.63.63-.63h2.386a.63.63 0 0 1-.003 1.26H17.61v1.125h1.755zm-3.855 3.016a.63.63 0 0 1-.631.627.618.618 0 0 1-.51-.25l-2.443-3.317v2.94a.63.63 0 0 1-1.257 0V8.108a.627.627 0 0 1 .624-.628c.195 0 .375.105.495.255l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0a.632.632 0 0 1-.631.629.631.631 0 0 1-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917a.634.634 0 0 1-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756a.63.63 0 0 1 0 1.259M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>',
-    mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
-    more: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4M12 2v13"/></svg>'
+    line: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863a.631.631 0 0 1 0 1.261H17.61v1.125h1.755a.63.63 0 1 1 0 1.259h-2.386a.631.631 0 0 1-.627-.629V8.108c0-.345.282-.63.63-.63h2.386a.63.63 0 0 1-.003 1.26H17.61v1.125h1.755zm-3.855 3.016a.63.63 0 0 1-.631.627.618.618 0 0 1-.51-.25l-2.443-3.317v2.94a.63.63 0 0 1-1.257 0V8.108a.627.627 0 0 1 .624-.628c.195 0 .375.105.495.255l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0a.632.632 0 0 1-.631.629.631.631 0 0 1-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917a.634.634 0 0 1-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756a.63.63 0 0 1 0 1.259M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>'
   };
 
   const NETWORKS = [
@@ -33,8 +31,7 @@
     { id: 'linkedin', name: 'LinkedIn', url: u => 'https://www.linkedin.com/sharing/share-offsite/?url=' + enc(u) },
     { id: 'facebook', name: 'Facebook', url: u => 'https://www.facebook.com/sharer/sharer.php?u=' + enc(u) },
     { id: 'threads', name: 'Threads', url: (u, t) => 'https://www.threads.net/intent/post?text=' + enc(t + ' ' + u) },
-    { id: 'line', name: 'LINE', url: u => 'https://social-plugins.line.me/lineit/share?url=' + enc(u) },
-    { id: 'mail', name: 'Email', url: (u, t) => 'mailto:?subject=' + enc(t) + '&body=' + enc(t + '\n\n' + u) }
+    { id: 'line', name: 'LINE', url: u => 'https://social-plugins.line.me/lineit/share?url=' + enc(u) }
   ];
 
   function defaults() {
@@ -77,10 +74,6 @@
       h += '<a class="sk-btn sk-' + n.id + '" data-net="' + n.id + '" target="_blank" rel="noopener noreferrer" title="' + n.name + '" aria-label="Share on ' + n.name + '">' +
         '<span class="sk-ico">' + ICONS[n.id] + '</span>' + (compact ? '' : '<span class="sk-text">' + n.name + '</span>') + '</a>';
     });
-    if (navigator.share) {
-      h += '<button type="button" class="sk-btn sk-more" data-act="native" title="More" aria-label="More sharing options">' +
-        '<span class="sk-ico">' + ICONS.more + '</span>' + label('More…', '更多…') + '</button>';
-    }
     return h;
   }
 
@@ -102,11 +95,6 @@
       if (!(await copy(get().url))) return;
       b.classList.add('done'); setTimeout(() => b.classList.remove('done'), 1800);
       toast(bi('Link copied', '已複製連結'));
-      if (opts.onDone) opts.onDone();
-    }));
-    el.querySelectorAll('[data-act="native"]').forEach(b => b.addEventListener('click', async () => {
-      const s = get();
-      try { await navigator.share({ title: s.title, url: s.url }); } catch (e) {}
       if (opts.onDone) opts.onDone();
     }));
   }
