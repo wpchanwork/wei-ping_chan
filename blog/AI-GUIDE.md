@@ -66,9 +66,35 @@ These apply to captions, alt text, excerpts, meta descriptions, labels and any o
 - **Avoid dashes** (`—`, `——`, `--`). Use commas, periods, colons or a new sentence instead. Example: "Nature enthusiasts excavating fossils in the field. Here, learning begins with a question in the ground." not "...in the field — learning begins...". In page titles use `|` as the separator.
 - Call it a **"post" / "blog post"**, never an "essay". 中文 uses 文章.
 - Keep the tone plain and personal; this is a personal site, not a journal.
-- Use the author's text verbatim. Only decide which lines become `lead`, `key`, `pull` or `h2`. If one language is missing, ask; do not translate silently.
-- **Exception, 中文 article body only:** translate incidental English words into Chinese, including in the author's 中文 text. Do not touch interface labels (e.g. "No. 001", "Blog", button text) (e.g. project → 專案, portfolio → 作品集, mentor → 導師, know-how → 實務經驗, proxy → 代理指標, biotech company → 生技公司, lectures/tests/grades → 講課、考試和成績). Keep proper nouns, brands, organization names and established abbreviations in English (AI, a16z, GitHub, Horowitz Andreessen Academy). Sustainability of Sustainability Foundation in 中文: first mention `SOS基金會（Sustainability of Sustainability Foundation）`, later mentions `SOS基金會`. List what you translated in your reply so the author can check.
+- Use the author's text verbatim, except for the 中文 translation rules below. Only decide which lines become `lead`, `key`, `pull` or `h2`. If one language is missing, ask; do not translate silently.
 - Captions describe only what is known. Do not invent names, places, species or affiliations. Tie the caption to the post's argument in one sentence.
+
+## 中文 translation rules (check every post)
+
+Applies to the **中文 article body only**, including the author's own 中文 text. Never change interface labels ("No. 001", "Blog", button text, nav) or the English article.
+
+1. **Translate incidental English** into Chinese whenever a natural Chinese term exists.
+2. **Keep in English**: proper nouns, brands, organization and product names, and established abbreviations (AI, SOS, a16z, GitHub, Horowitz Andreessen Academy), plus titles of English-language sources in Further Reading.
+3. **Sustainability of Sustainability Foundation**: first mention `SOS基金會（Sustainability of Sustainability Foundation）`, later mentions `SOS基金會` (no space), Further Reading source label `SOS基金會`.
+4. **Report**: list every term you translated in your reply so the author can review it.
+
+Glossary (use these for consistency; extend it when new terms come up):
+
+| English | 中文 |
+|---|---|
+| project / projects | 專案 |
+| portfolio | 作品集 |
+| mentor | 導師 |
+| know-how | 實務經驗 |
+| proxy (for capability) | 代理指標 |
+| proof of work | 實際成果 |
+| lectures / tests / grades | 講課 / 考試 / 成績 |
+| biotech company | 生技公司 |
+| CRO | 委託研究機構 |
+| self-driving laboratory | 自主實驗室 |
+| closed-loop research system | 閉環研究系統 |
+| hard science / soft science | 硬科學 / 軟科學 |
+| Build → Buy → Partner → University | 自建 → 購買 → 合作 → 大學 |
 
 ## Images
 
@@ -80,4 +106,6 @@ These apply to captions, alt text, excerpts, meta descriptions, labels and any o
 
 - Serve locally with `python -m http.server 8765`, then open `blog/<new-slug>.html`, the same with `?lang=zh`, `blog.html`, and `index.html#blog`.
 - No console errors. The EN / 中文 toggle switches title, body and TOC. No horizontal scroll at 375 px width.
+- **中文 English-word scan**: in the browser console on `?lang=zh` run `[...new Set(document.querySelector('.prose-post[data-lang=zh]').innerText.match(/[A-Za-z][A-Za-z.\-]*/g))]`. Every word left must be a proper noun, brand or abbreviation allowed by the rules above.
+- **Writing-rule scan**: no `—` / `——` in text you wrote; no "essay".
 - After deploying, check the live site in a **private / incognito window**. GitHub Pages lets browsers cache pages for up to 10 minutes, so a normal window may still show the old version.
