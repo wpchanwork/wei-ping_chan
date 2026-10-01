@@ -73,7 +73,8 @@ html[data-reading="zh"] [data-lang="en"] { display: none !important; }
 .essay-hero-inner { position: relative; z-index: 2; width: 100%; max-width: 72rem; margin: 0 auto; padding: 7rem 1.25rem 3.25rem; }
 @media (min-width: 768px) { .essay-hero-inner { padding: 8rem 2rem 4.25rem; } }
 
-.hero-top { position: absolute; top: 1.5rem; left: 1.25rem; right: 1.25rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+/* z-index keeps these tappable when the hero text block grows up to the top (short phone screens) */
+.hero-top { position: absolute; z-index: 5; top: 1.5rem; left: 1.25rem; right: 1.25rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
 @media (min-width: 768px) { .hero-top { left: 2rem; right: 2rem; } }
 
 .post-back {
