@@ -291,6 +291,20 @@ html[data-reading="zh"] .lang-toggle::before { transform: translateX(100%); }
 @keyframes breathe { 50% { border-color: rgba(251,191,36,.6); color: #fff; } }
 .prose-post .flow-caption { position: relative; margin-top: 1rem; font-family: var(--f-mono); font-size: .68rem; letter-spacing: .08em; line-height: 1.5; color: rgba(255,255,255,.5); }
 
+/* Inline figure: image eases in from a slight zoom; caption set like a specimen note */
+.post-figure { margin-top: 2.4rem; margin-bottom: .6rem; }
+@media (min-width: 900px) { .post-figure { margin-left: -2.5rem; margin-right: -2.5rem; } }
+.post-figure-frame { overflow: hidden; border-radius: 1rem; background: var(--paper-2); box-shadow: 0 26px 50px -34px rgba(29,34,48,.6); }
+.post-figure img { display: block; width: 100%; height: auto; transform: scale(1.06); transition: transform 1.6s var(--ease-out); }
+.post-figure.in img { transform: none; }
+.post-figure-frame:hover img { transform: scale(1.02); }
+.prose-post .post-figure figcaption {
+  display: flex; gap: .7rem; margin-top: .85rem; padding: 0 .2rem;
+  font-size: .82rem; line-height: 1.6; color: var(--ink-muted); text-align: left; letter-spacing: 0;
+}
+.post-figure figcaption::before { content: 'Fig.'; flex-shrink: 0; font-family: var(--f-mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--c-teal); padding-top: .2rem; }
+.prose-post:lang(zh) .post-figure figcaption::before { content: '圖'; font-family: var(--f-zh-sans); font-size: .72rem; letter-spacing: .1em; padding-top: .05rem; }
+
 /* Scroll reveal for blocks */
 .rv { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
 .rv.in { opacity: 1; transform: none; }
@@ -399,5 +413,6 @@ html[data-reading="zh"] .lang-toggle::before { transform: translateX(100%); }
   .essay-hero-media { transform: none !important; }
   .rv, .flow-step, .flow-arrow, .end-mark i, .pull .pw { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
   .mark { background-size: 100% 100% !important; transition: none; }
+  .post-figure img { transform: none !important; transition: none; }
   .prose-post h2 .h-idx::after { flex-basis: 4.5rem; transition: none; }
 }

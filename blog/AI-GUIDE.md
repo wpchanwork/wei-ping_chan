@@ -50,6 +50,7 @@ Post number ("No. 002"), reading time, date format, TOC, section numbers, "More 
 | Pull quote | `<div class="pull"><p>…</p></div>` | 2–3 memorable closing lines per post, plain text only |
 | From → To | `<div class="contrast"><div class="contrast-item"><small>From</small>…</div><div class="contrast-arrow" aria-hidden="true">→</div><div class="contrast-item contrast-item--to"><small>To</small>…</div></div>` | Contrasting two ideas (zh labels: 過去 / 未來) |
 | Step flow | see existing post (`<div class="flow">` with `.flow-step`, last step `.flow-step--last`, `<p class="flow-caption">`) | Short sequences, 3–5 steps |
+| Inline photo | `<figure class="post-figure"><img src="../imgs/web/<file>.jpg" alt="…" width="W" height="H" loading="lazy"><figcaption>…</figcaption></figure>` | Photos inside the text. Same file in both articles; alt + caption translated. Frame, "Fig./圖" label and reveal are automatic. Keep to 1–3 per post. |
 | Line breaks in a list-like paragraph | `<p>Line one.<br>Line two.</p>` | Short rhythmic lists |
 | Further reading | `<hr class="post-divider">` + `<h2 id="en-reading">Further Reading</h2>` + `<div class="reading-list">` with `<a class="reading-link">` items (copy from existing post) | End of post |
 | End mark | `<div class="end-mark" aria-hidden="true"></div>` | Always last element in each article |

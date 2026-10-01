@@ -45,7 +45,12 @@
       const c = ['#0d9488', '#14b8a6', '#d97706'];
       m.innerHTML = c.map((col, n) => '<i style="--c:' + col + ';--n:' + n + '"></i>').join('');
     });
-    article.querySelectorAll('.contrast, .flow, .reading-link, .pull').forEach(el => el.classList.add('rv'));
+    article.querySelectorAll('.post-figure > img').forEach(img => {
+      const frame = document.createElement('div');
+      frame.className = 'post-figure-frame';
+      img.replaceWith(frame); frame.appendChild(img);
+    });
+    article.querySelectorAll('.contrast, .flow, .reading-link, .pull, .post-figure').forEach(el => el.classList.add('rv'));
   });
 
   // Reveal on scroll
