@@ -79,7 +79,7 @@
     const all = window.BLOG_POSTS || [];
     const no = String(all.length - all.indexOf(post)).padStart(3, '0');
     const tags = (post.tags || []).map(t => '<span class="tag">' + esc(BlogLang.tag(t, lang)) + '</span>').join('<span class="sep"></span>');
-    $('#specimen-row').innerHTML = '<span class="no">No. ' + no + '</span><span>' + (lang === 'zh' ? '文章' : 'Essay') + '</span><span class="sep"></span>' + tags;
+    $('#specimen-row').innerHTML = '<span class="no">No. ' + no + '</span><span>' + (lang === 'zh' ? '文章' : 'Blog') + '</span><span class="sep"></span>' + tags;
   }
 
   let tocHeads = [], tocLinks = [];
