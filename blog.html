@@ -14,8 +14,17 @@
   <meta property="og:url" content="https://wpchanwork.github.io/wei-ping_chan/blog.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
+  <script>
+    (function () {
+      var l = new URLSearchParams(location.search).get('lang');
+      if (l !== 'en' && l !== 'zh') { try { l = localStorage.getItem('wpc-blog-lang'); } catch (e) {} }
+      if (l !== 'en' && l !== 'zh') l = 'en';
+      document.documentElement.setAttribute('data-reading', l);
+    })();
+  </script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet">
   <style>
     .hero-gradient { background: linear-gradient(135deg, var(--c-deep) 0%, var(--c-primary) 100%); }
     .card-hover { transition: transform .2s ease, box-shadow .2s ease; }
@@ -66,6 +75,32 @@
     .lightbox { display: none; position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.85); align-items: center; justify-content: center; padding: 1rem; }
     .lightbox.show { display: flex; }
     .lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: .5rem; }
+
+    /* Language */
+    html[data-reading="en"] [data-lang="zh"],
+    html[data-reading="zh"] [data-lang="en"] { display: none !important; }
+    .lang-toggle { display: inline-flex; gap: .25rem; padding: .25rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); }
+    .lang-toggle button { border: 0; cursor: pointer; font: inherit; font-size: .75rem; font-weight: 600; padding: .32rem .85rem; border-radius: 9999px; background: transparent; color: rgba(255,255,255,.6); transition: background .2s ease, color .2s ease; }
+    .lang-toggle button:hover { color: #fff; }
+    .lang-toggle button[aria-pressed="true"] { background: var(--c-teal); color: #fff; }
+
+    /* Article card (links to a full post in blog/) */
+    .essay-card { display: flex; flex-direction: column; background: #fff; border-radius: 1.25rem; overflow: hidden; text-decoration: none; color: inherit;
+      box-shadow: 0 4px 14px -6px rgba(30,41,59,.18); border: 1px solid var(--c-border); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .essay-card:hover { transform: translateY(-4px); border-color: rgba(13,148,136,.45); box-shadow: 0 22px 40px -18px rgba(13,148,136,.35); }
+    @media (min-width: 768px) { .essay-card { flex-direction: row; } }
+    .essay-cover { position: relative; flex-shrink: 0; overflow: hidden; background: var(--c-deep); }
+    @media (min-width: 768px) { .essay-cover { width: 42%; } }
+    .essay-cover img { width: 100%; height: 100%; min-height: 13rem; object-fit: cover; display: block; transition: transform .5s ease; }
+    .essay-card:hover .essay-cover img { transform: scale(1.04); }
+    .essay-kind { position: absolute; left: .9rem; top: .9rem; font-family: var(--f-mono); font-size: .65rem; letter-spacing: .14em; text-transform: uppercase;
+      color: #fff; background: rgba(12,21,37,.72); padding: .3rem .65rem; border-radius: 9999px; backdrop-filter: blur(4px); }
+    .essay-body { padding: 1.5rem 1.6rem 1.6rem; display: flex; flex-direction: column; }
+    .essay-title { font-family: var(--f-display); font-size: 1.55rem; line-height: 1.22; color: var(--c-text); margin-top: .6rem; }
+    .essay-title:lang(zh) { font-family: 'Noto Serif TC', 'Songti TC', 'PMingLiU', serif; font-weight: 700; line-height: 1.45; }
+    .essay-excerpt { margin-top: .7rem; color: var(--c-text-2); line-height: 1.65; font-size: .95rem; }
+    .essay-excerpt:lang(zh) { line-height: 1.9; letter-spacing: .02em; }
+    .essay-more { margin-top: auto; padding-top: 1.1rem; font-weight: 600; font-size: .9rem; color: var(--c-teal); }
   </style>
 </head>
 <body>
@@ -99,10 +134,15 @@
   <!-- ===================== HERO ===================== -->
   <section class="hero-gradient text-white">
     <div class="max-w-6xl mx-auto px-4 py-14 md:py-16 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold">Blog</h2>
+      <h2 class="text-3xl md:text-5xl font-bold"><span data-lang="en">Blog</span><span data-lang="zh">文章</span></h2>
       <p class="mt-4 text-blue-100 max-w-2xl mx-auto text-base md:text-lg">
-        Stories, updates, and reflections on science, sustainability, and the spaces in between.
+        <span data-lang="en">Stories, updates, and reflections on science, sustainability, and the spaces in between.</span>
+        <span data-lang="zh">關於科學、永續，以及兩者之間那些空間的故事、近況與思考。</span>
       </p>
+      <div class="lang-toggle mt-6" role="group" aria-label="Choose a language">
+        <button type="button" data-set-lang="en" title="English">EN</button>
+        <button type="button" data-set-lang="zh" title="繁體中文">中文</button>
+      </div>
     </div>
   </section>
 
@@ -114,7 +154,7 @@
   <!-- ===================== POSTS ===================== -->
   <section class="max-w-4xl mx-auto px-4 pb-16 reveal">
     <div id="posts-grid" class="space-y-8"></div>
-    <p id="posts-empty" class="hidden text-center text-gray-400 py-16">No posts yet — check back soon.</p>
+    <p id="posts-empty" class="hidden text-center text-gray-400 py-16"><span data-lang="en">No posts yet — check back soon.</span><span data-lang="zh">目前還沒有文章，敬請期待。</span></p>
   </section>
 
   <!-- Image lightbox -->
@@ -138,9 +178,14 @@
     </div>
   </footer>
 
+  <script src="blog-posts.js"></script>
   <script>
-    /* ============ ADD YOUR POSTS HERE ============
-       Each post is one entry in the POSTS array.
+    /* ============ FULL ARTICLES ============
+       Long-form, bilingual articles live in blog/<slug>.html and are
+       registered in blog-posts.js — they are listed first, newest first.
+
+       ============ SHORT POSTS ============
+       Each short post is one entry in the POSTS array below.
 
        SUPPORTED TYPES:
 
@@ -200,23 +245,26 @@
     /* ============================================= */
 
     const esc = t => String(t??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const ESSAYS = window.BLOG_POSTS || [];
+    // Both languages are rendered side by side; CSS shows the active one.
+    const bi = (en, zh) => `<span data-lang="en">${esc(en)}</span><span data-lang="zh">${esc(zh ?? en)}</span>`;
 
     // Collect unique tags
-    const allTags = [...new Set(POSTS.flatMap(p => p.tags || []))].sort();
+    const allTags = [...new Set([...ESSAYS, ...POSTS].flatMap(p => p.tags || []))].sort();
 
     // Render filter pills
     const filterBox = document.getElementById('filters');
-    function makeFilter(tag, label) {
+    function makeFilter(tag, labelHtml) {
       const btn = document.createElement('button');
       btn.className = 'filter-pill' + (tag === 'all' ? ' active' : '');
       btn.dataset.tag = tag;
-      btn.textContent = label;
+      btn.innerHTML = labelHtml;
       btn.addEventListener('click', () => applyFilter(tag));
       filterBox.appendChild(btn);
     }
     if (allTags.length > 1) {
-      makeFilter('all', 'All');
-      allTags.forEach(t => makeFilter(t, t));
+      makeFilter('all', bi('All', '全部'));
+      allTags.forEach(t => makeFilter(t, bi(t, BlogLang.tag(t, 'zh'))));
     }
 
     let activeFilter = 'all';
@@ -274,10 +322,53 @@
       ).join('')}${images.length > 4 ? `<p class="text-sm text-gray-400 text-center">+${images.length - 4} more</p>` : ''}</div>`;
     }
 
-    // Render posts
+    // Render full articles (from blog-posts.js)
     const grid = document.getElementById('posts-grid');
     const empty = document.getElementById('posts-empty');
-    if (!POSTS.length) {
+    function essayLinks(lang) {
+      document.querySelectorAll('.essay-card').forEach(a => {
+        a.href = a.dataset.url + (lang === 'zh' ? '?lang=zh' : '');
+      });
+    }
+    ESSAYS.forEach(p => {
+      const card = document.createElement('a');
+      card.className = 'post-entry essay-card';
+      card.dataset.tags = JSON.stringify(p.tags || []);
+      card.dataset.url = p.url;
+      card.href = p.url;
+      const tags = (p.tags || []).map(t =>
+        `<span class="text-xs font-semibold px-2 py-0.5 rounded-full" style="color:var(--c-teal);background:rgba(13,148,136,.09)">${bi(t, BlogLang.tag(t, 'zh'))}</span>`).join(' ');
+      card.innerHTML = `
+        <div class="essay-cover">
+          <img src="${esc(p.cover)}" alt="" loading="lazy" style="object-position:${esc(p.coverPosition || 'center')}">
+          <span class="essay-kind">${bi('Essay', '文章')}</span>
+        </div>
+        <div class="essay-body">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs text-gray-400">${bi(BlogLang.formatDate(p.date, 'en'), BlogLang.formatDate(p.date, 'zh'))}</span>
+            ${tags}
+          </div>
+          <h3 class="essay-title" lang="en" data-lang="en">${esc(p.title.en)}</h3>
+          <h3 class="essay-title" lang="zh-Hant" data-lang="zh">${esc(p.title.zh || p.title.en)}</h3>
+          <p class="essay-excerpt" lang="en" data-lang="en">${esc(p.excerpt.en)}</p>
+          <p class="essay-excerpt" lang="zh-Hant" data-lang="zh">${esc(p.excerpt.zh || p.excerpt.en)}</p>
+          <span class="essay-more">${bi('Read the essay →', '閱讀全文 →')}</span>
+        </div>`;
+      grid.appendChild(card);
+    });
+
+    // Language toggle (shared preference with the article pages)
+    function setReading(lang, persist) {
+      document.documentElement.setAttribute('data-reading', lang);
+      document.querySelectorAll('[data-set-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.setLang === lang)));
+      essayLinks(lang);
+      if (persist) BlogLang.set(lang);
+    }
+    document.querySelectorAll('[data-set-lang]').forEach(b => b.addEventListener('click', () => setReading(b.dataset.setLang, true)));
+    setReading(BlogLang.get(), false);
+
+    // Render short posts
+    if (!POSTS.length && !ESSAYS.length) {
       empty.classList.remove('hidden');
     } else {
       POSTS.forEach(post => {

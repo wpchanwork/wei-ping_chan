@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en" data-reading="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What If Research and Learning No Longer Revolve Around Universities? — Wei-Ping Chan</title>
+  <meta name="description" content="As AI, startups, and new forms of education spread research and learning beyond campus, what role is left for universities? An essay by Wei-Ping Chan." />
+  <link rel="canonical" href="https://wpchanwork.github.io/wei-ping_chan/blog/what-if-research-and-learning-no-longer-revolve-around-universities.html">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:title" content="What If Research and Learning No Longer Revolve Around Universities?">
+  <meta property="og:description" content="As AI, startups, and new forms of education spread research and learning beyond campus, what role is left for universities?">
+  <meta property="og:image" content="https://wpchanwork.github.io/wei-ping_chan/imgs/web/splash-bg.jpg">
+  <meta property="og:url" content="https://wpchanwork.github.io/wei-ping_chan/blog/what-if-research-and-learning-no-longer-revolve-around-universities.html">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-10-01">
+  <meta property="article:author" content="Wei-Ping Chan">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What If Research and Learning No Longer Revolve Around Universities?">
+  <meta name="twitter:image" content="https://wpchanwork.github.io/wei-ping_chan/imgs/web/splash-bg.jpg">
+  <!-- Pick the reading language before first paint so the page never flashes the wrong one. -->
+  <script>
+    (function () {
+      var l = new URLSearchParams(location.search).get('lang');
+      if (l !== 'en' && l !== 'zh') { try { l = localStorage.getItem('wpc-blog-lang'); } catch (e) {} }
+      if (l !== 'en' && l !== 'zh') l = 'en';
+      document.documentElement.setAttribute('data-reading', l);
+      document.documentElement.lang = l === 'zh' ? 'zh-Hant' : 'en';
+    })();
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="blog-post.css">
+</head>
+<body class="post-page">
+
+  <div class="read-progress" id="read-progress" aria-hidden="true"></div>
+
+  <!-- ===================== NAVBAR (shared across pages) ===================== -->
+  <header class="wpc-nav sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="../index.html" class="wpc-nav-brand">Wei-Ping Chan</a>
+      <div class="md:hidden">
+        <button id="menu-toggle" aria-label="Toggle menu" class="focus:outline-none" style="color:var(--c-text)">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+      <nav id="menu" class="hidden md:flex md:items-center md:space-x-1 absolute md:static top-16 left-0 right-0 bg-white md:bg-transparent shadow md:shadow-none flex-col md:flex-row px-3 md:px-0 py-3 md:py-0 space-y-1 md:space-y-0">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../projects.html" class="nav-link">Projects</a>
+        <a href="../collaborators.html" class="nav-link">Collaborations</a>
+        <a href="../blog.html" class="nav-active" style="text-decoration:none">Blog</a>
+        <a href="../index.html#talks" class="nav-link">Talks</a>
+        <a href="../index.html#background" class="nav-link">Background</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('menu').classList.toggle('hidden'));</script>
+
+  <main class="post-shell">
+
+    <!-- ===================== TITLE BLOCK ===================== -->
+    <section class="max-w-3xl mx-auto px-5 pt-12 md:pt-20 rise">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <a href="../blog.html" class="post-back" id="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span data-lang="en">All posts</span><span data-lang="zh">所有文章</span>
+        </a>
+        <div class="lang-toggle" role="group" aria-label="Choose a language">
+          <button type="button" data-set-lang="en" title="English">EN</button>
+          <button type="button" data-set-lang="zh" title="繁體中文">中文</button>
+        </div>
+      </div>
+
+      <div class="mt-7 flex flex-wrap gap-2" id="post-tags"></div>
+
+      <h1 class="post-title" lang="en" data-lang="en">What If Research and Learning No Longer Revolve Around Universities?</h1>
+      <h1 class="post-title" lang="zh-Hant" data-lang="zh">如果研究與學習不再以大學為中心</h1>
+
+      <p class="post-excerpt" lang="en" data-lang="en">A conversation about how companies acquire new capabilities led me to a bigger question: as AI, startups, and new forms of education spread research and learning beyond campus, what role is left for universities?</p>
+      <p class="post-excerpt" lang="zh-Hant" data-lang="zh">從一段關於企業如何取得新技術能力的對話出發：當 AI、新創與新型教育讓研究與學習逐漸走出校園，大學還會扮演什麼角色？</p>
+
+      <div class="byline">
+        <img src="../imgs/web/1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME.jpg" alt="Wei-Ping Chan">
+        <div>
+          <div class="byline-name">Wei-Ping Chan</div>
+          <div class="byline-meta"><time datetime="2026-10-01" id="post-date">October 1, 2026</time> · <span id="read-time"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COVER ===================== -->
+    <section class="max-w-5xl mx-auto px-4 md:px-5 mt-9 md:mt-12 rise rise-2">
+      <figure>
+        <div class="post-cover">
+          <!-- Placeholder cover — swap for the final image -->
+          <img src="../imgs/web/splash-bg.jpg" alt="" style="object-position:30% 50%">
+        </div>
+      </figure>
+    </section>
+
+    <!-- ===================== ARTICLE ===================== -->
+    <div class="post-layout mt-8 md:mt-12 rise rise-3">
+      <aside class="post-rail" aria-label="Table of contents">
+        <nav class="toc">
+          <p class="toc-label"><span data-lang="en">In this essay</span><span data-lang="zh">本文段落</span></p>
+          <ol id="toc-list"></ol>
+        </nav>
+      </aside>
+
+      <div class="post-col">
+
+        <!-- ========== ENGLISH ========== -->
+        <article class="reading-card prose-post" lang="en" data-lang="en">
+          <p class="lead">Recently, I was talking with a friend in industry about how companies respond when they need a new technical capability. His answer was surprisingly direct:</p>
+
+          <div class="flow" role="img" aria-label="Build, then Buy, then Partner, then University">
+            <div class="flow-steps">
+              <span class="flow-step"><b>01</b>Build</span><span class="flow-arrow">→</span>
+              <span class="flow-step"><b>02</b>Buy</span><span class="flow-arrow">→</span>
+              <span class="flow-step"><b>03</b>Partner</span><span class="flow-arrow">→</span>
+              <span class="flow-step flow-step--last"><b>04</b>University</span>
+            </div>
+            <p class="flow-caption">How one company prioritizes acquiring a new technical capability</p>
+          </div>
+
+          <p>If the company can build the capability itself, it does. If not, it buys the technology or acquires it externally. If that still does not solve the problem, it looks for a partner. And even then, startups are often more attractive collaborators because they tend to move quickly, work toward concrete outcomes, and have strong incentives to push things forward. Traditional university partnerships may come later.</p>
+          <p>Of course, this was one conversation, not a universal rule for how every company operates. But it made me think more seriously about a broader question:</p>
+          <p class="key"><strong>What happens if both research and learning gradually stop revolving around universities? What role will universities still play?</strong></p>
+
+          <h2 id="en-research">Research is gradually moving beyond the university</h2>
+          <p>Universities have historically mattered in large part because advanced research capability was concentrated there. The experts were there. The equipment was there. The latest methods, literature, graduate students, and accumulated know-how were there.</p>
+          <p>If a company wanted to enter an unfamiliar scientific field, collaborating with a university lab was often an obvious choice.</p>
+          <p>That condition is changing quickly.</p>
+          <p>AI is lowering the cost of entering unfamiliar domains. Open-source software, cloud computing, inexpensive sensors, automation, and robotics are also making capabilities that once had to be concentrated in large research institutions more widely accessible.</p>
+          <p>The rise of self-driving laboratories and closed-loop research systems pushes this even further. In these systems, AI can help decide what experiment to run next, machines can carry it out, the system can analyze the results, and those results can inform the next round of experimentation.</p>
+          <p>This does not mean university research will disappear. Basic science, long-term inquiry, large-scale infrastructure, and research that should not be driven by short-term commercial incentives still depend heavily on universities.</p>
+          <p>But something more fundamental is changing:</p>
+          <p class="key"><strong>Advanced research capability is no longer necessarily concentrated in university laboratories.</strong></p>
+          <p>It is also important to distinguish two things here: <strong>becoming less dependent on universities is not the same as becoming less dependent on sophisticated research infrastructure.</strong></p>
+          <p>In biotechnology, biomedicine, clinical research, and parts of chemistry and materials science, advanced work still depends on expensive equipment, core facilities, access to samples or patients, animal facilities, ethics review, regulatory systems, and large multidisciplinary teams. AI does not make those requirements disappear.</p>
+          <p>What is changing is where those capabilities have to live.</p>
+          <p>They can exist in hospitals, medical centers, national laboratories, independent research institutes, CROs, biotech companies, or corporate research centers, as well as in universities.</p>
+          <p>So the deeper shift is not necessarily away from large research institutions. It is away from <strong>the assumption that advanced research capability must be housed inside a university.</strong></p>
+          <p>A company can build its own R&amp;D team. It can acquire a technology. It can work with a highly specialized startup of ten or twenty people. It can combine AI, automation, and a small number of experts to create a capability that might once have required an entire lab.</p>
+          <p>From the perspective of industry, university research remains important. But it is no longer the only gateway to advanced research.</p>
+
+          <h2 id="en-threshold">AI is also lowering the threshold for who can begin doing “expert” work</h2>
+          <p>There is another shift that may be even more important.</p>
+          <p><strong>Many capabilities were historically tied to educational credentials not necessarily because the work itself could only be done by people with a bachelor’s, master’s, or PhD degree, but because the knowledge and tools needed to begin were difficult to access.</strong></p>
+          <p>In the past, if you wanted to write software, you first had to find the right resources, learn a programming language, understand debugging, and often know what to search for before you could even make progress. If you wanted to read a paper in an unfamiliar field, you first had to learn the terminology, background knowledge, and methods of that discipline. Data analysis, modeling, experimental design, and many technical tools required substantial training before you could begin to use them meaningfully.</p>
+          <p>One of the important functions of higher education was to help people cross those thresholds.</p>
+          <p class="key key--amber">AI is lowering them.</p>
+          <p>A high school student today can ask AI to explain a paper they would otherwise struggle to understand. They can get help writing code, organizing data, building a website, analyzing images, learning statistics, or beginning a project that once would have required much more formal training.</p>
+          <p>That does not mean a high school student with AI suddenly becomes equivalent to a fully trained engineer, scientist, or physician. Expertise still includes judgment, experience, methodology, sensitivity to error, and knowing when not to trust an answer.</p>
+          <p>But the threshold is clearly moving.</p>
+          <p>Some tasks that once required a PhD may eventually be manageable with a master’s degree. Some that required a master’s may become accessible to undergraduates. And some things that once required a full university education before one could even begin may now be approachable by a high school student working with AI.</p>
+          <p>This shift will not happen equally across all fields, and formal qualifications will not disappear. But the direction is clear:</p>
+          <p class="key"><strong>AI is lowering the minimum knowledge threshold required to begin doing professional or technically sophisticated work.</strong></p>
+          <p>That may matter far more to higher education than the familiar concern that “AI can help students do homework.”</p>
+          <p>Universities have historically done more than teach knowledge. They also functioned as social thresholds of capability: you typically needed a certain level of formal education before you could move on to the next level of work.</p>
+          <p>As AI distributes parts of those capabilities to younger people and to people with less formal education, the previously stable relationship between credentials and actual capability begins to loosen.</p>
+
+          <h2 id="en-learning">Learning is also moving beyond the university</h2>
+          <p>A similar shift is happening in education itself.</p>
+          <p>Recently, a16z incubated the <a href="https://theacademysf.com/" target="_blank" rel="noopener noreferrer">Horowitz Andreessen Academy</a>. What makes it interesting is not simply that someone started another school. It is that the school is not trying to replicate a traditional university.</p>
+          <p>Its emphasis is not primarily on lectures, tests, or grades, but on what students actually do. Students can start companies, build products, conduct research, create art, or pursue difficult questions, and demonstrate their abilities through projects and portfolios. In <a href="https://a16z.com/announcement/incubating-horowitz-andreessen-academy/" target="_blank" rel="noopener noreferrer">a16z’s announcement of the program</a>, AI is framed not only as a way to know more, but as a way to do more.</p>
+          <p>The underlying premise is simple:</p>
+          <p class="key"><strong>If AI can help us enter the depth of many different fields much more quickly, then knowledge itself may no longer be the scarcest part of education.</strong></p>
+          <p>I explored this idea in a recent essay for the Sustainability of Sustainability Foundation, <a href="https://www.sos-network.org/blog/when-ai-can-answer-questions-what-do-we-still-need-to-learn" target="_blank" rel="noopener noreferrer">“When AI Can Answer Questions, What Do We Still Need to Learn?”</a>.</p>
+          <p>In that essay, I tried to place this shift in a longer history of how human knowledge developed.</p>
+          <p>From Leonardo da Vinci to the early naturalists, the study of nature, engineering, art, anatomy, and geography was not divided into disciplines in the way it is today. A single person could draw plants, study the human body, design machines, and observe birds, water, and rocks.</p>
+          <p>As human knowledge expanded, we specialized. Physics, chemistry, biology, engineering, medicine, and the social sciences all became increasingly divided into narrower fields.</p>
+          <p>That specialization gave us tremendous depth. It is one of the reasons modern science became so powerful.</p>
+          <p>But we paid a price for it:</p>
+          <p class="key key--amber"><strong>We became very good at going deeper, while becoming less comfortable moving sideways.</strong></p>
+          <p>Someone today may understand a protein, an algorithm, or an ecosystem in extraordinary detail, yet still be unaware that a neighboring field already contains a useful method or idea.</p>
+          <p>AI is emerging inside this highly specialized body of knowledge. It can help someone move quickly into statistics, materials science, ecology, history, programming, or another unfamiliar domain.</p>
+          <p>So the question may gradually shift from:</p>
+          <div class="contrast">
+            <div class="contrast-item"><small>From</small>“How much do I know within my field?”</div>
+            <div class="contrast-arrow" aria-hidden="true">→</div>
+            <div class="contrast-item contrast-item--to"><small>To</small>“Do I know when and how to connect different fields?”</div>
+          </div>
+          <p>This is one reason I think education may begin to recover something like a naturalist mindset.</p>
+          <p>Not because we should return to an era in which one person is expected to know everything, and not because specialization no longer matters. Quite the opposite.</p>
+          <p>AI may allow us to enter the depth of specialized knowledge more easily, while allowing human attention to focus more on breadth: observation, questioning, comparison, connection, and bringing different forms of knowledge into the same problem.</p>
+          <p>In other words, we may have a chance to combine two things that have become increasingly difficult to hold together:</p>
+          <div class="pull"><p>the depth of specialized knowledge and the breadth of the naturalist.</p></div>
+
+          <h2 id="en-boundaries">Universities are often least flexible at crossing the boundaries they created</h2>
+          <p>This creates an interesting contradiction.</p>
+          <p>Universities became so successful precisely because they organized knowledge into faculties, departments, disciplines, laboratories, and professional communities. But as the need for interdisciplinary thinking grows, the same structure that once made universities powerful can sometimes become a constraint.</p>
+          <p>Disciplines develop their own cultures, hierarchies, and biases. The English-speaking world still uses distinctions such as hard science and soft science. Natural science, engineering, the social sciences, the humanities, and the arts are often separated not only by methods, but by assumptions about prestige and value.</p>
+          <p>Even within a single field, different methods, schools of thought, and institutions can develop long-standing boundaries and politics.</p>
+          <p>So the hardest part of interdisciplinary research is often not that the knowledge cannot be connected.</p>
+          <p class="key"><strong>It is that the institutions humans have built do not always make those connections easy.</strong></p>
+          <p>If future education truly begins with problems rather than departments, the solution may not simply be to create one more “interdisciplinary program” inside an existing university.</p>
+          <p>New forms of education may need to grow partly outside the existing structure.</p>
+          <p>The Horowitz Andreessen Academy is one such experiment. We are exploring different approaches through the Sustainability of Sustainability Foundation. And recently, in conversations with faculty at National Yang Ming Chiao Tung University, I heard remarkably similar ideas: students should be able to move more easily across existing departments and place real problems ahead of disciplinary categories.</p>
+          <p>These efforts look very different from one another, but they are all responding to a similar question:</p>
+          <p class="key key--amber"><strong>If the unit of learning becomes the problem rather than the department, do all forms of advanced learning still need to be organized through the university structures we use today?</strong></p>
+
+          <h2 id="en-demographics">And then there is the demographic question</h2>
+          <p>If AI were the only force at work, this might simply be a debate about educational methods.</p>
+          <p>But in Taiwan, there is another very practical force: demographics.</p>
+          <p>A declining birth rate means fewer young people will enter higher education in the future. That does not make a genuinely valuable university suddenly less valuable. But it does reduce the need for society to maintain the same scale of higher-education capacity.</p>
+          <p>And this demographic shift is happening at the same time as another one: while the number of young people entering traditional higher education is declining, the number of alternative ways to access advanced knowledge, research capability, and professional training is increasing.</p>
+          <p>In other words:</p>
+          <div class="pull"><p>Demand is shrinking while alternatives are expanding.</p></div>
+          <p>Under those conditions, if universities continue to offer the same courses, the same departmental structure, and a degree at the end of four years, the relative value of that package will face increasing pressure.</p>
+
+          <h2 id="en-value">So what remains uniquely valuable about universities?</h2>
+          <p>I do not think the answer is that universities are becoming useless.</p>
+          <p>Universities still provide many things that are difficult to replace. They can support research with no immediate commercial payoff. They sustain intellectual communities across generations. They provide large research infrastructures. Fields such as medicine still require rigorous training, certification, and public accountability.</p>
+          <p>And for many eighteen-year-olds, university is not simply about acquiring knowledge. It is an important period of social development, exploration, and growth.</p>
+          <p class="key">What is changing is the necessity of bundling all of these functions together in one institution.</p>
+          <p>Historically, universities provided knowledge, teachers, equipment, research communities, professional networks, certification, and degrees.</p>
+          <p>If you wanted to enter the deeper layers of human knowledge, the university was the default gateway.</p>
+          <p>Now those functions are gradually being unbundled.</p>
+          <p>Knowledge can be accessed through AI. A mentor does not have to be a professor. Research can happen in companies, startups, nonprofits, hospitals, medical centers, or independent research institutes. Professional communities can form globally online. Capability can be demonstrated through products, creative work, papers, GitHub repositories, entrepreneurial experience, and other forms of proof of work.</p>
+          <p>The hardest piece to unbundle may actually be the degree itself.</p>
+          <p>A degree is still a cheap and efficient social signal. It allows employers, governments, and institutions to avoid independently evaluating every person’s abilities from scratch.</p>
+          <p>So I do not expect degrees to disappear.</p>
+          <p>But as real capabilities become easier to demonstrate in other ways, and as AI lowers the knowledge thresholds that once required higher levels of formal education, the relative value of the degree as a proxy for capability may also decline.</p>
+
+          <h2 id="en-center">Universities may remain important without remaining the center</h2>
+          <p>So the change I am describing is not “universities are going away.”</p>
+          <p>It is slower and more fundamental than that.</p>
+          <p class="key"><strong>Research is gradually becoming less centered on universities.</strong><br>
+            <strong>Learning is gradually becoming less centered on universities.</strong><br>
+            <strong>And many activities that once required a certain level of formal education before one could even begin are becoming more accessible.</strong></p>
+          <p>At the same time, societies with declining populations may no longer need the same scale of higher-education capacity.</p>
+          <p>When these forces come together, the role of universities will naturally change.</p>
+          <p>People will still attend universities. There will still be world-class research universities. But universities may gradually shift from being the default path into advanced knowledge to becoming one path among many.</p>
+          <p>Some people will attend universities.<br>
+            Some will join new educational institutions.<br>
+            Some will enter startups.<br>
+            Some will work in research organizations, hospitals, or industrial research centers.<br>
+            Some will build projects independently and use AI to fill in the knowledge they need along the way.<br>
+            And many will move between these systems rather than staying inside just one.</p>
+          <p>AI may not be undermining education itself.</p>
+          <p>It may be undermining a long-standing assumption:</p>
+          <div class="pull"><p>that the university must remain the primary gateway into the frontiers of human knowledge and research.</p></div>
+          <p>That assumption is beginning to change.</p>
+
+          <hr class="post-divider">
+          <h2 id="en-reading">Further Reading</h2>
+          <div class="reading-list">
+            <a class="reading-link" href="https://theacademysf.com/" target="_blank" rel="noopener noreferrer">
+              <span><span class="rl-src">theacademysf.com</span><span class="rl-title">The Horowitz Andreessen Academy</span></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+            <a class="reading-link" href="https://a16z.com/announcement/incubating-horowitz-andreessen-academy/" target="_blank" rel="noopener noreferrer">
+              <span><span class="rl-src">a16z</span><span class="rl-title">Incubating Horowitz Andreessen Academy</span></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+            <a class="reading-link" href="https://www.sos-network.org/blog/when-ai-can-answer-questions-what-do-we-still-need-to-learn" target="_blank" rel="noopener noreferrer">
+              <span><span class="rl-src">Sustainability of Sustainability Foundation</span><span class="rl-title">When AI Can Answer Questions, What Do We Still Need to Learn?</span></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+          <p class="post-end" aria-hidden="true">· · ·</p>
+        </article>
+
+        <!-- ========== 中文 ========== -->
+        <article class="reading-card prose-post" lang="zh-Hant" data-lang="zh">
+          <p class="lead">最近和一位產業界的朋友聊到，公司面對新的技術需求時，通常會怎麼找解決方案。他給我的順序很直接：</p>
+
+          <div class="flow" role="img" aria-label="Build → Buy → Partner → University">
+            <div class="flow-steps">
+              <span class="flow-step"><b>01</b>Build</span><span class="flow-arrow">→</span>
+              <span class="flow-step"><b>02</b>Buy</span><span class="flow-arrow">→</span>
+              <span class="flow-step"><b>03</b>Partner</span><span class="flow-arrow">→</span>
+              <span class="flow-step flow-step--last"><b>04</b>University</span>
+            </div>
+            <p class="flow-caption">一間公司取得新技術能力的優先順序</p>
+          </div>
+
+          <p>能自己做，就自己建立能力；做不了，就買現成的技術或公司；再不行，才尋找外部合作。而在合作對象裡，他們通常又更偏好新創公司，因為新創有明確的目標、速度，以及必須把事情往前推的壓力。傳統的產學合作，反而常常排在比較後面。</p>
+          <p>這當然只是一次產業對話，不代表所有企業都按照同樣的公式運作。但它讓我開始重新思考一件事：</p>
+          <p class="key"><strong>如果研究與學習都逐漸不再以大學為中心，那麼大學在未來還會扮演什麼角色？</strong></p>
+
+          <h2 id="zh-research">研究正在逐漸離開「大學中心」</h2>
+          <p>過去，大學之所以重要，很大一部分原因是高階研究能力集中在大學裡。專家在大學，設備在大學，最新的方法、文獻、研究生與長期累積的 know-how，也大量集中在大學與研究機構。企業如果想進入一個陌生的科學領域，找大學研究室合作是一個很自然的選擇。</p>
+          <p>但這個條件正在快速改變。AI 正在降低進入陌生領域的知識門檻；開源軟體、雲端運算、低成本感測器、自動化設備與機器人，也讓很多過去必須集中在大型研究機構裡的能力開始向外擴散。最近愈來愈多的 self-driving laboratory 與 closed-loop research system，又把這件事再往前推了一步：AI 可以根據已有的資料決定下一個實驗，機器執行實驗，系統分析結果，再根據結果決定下一輪該做什麼。</p>
+          <p>這並不代表大學研究會消失。基礎科學、長期研究、大型設備，以及很多不適合由短期商業利益主導的問題，仍然非常需要大學。但它改變了一件更根本的事情：</p>
+          <p class="key"><strong>研究能力不再必然集中在大學研究室。</strong></p>
+          <p>這裡也需要區分兩件事情：<strong>降低對大學的依賴，不等於降低對大型研究基礎設施的依賴。</strong></p>
+          <p>在生物科技、生物醫學、臨床研究，以及部分材料與化學領域，很多研究仍然需要昂貴設備、核心實驗設施、樣本與病人來源、動物設施、倫理審查、法規系統，以及跨專業的大型團隊。這些條件並不會因為 AI 出現就突然消失。</p>
+          <p>但關鍵是，它們不一定必須存在於大學裡。它們也可以存在於醫院、醫學中心、國家研究機構、獨立研究院、CRO、biotech company，或企業自己的研究中心。</p>
+          <p>因此，真正正在鬆動的，不一定是「大型研究組織」本身，而是<strong>「高階研究能力必須依附大學」這個假設。</strong></p>
+          <p>企業可以建立自己的研發團隊，可以直接買下一項技術，可以與一間十幾人的高度專業新創合作，也可以把 AI、自動化與少數專家組合起來，建立過去可能需要一整個實驗室才能維持的能力。從產業端來看，大學研究室仍然重要，但它不再是取得高階研究能力的唯一入口。</p>
+
+          <h2 id="zh-threshold">AI 正在降低「誰有資格開始做這件事」的門檻</h2>
+          <p>這裡還有另一個我覺得更重要的改變：<strong>過去很多能力之所以和學歷綁在一起，不一定是因為那件事情本質上只有大學生、碩士或博士才能做，而是因為取得那些知識與工具的門檻太高。</strong></p>
+          <p>以前要寫一個程式，你得先知道去哪裡找教材、理解程式語言、學會除錯，還要知道應該搜尋什麼。要閱讀一個陌生領域的論文，你得先學會那個領域的術語、背景知識與方法。要做資料分析、建立模型、設計實驗或操作某些專業工具，也都需要一段相當長的訓練。高等教育很重要的一個功能，就是帶人跨過這些門檻。</p>
+          <p class="key key--amber">AI 正在把這些門檻往下推。</p>
+          <p>一個高中生今天可以請 AI 解釋一篇原本看不懂的論文，可以在協助下寫程式、整理資料、建立網站、分析影像、學習統計，甚至開始做以前需要一定專業訓練才能接觸的 project。</p>
+          <p>這當然不代表高中生搭配 AI，就等於一個受過完整訓練的工程師、科學家或醫師。真正的專業仍然包含經驗、判斷、方法論、對錯誤的敏感度，以及知道什麼時候不能相信自己的答案。</p>
+          <p>但門檻確實正在移動。</p>
+          <p>以前可能需要博士才能完成的某些工作，未來可能碩士就能做；以前需要碩士的，可能大學生就能做；以前需要完整大學訓練才能開始的事情，高中生在 AI 的輔助下，就可能做出第一個有意義的成果。</p>
+          <p>這種變化不會平均發生在所有領域，也不代表正式資格制度會消失，但整體方向很清楚：</p>
+          <p class="key"><strong>AI 正在降低「開始做一件專業事情」所需要的最低知識門檻。</strong></p>
+          <p>這件事對高等教育的影響，可能比「AI 可以幫學生寫作業」重要得多。因為大學過去不只是教授知識，也在社會上扮演一道能力門檻：你通常必須先取得某種程度的正式教育，才有機會進入下一層工作。</p>
+          <p>當 AI 開始把部分能力往更年輕、教育程度更低的人手上分散時，學歷和實際能力之間原本相對穩定的對應關係，也會開始鬆動。</p>
+
+          <h2 id="zh-learning">學習也正在逐漸離開「大學中心」</h2>
+          <p>幾乎同樣的變化，也正在教育端發生。最近 a16z 孵化了 <a href="https://theacademysf.com/" target="_blank" rel="noopener noreferrer">The Horowitz Andreessen Academy</a>。它最有意思的地方，並不是又有人辦了一間學校，而是它根本沒有試圖複製一所傳統大學。</p>
+          <p>它強調的不是 lectures、tests、grades，而是學生真正做出了什麼。學生可以創業、建立產品、做研究、創作藝術、探索一個困難的問題，並以自己的 projects 和 portfolio 證明能力。a16z 在<a href="https://a16z.com/announcement/incubating-horowitz-andreessen-academy/" target="_blank" rel="noopener noreferrer">正式宣布這個計畫</a>時，也把 AI 帶來的改變直接連結到「能夠做什麼」，而不只是「能夠知道什麼」。</p>
+          <p>這種教育模式背後其實有一個很簡單的前提：</p>
+          <p class="key"><strong>如果 AI 已經可以快速帶我們進入不同領域的知識深處，教育真正稀缺的東西可能不再只是知識本身。</strong></p>
+          <p>我前一篇寫給 Sustainability of Sustainability Foundation 的文章<a href="https://www.sos-network.org/blog/when-ai-can-answer-questions-what-do-we-still-need-to-learn-zh" target="_blank" rel="noopener noreferrer">〈當 AI 可以回答問題，我們還需要學習什麼？〉</a>，談的就是這件事。</p>
+          <p>那篇文章裡，我試著把這個變化放進更長的知識發展歷史來看。從達文西到早期博物學家，研究自然、工程、藝術、人體與地理，原本並沒有像今天這樣被切割成清楚的學科。一個人可以同時畫植物、研究人體、設計機械，也觀察鳥類、水流與岩石。</p>
+          <p>隨著人類知識快速累積，我們開始分科。物理、化學、生物、工程、醫學、社會科學，再不斷往下細分。這個過程讓每一個領域都能向下鑽得更深，也是現代科學之所以如此強大的原因。</p>
+          <p>可是我們也付出了一個代價：</p>
+          <p class="key key--amber"><strong>我們愈來愈擅長向下鑽，卻不一定擅長向旁邊看。</strong></p>
+          <p>今天一個人可能對某一種蛋白質、某一類演算法或某一個生態系統理解得極深，卻未必知道隔壁領域早已存在一套可以解決自己問題的方法。</p>
+          <p>而今天的 AI，恰恰是在這個高度專業化、高度分工的知識世界裡學習的。它可以幫一個人快速理解統計、材料、生態、歷史、程式設計，甚至進入自己原本完全陌生的領域。</p>
+          <p>所以未來真正重要的能力，可能逐漸不再只是：</p>
+          <div class="contrast">
+            <div class="contrast-item"><small>過去</small>「我在哪一個領域知道多少？」</div>
+            <div class="contrast-arrow" aria-hidden="true">→</div>
+            <div class="contrast-item contrast-item--to"><small>未來</small>「我能不能知道什麼時候應該把哪些領域連起來？」</div>
+          </div>
+          <p>這也是為什麼我認為下一代教育可能再次出現某種「博物學家式」的學習。不是回到一個人什麼都懂的年代，也不是否定專業，而是利用 AI 幫助我們快速進入各個專業的深度，再重新培養人的廣度：觀察、提問、比較、連結，以及把不同領域的知識帶進同一個問題裡。</p>
+          <p>換句話說，我們也許第一次有機會同時擁有兩件原本愈來愈難同時存在的事情：</p>
+          <div class="pull"><p>專業知識的深度，以及博物學家的廣度。</p></div>
+
+          <h2 id="zh-boundaries">而傳統大學恰好最難跨越自己建立的邊界</h2>
+          <p>這裡就出現了一個很有趣的矛盾。</p>
+          <p>大學之所以如此成功，正是因為它把知識分成學院、系所、學門、研究室與專業社群。但當未來需要的能力愈來愈強調跨領域時，這套原本非常成功的結構，有時反而會成為阻力。</p>
+          <p>學科之間有自己的文化，也有自己的階級與偏見。英文世界至今仍會使用 hard science 與 soft science 這類分類；自然科學、工程、社會科學、人文與藝術之間，也常常存在某種鄙視鏈。即使在同一個學科裡，不同方法、不同學派、不同機構之間，都可能存在長期形成的界線與政治。</p>
+          <p>因此，很多跨領域研究真正困難的地方，其實不是知識無法連接，而是：</p>
+          <p class="key"><strong>人類建立出來的制度不容易讓它連接。</strong></p>
+          <p>如果下一代的教育真的要從「問題」出發，而不是從「科系」出發，那麼它很可能不只是今天的大學多設一個「跨領域學程」。它甚至可能需要在原本的大學結構之外，長出新的教育形式。</p>
+          <p>Horowitz Andreessen Academy 是其中一種實驗。我們在 Sustainability of Sustainability Foundation 也正在做不同形式的嘗試。最近我和陽明交大的老師聊天，也聽到非常相近的想法：學生應該更容易跨越既有科系，把真正的問題放在學科分類之前。</p>
+          <p>這些嘗試的形式非常不同，但背後其實都正在回答同一個問題：</p>
+          <p class="key key--amber"><strong>如果學習的單位不再是「科系」，而是「問題」，我們還需要把所有高階學習都放在今天的大學組織方式裡嗎？</strong></p>
+
+          <h2 id="zh-demographics">然後還有少子化</h2>
+          <p>如果只有 AI，這可能還只是一場教育方法的改變。但對台灣而言，還有另一股非常現實的力量：人口。</p>
+          <p>少子化意味著未來進入高等教育體系的年輕人口持續減少。這並不會讓一所真正有研究價值的大學突然變得沒有價值，但它會降低社會維持目前這麼龐大的高等教育容量的必要性。</p>
+          <p>而這件事情，恰好發生在另一個轉變之上：一方面，需要接受傳統高等教育的年輕人口正在減少；另一方面，取得高階知識、研究能力與專業訓練的替代方式卻正在增加。</p>
+          <p>換句話說：</p>
+          <div class="pull"><p>需求變少了，替代方案卻變多了。</p></div>
+          <p>在這樣的情況下，大學如果只是繼續提供相同的課程、相同的科系架構，以及一張四年後取得的文憑，它所提供的相對價值，自然會受到愈來愈大的挑戰。</p>
+
+          <h2 id="zh-value">那麼，大學還有哪些不可取代的價值？</h2>
+          <p>我並不認為答案是「大學沒有用了」。</p>
+          <p>大學仍然有很多其他組織很難取代的功能。它可以容納不具立即商業價值的研究，可以維持跨世代累積的學術社群，可以提供大型研究基礎設施。醫學等特定專業仍然需要嚴格訓練與認證。對很多十八歲的年輕人來說，大學也不只是取得知識，而是一段重要的社會化、探索與成長過程。</p>
+          <p class="key">但真正正在改變的，是大學把這些功能全部綁在一起的必要性。</p>
+          <p>以前，大學同時提供知識、老師、研究設備、研究社群、人脈、能力認證，以及文憑。所以如果一個人想進入人類知識比較深的地方，大學幾乎就是預設入口。</p>
+          <p>現在，這些功能正在逐漸被拆開。</p>
+          <p>知識可以透過 AI 取得；mentor 不一定是大學教授；研究可以在公司、新創、非營利組織、醫院、醫學中心或獨立研究機構發生；專業社群可以跨國在線上形成；能力可以透過產品、作品、論文、GitHub、創業經驗與各種 proof of work 展示。</p>
+          <p>剩下最難被拆掉的一項，可能反而是文憑。</p>
+          <p>因為文憑是一個非常便宜而有效率的社會訊號。它讓企業、政府與其他機構不用重新檢查每一個人的能力。所以我不認為大學文憑會突然消失。</p>
+          <p>但當真正的能力愈來愈容易透過其他方式被展示，而 AI 又讓過去需要較高學歷才能跨過的知識門檻逐漸下降時，文憑作為能力 proxy 的相對價值，也可能跟著下降。</p>
+
+          <h2 id="zh-center">大學不會消失，但它可能不再是唯一的中心</h2>
+          <p>所以，我所說的變化並不是「大學即將消失」，而是更緩慢，也更根本的一件事情。</p>
+          <p class="key"><strong>研究正在逐漸不再以大學為唯一中心。</strong><br>
+            <strong>學習正在逐漸不再以大學為唯一中心。</strong><br>
+            <strong>甚至許多過去必須先取得某種學歷才能開始做的事情，進入門檻也正在下降。</strong></p>
+          <p>而在人口下降的社會裡，我們也不再需要和過去一樣龐大的高等教育容量。</p>
+          <p>當這些事情同時發生，大學在人類社會中的角色自然會改變。</p>
+          <p>未來仍然會有人讀大學，也仍然會存在非常強大的研究型大學。但大學可能逐漸從「進入高階知識世界的預設道路」，變成許多道路中的其中一條。</p>
+          <p>有人進大學，有人進新型教育機構，有人加入新創，有人進研究組織，有人進醫院或產業研究中心，有人自己建立 project，再用 AI 補上途中需要的知識，也有人在這些系統之間不斷移動。</p>
+          <p>AI 真正動搖的，可能不是教育本身。</p>
+          <p>而是一個我們長久以來習以為常的假設：</p>
+          <div class="pull"><p>要進入人類知識與研究的最前沿，大學必須是那個最主要的入口。</p></div>
+          <p>這個假設，正在慢慢改變。</p>
+
+          <hr class="post-divider">
+          <h2 id="zh-reading">延伸閱讀</h2>
+          <div class="reading-list">
+            <a class="reading-link" href="https://theacademysf.com/" target="_blank" rel="noopener noreferrer">
+              <span><span class="rl-src">theacademysf.com</span><span class="rl-title">The Horowitz Andreessen Academy</span></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+            <a class="reading-link" href="https://a16z.com/announcement/incubating-horowitz-andreessen-academy/" target="_blank" rel="noopener noreferrer">
+              <span><span class="rl-src">a16z</span><span class="rl-title">Incubating Horowitz Andreessen Academy</span></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+            <a class="reading-link" href="https://www.sos-network.org/blog/when-ai-can-answer-questions-what-do-we-still-need-to-learn-zh" target="_blank" rel="noopener noreferrer">
+              <span><span class="rl-src">SOS Foundation</span><span class="rl-title">當 AI 可以回答問題，我們還需要學習什麼？</span></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+          <p class="post-end" aria-hidden="true">· · ·</p>
+        </article>
+
+        <!-- ===================== SHARE ===================== -->
+        <div class="share-bar mt-8">
+          <span class="share-label"><span data-lang="en">Share</span><span data-lang="zh">分享</span></span>
+          <button type="button" class="share-btn" id="share-copy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <span id="share-copy-label"><span data-lang="en">Copy link</span><span data-lang="zh">複製連結</span></span>
+          </button>
+          <a class="share-btn" id="share-x" target="_blank" rel="noopener noreferrer" title="Share on X" aria-label="Share on X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a class="share-btn" id="share-li" target="_blank" rel="noopener noreferrer" title="Share on LinkedIn" aria-label="Share on LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a class="share-btn" id="share-fb" target="_blank" rel="noopener noreferrer" title="Share on Facebook" aria-label="Share on Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.026 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971H15.83c-1.491 0-1.956.93-1.956 1.886v2.264h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          </a>
+        </div>
+
+        <!-- ===================== AUTHOR ===================== -->
+        <div class="author-card mt-6">
+          <img src="../imgs/web/1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME.jpg" alt="Wei-Ping Chan">
+          <div class="flex-1">
+            <div class="author-kicker"><span data-lang="en">Written by</span><span data-lang="zh">作者</span></div>
+            <div class="author-name">Wei-Ping Chan</div>
+            <div class="author-role">Exploratory Data Scientist · Interdisciplinary Researcher</div>
+            <p class="author-bio" lang="en" data-lang="en">Founder of BioNarr and founding director of the Sustainability of Sustainability Foundation. Harvard-trained in organismic and evolutionary biology, Wei-Ping works across ecology, evolution, AI, and data science — and writes about how knowledge, research, and learning are changing.</p>
+            <p class="author-bio" lang="zh-Hant" data-lang="zh">BioNarr 創辦人、Sustainability of Sustainability Foundation 創始總監。哈佛大學有機體與演化生物學博士，研究橫跨生態、演化、AI 與資料科學，也持續書寫知識、研究與學習正在如何改變。</p>
+            <div class="author-links">
+              <a href="../index.html"><span data-lang="en">About</span><span data-lang="zh">關於我</span></a>
+              <a href="https://www.linkedin.com/in/wei-ping-chan" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
+              <a href="https://www.sos-network.org/blog" target="_blank" rel="noopener noreferrer">SOS Blog ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== MORE POSTS ===================== -->
+    <section class="max-w-6xl mx-auto px-5 mt-20 md:mt-28">
+      <div style="height:1px;background:rgba(255,255,255,.08)" class="mb-12"></div>
+      <div id="more-wrap" class="hidden">
+        <h2 class="text-2xl" style="color:#fff"><span data-lang="en">More posts</span><span data-lang="zh">更多文章</span></h2>
+        <div id="more-grid" class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="../blog.html" class="btn-ghost-light" id="all-posts-btn">
+          <span data-lang="en">Browse all posts</span><span data-lang="zh">瀏覽所有文章</span> →
+        </a>
+      </div>
+    </section>
+
+    <div class="pb-24 md:pb-32"></div>
+  </main>
+
+  <!-- ===================== FOOTER (shared across pages) ===================== -->
+  <footer class="wpc-footer">
+    <div class="max-w-6xl mx-auto px-4 py-10 text-center" style="border-top:1px solid rgba(255,255,255,.06)">
+      <p class="footer-brand">Wei-Ping Chan</p>
+      <p class="text-sm mt-1" style="color:#7a788a">Exploratory Data Scientist · Interdisciplinary Researcher</p>
+      <div class="flex justify-center gap-6 mt-5">
+        <a href="https://github.com/wpchanwork" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/wei-ping-chan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+        <a href="https://sos-commons.vercel.app/research" target="_blank" rel="noopener noreferrer">SOS Research</a>
+      </div>
+      <p class="text-xs mt-6" style="color:#55536a">&copy; 2026 Wei-Ping Chan. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../blog-posts.js"></script>
+  <script>
+    (function () {
+      const SLUG = 'what-if-research-and-learning-no-longer-revolve-around-universities';
+      const post = BLOG_POSTS.find(p => p.slug === SLUG);
+      const root = document.documentElement;
+      const esc = t => String(t ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      const TITLES = {
+        en: document.querySelector('.post-title[data-lang="en"]').textContent + ' — Wei-Ping Chan',
+        zh: document.querySelector('.post-title[data-lang="zh"]').textContent + '｜Wei-Ping Chan'
+      };
+
+      // Reading time from the visible body (≈230 English words / ≈400 Chinese characters per minute).
+      function readingTime(lang) {
+        const text = document.querySelector('.prose-post[data-lang="' + lang + '"]').textContent;
+        const mins = lang === 'zh'
+          ? Math.ceil((text.match(/[一-鿿]/g) || []).length / 400)
+          : Math.ceil(text.trim().split(/\s+/).length / 230);
+        return lang === 'zh' ? '約 ' + mins + ' 分鐘閱讀' : mins + ' min read';
+      }
+
+      // Table of contents from the visible article's section headings.
+      const tocList = document.getElementById('toc-list');
+      let tocObserver;
+      function buildToc(lang) {
+        if (tocObserver) tocObserver.disconnect();
+        const heads = [...document.querySelectorAll('.prose-post[data-lang="' + lang + '"] h2[id]')];
+        tocList.innerHTML = heads.map(h =>
+          '<li><a href="#' + h.id + '" lang="' + (lang === 'zh' ? 'zh-Hant' : 'en') + '">' + esc(h.textContent) + '</a></li>').join('');
+        const links = new Map([...tocList.querySelectorAll('a')].map(a => [a.getAttribute('href').slice(1), a]));
+        tocObserver = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            links.forEach(a => a.classList.remove('active'));
+            links.get(e.target.id)?.classList.add('active');
+          });
+        }, { rootMargin: '-15% 0px -70% 0px' });
+        heads.forEach(h => tocObserver.observe(h));
+      }
+
+      function renderTags(lang) {
+        document.getElementById('post-tags').innerHTML =
+          (post.tags || []).map(t => '<span class="post-tag">' + esc(BlogLang.tag(t, lang)) + '</span>').join('');
+      }
+
+      function renderMore(lang) {
+        const others = BLOG_POSTS.filter(p => p.slug !== SLUG).slice(0, 3);
+        document.getElementById('more-wrap').classList.toggle('hidden', !others.length);
+        document.getElementById('more-grid').innerHTML = others.map(p =>
+          '<a class="more-card" href="../' + esc(p.url) + (lang === 'zh' ? '?lang=zh' : '') + '">' +
+            '<img src="../' + esc(p.cover) + '" alt="" loading="lazy" style="object-position:' + esc(p.coverPosition || 'center') + '">' +
+            '<div class="more-card-body"><div class="more-card-date">' + esc(BlogLang.formatDate(p.date, lang)) + '</div>' +
+            '<div class="more-card-title" lang="' + (lang === 'zh' ? 'zh-Hant' : 'en') + '">' + esc(p.title[lang] || p.title.en) + '</div></div></a>'
+        ).join('');
+      }
+
+      function applyLang(lang, persist) {
+        root.setAttribute('data-reading', lang);
+        root.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+        document.title = TITLES[lang];
+        document.querySelectorAll('[data-set-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.setLang === lang)));
+        document.getElementById('post-date').textContent = BlogLang.formatDate(post.date, lang);
+        document.getElementById('read-time').textContent = readingTime(lang);
+        const q = lang === 'zh' ? '?lang=zh' : '';
+        document.getElementById('back-link').href = '../blog.html' + q;
+        document.getElementById('all-posts-btn').href = '../blog.html' + q;
+        renderTags(lang);
+        renderMore(lang);
+        buildToc(lang);
+        if (persist) BlogLang.set(lang);
+      }
+
+      document.querySelectorAll('[data-set-lang]').forEach(b => b.addEventListener('click', () => {
+        if (b.dataset.setLang === root.getAttribute('data-reading')) return;
+        applyLang(b.dataset.setLang, true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }));
+      applyLang(BlogLang.get(), false);
+
+      // Share links always point at the canonical URL.
+      const shareUrl = document.querySelector('link[rel="canonical"]').href;
+      const shareTitle = () => document.querySelector('.post-title[data-lang="' + root.getAttribute('data-reading') + '"]').textContent;
+      const enc = encodeURIComponent;
+      document.getElementById('share-li').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + enc(shareUrl);
+      document.getElementById('share-fb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + enc(shareUrl);
+      document.getElementById('share-x').addEventListener('click', e => {
+        e.currentTarget.href = 'https://twitter.com/intent/tweet?url=' + enc(shareUrl) + '&text=' + enc(shareTitle());
+      });
+      const copyBtn = document.getElementById('share-copy');
+      const copyLabel = document.getElementById('share-copy-label');
+      const copyHtml = copyLabel.innerHTML;
+      copyBtn.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(shareUrl); } catch (e) { return; }
+        copyBtn.classList.add('copied');
+        copyLabel.innerHTML = '<span data-lang="en">Copied!</span><span data-lang="zh">已複製！</span>';
+        setTimeout(() => { copyBtn.classList.remove('copied'); copyLabel.innerHTML = copyHtml; }, 1800);
+      });
+
+      // Reading progress across the article column.
+      const bar = document.getElementById('read-progress');
+      const col = document.querySelector('.post-col');
+      function onScroll() {
+        const r = col.getBoundingClientRect();
+        const total = r.height - window.innerHeight * 0.6;
+        const p = Math.min(1, Math.max(0, -r.top / Math.max(total, 1)));
+        bar.style.transform = 'scaleX(' + p + ')';
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
