@@ -322,8 +322,7 @@
             <span class="essay-read">${bi('Read the essay', '閱讀全文')} <i>→</i></span>
             <button type="button" class="essay-share" aria-haspopup="menu" aria-expanded="false">${SHARE_ICON}${bi('Share', '轉貼')}</button>
           </div>
-        </div>
-        <span class="holo-foil"></span><span class="holo-glare"></span>`;
+        </div>`;
       const absUrl = new URL(p.url, location.href).href;
       card.querySelector('.essay-share').addEventListener('click', e => {
         e.preventDefault(); e.stopPropagation();

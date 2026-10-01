@@ -10,7 +10,7 @@ Read this first. It is everything needed to add a bilingual (EN default / 中文
 - All behaviour (language switch, TOC, numbering, animations, share buttons, reading time) is in shared files. **A new post needs no JS or CSS.**
   - `blog/blog-post.js`, `blog/blog-post.css` — article page
   - `share.js`, `share.css` — share buttons (Copy link, X, LinkedIn, Facebook, Threads, LINE)
-  - `holo.js`, `holo.css` — foil effect on cards in `blog.html` only
+  - `holo.js`, `holo.css` — pointer tilt on cards in `blog.html` (foil/glare layers exist but are intentionally not used)
 
 ## Steps (do exactly these 4)
 
