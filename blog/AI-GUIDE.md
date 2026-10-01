@@ -75,12 +75,12 @@ Applies to the **中文 article body only**, including the author's own 中文 t
 
 1. **Translate incidental English** into Chinese whenever a natural Chinese term exists.
 2. **Keep in English**: proper nouns, brands, organization and product names, and established abbreviations (AI, SOS, a16z, GitHub, Horowitz Andreessen Academy), plus titles of English-language sources in Further Reading.
-3. **Sustainability of Sustainability Foundation**: first mention `SOS基金會（Sustainability of Sustainability Foundation）`, later mentions `SOS基金會` (no space), Further Reading source label `SOS基金會`.
-4. **Report**: list every term you translated in your reply so the author can review it.
+3. **Technical terms and industry abbreviations**: translate, then add the original in full-width parentheses on first mention, e.g. `委託研究機構（CRO）`, `自主實驗室（self-driving laboratory）`, `「硬科學」（hard science）`. Everyday words (project, mentor, portfolio) get no parentheses.: first mention `SOS基金會（Sustainability of Sustainability Foundation）`, later mentions `SOS基金會` (no space), Further Reading source label `SOS基金會`.
+5. **Report**: list every term you translated in your reply so the author can review it.
 
 Glossary (use these for consistency; extend it when new terms come up):
 
-| English | 中文 |
+| English | 中文 (as written in the post) |
 |---|---|
 | project / projects | 專案 |
 | portfolio | 作品集 |
@@ -90,10 +90,10 @@ Glossary (use these for consistency; extend it when new terms come up):
 | proof of work | 實際成果 |
 | lectures / tests / grades | 講課 / 考試 / 成績 |
 | biotech company | 生技公司 |
-| CRO | 委託研究機構 |
-| self-driving laboratory | 自主實驗室 |
-| closed-loop research system | 閉環研究系統 |
-| hard science / soft science | 硬科學 / 軟科學 |
+| CRO | 委託研究機構（CRO） |
+| self-driving laboratory | 自主實驗室（self-driving laboratory） |
+| closed-loop research system | 閉環研究系統（closed-loop research system） |
+| hard science / soft science | 「硬科學」（hard science）/「軟科學」（soft science） |
 | Build → Buy → Partner → University | 自建 → 購買 → 合作 → 大學 |
 
 ## Images
@@ -106,6 +106,6 @@ Glossary (use these for consistency; extend it when new terms come up):
 
 - Serve locally with `python -m http.server 8765`, then open `blog/<new-slug>.html`, the same with `?lang=zh`, `blog.html`, and `index.html#blog`.
 - No console errors. The EN / 中文 toggle switches title, body and TOC. No horizontal scroll at 375 px width.
-- **中文 English-word scan**: in the browser console on `?lang=zh` run `[...new Set(document.querySelector('.prose-post[data-lang=zh]').innerText.match(/[A-Za-z][A-Za-z.\-]*/g))]`. Every word left must be a proper noun, brand or abbreviation allowed by the rules above.
+- **中文 English-word scan**: in the browser console on `?lang=zh` run `[...new Set(document.querySelector('.prose-post[data-lang=zh]').innerText.match(/[A-Za-z][A-Za-z.\-]*/g))]`. Every word left must be a proper noun, brand, abbreviation, or an original term inside （） allowed by the rules above.
 - **Writing-rule scan**: no `—` / `——` in text you wrote; no "essay".
 - After deploying, check the live site in a **private / incognito window**. GitHub Pages lets browsers cache pages for up to 10 minutes, so a normal window may still show the old version.
