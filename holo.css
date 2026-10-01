@@ -1,0 +1,65 @@
+/* ============================================================
+   Holo card — a trading-card foil effect for blog cards.
+   Written from scratch for this site (technique: pointer-driven
+   3D tilt + colour-dodge rainbow foil + moving glare).
+
+   Markup:
+     <div class="holo" data-holo>
+       ...card content...
+       <span class="holo-foil"></span>   (optional; may be placed inside
+       <span class="holo-glare"></span>   a sub-area such as an image)
+     </div>
+
+   holo.js writes these custom properties on .holo:
+     --rx, --ry   tilt in degrees
+     --px, --py   pointer position in % (0–100)
+     --o          effect strength 0–1
+   ============================================================ */
+
+.holo {
+  --rx: 0deg; --ry: 0deg; --px: 50%; --py: 50%; --o: 0;
+  position: relative;
+  transform: perspective(1100px) rotateX(var(--ry)) rotateY(var(--rx));
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.holo.is-resting { transition: transform .9s cubic-bezier(.22,1,.36,1); }
+
+.holo-foil, .holo-glare {
+  position: absolute; inset: 0; z-index: 4; pointer-events: none; border-radius: inherit;
+}
+
+/* Rainbow foil: two diagonal bands that slide against each other as the
+   pointer moves, blended with colour-dodge so it lights up the artwork. */
+.holo-foil {
+  opacity: calc(var(--o) * .75);
+  mix-blend-mode: color-dodge;
+  background:
+    repeating-linear-gradient(115deg,
+      hsl(350 90% 66%) 0%, hsl(40 95% 62%) 6%, hsl(95 85% 60%) 12%,
+      hsl(180 90% 62%) 18%, hsl(225 90% 68%) 24%, hsl(285 85% 70%) 30%, hsl(350 90% 66%) 36%),
+    repeating-linear-gradient(-35deg,
+      rgba(10,16,32,.7) 0%, rgba(150,170,180,.45) 2.5%, rgba(10,16,32,.7) 5%);
+  background-size: 260% 260%, 180% 180%;
+  background-position:
+    calc(var(--px) * 1.1) calc(var(--py) * 1.1),
+    calc(100% - var(--px)) calc(100% - var(--py));
+  background-blend-mode: overlay;
+  filter: brightness(.75) contrast(1.6) saturate(1.3);
+}
+
+/* Soft light hotspot that follows the pointer. */
+.holo-glare {
+  opacity: calc(var(--o) * .8);
+  mix-blend-mode: overlay;
+  background: radial-gradient(circle at var(--px) var(--py),
+    rgba(255,255,255,.85) 0%, rgba(255,255,255,.35) 22%, rgba(0,0,0,.25) 70%);
+}
+
+/* Lighter variant for cards with pale surfaces. */
+.holo-glare--soft { mix-blend-mode: soft-light; opacity: calc(var(--o) * .9); }
+
+@media (prefers-reduced-motion: reduce) {
+  .holo { transform: none !important; }
+  .holo-foil, .holo-glare { display: none; }
+}

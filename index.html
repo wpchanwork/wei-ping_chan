@@ -68,8 +68,17 @@
 
     /* From the Blog */
     .blog-feature { display: flex; flex-direction: column; overflow: hidden; border-radius: 1.25rem; text-decoration: none; color: inherit;
-      background: var(--c-deep); box-shadow: 0 24px 50px -28px rgba(12,21,37,.7); transition: transform .25s ease, box-shadow .25s ease; }
-    .blog-feature:hover { transform: translateY(-4px); box-shadow: 0 34px 60px -28px rgba(12,21,37,.8); }
+      background: var(--c-deep); box-shadow: 0 24px 50px -28px rgba(12,21,37,.7); transition: box-shadow .5s ease; }
+    .blog-feature:hover { box-shadow: 0 40px 70px -30px rgba(12,21,37,.85); }
+    .blog-feature-no { position: absolute; left: 1rem; top: .9rem; z-index: 5; font-family: var(--f-mono); font-size: .64rem; letter-spacing: .16em; color: #fff;
+      padding: .28rem .55rem; border: 1px solid rgba(255,255,255,.45); border-radius: .3rem; background: rgba(12,21,37,.35); }
+    .blog-feature-cta i { display: inline-block; font-style: normal; transition: transform .45s cubic-bezier(.22,1,.36,1); }
+    .blog-feature:hover .blog-feature-cta i { transform: translateX(6px); }
+    .view-more { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.4rem; border-radius: 9999px; font-weight: 600; font-size: .9rem;
+      color: var(--c-deep); border: 1.5px solid var(--c-deep); text-decoration: none; transition: background .25s ease, color .25s ease; }
+    .view-more i { font-style: normal; transition: transform .45s cubic-bezier(.22,1,.36,1); }
+    .view-more:hover { background: var(--c-deep); color: #fff; }
+    .view-more:hover i { transform: translateX(5px); }
     @media (min-width: 768px) { .blog-feature { flex-direction: row; } }
     .blog-feature-cover { position: relative; overflow: hidden; flex-shrink: 0; }
     @media (min-width: 768px) { .blog-feature-cover { width: 45%; } }
@@ -385,10 +394,12 @@
     <p class="section-subtitle mb-10 reveal">Essays on research, learning, and how knowledge is changing — in English and 中文.</p>
     <div id="blog-latest" class="reveal"></div>
     <p class="text-center mt-8 reveal">
-      <a href="blog.html" class="link-teal font-semibold">View More Posts →</a>
+      <a href="blog.html" class="view-more">View More Posts <i>→</i></a>
     </p>
   </section>
+  <link rel="stylesheet" href="holo.css">
   <script src="blog-posts.js"></script>
+  <script src="holo.js"></script>
   <script>
     (function () {
       const p = (window.BLOG_POSTS || [])[0];
@@ -396,16 +407,19 @@
       if (!p) { box.closest('section').style.display = 'none'; return; }
       const esc = t => String(t ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
       box.innerHTML =
-        '<a class="blog-feature" href="' + esc(p.url) + '">' +
-          '<div class="blog-feature-cover"><img src="' + esc(p.cover) + '" alt="" loading="lazy" style="object-position:' + esc(p.coverPosition || 'center') + '"></div>' +
+        '<a class="blog-feature holo" data-holo data-holo-max="5" href="' + esc(p.url) + '">' +
+          '<div class="blog-feature-cover"><img src="' + esc(p.cover) + '" alt="" loading="lazy" style="object-position:' + esc(p.coverPosition || 'center') + '">' +
+            '<span class="blog-feature-no">No. ' + String(window.BLOG_POSTS.length).padStart(3, '0') + '</span></div>' +
           '<div class="blog-feature-body">' +
             '<span class="blog-kicker">Latest essay · ' + esc(BlogLang.formatDate(p.date, 'en')) + '</span>' +
             '<h3 class="blog-feature-title">' + esc(p.title.en) + '</h3>' +
             (p.title.zh ? '<p class="blog-feature-zh" lang="zh-Hant">' + esc(p.title.zh) + '</p>' : '') +
             '<p class="blog-feature-excerpt">' + esc(p.excerpt.en) + '</p>' +
-            '<span class="blog-feature-cta">Read the essay →</span>' +
+            '<span class="blog-feature-cta">Read the essay <i>→</i></span>' +
           '</div>' +
+          '<span class="holo-foil"></span><span class="holo-glare"></span>' +
         '</a>';
+      Holo.init(box);
     })();
   </script>
 

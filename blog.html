@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-reading="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog — Wei-Ping Chan</title>
-  <meta name="description" content="Blog posts, social updates, and articles by Wei-Ping Chan — science, sustainability, and interdisciplinary stories." />
+  <meta name="description" content="Essays and field notes by Wei-Ping Chan — on research, learning, science, sustainability, and how knowledge is changing. In English and 中文." />
   <link rel="canonical" href="https://wpchanwork.github.io/wei-ping_chan/blog.html">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta property="og:title" content="Blog — Wei-Ping Chan">
-  <meta property="og:description" content="Blog posts, social updates, and articles by Wei-Ping Chan.">
-  <meta property="og:image" content="https://wpchanwork.github.io/wei-ping_chan/imgs/web/1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME.jpg">
+  <meta property="og:description" content="Essays and field notes on research, learning, science, and sustainability.">
+  <meta property="og:image" content="https://wpchanwork.github.io/wei-ping_chan/imgs/web/splash-bg.jpg">
   <meta property="og:url" content="https://wpchanwork.github.io/wei-ping_chan/blog.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
@@ -24,83 +24,124 @@
   </script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="holo.css">
+  <link rel="stylesheet" href="share.css">
   <style>
-    .hero-gradient { background: linear-gradient(135deg, var(--c-deep) 0%, var(--c-primary) 100%); }
-    .card-hover { transition: transform .2s ease, box-shadow .2s ease; }
-    .card-hover:hover { transform: translateY(-5px); box-shadow: 0 22px 40px -16px rgba(30,41,59,.32); }
-
-    /* Filter pills */
-    .filter-pill {
-      display: inline-flex; align-items: center; gap: .35rem;
-      font-size: .8rem; padding: .4rem .9rem; border-radius: 9999px;
-      border: 1.5px solid #e2e8f0; background: #fff; color: #475569;
-      cursor: pointer; transition: all .15s ease; font-weight: 500;
+    :root {
+      --ease-out: cubic-bezier(.22,1,.36,1);
+      --accent-grad: linear-gradient(90deg, var(--c-teal), #14b8a6 45%, var(--c-amber));
+      --paper: #f7f4ee;
+      --rule: rgba(29,34,48,.12);
+      --f-zh-serif: 'Noto Serif TC', 'Songti TC', 'PMingLiU', serif;
+      --f-zh-sans: 'PingFang TC', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
     }
-    .filter-pill:hover { border-color: #cbd5e1; background: #f8fafc; }
-    .filter-pill.active { background: var(--c-primary); color: #fff; border-color: var(--c-primary); font-weight: 600; }
-    .filter-pill svg { width: 1rem; height: 1rem; }
+    body { background: var(--paper); }
+    html[data-reading="en"] [data-lang="zh"],
+    html[data-reading="zh"] [data-lang="en"] { display: none !important; }
 
-    /* Post card */
-    .post-card {
-      background: #fff; border-radius: 1rem; overflow: hidden;
-      box-shadow: 0 4px 14px -6px rgba(30,41,59,.18);
-      transition: transform .2s ease, box-shadow .2s ease;
+    /* ---------- Hero ---------- */
+    .bl-hero { position: relative; overflow: hidden; background: var(--c-deep); color: #fff; }
+    .bl-hero::before { /* dotted specimen grid */
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(rgba(255,255,255,.09) 1px, transparent 1.2px); background-size: 22px 22px;
+      -webkit-mask-image: radial-gradient(ellipse at 70% 40%, #000, transparent 70%); mask-image: radial-gradient(ellipse at 70% 40%, #000, transparent 70%);
     }
-    .post-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 35px -12px rgba(30,41,59,.28);
-    }
+    .bl-glow { position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none; }
+    .bl-glow--a { width: 34rem; height: 34rem; left: -8rem; top: -12rem; background: rgba(13,148,136,.32); animation: drift 18s ease-in-out infinite alternate; }
+    .bl-glow--b { width: 26rem; height: 26rem; right: -6rem; bottom: -12rem; background: rgba(217,119,6,.2); animation: drift 22s ease-in-out infinite alternate-reverse; }
+    @keyframes drift { to { transform: translate(5rem, 3rem) scale(1.12); } }
+    .bl-hero-inner { position: relative; max-width: 72rem; margin: 0 auto; padding: 5.5rem 1.25rem 4.5rem; }
+    @media (min-width: 768px) { .bl-hero-inner { padding: 7.5rem 2rem 6rem; } }
+    .bl-kicker { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: #5eead4; }
+    .bl-title { margin-top: .9rem; font-size: clamp(3.2rem, 9vw, 7rem); line-height: .95; letter-spacing: -.03em; color: #fff; }
+    .bl-title:lang(zh) { font-family: var(--f-zh-serif); font-weight: 700; letter-spacing: .04em; line-height: 1.15; }
+    .bl-title .w { display: inline-block; opacity: 0; transform: translateY(.4em); filter: blur(8px); animation: word-in 1s var(--ease-out) forwards; animation-delay: calc(.15s + var(--i) * 90ms); }
+    @keyframes word-in { to { opacity: 1; transform: none; filter: none; } }
+    .bl-sub { margin-top: 1.5rem; max-width: 36rem; font-size: 1.1rem; line-height: 1.7; color: rgba(255,255,255,.66); }
+    .bl-sub:lang(zh), html[data-reading="zh"] .bl-sub { font-family: var(--f-zh-sans); letter-spacing: .03em; line-height: 1.9; }
+    .bl-hero-row { margin-top: 2.2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
+    .bl-count { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+    .bl-line { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--accent-grad); transform-origin: 0 50%; transform: scaleX(0); animation: grow-x 1.6s var(--ease-out) .6s forwards; }
+    @keyframes grow-x { to { transform: scaleX(1); } }
+    .fade-up { opacity: 0; transform: translateY(14px); animation: fade-up .9s var(--ease-out) forwards; animation-delay: var(--d, 0s); }
+    @keyframes fade-up { to { opacity: 1; transform: none; } }
 
-    /* Social embed container */
-    .embed-frame {
-      width: 100%; border: 0; min-height: 400px;
-      background: #f8fafc; border-radius: .5rem;
-    }
+    /* Language switch with sliding thumb */
+    .lang-toggle { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; padding: .25rem; border-radius: 9999px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); }
+    .lang-toggle::before { content: ''; position: absolute; top: .25rem; bottom: .25rem; left: .25rem; width: calc(50% - .25rem); border-radius: 9999px; background: var(--c-teal); box-shadow: 0 4px 14px -4px rgba(13,148,136,.8); transition: transform .45s var(--ease-out); }
+    html[data-reading="zh"] .lang-toggle::before { transform: translateX(100%); }
+    .lang-toggle button { position: relative; z-index: 1; border: 0; background: none; cursor: pointer; font: inherit; font-size: .75rem; font-weight: 600; min-width: 3.2rem; padding: .34rem .8rem; border-radius: 9999px; color: rgba(255,255,255,.6); transition: color .3s ease; }
+    .lang-toggle button[aria-pressed="true"], .lang-toggle button:hover { color: #fff; }
 
-    /* Image gallery grid */
+    /* ---------- Filters ---------- */
+    .bl-filters { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .filter-pill { position: relative; font: inherit; font-size: .8rem; font-weight: 500; padding: .45rem 1rem; border-radius: 9999px; cursor: pointer;
+      color: #5c5c6f; background: #fff; border: 1px solid var(--rule); transition: color .25s ease, background .25s ease, border-color .25s ease, transform .35s var(--ease-out); }
+    .filter-pill:hover { transform: translateY(-1px); border-color: rgba(13,148,136,.4); color: var(--c-teal); }
+    .filter-pill.active { background: var(--c-deep); border-color: var(--c-deep); color: #fff; }
+    .section-kicker { display: flex; align-items: center; gap: .9rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: #7b7686; }
+    .section-kicker::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+    /* ---------- Essay cards ---------- */
+    .essay-card { position: relative; display: flex; flex-direction: column; border-radius: 1.4rem; overflow: hidden; background: var(--c-deep); color: #fff;
+      box-shadow: 0 30px 60px -34px rgba(12,21,37,.75); transition: box-shadow .5s var(--ease-out); }
+    .essay-card:hover { box-shadow: 0 40px 80px -34px rgba(12,21,37,.85); }
+    .essay-card--feature { min-height: 26rem; }
+    @media (min-width: 900px) { .essay-card--feature { flex-direction: row; } }
+    .essay-cover { position: relative; overflow: hidden; min-height: 15rem; flex-shrink: 0; }
+    @media (min-width: 900px) { .essay-card--feature .essay-cover { width: 54%; } }
+    .essay-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); transition: transform 1.2s var(--ease-out); }
+    .essay-card:hover .essay-cover img { transform: scale(1.07); }
+    .essay-cover::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, rgba(12,21,37,.55)); pointer-events: none; }
+    @media (max-width: 899px) { .essay-cover::after { background: linear-gradient(180deg, transparent 60%, rgba(12,21,37,.6)); } }
+    .essay-no { position: absolute; left: 1.1rem; top: 1rem; z-index: 5; font-family: var(--f-mono); font-size: .66rem; letter-spacing: .16em; color: #fff;
+      padding: .3rem .6rem; border: 1px solid rgba(255,255,255,.45); border-radius: .3rem; background: rgba(12,21,37,.35); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+    .essay-body { position: relative; z-index: 2; display: flex; flex-direction: column; padding: 1.6rem 1.6rem 1.7rem;
+      background: radial-gradient(circle at 100% 0%, rgba(13,148,136,.22), transparent 55%); }
+    @media (min-width: 900px) { .essay-card--feature .essay-body { flex: 1; padding: 2.4rem 2.5rem; } }
+    .essay-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .8rem; font-family: var(--f-mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+    .essay-meta .tag { color: #5eead4; } .essay-meta .tag:nth-of-type(even) { color: #fbbf24; }
+    .essay-title { margin-top: .9rem; font-family: var(--f-display); font-size: 1.7rem; line-height: 1.15; color: #fff; }
+    .essay-card--feature .essay-title { font-size: clamp(1.9rem, 3vw, 2.5rem); }
+    .essay-title:lang(zh) { font-family: var(--f-zh-serif); font-weight: 700; line-height: 1.4; letter-spacing: .03em; }
+    .essay-title a { color: inherit; text-decoration: none; }
+    .essay-title a::after { content: ''; position: absolute; inset: 0; z-index: 3; } /* whole card is clickable */
+    .essay-excerpt { margin-top: .9rem; font-size: .95rem; line-height: 1.7; color: rgba(255,255,255,.66); }
+    .essay-excerpt:lang(zh) { font-family: var(--f-zh-sans); line-height: 1.95; letter-spacing: .03em; }
+    .essay-foot { margin-top: auto; padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .essay-read { display: inline-flex; align-items: center; gap: .5rem; font-weight: 600; font-size: .9rem; color: #5eead4; }
+    .essay-read i { font-style: normal; transition: transform .45s var(--ease-out); }
+    .essay-card:hover .essay-read i { transform: translateX(6px); }
+    .essay-share { position: relative; z-index: 6; display: inline-flex; align-items: center; gap: .45rem; height: 2.3rem; padding: 0 .9rem; border-radius: 9999px; cursor: pointer;
+      font: inherit; font-size: .78rem; font-weight: 500; color: rgba(255,255,255,.8); background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18);
+      transition: background .25s ease, color .25s ease, border-color .25s ease; }
+    .essay-share:hover, .essay-share[aria-expanded="true"] { background: #fff; color: var(--c-deep); border-color: #fff; }
+    .essay-share svg { width: 15px; height: 15px; }
+
+    /* Uses `translate` (not `transform`) so it composes with the holo tilt. */
+    .post-entry.rv { opacity: 0; translate: 0 26px; transition: opacity 1s var(--ease-out), translate 1s var(--ease-out); transition-delay: var(--d, 0s); }
+    .post-entry.rv.in { opacity: 1; translate: 0 0; }
+    .post-entry.is-hidden { display: none; }
+
+    /* ---------- Short posts (social, images, notes) ---------- */
+    .note-card { background: #fff; border-radius: 1.1rem; border: 1px solid var(--rule); overflow: hidden; transition: translate .45s var(--ease-out), box-shadow .45s var(--ease-out); }
+    .note-card:hover { translate: 0 -3px; box-shadow: 0 20px 40px -26px rgba(29,34,48,.45); }
     .gallery-grid { display: grid; gap: .5rem; }
     .gallery-grid.g1 { grid-template-columns: 1fr; }
-    .gallery-grid.g2 { grid-template-columns: 1fr 1fr; }
-    .gallery-grid.g3 { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
+    .gallery-grid.g2, .gallery-grid.g4 { grid-template-columns: 1fr 1fr; }
+    .gallery-grid.g3 { grid-template-columns: 1fr 1fr; }
     .gallery-grid.g3 > :first-child { grid-column: 1 / -1; }
-    .gallery-grid.g4 { grid-template-columns: 1fr 1fr; }
-    .gallery-img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      border-radius: .5rem; cursor: pointer; transition: opacity .15s ease;
-    }
+    .gallery-img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: .6rem; cursor: zoom-in; transition: opacity .2s ease; }
     .gallery-img:hover { opacity: .88; }
-
-    /* Lightbox */
     .lightbox { display: none; position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.85); align-items: center; justify-content: center; padding: 1rem; }
     .lightbox.show { display: flex; }
     .lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: .5rem; }
 
-    /* Language */
-    html[data-reading="en"] [data-lang="zh"],
-    html[data-reading="zh"] [data-lang="en"] { display: none !important; }
-    .lang-toggle { display: inline-flex; gap: .25rem; padding: .25rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); }
-    .lang-toggle button { border: 0; cursor: pointer; font: inherit; font-size: .75rem; font-weight: 600; padding: .32rem .85rem; border-radius: 9999px; background: transparent; color: rgba(255,255,255,.6); transition: background .2s ease, color .2s ease; }
-    .lang-toggle button:hover { color: #fff; }
-    .lang-toggle button[aria-pressed="true"] { background: var(--c-teal); color: #fff; }
-
-    /* Article card (links to a full post in blog/) */
-    .essay-card { display: flex; flex-direction: column; background: #fff; border-radius: 1.25rem; overflow: hidden; text-decoration: none; color: inherit;
-      box-shadow: 0 4px 14px -6px rgba(30,41,59,.18); border: 1px solid var(--c-border); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
-    .essay-card:hover { transform: translateY(-4px); border-color: rgba(13,148,136,.45); box-shadow: 0 22px 40px -18px rgba(13,148,136,.35); }
-    @media (min-width: 768px) { .essay-card { flex-direction: row; } }
-    .essay-cover { position: relative; flex-shrink: 0; overflow: hidden; background: var(--c-deep); }
-    @media (min-width: 768px) { .essay-cover { width: 42%; } }
-    .essay-cover img { width: 100%; height: 100%; min-height: 13rem; object-fit: cover; display: block; transition: transform .5s ease; }
-    .essay-card:hover .essay-cover img { transform: scale(1.04); }
-    .essay-kind { position: absolute; left: .9rem; top: .9rem; font-family: var(--f-mono); font-size: .65rem; letter-spacing: .14em; text-transform: uppercase;
-      color: #fff; background: rgba(12,21,37,.72); padding: .3rem .65rem; border-radius: 9999px; backdrop-filter: blur(4px); }
-    .essay-body { padding: 1.5rem 1.6rem 1.6rem; display: flex; flex-direction: column; }
-    .essay-title { font-family: var(--f-display); font-size: 1.55rem; line-height: 1.22; color: var(--c-text); margin-top: .6rem; }
-    .essay-title:lang(zh) { font-family: 'Noto Serif TC', 'Songti TC', 'PMingLiU', serif; font-weight: 700; line-height: 1.45; }
-    .essay-excerpt { margin-top: .7rem; color: var(--c-text-2); line-height: 1.65; font-size: .95rem; }
-    .essay-excerpt:lang(zh) { line-height: 1.9; letter-spacing: .02em; }
-    .essay-more { margin-top: auto; padding-top: 1.1rem; font-weight: 600; font-size: .9rem; color: var(--c-teal); }
+    @media (prefers-reduced-motion: reduce) {
+      .bl-glow, .bl-line, .bl-title .w, .fade-up { animation: none !important; opacity: 1; transform: none; filter: none; }
+      .post-entry.rv { opacity: 1; translate: none; transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -125,37 +166,43 @@
       </nav>
     </div>
   </header>
-  <script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('menu');
-    menuToggle.addEventListener('click', () => menu.classList.toggle('hidden'));
-  </script>
+  <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('menu').classList.toggle('hidden'));</script>
 
   <!-- ===================== HERO ===================== -->
-  <section class="hero-gradient text-white">
-    <div class="max-w-6xl mx-auto px-4 py-14 md:py-16 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold"><span data-lang="en">Blog</span><span data-lang="zh">文章</span></h2>
-      <p class="mt-4 text-blue-100 max-w-2xl mx-auto text-base md:text-lg">
-        <span data-lang="en">Stories, updates, and reflections on science, sustainability, and the spaces in between.</span>
-        <span data-lang="zh">關於科學、永續，以及兩者之間那些空間的故事、近況與思考。</span>
+  <section class="bl-hero">
+    <span class="bl-glow bl-glow--a"></span><span class="bl-glow bl-glow--b"></span>
+    <div class="bl-hero-inner">
+      <p class="bl-kicker fade-up">Wei-Ping Chan · Blog</p>
+      <h1 class="bl-title" lang="en" data-lang="en" data-split>Field Notes</h1>
+      <h1 class="bl-title" lang="zh-Hant" data-lang="zh" data-split>田野筆記</h1>
+      <p class="bl-sub fade-up" style="--d:.5s">
+        <span data-lang="en">Essays and notes on research, learning, and how knowledge is changing — from the museum drawer to the age of AI.</span>
+        <span data-lang="zh">關於研究、學習，以及知識正在如何改變的文章與筆記——從博物館的標本抽屜，到 AI 的時代。</span>
       </p>
-      <div class="lang-toggle mt-6" role="group" aria-label="Choose a language">
-        <button type="button" data-set-lang="en" title="English">EN</button>
-        <button type="button" data-set-lang="zh" title="繁體中文">中文</button>
+      <div class="bl-hero-row fade-up" style="--d:.7s">
+        <div class="lang-toggle" role="group" aria-label="Choose a language">
+          <button type="button" data-set-lang="en" title="English">EN</button>
+          <button type="button" data-set-lang="zh" title="繁體中文">中文</button>
+        </div>
+        <span class="bl-count" id="bl-count"></span>
       </div>
     </div>
+    <span class="bl-line"></span>
   </section>
 
-  <!-- ===================== FILTER ===================== -->
-  <section class="max-w-4xl mx-auto px-4 pt-10 pb-4 reveal">
-    <div id="filters" class="flex flex-wrap justify-center gap-2"></div>
-  </section>
+  <!-- ===================== LIST ===================== -->
+  <main class="max-w-6xl mx-auto px-4 md:px-8 pt-10 md:pt-14 pb-24">
+    <div id="filters" class="bl-filters"></div>
 
-  <!-- ===================== POSTS ===================== -->
-  <section class="max-w-4xl mx-auto px-4 pb-16 reveal">
-    <div id="posts-grid" class="space-y-8"></div>
+    <p class="section-kicker mt-10" id="essays-kicker"><span data-lang="en">Essays</span><span data-lang="zh">文章</span></p>
+    <div id="essays-grid" class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+
+    <div id="notes-wrap" class="hidden">
+      <p class="section-kicker mt-16"><span data-lang="en">Notes &amp; updates</span><span data-lang="zh">近況與短文</span></p>
+      <div id="posts-grid" class="mt-6 space-y-6 max-w-3xl"></div>
+    </div>
     <p id="posts-empty" class="hidden text-center text-gray-400 py-16"><span data-lang="en">No posts yet — check back soon.</span><span data-lang="zh">目前還沒有文章，敬請期待。</span></p>
-  </section>
+  </main>
 
   <!-- Image lightbox -->
   <div id="img-lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
@@ -179,6 +226,8 @@
   </footer>
 
   <script src="blog-posts.js"></script>
+  <script src="holo.js"></script>
+  <script src="share.js"></script>
   <script>
     /* ============ FULL ARTICLES ============
        Long-form, bilingual articles live in blog/<slug>.html and are
@@ -197,7 +246,7 @@
             date: 'Sep 2026',
             tags: ['SOS', 'Sustainability'] }
 
-       2. Article / blog post:
+       2. Short article:
           { type: 'article',
             title: 'My Article Title',
             body: '<p>HTML content here...</p>',
@@ -216,46 +265,81 @@
             date: 'Sep 2026',
             tags: ['Field Work'] }
 
-       Tags are used for filtering. Add any tag you like;
-       the filter pills are generated automatically.
+       Tags are used for filtering; the filter pills are generated automatically.
     ============================================= */
 
     const POSTS = [
-      // Example posts (replace with real content):
-
-      /*
-      {
-        type: 'article',
-        title: 'Welcome to My Blog',
-        body: '<p>This is where I'll share updates about my research, SOS Foundation activities, and thoughts on science and sustainability.</p>',
-        date: 'Sep 2026',
-        tags: ['Update']
-      },
-      {
-        type: 'embed',
-        platform: 'instagram',
-        url: 'https://www.instagram.com/p/EXAMPLE/',
-        caption: 'A recent field update from the museum.',
-        date: 'Aug 2026',
-        tags: ['SOS', 'Field Work']
-      },
-      */
+      // Example:
+      // { type: 'article', title: 'Welcome', body: '<p>Hello!</p>', date: 'Sep 2026', tags: ['Update'] },
     ];
 
     /* ============================================= */
 
-    const esc = t => String(t??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const esc = t => String(t ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     const ESSAYS = window.BLOG_POSTS || [];
     // Both languages are rendered side by side; CSS shows the active one.
     const bi = (en, zh) => `<span data-lang="en">${esc(en)}</span><span data-lang="zh">${esc(zh ?? en)}</span>`;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Collect unique tags
+    // Hero title: word / character entrance
+    document.querySelectorAll('[data-split]').forEach(el => {
+      const text = el.textContent.trim(), zh = /[一-鿿]/.test(text);
+      const parts = zh ? Array.from(text) : text.split(/\s+/);
+      el.setAttribute('aria-label', text);
+      el.innerHTML = parts.map((w, i) => `<span class="w" aria-hidden="true" style="--i:${i}">${esc(w)}</span>`).join(zh ? '' : ' ');
+    });
+
+    const total = ESSAYS.length + POSTS.length;
+    document.getElementById('bl-count').innerHTML = bi(
+      `${ESSAYS.length} essay${ESSAYS.length === 1 ? '' : 's'}` + (POSTS.length ? ` · ${POSTS.length} note${POSTS.length === 1 ? '' : 's'}` : ''),
+      `${ESSAYS.length} 篇文章` + (POSTS.length ? ` · ${POSTS.length} 則短文` : ''));
+
+    /* ---------- Essay cards ---------- */
+    const SHARE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>';
+    const essaysGrid = document.getElementById('essays-grid');
+    ESSAYS.forEach((p, i) => {
+      const feature = i === 0;
+      const no = String(ESSAYS.length - i).padStart(3, '0');
+      const tags = (p.tags || []).map(t => `<span class="tag">${bi(t, BlogLang.tag(t, 'zh'))}</span>`).join('');
+      const card = document.createElement('article');
+      card.className = 'post-entry rv essay-card holo' + (feature ? ' essay-card--feature md:col-span-2' : '');
+      card.dataset.tags = JSON.stringify(p.tags || []);
+      card.dataset.holo = '';
+      card.dataset.holoMax = feature ? '5' : '8';
+      card.style.setProperty('--d', (i * .08) + 's');
+      card.innerHTML = `
+        <div class="essay-cover">
+          <img src="${esc(p.cover)}" alt="" loading="lazy" style="object-position:${esc(p.coverPosition || 'center')}">
+          <span class="essay-no">No. ${no}</span>
+        </div>
+        <div class="essay-body">
+          <div class="essay-meta">${bi(BlogLang.formatDate(p.date, 'en'), BlogLang.formatDate(p.date, 'zh'))}${tags}</div>
+          <h2 class="essay-title" lang="en" data-lang="en"><a class="essay-link" data-url="${esc(p.url)}" href="${esc(p.url)}">${esc(p.title.en)}</a></h2>
+          <h2 class="essay-title" lang="zh-Hant" data-lang="zh"><a class="essay-link" data-url="${esc(p.url)}" href="${esc(p.url)}">${esc(p.title.zh || p.title.en)}</a></h2>
+          <p class="essay-excerpt" lang="en" data-lang="en">${esc(p.excerpt.en)}</p>
+          <p class="essay-excerpt" lang="zh-Hant" data-lang="zh">${esc(p.excerpt.zh || p.excerpt.en)}</p>
+          <div class="essay-foot">
+            <span class="essay-read">${bi('Read the essay', '閱讀全文')} <i>→</i></span>
+            <button type="button" class="essay-share" aria-haspopup="menu" aria-expanded="false">${SHARE_ICON}${bi('Share', '轉貼')}</button>
+          </div>
+        </div>
+        <span class="holo-foil"></span><span class="holo-glare"></span>`;
+      const absUrl = new URL(p.url, location.href).href;
+      card.querySelector('.essay-share').addEventListener('click', e => {
+        e.preventDefault(); e.stopPropagation();
+        const lang = document.documentElement.getAttribute('data-reading');
+        ShareKit.popover(e.currentTarget, { url: absUrl, title: p.title[lang] || p.title.en });
+      });
+      essaysGrid.appendChild(card);
+    });
+    if (!ESSAYS.length) document.getElementById('essays-kicker').classList.add('hidden');
+
+    /* ---------- Filters ---------- */
     const allTags = [...new Set([...ESSAYS, ...POSTS].flatMap(p => p.tags || []))].sort();
-
-    // Render filter pills
     const filterBox = document.getElementById('filters');
     function makeFilter(tag, labelHtml) {
       const btn = document.createElement('button');
+      btn.type = 'button';
       btn.className = 'filter-pill' + (tag === 'all' ? ' active' : '');
       btn.dataset.tag = tag;
       btn.innerHTML = labelHtml;
@@ -266,20 +350,16 @@
       makeFilter('all', bi('All', '全部'));
       allTags.forEach(t => makeFilter(t, bi(t, BlogLang.tag(t, 'zh'))));
     }
-
-    let activeFilter = 'all';
     function applyFilter(tag) {
-      activeFilter = tag;
-      document.querySelectorAll('.filter-pill').forEach(b => {
-        b.classList.toggle('active', b.dataset.tag === tag);
-      });
+      document.querySelectorAll('.filter-pill').forEach(b => b.classList.toggle('active', b.dataset.tag === tag));
       document.querySelectorAll('.post-entry').forEach(el => {
-        const tags = JSON.parse(el.dataset.tags || '[]');
-        el.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
+        const show = tag === 'all' || JSON.parse(el.dataset.tags || '[]').includes(tag);
+        el.classList.toggle('is-hidden', !show);
+        if (show && !reduced) { el.classList.remove('in'); requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in'))); }
       });
     }
 
-    // Platform-specific embed scripts (loaded once)
+    /* ---------- Short posts ---------- */
     const loadedScripts = {};
     function loadEmbedScript(platform) {
       const urls = {
@@ -290,12 +370,9 @@
       if (loadedScripts[platform] || !urls[platform]) return;
       loadedScripts[platform] = true;
       const s = document.createElement('script');
-      s.src = urls[platform];
-      s.async = true;
-      s.defer = true;
+      s.src = urls[platform]; s.async = true; s.defer = true;
       document.body.appendChild(s);
     }
-
     function embedHTML(post) {
       const url = esc(post.url);
       switch (post.platform) {
@@ -312,132 +389,75 @@
           return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">View post &rarr;</a>`;
       }
     }
-
     function galleryHTML(images) {
       const n = Math.min(images.length, 4);
-      const cls = 'gallery-grid g' + n;
-      return `<div class="${cls}">${images.slice(0, 4).map((img, i) =>
-        `<img class="gallery-img" src="${esc(img.src)}" alt="${esc(img.alt || '')}"
-              style="aspect-ratio:${n===1?'16/9':'4/3'}" onclick="openLightbox('${esc(img.src)}','${esc(img.alt)}')">`
+      return `<div class="gallery-grid g${n}">${images.slice(0, 4).map(img =>
+        `<img class="gallery-img" src="${esc(img.src)}" alt="${esc(img.alt || '')}" style="aspect-ratio:${n === 1 ? '16/9' : '4/3'}" onclick="openLightbox('${esc(img.src)}','${esc(img.alt)}')">`
       ).join('')}${images.length > 4 ? `<p class="text-sm text-gray-400 text-center">+${images.length - 4} more</p>` : ''}</div>`;
     }
 
-    // Render full articles (from blog-posts.js)
     const grid = document.getElementById('posts-grid');
-    const empty = document.getElementById('posts-empty');
-    function essayLinks(lang) {
-      document.querySelectorAll('.essay-card').forEach(a => {
-        a.href = a.dataset.url + (lang === 'zh' ? '?lang=zh' : '');
-      });
-    }
-    ESSAYS.forEach(p => {
-      const card = document.createElement('a');
-      card.className = 'post-entry essay-card';
-      card.dataset.tags = JSON.stringify(p.tags || []);
-      card.dataset.url = p.url;
-      card.href = p.url;
-      const tags = (p.tags || []).map(t =>
-        `<span class="text-xs font-semibold px-2 py-0.5 rounded-full" style="color:var(--c-teal);background:rgba(13,148,136,.09)">${bi(t, BlogLang.tag(t, 'zh'))}</span>`).join(' ');
-      card.innerHTML = `
-        <div class="essay-cover">
-          <img src="${esc(p.cover)}" alt="" loading="lazy" style="object-position:${esc(p.coverPosition || 'center')}">
-          <span class="essay-kind">${bi('Essay', '文章')}</span>
-        </div>
-        <div class="essay-body">
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="text-xs text-gray-400">${bi(BlogLang.formatDate(p.date, 'en'), BlogLang.formatDate(p.date, 'zh'))}</span>
-            ${tags}
-          </div>
-          <h3 class="essay-title" lang="en" data-lang="en">${esc(p.title.en)}</h3>
-          <h3 class="essay-title" lang="zh-Hant" data-lang="zh">${esc(p.title.zh || p.title.en)}</h3>
-          <p class="essay-excerpt" lang="en" data-lang="en">${esc(p.excerpt.en)}</p>
-          <p class="essay-excerpt" lang="zh-Hant" data-lang="zh">${esc(p.excerpt.zh || p.excerpt.en)}</p>
-          <span class="essay-more">${bi('Read the essay →', '閱讀全文 →')}</span>
-        </div>`;
-      grid.appendChild(card);
-    });
-
-    // Language toggle (shared preference with the article pages)
-    function setReading(lang, persist) {
-      document.documentElement.setAttribute('data-reading', lang);
-      document.querySelectorAll('[data-set-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.setLang === lang)));
-      essayLinks(lang);
-      if (persist) BlogLang.set(lang);
-    }
-    document.querySelectorAll('[data-set-lang]').forEach(b => b.addEventListener('click', () => setReading(b.dataset.setLang, true)));
-    setReading(BlogLang.get(), false);
-
-    // Render short posts
-    if (!POSTS.length && !ESSAYS.length) {
-      empty.classList.remove('hidden');
-    } else {
-      POSTS.forEach(post => {
+    if (!total) document.getElementById('posts-empty').classList.remove('hidden');
+    if (POSTS.length) {
+      document.getElementById('notes-wrap').classList.remove('hidden');
+      POSTS.forEach((post, i) => {
         const card = document.createElement('article');
-        card.className = 'post-entry post-card';
+        card.className = 'post-entry rv note-card';
         card.dataset.tags = JSON.stringify(post.tags || []);
-
-        let content = '';
-        // Date and tags header
-        const tagsLine = (post.tags || []).map(t => `<span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">${esc(t)}</span>`).join(' ');
+        card.style.setProperty('--d', (i * .06) + 's');
+        const tagsLine = (post.tags || []).map(t => `<span class="text-xs font-semibold px-2 py-0.5 rounded-full" style="color:var(--c-teal);background:rgba(13,148,136,.09)">${esc(t)}</span>`).join(' ');
         const header = `<div class="flex flex-wrap items-center gap-2 mb-3">
           ${post.date ? `<span class="text-xs text-gray-400">${esc(post.date)}</span>` : ''}
           ${post.platform ? `<span class="text-xs font-semibold uppercase tracking-wide text-gray-500">${esc(post.platform)}</span>` : ''}
-          ${tagsLine}
-        </div>`;
-
+          ${tagsLine}</div>`;
+        let content = '';
         if (post.type === 'embed') {
-          content = `<div class="p-6">
-            ${header}
-            ${post.caption ? `<p class="text-gray-700 mb-4">${esc(post.caption)}</p>` : ''}
-            <div class="flex justify-center">${embedHTML(post)}</div>
-          </div>`;
+          content = `<div class="p-6">${header}${post.caption ? `<p class="text-gray-700 mb-4">${esc(post.caption)}</p>` : ''}<div class="flex justify-center">${embedHTML(post)}</div></div>`;
         } else if (post.type === 'article') {
-          content = `<div class="p-6">
-            ${header}
-            ${post.title ? `<h3 class="text-xl font-bold text-gray-800 mb-3">${esc(post.title)}</h3>` : ''}
-            <div class="prose prose-sm max-w-none text-gray-700">${post.body || ''}</div>
-            ${post.link ? `<a href="${esc(post.link)}" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-blue-600 hover:underline font-semibold">${esc(post.linkLabel || 'Read more')} &rarr;</a>` : ''}
-          </div>`;
+          content = `<div class="p-6">${header}${post.title ? `<h3 class="text-xl font-bold text-gray-800 mb-3">${esc(post.title)}</h3>` : ''}
+            <div class="text-gray-700 leading-relaxed">${post.body || ''}</div>
+            ${post.link ? `<a href="${esc(post.link)}" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 link-teal font-semibold">${esc(post.linkLabel || 'Read more')} &rarr;</a>` : ''}</div>`;
         } else if (post.type === 'images') {
-          content = `<div class="p-6">
-            ${header}
-            ${galleryHTML(post.images || [])}
-            ${post.caption ? `<p class="text-gray-700 mt-4">${esc(post.caption)}</p>` : ''}
-          </div>`;
+          content = `<div class="p-6">${header}${galleryHTML(post.images || [])}${post.caption ? `<p class="text-gray-700 mt-4">${esc(post.caption)}</p>` : ''}</div>`;
         }
-
         card.innerHTML = content;
         grid.appendChild(card);
       });
-
-      // Re-process embeds
       setTimeout(() => {
         if (window.instgrm) window.instgrm.Embeds.process();
         if (window.FB) window.FB.XFBML.parse();
       }, 1500);
     }
 
+    /* ---------- Reveal + language ---------- */
+    const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+    document.querySelectorAll('.post-entry.rv').forEach(el => reduced ? el.classList.add('in') : io.observe(el));
+
+    function setReading(lang, persist) {
+      document.documentElement.setAttribute('data-reading', lang);
+      document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+      document.querySelectorAll('[data-set-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.setLang === lang)));
+      document.querySelectorAll('.essay-link').forEach(a => { a.href = a.dataset.url + (lang === 'zh' ? '?lang=zh' : ''); });
+      if (persist) BlogLang.set(lang);
+    }
+    document.querySelectorAll('[data-set-lang]').forEach(b => b.addEventListener('click', () => setReading(b.dataset.setLang, true)));
+    setReading(BlogLang.get(), false);
+    Holo.init();
+
     // Lightbox
     function openLightbox(src, alt) {
-      const lb = document.getElementById('img-lightbox');
       const img = document.getElementById('lb-img');
       img.src = src; img.alt = alt || '';
-      lb.classList.add('show');
+      document.getElementById('img-lightbox').classList.add('show');
       document.body.style.overflow = 'hidden';
     }
     function closeLightbox() {
-      const lb = document.getElementById('img-lightbox');
-      lb.classList.remove('show');
+      document.getElementById('img-lightbox').classList.remove('show');
       document.getElementById('lb-img').src = '';
       document.body.style.overflow = '';
     }
     document.getElementById('img-lightbox').addEventListener('click', e => { if (e.target === e.currentTarget) closeLightbox(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-  </script>
-
-  <script>
-  const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:0.08});
-  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
   </script>
 </body>
 </html>

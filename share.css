@@ -1,0 +1,69 @@
+/* ============================================================
+   Share kit styles — see share.js
+   ============================================================ */
+.share-kit { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+.sk-btn {
+  --brand: var(--c-teal, #0d9488);
+  position: relative; display: inline-flex; align-items: center; gap: .5rem;
+  height: 2.6rem; padding: 0 1rem 0 .8rem; border-radius: 9999px; cursor: pointer;
+  font: inherit; font-size: .82rem; font-weight: 500; text-decoration: none;
+  color: #363a48; background: #fff; border: 1px solid rgba(29,34,48,.12);
+  transition: transform .35s cubic-bezier(.22,1,.36,1), color .2s ease, background .25s ease, border-color .25s ease, box-shadow .35s ease;
+}
+.sk-btn:hover, .sk-btn:focus-visible {
+  transform: translateY(-2px); color: #fff; background: var(--brand); border-color: var(--brand);
+  box-shadow: 0 12px 22px -14px var(--brand); outline: none;
+}
+.sk-btn:active { transform: translateY(0) scale(.97); }
+.sk-ico { position: relative; display: inline-grid; place-items: center; width: 1rem; height: 1rem; }
+.sk-ico svg { width: 1rem; height: 1rem; grid-area: 1 / 1; transition: transform .35s cubic-bezier(.22,1,.36,1), opacity .2s ease; }
+.sk-btn:hover .sk-ico svg:first-child { transform: rotate(-8deg) scale(1.1); }
+
+.sk-x        { --brand: #111; }
+.sk-linkedin { --brand: #0a66c2; }
+.sk-facebook { --brand: #1877f2; }
+.sk-threads  { --brand: #111; }
+.sk-line     { --brand: #06c755; }
+.sk-mail     { --brand: #d97706; }
+.sk-more     { --brand: #14294b; }
+
+/* Copy button: link icon morphs into a check */
+.sk-copy { --brand: #0d9488; }
+.sk-copy .sk-ico svg:last-child { opacity: 0; transform: scale(.4) rotate(-30deg); }
+.sk-copy.done { color: #fff; background: var(--brand); border-color: var(--brand); }
+.sk-copy.done .sk-ico svg:first-child { opacity: 0; transform: scale(.4) rotate(30deg); }
+.sk-copy.done .sk-ico svg:last-child { opacity: 1; transform: none; }
+
+/* Icon-only row */
+.share-kit--compact { gap: .4rem; }
+.share-kit--compact .sk-btn { width: 2.3rem; height: 2.3rem; padding: 0; justify-content: center; }
+
+/* Toast */
+.share-toast {
+  position: fixed; left: 50%; bottom: 1.5rem; z-index: 60; display: flex; align-items: center; gap: .55rem;
+  padding: .7rem 1.1rem .7rem .9rem; border-radius: 9999px; font-size: .85rem; font-weight: 600; color: #fff;
+  background: #0c1525; box-shadow: 0 16px 40px -14px rgba(0,0,0,.6);
+  transform: translate(-50%, 140%); opacity: 0; pointer-events: none;
+  transition: transform .5s cubic-bezier(.22,1,.36,1), opacity .3s ease;
+}
+.share-toast svg { width: 1rem; height: 1rem; color: #5eead4; }
+.share-toast.show { transform: translate(-50%, 0); opacity: 1; }
+
+/* Popover (blog list cards) */
+.share-pop {
+  position: absolute; z-index: 55; width: min(20rem, calc(100vw - 24px)); padding: .9rem; border-radius: 1rem;
+  background: rgba(255,255,255,.96); border: 1px solid rgba(29,34,48,.1);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: 0 24px 50px -20px rgba(12,21,37,.45);
+  opacity: 0; transform: translateY(-6px) scale(.98); transform-origin: top right;
+  transition: opacity .2s ease, transform .3s cubic-bezier(.22,1,.36,1);
+}
+.share-pop.show { opacity: 1; transform: none; }
+.share-pop-title { margin: 0 0 .6rem .2rem; font-family: var(--f-mono, monospace); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: #7b7686; }
+.share-pop .share-kit { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
+.share-pop .sk-btn { height: 2.4rem; font-size: .78rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sk-btn, .share-toast, .share-pop { transition: none; }
+}
