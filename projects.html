@@ -14,19 +14,11 @@
   <meta property="og:url" content="https://wpchanwork.github.io/wei-ping_chan/projects.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <script>
-    (function () {
-      var ok = function (l) { return l === 'en' || l === 'zh' || l === 'es'; };
-      var l = new URLSearchParams(location.search).get('lang');
-      if (!ok(l)) { try { l = localStorage.getItem('wpc-blog-lang'); } catch (e) {} }
-      document.documentElement.setAttribute('data-reading', ok(l) ? l : 'en');
-    })();
-  </script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="i18n.css">
-  <script src="i18n.js"></script>
+  <script src="i18n.js"></script><!-- sets the language before first paint -->
   <style>
     /* === Page-specific styles === */
     .hero-gradient { background: linear-gradient(135deg, var(--c-deep) 0%, var(--c-primary) 100%); }

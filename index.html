@@ -17,19 +17,11 @@
   <meta name="twitter:title" content="Wei-Ping Chan — Data Scientist & Interdisciplinary Researcher">
   <meta name="twitter:description" content="Exploratory Data Scientist specializing in AI, computational modeling, ecology, and evolution.">
   <meta name="twitter:image" content="https://wpchanwork.github.io/wei-ping_chan/imgs/web/1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME.jpg">
-  <script>
-    (function () {
-      var ok = function (l) { return l === 'en' || l === 'zh' || l === 'es'; };
-      var l = new URLSearchParams(location.search).get('lang');
-      if (!ok(l)) { try { l = localStorage.getItem('wpc-blog-lang'); } catch (e) {} }
-      document.documentElement.setAttribute('data-reading', ok(l) ? l : 'en');
-    })();
-  </script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="i18n.css">
-  <script src="i18n.js"></script>
+  <script src="i18n.js"></script><!-- sets the language before first paint -->
   <style>
     /* === Page-specific styles === */
     .hero-mosaic {
@@ -468,10 +460,6 @@
             '<span class="blog-feature-cta">' + t({ en: 'Read more', zh: '閱讀全文', es: 'Leer en inglés' }) + ' <i>→</i></span>' +
           '</div>' +
         '</a>';
-      // The blog reads ?lang=zh; it has no Spanish, so other languages open the English post.
-      const link = box.querySelector('a');
-      const sync = lang => { link.href = p.url + (lang === 'zh' ? '?lang=zh' : ''); };
-      SiteLang.onChange(sync); sync(SiteLang.get());
     })();
   </script>
 

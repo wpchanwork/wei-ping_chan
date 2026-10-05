@@ -19,6 +19,10 @@ html:not([data-reading="es"]) [data-lang="es"],
 html[data-reading="zh"] [data-lang="en"],
 html[data-reading="es"] [data-lang="en"] { display: none !important; }
 
+/* First visit only: hidden for up to 0.8 s while the region lookup answers (see i18n.js). */
+body { transition: opacity .35s ease; }
+html.lang-pending body { opacity: 0; }
+
 /* ---------- Language switch with sliding thumb (same look as the blog) ---------- */
 .lang-toggle { position: relative; display: inline-grid; grid-template-columns: repeat(3, 1fr); padding: .25rem; border-radius: 9999px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); }
 .lang-toggle::before { content: ''; position: absolute; top: .25rem; bottom: .25rem; left: .25rem; width: calc((100% - .5rem) / 3); border-radius: 9999px; background: var(--c-teal); box-shadow: 0 4px 14px -4px rgba(13,148,136,.8); transition: transform .45s var(--ease-out); }

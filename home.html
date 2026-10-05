@@ -59,9 +59,11 @@
     <a href="index.html" class="enter" id="enter">Enter site →</a>
   </div>
   <script>
-    // Same stored language as the rest of the site (see i18n.js).
+    // Same order as i18n.js: the reader's own choice, then the cached region, then the browser language.
     (function () {
-      var l; try { l = localStorage.getItem('wpc-blog-lang'); } catch (e) {}
+      var l, g;
+      try { l = localStorage.getItem('wpc-blog-lang'); g = JSON.parse(localStorage.getItem('wpc-geo-lang') || 'null'); } catch (e) {}
+      if (!/^(en|zh|es)$/.test(l || '')) l = g && Date.now() < g.t ? g.lang : String(navigator.language || '').slice(0, 2);
       var label = { zh: '進入網站 →', es: 'Entrar al sitio →' }[l];
       if (label) { document.getElementById('enter').textContent = label; document.documentElement.lang = l === 'zh' ? 'zh-Hant' : l; }
     })();
