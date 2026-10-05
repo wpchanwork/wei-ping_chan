@@ -56,7 +56,15 @@
 <body>
   <div class="bg"></div>
   <div class="content">
-    <a href="index.html" class="enter">Enter site →</a>
+    <a href="index.html" class="enter" id="enter">Enter site →</a>
   </div>
+  <script>
+    // Same stored language as the rest of the site (see i18n.js).
+    (function () {
+      var l; try { l = localStorage.getItem('wpc-blog-lang'); } catch (e) {}
+      var label = { zh: '進入網站 →', es: 'Entrar al sitio →' }[l];
+      if (label) { document.getElementById('enter').textContent = label; document.documentElement.lang = l === 'zh' ? 'zh-Hant' : l; }
+    })();
+  </script>
 </body>
 </html>

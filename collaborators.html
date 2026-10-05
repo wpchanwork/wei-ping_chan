@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-reading="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Collaboration Map — Wei-Ping Chan</title>
+  <title data-zh="合作地圖｜Wei-Ping Chan" data-es="Mapa de colaboraciones | Wei-Ping Chan">Collaboration Map — Wei-Ping Chan</title>
   <meta name="description" content="An interactive map of Wei-Ping Chan's research collaborators and their institutions worldwide." />
   <link rel="canonical" href="https://wpchanwork.github.io/wei-ping_chan/collaborators.html">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -14,8 +14,19 @@
   <meta property="og:url" content="https://wpchanwork.github.io/wei-ping_chan/collaborators.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
+  <script>
+    (function () {
+      var ok = function (l) { return l === 'en' || l === 'zh' || l === 'es'; };
+      var l = new URLSearchParams(location.search).get('lang');
+      if (!ok(l)) { try { l = localStorage.getItem('wpc-blog-lang'); } catch (e) {} }
+      document.documentElement.setAttribute('data-reading', ok(l) ? l : 'en');
+    })();
+  </script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="i18n.css">
+  <script src="i18n.js"></script>
   <!-- Leaflet (interactive map, no API key required) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -154,13 +165,13 @@
         </button>
       </div>
       <nav id="menu" class="hidden md:flex md:items-center md:space-x-1 absolute md:static top-16 left-0 right-0 bg-white md:bg-transparent shadow md:shadow-none flex-col md:flex-row px-3 md:px-0 py-3 md:py-0 space-y-1 md:space-y-0">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <span class="nav-active">Collaborations</span>
-        <a href="blog.html" class="nav-link">Blog</a>
-        <a href="index.html#talks" class="nav-link">Talks</a>
-        <a href="index.html#background" class="nav-link">Background</a>
-        <a href="index.html#contact" class="nav-link">Contact</a>
+        <a href="index.html" class="nav-link"><span data-lang="en">Home</span><span data-lang="zh">首頁</span><span data-lang="es">Inicio</span></a>
+        <a href="projects.html" class="nav-link"><span data-lang="en">Projects</span><span data-lang="zh">專案</span><span data-lang="es">Proyectos</span></a>
+        <span class="nav-active"><span data-lang="en">Collaborations</span><span data-lang="zh">合作</span><span data-lang="es">Colaboraciones</span></span>
+        <a href="blog.html" class="nav-link"><span data-lang="en">Blog</span><span data-lang="zh">部落格</span><span data-lang="es">Blog</span></a>
+        <a href="index.html#talks" class="nav-link"><span data-lang="en">Talks</span><span data-lang="zh">演講</span><span data-lang="es">Charlas</span></a>
+        <a href="index.html#background" class="nav-link"><span data-lang="en">Background</span><span data-lang="zh">經歷</span><span data-lang="es">Trayectoria</span></a>
+        <a href="index.html#contact" class="nav-link"><span data-lang="en">Contact</span><span data-lang="zh">聯絡</span><span data-lang="es">Contacto</span></a>
       </nav>
     </div>
   </header>
@@ -173,11 +184,17 @@
   <!-- Hero -->
   <section class="hero-gradient text-white">
     <div class="max-w-6xl mx-auto px-4 py-14 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold">Collaboration Map</h2>
+      <h2 class="text-3xl md:text-5xl font-bold"><span data-lang="en">Collaboration Map</span><span data-lang="zh">合作地圖</span><span data-lang="es">Mapa de colaboraciones</span></h2>
       <p class="mt-4 text-blue-100 max-w-2xl mx-auto text-base md:text-lg">
-        Science is a team effort. Explore the mentors, co-authors, and partners who
-        have shaped my research — and where in the world they work.
+        <span data-lang="en">Science is a team effort. Explore the mentors, co-authors, and partners who have shaped my research — and where in the world they work.</span><span data-lang="zh">科學是團隊合作的成果。認識影響我研究的導師、共同作者與合作夥伴，也看看他們在世界上的哪些地方工作。</span><span data-lang="es">La ciencia es un trabajo en equipo. Conoce a los mentores, coautores y colaboradores que han marcado mi investigación, y descubre en qué lugares del mundo trabajan.</span>
       </p>
+      <div class="mt-7 flex justify-center">
+        <div class="lang-toggle" role="group" aria-label="Choose a language">
+          <button type="button" data-set-lang="en" title="English" lang="en">EN</button>
+          <button type="button" data-set-lang="zh" title="繁體中文" lang="zh-Hant">中文</button>
+          <button type="button" data-set-lang="es" title="Español" lang="es">ES</button>
+        </div>
+      </div>
       <div class="mt-6 flex flex-wrap justify-center gap-3">
         <a href="mailto:wpchanwork@gmail.com" class="hero-btn hero-btn-outline">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -191,16 +208,16 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
           </svg>
-          SOS Research Unit
+          <span data-lang="en">SOS Research Unit</span><span data-lang="zh">SOS Research Unit</span><span data-lang="es">SOS Research Unit</span>
         </a>
       </div>
       <div class="mt-8 flex flex-wrap justify-center gap-6 md:gap-10">
         <div><p class="text-3xl md:text-4xl font-bold" id="stat-people">—</p>
-          <p class="text-xs md:text-sm text-blue-100 uppercase tracking-wide">Collaborators</p></div>
+          <p class="text-xs md:text-sm text-blue-100 uppercase tracking-wide"><span data-lang="en">Collaborators</span><span data-lang="zh">合作者</span><span data-lang="es">Colaboradores</span></p></div>
         <div><p class="text-3xl md:text-4xl font-bold" id="stat-countries">—</p>
-          <p class="text-xs md:text-sm text-blue-100 uppercase tracking-wide">Countries</p></div>
+          <p class="text-xs md:text-sm text-blue-100 uppercase tracking-wide"><span data-lang="en">Countries</span><span data-lang="zh">國家</span><span data-lang="es">Países</span></p></div>
         <div><p class="text-3xl md:text-4xl font-bold" id="stat-fields">—</p>
-          <p class="text-xs md:text-sm text-blue-100 uppercase tracking-wide">Research fields</p></div>
+          <p class="text-xs md:text-sm text-blue-100 uppercase tracking-wide"><span data-lang="en">Research fields</span><span data-lang="zh">研究領域</span><span data-lang="es">Áreas de investigación</span></p></div>
       </div>
     </div>
   </section>
@@ -208,10 +225,10 @@
   <!-- Field-work photo marquee -->
   <section class="bg-gray-100 py-12 reveal">
     <div class="max-w-6xl mx-auto px-4 text-center mb-8">
-      <h3 class="text-2xl md:text-3xl font-bold text-gray-800">From the Field</h3>
+      <h3 class="text-2xl md:text-3xl font-bold text-gray-800"><span data-lang="en">From the Field</span><span data-lang="zh">野外紀實</span><span data-lang="es">Desde el campo</span></h3>
       <p class="text-gray-500 mt-2">
-        Group photos and snapshots from collaborative field research around the world.
-        <span class="block text-xs text-gray-400 mt-1">Hover to pause · scrolls automatically</span>
+        <span data-lang="en">Group photos and snapshots from collaborative field research around the world.</span><span data-lang="zh">在世界各地合作進行野外研究時留下的團體照與生活片段。</span><span data-lang="es">Fotos de grupo e instantáneas de investigaciones de campo en colaboración por todo el mundo.</span>
+        <span class="block text-xs text-gray-400 mt-1"><span data-lang="en">Hover to pause · scrolls automatically</span><span data-lang="zh">自動捲動 · 滑鼠移入即可暫停</span><span data-lang="es">Desplazamiento automático · pasa el cursor para pausar</span></span>
       </p>
     </div>
     <div class="marquee mb-4"><div class="marquee-track left"  id="photo-row-1"></div></div>
@@ -221,8 +238,8 @@
   <!-- Map + filter -->
   <section class="max-w-6xl mx-auto px-4 py-10 reveal">
     <div class="text-center mb-5">
-      <h3 class="text-2xl md:text-3xl font-bold text-gray-800">Where my collaborators work</h3>
-      <p class="text-gray-500 mt-2">Tap a marker for details, or filter by research field. Markers are coloured by field.</p>
+      <h3 class="text-2xl md:text-3xl font-bold text-gray-800"><span data-lang="en">Where my collaborators work</span><span data-lang="zh">合作者分布地圖</span><span data-lang="es">Dónde trabajan mis colaboradores</span></h3>
+      <p class="text-gray-500 mt-2"><span data-lang="en">Tap a marker for details, or filter by research field. Markers are coloured by field.</span><span data-lang="zh">點選標記查看詳細資訊，或依研究領域篩選。標記的顏色代表研究領域。</span><span data-lang="es">Toca un marcador para ver los detalles o filtra por área de investigación. El color de cada marcador indica su área.</span></p>
     </div>
     <div id="filters" class="flex flex-wrap justify-center gap-2 mb-5"></div>
     <div id="map" class="rounded-2xl shadow-lg z-0"></div>
@@ -230,21 +247,21 @@
 
   <!-- Collaborator cards grouped by field -->
   <section class="max-w-6xl mx-auto px-4 pb-6 reveal">
-    <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-2">Collaborators by Research Field</h3>
-    <p class="text-center text-gray-500 mb-8">Tap a card to locate that collaborator on the map.</p>
+    <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-2"><span data-lang="en">Collaborators by Research Field</span><span data-lang="zh">各研究領域的合作者</span><span data-lang="es">Colaboradores por área de investigación</span></h3>
+    <p class="text-center text-gray-500 mb-8"><span data-lang="en">Tap a card to locate that collaborator on the map.</span><span data-lang="zh">點選卡片，即可在地圖上找到這位合作者。</span><span data-lang="es">Toca una tarjeta para ubicar a esa persona en el mapa.</span></p>
     <div id="collab-sections"></div>
   </section>
 
   <!-- Collaborations by Publication -->
   <section class="max-w-6xl mx-auto px-4 py-8 reveal">
-    <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-800">Collaborations by Publication</h3>
-    <p class="text-center text-gray-500 mt-2 mb-6">The leading and senior co-authors of each study, in author order.</p>
+    <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-800"><span data-lang="en">Collaborations by Publication</span><span data-lang="zh">論文合作</span><span data-lang="es">Colaboraciones por publicación</span></h3>
+    <p class="text-center text-gray-500 mt-2 mb-6"><span data-lang="en">The leading and senior co-authors of each study, in author order.</span><span data-lang="zh">每篇研究的第一作者與資深作者，依作者順序排列。</span><span data-lang="es">Autores principales y sénior de cada estudio, por orden de autoría.</span></p>
     <div class="flex flex-wrap justify-center gap-3 mb-10 text-xs">
-      <span class="chip chip-you">Wei-Ping Chan (me)</span>
-      <span class="chip chip-cofirst">Co-first author</span>
-      <span class="chip chip-senior">Senior author</span>
-      <span class="chip">Co-author</span>
-      <span class="chip chip-more">+ N more co-authors</span>
+      <span class="chip chip-you"><span data-lang="en">Wei-Ping Chan (me)</span><span data-lang="zh">Wei-Ping Chan（我）</span><span data-lang="es">Wei-Ping Chan (yo)</span></span>
+      <span class="chip chip-cofirst"><span data-lang="en">Co-first author</span><span data-lang="zh">共同第一作者</span><span data-lang="es">Primera autoría compartida</span></span>
+      <span class="chip chip-senior"><span data-lang="en">Senior author</span><span data-lang="zh">資深作者</span><span data-lang="es">Autoría sénior</span></span>
+      <span class="chip"><span data-lang="en">Co-author</span><span data-lang="zh">共同作者</span><span data-lang="es">Coautoría</span></span>
+      <span class="chip chip-more"><span data-lang="en">+ N more co-authors</span><span data-lang="zh">另有 N 位共同作者</span><span data-lang="es">+ N coautores más</span></span>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
@@ -261,7 +278,7 @@
         <div class="flex flex-wrap gap-2 mt-auto">
           <span class="chip chip-you">Wei-Ping Chan</span>
           <span class="chip">Imogen Daszak</span>
-          <span class="chip chip-more">+9 more co-authors</span>
+          <span class="chip chip-more"><span data-lang="en">+9 more co-authors</span><span data-lang="zh">另有 9 位共同作者</span><span data-lang="es">+9 coautores más</span></span>
           <span class="chip chip-senior">Avalon C. S. Owens</span>
         </div>
       </article>
@@ -278,8 +295,8 @@
         </h4>
         <div class="flex flex-wrap gap-2 mt-auto">
           <span class="chip">Po-An Lin</span>
-          <span class="chip chip-you">Wei-Ping Chan <span class="chip-tag">co-first</span></span>
-          <span class="chip chip-more">+4 more co-authors</span>
+          <span class="chip chip-you">Wei-Ping Chan <span class="chip-tag"><span data-lang="en">co-first</span><span data-lang="zh">共同第一</span><span data-lang="es">primera autoría compartida</span></span></span>
+          <span class="chip chip-more"><span data-lang="en">+4 more co-authors</span><span data-lang="zh">另有 4 位共同作者</span><span data-lang="es">+4 coautores más</span></span>
           <span class="chip chip-senior">Naomi E. Pierce</span>
           <span class="chip chip-senior">Gary Felton</span>
         </div>
@@ -298,7 +315,7 @@
         <div class="flex flex-wrap gap-2 mt-auto">
           <span class="chip chip-you">Wei-Ping Chan</span>
           <span class="chip chip-senior">Jonathan Lenoir</span>
-          <span class="chip chip-more">+2 more co-authors</span>
+          <span class="chip chip-more"><span data-lang="en">+2 more co-authors</span><span data-lang="zh">另有 2 位共同作者</span><span data-lang="es">+2 coautores más</span></span>
           <span class="chip chip-senior">I-Ching Chen</span>
           <span class="chip chip-senior">Sheng-Feng Shen</span>
         </div>
@@ -316,8 +333,8 @@
         </h4>
         <div class="flex flex-wrap gap-2 mt-auto">
           <span class="chip">Zhengyang Wang</span>
-          <span class="chip chip-you">Wei-Ping Chan <span class="chip-tag">co-first</span></span>
-          <span class="chip chip-more">+2 more co-authors</span>
+          <span class="chip chip-you">Wei-Ping Chan <span class="chip-tag"><span data-lang="en">co-first</span><span data-lang="zh">共同第一</span><span data-lang="es">primera autoría compartida</span></span></span>
+          <span class="chip chip-more"><span data-lang="en">+2 more co-authors</span><span data-lang="zh">另有 2 位共同作者</span><span data-lang="es">+2 coautores más</span></span>
           <span class="chip chip-senior">Naomi E. Pierce</span>
           <span class="chip chip-senior">David J. Lohman</span>
           <span class="chip chip-senior">Weilin Meng</span>
@@ -336,9 +353,9 @@
         </h4>
         <div class="flex flex-wrap gap-2 mt-auto">
           <span class="chip chip-you">Wei-Ping Chan</span>
-          <span class="chip chip-cofirst">Richard Rabideau Childers <span class="chip-tag">co-first</span></span>
-          <span class="chip chip-cofirst">Sorcha Ashe <span class="chip-tag">co-first</span></span>
-          <span class="chip chip-more">+8 more co-authors</span>
+          <span class="chip chip-cofirst">Richard Rabideau Childers <span class="chip-tag"><span data-lang="en">co-first</span><span data-lang="zh">共同第一</span><span data-lang="es">primera autoría compartida</span></span></span>
+          <span class="chip chip-cofirst">Sorcha Ashe <span class="chip-tag"><span data-lang="en">co-first</span><span data-lang="zh">共同第一</span><span data-lang="es">primera autoría compartida</span></span></span>
+          <span class="chip chip-more"><span data-lang="en">+8 more co-authors</span><span data-lang="zh">另有 8 位共同作者</span><span data-lang="es">+8 coautores más</span></span>
           <span class="chip chip-senior">Nanfang Yu</span>
           <span class="chip chip-senior">Naomi E. Pierce</span>
         </div>
@@ -358,7 +375,7 @@
           <span class="chip chip-you">Wei-Ping Chan</span>
           <span class="chip chip-senior">I-Ching Chen</span>
           <span class="chip chip-senior">Robert K. Colwell</span>
-          <span class="chip chip-more">+1 more co-author</span>
+          <span class="chip chip-more"><span data-lang="en">+1 more co-author</span><span data-lang="zh">另有 1 位共同作者</span><span data-lang="es">+1 coautor más</span></span>
           <span class="chip chip-senior">Cho-ying Huang</span>
           <span class="chip chip-senior">Sheng-Feng Shen</span>
         </div>
@@ -370,10 +387,10 @@
   <!-- CTA -->
   <section class="max-w-6xl mx-auto px-4 py-12 text-center reveal">
     <div class="bg-white rounded-2xl shadow-md p-8">
-      <h3 class="text-xl md:text-2xl font-bold text-gray-800">Interested in collaborating?</h3>
-      <p class="text-gray-600 mt-2 mb-6">I welcome interdisciplinary projects across science, data, and design.</p>
+      <h3 class="text-xl md:text-2xl font-bold text-gray-800"><span data-lang="en">Interested in collaborating?</span><span data-lang="zh">有興趣合作嗎？</span><span data-lang="es">¿Te interesa colaborar?</span></h3>
+      <p class="text-gray-600 mt-2 mb-6"><span data-lang="en">I welcome interdisciplinary projects across science, data, and design.</span><span data-lang="zh">我很樂意參與橫跨科學、資料與設計的跨領域專案。</span><span data-lang="es">Me interesan los proyectos interdisciplinarios que unen ciencia, datos y diseño.</span></p>
       <a href="index.html#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition">
-        Get in touch
+        <span data-lang="en">Get in touch</span><span data-lang="zh">與我聯絡</span><span data-lang="es">Escríbeme</span>
       </a>
     </div>
   </section>
@@ -382,7 +399,7 @@
   <footer class="wpc-footer">
     <div class="max-w-6xl mx-auto px-4 py-10 text-center">
       <p class="footer-brand">Wei-Ping Chan</p>
-      <p class="text-sm mt-1" style="color:#7a788a">Exploratory Data Scientist · Interdisciplinary Researcher</p>
+      <p class="text-sm mt-1" style="color:#7a788a"><span data-lang="en">Exploratory Data Scientist · Interdisciplinary Researcher</span><span data-lang="zh">探索型資料科學家 · 跨領域研究者</span><span data-lang="es">Científico de datos exploratorio · Investigador interdisciplinario</span></p>
       <div class="flex justify-center gap-6 mt-5">
         <a href="https://github.com/wpchanwork" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/wei-ping-chan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -390,9 +407,9 @@
         <a href="https://sos-commons.vercel.app/research" target="_blank" rel="noopener noreferrer">SOS Research</a>
       </div>
       <p class="text-xs mt-6" style="color:#55536a">
-        Map data &copy; OpenStreetMap contributors, &copy; CARTO &middot; Collaborator data from published citations, Google Scholar &amp; ongoing partnerships
+        <span data-lang="en">Map data &copy; OpenStreetMap contributors, &copy; CARTO &middot; Collaborator data from published citations, Google Scholar &amp; ongoing partnerships</span><span data-lang="zh">地圖資料 &copy; OpenStreetMap 貢獻者、&copy; CARTO &middot; 合作者資料取自已發表論文、Google Scholar 與進行中的合作</span><span data-lang="es">Datos del mapa &copy; colaboradores de OpenStreetMap, &copy; CARTO &middot; Datos de colaboradores obtenidos de publicaciones, Google Scholar y colaboraciones en curso</span>
       </p>
-      <p class="text-xs mt-1" style="color:#55536a">&copy; 2026 Wei-Ping Chan. All rights reserved.</p>
+      <p class="text-xs mt-1" style="color:#55536a"><span data-lang="en">&copy; 2026 Wei-Ping Chan. All rights reserved.</span><span data-lang="zh">&copy; 2026 Wei-Ping Chan 版權所有</span><span data-lang="es">&copy; 2026 Wei-Ping Chan. Todos los derechos reservados.</span></p>
     </div>
   </footer>
 
@@ -401,13 +418,13 @@
      RESEARCH FIELDS  (label + marker colour)
      ============================================================ */
   const FIELDS = {
-    evo: { label: "Evolution & Animal Behavior",     color: "#7c3aed" },
-    eco: { label: "Ecology & Biogeography",          color: "#059669" },
-    ent: { label: "Entomology & Chemical Ecology",   color: "#d97706" },
-    con: { label: "Biodiversity & Conservation",     color: "#0d9488" },
-    bot: { label: "Botany & Phylogenomics",          color: "#65a30d" },
-    phy: { label: "Physics & Imaging",               color: "#2563eb" },
-    sus: { label: "Sustainability in Practice",       color: "#db2777" }
+    evo: { label: {en:"Evolution & Animal Behavior",zh:"演化與動物行為",es:"Evolución y comportamiento animal"},     color: "#7c3aed" },
+    eco: { label: {en:"Ecology & Biogeography",zh:"生態學與生物地理學",es:"Ecología y biogeografía"},          color: "#059669" },
+    ent: { label: {en:"Entomology & Chemical Ecology",zh:"昆蟲學與化學生態學",es:"Entomología y ecología química"},   color: "#d97706" },
+    con: { label: {en:"Biodiversity & Conservation",zh:"生物多樣性與保育",es:"Biodiversidad y conservación"},     color: "#0d9488" },
+    bot: { label: {en:"Botany & Phylogenomics",zh:"植物學與親緣基因體學",es:"Botánica y filogenómica"},          color: "#65a30d" },
+    phy: { label: {en:"Physics & Imaging",zh:"物理與影像",es:"Física y técnicas de imagen"},               color: "#2563eb" },
+    sus: { label: {en:"Sustainability in Practice",zh:"永續實踐",es:"Sostenibilidad en la práctica"},       color: "#db2777" }
   };
 
   /* ============================================================
@@ -419,126 +436,128 @@
      ============================================================ */
   const COLLAB = [
     { name:"Naomi E. Pierce", field:"evo", photoId:"",
-      inst:"Museum of Comparative Zoology, Harvard University",
-      loc:"Cambridge, MA, USA", lat:42.3782, lng:-71.1156,
-      note:"Doctoral advisor",
+      inst:{en:"Museum of Comparative Zoology, Harvard University",zh:"哈佛大學比較動物學博物館",es:"Museo de Zoología Comparada, Universidad de Harvard"},
+      loc:{en:"Cambridge, MA, USA",zh:"美國麻州劍橋",es:"Cambridge, Massachusetts (EE. UU.)"}, lat:42.3782, lng:-71.1156,
+      note:{en:"Doctoral advisor",zh:"博士指導教授",es:"Dirección de la tesis doctoral"},
       pubs:["Proc. R. Soc. B 2025","Biol. Conserv. 2023","Commun. Biol. 2022"] },
 
     { name:"Avalon C. S. Owens", field:"evo", photoId:"",
-      inst:"The Rowland Institute at Harvard",
-      loc:"Cambridge, MA, USA", lat:42.3626, lng:-71.1003,
+      inst:{en:"The Rowland Institute at Harvard",zh:"哈佛大學羅蘭研究所",es:"Rowland Institute at Harvard"},
+      loc:{en:"Cambridge, MA, USA",zh:"美國麻州劍橋",es:"Cambridge, Massachusetts (EE. UU.)"}, lat:42.3626, lng:-71.1003,
       pubs:["Proc. R. Soc. B 2025"] },
 
     { name:"Imogen Daszak", field:"evo", photoId:"",
-      inst:"The Rowland Institute at Harvard / Northeastern University",
-      loc:"Boston, MA, USA", lat:42.3500, lng:-71.0892,
+      inst:{en:"The Rowland Institute at Harvard / Northeastern University",zh:"哈佛大學羅蘭研究所／美國東北大學",es:"Rowland Institute at Harvard / Universidad Northeastern"},
+      loc:{en:"Boston, MA, USA",zh:"美國麻州波士頓",es:"Boston, Massachusetts (EE. UU.)"}, lat:42.3500, lng:-71.0892,
       pubs:["Proc. R. Soc. B 2025"] },
 
     { name:"Qian Tang", field:"con", photoId:"",
-      inst:"The Rowland Institute at Harvard",
-      loc:"Cambridge, MA, USA", lat:42.3610, lng:-71.0975,
+      inst:{en:"The Rowland Institute at Harvard",zh:"哈佛大學羅蘭研究所",es:"Rowland Institute at Harvard"},
+      loc:{en:"Cambridge, MA, USA",zh:"美國麻州劍橋",es:"Cambridge, Massachusetts (EE. UU.)"}, lat:42.3610, lng:-71.0975,
       pubs:[] },
 
     { name:"Richard Rabideau Childers", field:"evo", photoId:"",
-      inst:"Harvard University",
-      loc:"Cambridge, MA, USA", lat:42.3770, lng:-71.1167,
+      inst:{en:"Harvard University",zh:"哈佛大學",es:"Universidad de Harvard"},
+      loc:{en:"Cambridge, MA, USA",zh:"美國麻州劍橋",es:"Cambridge, Massachusetts (EE. UU.)"}, lat:42.3770, lng:-71.1167,
       pubs:["Commun. Biol. 2022"] },
 
     { name:"Sheng-Feng Shen", field:"eco", photoId:"",
-      inst:"Biodiversity Research Center, Academia Sinica",
-      loc:"Taipei, Taiwan", lat:25.0420, lng:121.6147,
-      note:"Master's co-advisor",
+      inst:{en:"Biodiversity Research Center, Academia Sinica",zh:"中央研究院生物多樣性研究中心",es:"Centro de Investigación en Biodiversidad, Academia Sinica"},
+      loc:{en:"Taipei, Taiwan",zh:"臺灣臺北",es:"Taipéi (Taiwán)"}, lat:25.0420, lng:121.6147,
+      note:{en:"Master's co-advisor",zh:"碩士共同指導教授",es:"Codirección de la tesis de maestría"},
       pubs:["Nature 2024","Science 2016"] },
 
     { name:"I-Ching Chen", field:"eco", photoId:"",
-      inst:"Department of Life Sciences, National Cheng Kung University",
-      loc:"Tainan, Taiwan", lat:22.9999, lng:120.2179,
+      inst:{en:"Department of Life Sciences, National Cheng Kung University",zh:"國立成功大學生命科學系",es:"Departamento de Ciencias de la Vida, Universidad Nacional Cheng Kung"},
+      loc:{en:"Tainan, Taiwan",zh:"臺灣臺南",es:"Tainan (Taiwán)"}, lat:22.9999, lng:120.2179,
       pubs:["Nature 2024","Science 2016"] },
 
     { name:"Po-An Lin", field:"ent", photoId:"",
-      inst:"Department of Entomology, National Taiwan University",
-      loc:"Taipei, Taiwan", lat:25.0174, lng:121.5398,
+      inst:{en:"Department of Entomology, National Taiwan University",zh:"國立臺灣大學昆蟲學系",es:"Departamento de Entomología, Universidad Nacional de Taiwán"},
+      loc:{en:"Taipei, Taiwan",zh:"臺灣臺北",es:"Taipéi (Taiwán)"}, lat:25.0174, lng:121.5398,
       pubs:["Proc. R. Soc. B 2025"] },
 
     { name:"Cheng-Chia Tsai", field:"phy", photoId:"",
-      inst:"Columbia University",
-      loc:"New York, NY, USA", lat:40.8060, lng:-73.9610,
+      inst:{en:"Columbia University",zh:"哥倫比亞大學",es:"Universidad de Columbia"},
+      loc:{en:"New York, NY, USA",zh:"美國紐約",es:"Nueva York (EE. UU.)"}, lat:40.8060, lng:-73.9610,
       pubs:["Commun. Biol. 2022"] },
 
     { name:"Edward R. Soucy", field:"phy", photoId:"",
-      inst:"Center for Brain Science, Harvard University",
-      loc:"Cambridge, MA, USA", lat:42.3760, lng:-71.1138,
+      inst:{en:"Center for Brain Science, Harvard University",zh:"哈佛大學腦科學中心",es:"Centro de Ciencias del Cerebro, Universidad de Harvard"},
+      loc:{en:"Cambridge, MA, USA",zh:"美國麻州劍橋",es:"Cambridge, Massachusetts (EE. UU.)"}, lat:42.3760, lng:-71.1138,
       pubs:["Commun. Biol. 2022"] },
 
     { name:"Akito Y. Kawahara", field:"evo", photoId:"",
-      inst:"Florida Museum of Natural History, University of Florida",
-      loc:"Gainesville, FL, USA", lat:29.6357, lng:-82.3702,
+      inst:{en:"Florida Museum of Natural History, University of Florida",zh:"佛羅里達大學佛羅里達自然史博物館",es:"Museo de Historia Natural de Florida, Universidad de Florida"},
+      loc:{en:"Gainesville, FL, USA",zh:"美國佛州蓋恩斯維爾",es:"Gainesville, Florida (EE. UU.)"}, lat:29.6357, lng:-82.3702,
       pubs:["Nat. Ecol. Evol. 2023"] },
 
     { name:"Shipher Wu", field:"con", photoId:"",
-      inst:"National Taiwan Museum",
-      loc:"Taipei, Taiwan", lat:25.0429, lng:121.5150,
+      inst:{en:"National Taiwan Museum",zh:"國立臺灣博物館",es:"Museo Nacional de Taiwán"},
+      loc:{en:"Taipei, Taiwan",zh:"臺灣臺北",es:"Taipéi (Taiwán)"}, lat:25.0429, lng:121.5150,
       pubs:[] },
 
     { name:"Syuan-Jyun Sun", field:"evo", photoId:"",
-      inst:"National Taiwan University",
-      loc:"Taipei, Taiwan", lat:25.0190, lng:121.5415,
+      inst:{en:"National Taiwan University",zh:"國立臺灣大學",es:"Universidad Nacional de Taiwán"},
+      loc:{en:"Taipei, Taiwan",zh:"臺灣臺北",es:"Taipéi (Taiwán)"}, lat:25.0190, lng:121.5415,
       pubs:[] },
 
     { name:"Jonathan Lenoir", field:"eco", photoId:"",
-      inst:"CNRS / Université de Picardie Jules Verne",
-      loc:"Amiens, France", lat:49.8941, lng:2.2958,
+      inst:{en:"CNRS / Université de Picardie Jules Verne",zh:"法國國家科學研究中心（CNRS）／皮卡第儒勒凡爾納大學",es:"CNRS / Universidad de Picardía Jules Verne"},
+      loc:{en:"Amiens, France",zh:"法國亞眠",es:"Amiens (Francia)"}, lat:49.8941, lng:2.2958,
       pubs:["Nature 2024"] },
 
     { name:"Robert K. Colwell", field:"eco", photoId:"",
-      inst:"University of Connecticut",
-      loc:"Storrs, CT, USA", lat:41.8077, lng:-72.2540,
+      inst:{en:"University of Connecticut",zh:"康乃狄克大學",es:"Universidad de Connecticut"},
+      loc:{en:"Storrs, CT, USA",zh:"美國康州斯托斯",es:"Storrs, Connecticut (EE. UU.)"}, lat:41.8077, lng:-72.2540,
       pubs:["Science 2016"] },
 
     { name:"David J. Lohman", field:"con", photoId:"",
-      inst:"City College of New York, CUNY",
-      loc:"New York, NY, USA", lat:40.8200, lng:-73.9493,
+      inst:{en:"City College of New York, CUNY",zh:"紐約市立大學城市學院",es:"City College of New York (CUNY)"},
+      loc:{en:"New York, NY, USA",zh:"美國紐約",es:"Nueva York (EE. UU.)"}, lat:40.8200, lng:-73.9493,
       pubs:["Biol. Conserv. 2023"] },
 
     { name:"Zhengyang Wang", field:"con", photoId:"",
-      inst:"Sichuan University",
-      loc:"Chengdu, China", lat:30.6310, lng:104.0830,
+      inst:{en:"Sichuan University",zh:"四川大學",es:"Universidad de Sichuan"},
+      loc:{en:"Chengdu, China",zh:"中國成都",es:"Chengdu (China)"}, lat:30.6310, lng:104.0830,
       pubs:["Biol. Conserv. 2023"] },
 
     { name:"Nanfang Yu", field:"phy", photoId:"",
-      inst:"Department of Applied Physics, Columbia University",
-      loc:"New York, NY, USA", lat:40.8075, lng:-73.9626,
+      inst:{en:"Department of Applied Physics, Columbia University",zh:"哥倫比亞大學應用物理系",es:"Departamento de Física Aplicada, Universidad de Columbia"},
+      loc:{en:"New York, NY, USA",zh:"美國紐約",es:"Nueva York (EE. UU.)"}, lat:40.8075, lng:-73.9626,
       pubs:["Commun. Biol. 2022"] },
 
     { name:"Liming Cai", field:"bot", photoId:"",
-      inst:"University of Florida",
-      loc:"Gainesville, FL, USA", lat:29.6436, lng:-82.3549,
+      inst:{en:"University of Florida",zh:"佛羅里達大學",es:"Universidad de Florida"},
+      loc:{en:"Gainesville, FL, USA",zh:"美國佛州蓋恩斯維爾",es:"Gainesville, Florida (EE. UU.)"}, lat:29.6436, lng:-82.3549,
       pubs:["Proc. R. Soc. B 2025"] },
 
     { name:"Shawan Chowdhury", field:"con", photoId:"",
-      inst:"Monash University",
-      loc:"Melbourne, Australia", lat:-37.9105, lng:145.1340,
+      inst:{en:"Monash University",zh:"蒙納許大學",es:"Universidad Monash"},
+      loc:{en:"Melbourne, Australia",zh:"澳洲墨爾本",es:"Melbourne (Australia)"}, lat:-37.9105, lng:145.1340,
       pubs:[] },
 
     { name:"Akbar John", field:"con", photoId:"",
-      inst:"College of Marine Science and Aquatic Biology, University of Khorfakkan",
-      loc:"Sharjah, United Arab Emirates", lat:25.3392, lng:56.3420,
+      inst:{en:"College of Marine Science and Aquatic Biology, University of Khorfakkan",zh:"霍爾法坎大學海洋科學與水生生物學院",es:"Facultad de Ciencias Marinas y Biología Acuática, Universidad de Khorfakkan"},
+      loc:{en:"Sharjah, United Arab Emirates",zh:"阿拉伯聯合大公國沙迦",es:"Sharjah (Emiratos Árabes Unidos)"}, lat:25.3392, lng:56.3420,
       pubs:[] },
 
     { name:"SALAD Dressing", field:"sus", photoId:"",
-      inst:"Landscape architecture practice",
-      loc:"Singapore", lat:1.2903, lng:103.8520,
-      note:"Sustainable landscape design",
+      inst:{en:"Landscape architecture practice",zh:"地景建築事務所",es:"Estudio de paisajismo"},
+      loc:{en:"Singapore",zh:"新加坡",es:"Singapur"}, lat:1.2903, lng:103.8520,
+      note:{en:"Sustainable landscape design",zh:"永續地景設計",es:"Diseño de paisajes sostenibles"},
       pubs:[] },
 
     { name:"Tony Aramburu", field:"sus", photoId:"",
-      inst:"Local naturalist guide, Tambopata National Reserve",
-      loc:"Sandoval Lake, Peru", lat:-12.6070, lng:-69.0340,
-      note:"Amazon biodiversity monitoring",
+      inst:{en:"Local naturalist guide, Tambopata National Reserve",zh:"坦博帕塔國家保護區在地自然嚮導",es:"Guía naturalista local, Reserva Nacional Tambopata"},
+      loc:{en:"Sandoval Lake, Peru",zh:"秘魯桑多瓦爾湖",es:"Lago Sandoval (Perú)"}, lat:-12.6070, lng:-69.0340,
+      note:{en:"Amazon biodiversity monitoring",zh:"亞馬遜生物多樣性監測",es:"Monitoreo de la biodiversidad amazónica"},
       pubs:[] }
   ];
 
   /* ---------- helpers ---------- */
+  // inst, loc, note, caption and field labels are { en, zh, es }; SiteLang.t renders all three.
+  const t = m => SiteLang.t(m);
   function initials(name){
     const p = name.replace(/[^A-Za-z\s-]/g,'').trim().split(/[\s-]+/).filter(Boolean);
     if(p.length===1) return p[0][0].toUpperCase();
@@ -553,10 +572,10 @@
             </div>`;
   }
   function tagsHTML(c){
-    const note = c.note ? `<span class="tag tag-note">${c.note}</span>` : '';
+    const note = c.note ? `<span class="tag tag-note">${t(c.note)}</span>` : '';
     const pubs = (c.pubs && c.pubs.length)
       ? c.pubs.map(p=>`<span class="tag">${p}</span>`).join('')
-      : `<span class="tag tag-new">Active collaboration</span>`;
+      : `<span class="tag tag-new">${t({en:'Active collaboration',zh:'合作進行中',es:'Colaboración en curso'})}</span>`;
     return note + pubs;
   }
 
@@ -578,11 +597,11 @@
            ${avatar(c,48)}
            <div>
              <div style="font-weight:700;font-size:.95rem;">${c.name}</div>
-             <div style="font-size:.72rem;color:#7c3aed;font-weight:600;">${FIELDS[c.field].label}</div>
+             <div style="font-size:.72rem;color:#7c3aed;font-weight:600;">${t(FIELDS[c.field].label)}</div>
            </div>
          </div>
-         <div style="font-size:.78rem;color:#475569;margin-top:.5rem;">${c.inst}</div>
-         <div style="font-size:.72rem;color:#94a3b8;margin-top:.15rem;">📍 ${c.loc}</div>
+         <div style="font-size:.78rem;color:#475569;margin-top:.5rem;">${t(c.inst)}</div>
+         <div style="font-size:.72rem;color:#94a3b8;margin-top:.15rem;">📍 ${t(c.loc)}</div>
          <div style="margin-top:.5rem;display:flex;flex-wrap:wrap;gap:.3rem;">${tagsHTML(c)}</div>
        </div>`
     );
@@ -598,7 +617,7 @@
     if(!members.length) return;
     sectionsHTML += `<div data-group="${key}" class="mb-10">
       <h4 class="group-head" style="border-color:${FIELDS[key].color};">
-        <span class="dot" style="background:${FIELDS[key].color};"></span>${FIELDS[key].label}
+        <span class="dot" style="background:${FIELDS[key].color};"></span>${t(FIELDS[key].label)}
       </h4>
       <div class="collab-grid">
         ${members.map(x=>`
@@ -606,8 +625,8 @@
             ${avatar(x.c,56)}
             <div class="collab-info">
               <p class="collab-name">${x.c.name}</p>
-              <p class="collab-inst">${x.c.inst}</p>
-              <p class="collab-loc">📍 ${x.c.loc}</p>
+              <p class="collab-inst">${t(x.c.inst)}</p>
+              <p class="collab-loc">📍 ${t(x.c.loc)}</p>
               <div class="collab-tags">${tagsHTML(x.c)}</div>
             </div>
           </div>`).join('')}
@@ -636,8 +655,8 @@
     filterBox.appendChild(b);
     return b;
   }
-  makeBtn('all','All collaborators','');
-  Object.keys(FIELDS).forEach(k => makeBtn(k, FIELDS[k].label, FIELDS[k].color));
+  makeBtn('all', t({en:'All collaborators',zh:'所有合作者',es:'Todos los colaboradores'}), '');
+  Object.keys(FIELDS).forEach(k => makeBtn(k, t(FIELDS[k].label), FIELDS[k].color));
 
   function applyFilter(key){
     markers.forEach((m,i) => {
@@ -661,7 +680,7 @@
   /* ---------- hero stats ---------- */
   document.getElementById('stat-people').textContent = COLLAB.length;
   document.getElementById('stat-countries').textContent =
-    new Set(COLLAB.map(c => c.loc.split(',').pop().trim())).size;
+    new Set(COLLAB.map(c => c.loc.en.split(',').pop().trim())).size;
   document.getElementById('stat-fields').textContent =
     new Set(COLLAB.map(c => c.field)).size;
 
@@ -681,62 +700,63 @@
        { caption:"...", photoId:"...", align:"top" }
      ============================================================ */
   const PHOTOS = [
-    { caption:"Field station | 2024", photoId:"1toQxDijaofIy73EkUnBAeZhD0NiF-bsZ" },
-    { caption:"Wing beat signature experiment | 2024", photoId:"1SZZpsKK7ACPEkuxQm-VgpUZdAZJ18bNs" },
-    { caption:"Cambridge | 2023", photoId:"1fS3zwCIdLqvvV48l2mOsIzEDajs06Aj-" },
-    { caption:"Maine | 2024", photoId:"12AOChYFpA89VFv-s585YwmR2aT1pr4-E" },
-    { caption:"Harvard University | 2026", photoId:"1SBZ2nfbURDJ1ZdQCYObke0RyIYspyYqB" },
-    { caption:"SALAD Dressing | 2026", photoId:"salad-dressing-talk-2026" },
-    { caption:"Madre de Dios, Peruvian Amazon | 2026", photoId:"madre-de-dios-canopy-2026" },
-    { caption:"National University of Singapore | 2026", photoId:"nus-visit-2026" },
-    { caption:"Plum Island | 2025", photoId:"1traecx9-ZQMdXyoSFyscRaQo6AUQaj07" },
-    { caption:"Goast flower | 2023", photoId:"1yVmxVk5w92bbRzUmFvUnxN5t2szi9K_-" },
-    { caption:"Plum Island | 2021", photoId:"10aZZM4mS8GOs49obbVJQQBIUt-p4aXvl" },
-    { caption:"Biodiversity Research Center | 2017", photoId:"1iSiJlJXSBXC-eD3gF-R5-sgTkULUZqBK" },
+    { caption:{en:"Field station | 2024",zh:"野外工作站｜2024",es:"Estación de campo | 2024"}, photoId:"1toQxDijaofIy73EkUnBAeZhD0NiF-bsZ" },
+    { caption:{en:"Wing beat signature experiment | 2024",zh:"振翅特徵實驗｜2024",es:"Experimento sobre la firma del aleteo | 2024"}, photoId:"1SZZpsKK7ACPEkuxQm-VgpUZdAZJ18bNs" },
+    { caption:{en:"Cambridge | 2023",zh:"劍橋｜2023",es:"Cambridge | 2023"}, photoId:"1fS3zwCIdLqvvV48l2mOsIzEDajs06Aj-" },
+    { caption:{en:"Maine | 2024",zh:"緬因州｜2024",es:"Maine | 2024"}, photoId:"12AOChYFpA89VFv-s585YwmR2aT1pr4-E" },
+    { caption:{en:"Harvard University | 2026",zh:"哈佛大學｜2026",es:"Universidad de Harvard | 2026"}, photoId:"1SBZ2nfbURDJ1ZdQCYObke0RyIYspyYqB" },
+    { caption:{en:"SALAD Dressing | 2026",zh:"SALAD Dressing｜2026",es:"SALAD Dressing | 2026"}, photoId:"salad-dressing-talk-2026" },
+    { caption:{en:"Madre de Dios, Peruvian Amazon | 2026",zh:"秘魯亞馬遜，馬德雷德迪奧斯｜2026",es:"Madre de Dios, Amazonía peruana | 2026"}, photoId:"madre-de-dios-canopy-2026" },
+    { caption:{en:"National University of Singapore | 2026",zh:"新加坡國立大學｜2026",es:"Universidad Nacional de Singapur | 2026"}, photoId:"nus-visit-2026" },
+    { caption:{en:"Plum Island | 2025",zh:"Plum Island｜2025",es:"Plum Island | 2025"}, photoId:"1traecx9-ZQMdXyoSFyscRaQo6AUQaj07" },
+    { caption:{en:"Goast flower | 2023",zh:"Goast flower｜2023",es:"Goast flower | 2023"}, photoId:"1yVmxVk5w92bbRzUmFvUnxN5t2szi9K_-" },
+    { caption:{en:"Plum Island | 2021",zh:"Plum Island｜2021",es:"Plum Island | 2021"}, photoId:"10aZZM4mS8GOs49obbVJQQBIUt-p4aXvl" },
+    { caption:{en:"Biodiversity Research Center | 2017",zh:"中研院生物多樣性研究中心｜2017",es:"Centro de Investigación en Biodiversidad | 2017"}, photoId:"1iSiJlJXSBXC-eD3gF-R5-sgTkULUZqBK" },
     { caption:"Caelan | 2023", photoId:"1uoYtGjcLYDgWitLbTHeVjjWU-s73OmIK", align:"top" },
-    { caption:"Harvard University | 2025", photoId:"1g3p4H9Ts5q5bdfLbor5ruWohxnbObBRs" },
-    { caption:"Field experiment | 2024", photoId:"1qARk7X7cqdsy9g1Y4_rRD-0SZd5g2qPe" },
-    { caption:"Maine | 2024", photoId:"1rvqb7Cig13XimwQs_V3GMAj_vtTWChFh" },
-    { caption:"National Cheng Kung University | 2017", photoId:"1yCZDdGWyd097uFis9MaQQL3XpfefFSUg" },
-    { caption:"National Taiwan University | 2017", photoId:"1ninkwzYrVZcvPnsCPvsvXH2zoj_6KMo-" },
-    { caption:"Plum Island | 2021", photoId:"15FFYfI3nKzGY1xYjm6SMDl42uUBXWIiP" },
+    { caption:{en:"Harvard University | 2025",zh:"哈佛大學｜2025",es:"Universidad de Harvard | 2025"}, photoId:"1g3p4H9Ts5q5bdfLbor5ruWohxnbObBRs" },
+    { caption:{en:"Field experiment | 2024",zh:"野外實驗｜2024",es:"Experimento de campo | 2024"}, photoId:"1qARk7X7cqdsy9g1Y4_rRD-0SZd5g2qPe" },
+    { caption:{en:"Maine | 2024",zh:"緬因州｜2024",es:"Maine | 2024"}, photoId:"1rvqb7Cig13XimwQs_V3GMAj_vtTWChFh" },
+    { caption:{en:"National Cheng Kung University | 2017",zh:"國立成功大學｜2017",es:"Universidad Nacional Cheng Kung | 2017"}, photoId:"1yCZDdGWyd097uFis9MaQQL3XpfefFSUg" },
+    { caption:{en:"National Taiwan University | 2017",zh:"國立臺灣大學｜2017",es:"Universidad Nacional de Taiwán | 2017"}, photoId:"1ninkwzYrVZcvPnsCPvsvXH2zoj_6KMo-" },
+    { caption:{en:"Plum Island | 2021",zh:"Plum Island｜2021",es:"Plum Island | 2021"}, photoId:"15FFYfI3nKzGY1xYjm6SMDl42uUBXWIiP" },
     { caption:"Shipher | 2016", photoId:"1GPAP_Pbb1yFBmdTgz9b7SIqzl6FYEq5m" },
     { caption:"Amy | 2022", photoId:"1qX5xYqG04pJ8atZAOOgdUJzvKfFjI59z" },
     { caption:"Rachel | 2022", photoId:"1Gu84b5C20dAMPk5u7Dm7Bm7ms0MFgLwv" },
-    { caption:"Pierce family | 2022", photoId:"1SiS3IeVLtW8q3Tfxtl2JD2_vtaGqohwW" },
+    { caption:{en:"Pierce family | 2022",zh:"Pierce 大家庭｜2022",es:"La familia Pierce | 2022"}, photoId:"1SiS3IeVLtW8q3Tfxtl2JD2_vtaGqohwW" },
     { caption:"Shinichi | 2022", photoId:"1iMPl9wcyu7I0gYetAHmgjRNRTgoh7vSX" },
-    { caption:"Moth experiment | 2023", photoId:"1mD7zOa2_LJmxQ8OMEBv9uKzWqgS4nEGC" },
-    { caption:"MCZ entomology collection | 2023", photoId:"1V-nPXC0XJGvcwGgI7YCc3LKDAxV3Au4_" },
-    { caption:"Owen's lab | 2023", photoId:"1xSjHLQYBXKiD5_2jkHt05DhrSO7eTPxs" },
+    { caption:{en:"Moth experiment | 2023",zh:"蛾類實驗｜2023",es:"Experimento con polillas | 2023"}, photoId:"1mD7zOa2_LJmxQ8OMEBv9uKzWqgS4nEGC" },
+    { caption:{en:"MCZ entomology collection | 2023",zh:"MCZ 昆蟲標本典藏｜2023",es:"Colección entomológica del MCZ | 2023"}, photoId:"1V-nPXC0XJGvcwGgI7YCc3LKDAxV3Au4_" },
+    { caption:{en:"Owen's lab | 2023",zh:"Owens 實驗室｜2023",es:"Laboratorio Owens | 2023"}, photoId:"1xSjHLQYBXKiD5_2jkHt05DhrSO7eTPxs" },
     { caption:"Avalon | 2023", photoId:"15G39m_ZAETmePvLVbGDo95ILq9EBEtb6" },
-    { caption:"Pierce lab retreat | 2023", photoId:"1uuGkBj5Zrj16_JpebGWRhvKO9WAPwrzm" },
-    { caption:"Galen's Qualifying Exam | 2024", photoId:"11_BcBE09Aus3TAKojsEJstGdrD0TRFM7" },
-    { caption:"Mass Audubon's Boston Wildlife Sanctuary | 2024", photoId:"1VCbz4b1h4lUn46W3eWhrQUYvvDEropSQ" },
-    { caption:"Lakeville squad | 2024", photoId:"1DiQZB1swHIBwo69kxFLbsXib07vdwtqH" },
-    { caption:"Back from vacation | 2024", photoId:"1GKBXpMhiUZgSCnLfZm98nAszCdT1stHa", align:"center" },
-    { caption:"Interview artist | 2026", photoId:"1Y9WbsFHA0Wg-pbJ8hqI7JpdMdVK4hhr7", align:"top" },
-    { caption:"Interview artist | 2026", photoId:"1llSxSRioHLm7WMnG_azUo1-4nVB9A_3i", align:"top" },
-    { caption:"High-throughput digitization team | 2025", photoId:"150iS6oQqqhsHJUT9egtWC-1xeS6joDC1", align:"top" },
-    { caption:"Starry night | 2024", photoId:"1E8wsaeA9lPEZymgULvwtZZxJkPSEygAr" },
-    { caption:"Pierce lab | 2018", photoId:"1fJeAGEfITnvtQSVmTvAcO6luM_-mV1_V" },
-    { caption:"CropSky team | 2017", photoId:"1XtxpO0sGigDVRs7_RYKU7PfZquEkTjO4" },
-    { caption:"Sun eclipse squad | 2023", photoId:"1gElmGxUaw-MTBV45kHKhcotEw4F4-vxP" }
+    { caption:{en:"Pierce lab retreat | 2023",zh:"Pierce 實驗室出遊｜2023",es:"Retiro del laboratorio Pierce | 2023"}, photoId:"1uuGkBj5Zrj16_JpebGWRhvKO9WAPwrzm" },
+    { caption:{en:"Galen's Qualifying Exam | 2024",zh:"Galen 的資格考｜2024",es:"Examen de candidatura de Galen | 2024"}, photoId:"11_BcBE09Aus3TAKojsEJstGdrD0TRFM7" },
+    { caption:{en:"Mass Audubon's Boston Wildlife Sanctuary | 2024",zh:"Mass Audubon 波士頓野生動物保護區｜2024",es:"Santuario de vida silvestre de Mass Audubon en Boston | 2024"}, photoId:"1VCbz4b1h4lUn46W3eWhrQUYvvDEropSQ" },
+    { caption:{en:"Lakeville squad | 2024",zh:"Lakeville 小隊｜2024",es:"El equipo de Lakeville | 2024"}, photoId:"1DiQZB1swHIBwo69kxFLbsXib07vdwtqH" },
+    { caption:{en:"Back from vacation | 2024",zh:"度假歸來｜2024",es:"De vuelta de vacaciones | 2024"}, photoId:"1GKBXpMhiUZgSCnLfZm98nAszCdT1stHa", align:"center" },
+    { caption:{en:"Interview artist | 2026",zh:"藝術家訪談｜2026",es:"Entrevista con artista | 2026"}, photoId:"1Y9WbsFHA0Wg-pbJ8hqI7JpdMdVK4hhr7", align:"top" },
+    { caption:{en:"Interview artist | 2026",zh:"藝術家訪談｜2026",es:"Entrevista con artista | 2026"}, photoId:"1llSxSRioHLm7WMnG_azUo1-4nVB9A_3i", align:"top" },
+    { caption:{en:"High-throughput digitization team | 2025",zh:"高通量數位化團隊｜2025",es:"Equipo de digitalización de alto rendimiento | 2025"}, photoId:"150iS6oQqqhsHJUT9egtWC-1xeS6joDC1", align:"top" },
+    { caption:{en:"Starry night | 2024",zh:"星空｜2024",es:"Noche estrellada | 2024"}, photoId:"1E8wsaeA9lPEZymgULvwtZZxJkPSEygAr" },
+    { caption:{en:"Pierce lab | 2018",zh:"Pierce 實驗室｜2018",es:"Laboratorio Pierce | 2018"}, photoId:"1fJeAGEfITnvtQSVmTvAcO6luM_-mV1_V" },
+    { caption:{en:"CropSky team | 2017",zh:"CropSky 團隊｜2017",es:"Equipo de CropSky | 2017"}, photoId:"1XtxpO0sGigDVRs7_RYKU7PfZquEkTjO4" },
+    { caption:{en:"Sun eclipse squad | 2023",zh:"日食觀測小隊｜2023",es:"El equipo del eclipse solar | 2023"}, photoId:"1gElmGxUaw-MTBV45kHKhcotEw4F4-vxP" }
   ];
 
   function photoCard(p){
+    const capEn = typeof p.caption === 'string' ? p.caption : p.caption.en;
     const pos = p.align === 'top' ? 'top' : p.align === 'bottom' ? 'bottom' : 'center';
     const rot = p.rotate ? `transform:rotate(${p.rotate}deg) scale(1.4);` : '';
     const body = p.photoId
-      ? `<img src="imgs/web/${p.photoId}.jpg" alt="${p.caption}" style="object-position:${pos} !important;${rot}" onerror="this.style.display='none'">`
+      ? `<img src="imgs/web/${p.photoId}.jpg" alt="${capEn}" style="object-position:${pos} !important;${rot}" onerror="this.style.display='none'">`
       : `<div class="photo-ph">
            <svg width="34" height="34" fill="none" stroke="currentColor" viewBox="0 0 24 24">
              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"
                d="M3 9a2 2 0 012-2h.93a2 2 0 001.66-.9l.82-1.2A2 2 0 0110.07 4h3.86a2 2 0 011.66.9l.82 1.2a2 2 0 001.66.9H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
              <circle cx="12" cy="13" r="3.2" stroke-width="1.6"/>
            </svg>
-           <span style="font-size:.68rem;margin-top:.35rem;">Photo placeholder</span>
+           <span style="font-size:.68rem;margin-top:.35rem;">${t({en:'Photo placeholder',zh:'照片預留位置',es:'Foto pendiente'})}</span>
          </div>`;
-    return `<figure class="photo-card">${body}<figcaption class="photo-cap">${p.caption}</figcaption></figure>`;
+    return `<figure class="photo-card">${body}<figcaption class="photo-cap">${t(p.caption)}</figcaption></figure>`;
   }
 
   // Shuffle helper.

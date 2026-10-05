@@ -1,0 +1,50 @@
+/* ============================================================
+   Site language switch (EN / 中文 / ES) — index, projects and
+   collaborators. The blog has its own two-language switch
+   (blog.html, blog/) and does not load this file.
+
+   Every translatable piece of text exists once per language,
+   marked with data-lang="en|zh|es". <html data-reading="..."> decides
+   which one is shown, so nothing flashes or reflows on load.
+   ============================================================ */
+
+:root {
+  --ease-out: cubic-bezier(.22,1,.36,1);
+  --f-zh-serif: 'Noto Serif TC', 'Songti TC', 'PMingLiU', serif;
+  --f-zh-sans: 'PingFang TC', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+}
+
+html:not([data-reading="zh"]) [data-lang="zh"],
+html:not([data-reading="es"]) [data-lang="es"],
+html[data-reading="zh"] [data-lang="en"],
+html[data-reading="es"] [data-lang="en"] { display: none !important; }
+
+/* ---------- Language switch with sliding thumb (same look as the blog) ---------- */
+.lang-toggle { position: relative; display: inline-grid; grid-template-columns: repeat(3, 1fr); padding: .25rem; border-radius: 9999px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); }
+.lang-toggle::before { content: ''; position: absolute; top: .25rem; bottom: .25rem; left: .25rem; width: calc((100% - .5rem) / 3); border-radius: 9999px; background: var(--c-teal); box-shadow: 0 4px 14px -4px rgba(13,148,136,.8); transition: transform .45s var(--ease-out); }
+html[data-reading="zh"] .lang-toggle::before { transform: translateX(100%); }
+html[data-reading="es"] .lang-toggle::before { transform: translateX(200%); }
+.lang-toggle button { position: relative; z-index: 1; border: 0; background: none; cursor: pointer; font: inherit; font-size: .75rem; font-weight: 600; min-width: 3.2rem; padding: .34rem .8rem; border-radius: 9999px; color: rgba(255,255,255,.6); transition: color .3s ease; }
+.lang-toggle button[aria-pressed="true"], .lang-toggle button:hover { color: #fff; }
+.lang-toggle button:focus-visible { outline: 2px solid #5eead4; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .lang-toggle::before { transition: none; } }
+
+/* ---------- Navbar at tablet width ----------
+   Spanish labels are longer; keep the brand on one line and tighten the links
+   until there is room for the full desktop spacing. */
+.wpc-nav-brand { white-space: nowrap; }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .wpc-nav .nav-link, .wpc-nav .nav-active { padding: .4rem .55rem; font-size: .84rem; }
+}
+
+/* ---------- 中文 typography ---------- */
+/* Headings: CJK falls back from the Latin display face to a Traditional Chinese serif. */
+:is(h1, h2, h3, h4, .section-title, .cat-head, .group-head)[data-lang="zh"],
+:is(h1, h2, h3, h4, .section-title, .cat-head, .group-head) [data-lang="zh"] {
+  font-family: 'DM Serif Display', var(--f-zh-serif);
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+/* Body copy: a Traditional Chinese sans with looser leading. */
+html[data-reading="zh"] body { font-family: 'Inter', var(--f-zh-sans); }
+p[data-lang="zh"], li[data-lang="zh"] { line-height: 1.85; letter-spacing: .02em; }

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-reading="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects — Wei-Ping Chan</title>
+  <title data-zh="專案｜Wei-Ping Chan" data-es="Proyectos | Wei-Ping Chan">Projects — Wei-Ping Chan</title>
   <meta name="description" content="Research and creative projects by Wei-Ping Chan — spanning organizations, start-ups, evolution, climate science, and interdisciplinary exploration." />
   <link rel="canonical" href="https://wpchanwork.github.io/wei-ping_chan/projects.html">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -14,8 +14,19 @@
   <meta property="og:url" content="https://wpchanwork.github.io/wei-ping_chan/projects.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
+  <script>
+    (function () {
+      var ok = function (l) { return l === 'en' || l === 'zh' || l === 'es'; };
+      var l = new URLSearchParams(location.search).get('lang');
+      if (!ok(l)) { try { l = localStorage.getItem('wpc-blog-lang'); } catch (e) {} }
+      document.documentElement.setAttribute('data-reading', ok(l) ? l : 'en');
+    })();
+  </script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="i18n.css">
+  <script src="i18n.js"></script>
   <style>
     /* === Page-specific styles === */
     .hero-gradient { background: linear-gradient(135deg, var(--c-deep) 0%, var(--c-primary) 100%); }
@@ -34,13 +45,13 @@
         </button>
       </div>
       <nav id="menu" class="hidden md:flex md:items-center md:space-x-1 absolute md:static top-16 left-0 right-0 bg-white md:bg-transparent shadow md:shadow-none flex-col md:flex-row px-3 md:px-0 py-3 md:py-0 space-y-1 md:space-y-0">
-        <a href="index.html" class="nav-link">Home</a>
-        <span class="nav-active">Projects</span>
-        <a href="collaborators.html" class="nav-link">Collaborations</a>
-        <a href="blog.html" class="nav-link">Blog</a>
-        <a href="index.html#talks" class="nav-link">Talks</a>
-        <a href="index.html#background" class="nav-link">Background</a>
-        <a href="index.html#contact" class="nav-link">Contact</a>
+        <a href="index.html" class="nav-link"><span data-lang="en">Home</span><span data-lang="zh">首頁</span><span data-lang="es">Inicio</span></a>
+        <span class="nav-active"><span data-lang="en">Projects</span><span data-lang="zh">專案</span><span data-lang="es">Proyectos</span></span>
+        <a href="collaborators.html" class="nav-link"><span data-lang="en">Collaborations</span><span data-lang="zh">合作</span><span data-lang="es">Colaboraciones</span></a>
+        <a href="blog.html" class="nav-link"><span data-lang="en">Blog</span><span data-lang="zh">部落格</span><span data-lang="es">Blog</span></a>
+        <a href="index.html#talks" class="nav-link"><span data-lang="en">Talks</span><span data-lang="zh">演講</span><span data-lang="es">Charlas</span></a>
+        <a href="index.html#background" class="nav-link"><span data-lang="en">Background</span><span data-lang="zh">經歷</span><span data-lang="es">Trayectoria</span></a>
+        <a href="index.html#contact" class="nav-link"><span data-lang="en">Contact</span><span data-lang="zh">聯絡</span><span data-lang="es">Contacto</span></a>
       </nav>
     </div>
   </header>
@@ -49,11 +60,17 @@
   <!-- ===================== HERO ===================== -->
   <section class="hero-gradient text-white">
     <div class="max-w-6xl mx-auto px-4 py-14 md:py-16 text-center reveal">
-      <h2 class="text-3xl md:text-5xl font-bold">Projects</h2>
+      <h2 class="text-3xl md:text-5xl font-bold"><span data-lang="en">Projects</span><span data-lang="zh">專案</span><span data-lang="es">Proyectos</span></h2>
       <p class="mt-4 text-blue-100 max-w-2xl mx-auto text-base md:text-lg">
-        Research and creative work spanning organizations, start-ups, evolution and behavior,
-        climate science, and interdisciplinary exploration.
+        <span data-lang="en">Research and creative work spanning organizations, start-ups, evolution and behavior, climate science, and interdisciplinary exploration.</span><span data-lang="zh">研究與創作，橫跨非營利組織、新創、演化與行為、氣候科學及跨領域探索。</span><span data-lang="es">Trabajos de investigación y creación sobre organizaciones, startups, evolución y comportamiento, ciencias del clima y exploración interdisciplinaria.</span>
       </p>
+      <div class="mt-7 flex justify-center">
+        <div class="lang-toggle" role="group" aria-label="Choose a language">
+          <button type="button" data-set-lang="en" title="English" lang="en">EN</button>
+          <button type="button" data-set-lang="zh" title="繁體中文" lang="zh-Hant">中文</button>
+          <button type="button" data-set-lang="es" title="Español" lang="es">ES</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -61,7 +78,7 @@
 
     <!-- Nonprofit Organizations -->
     <div class="mb-16 reveal">
-      <h3 class="cat-head">Nonprofit Organizations</h3>
+      <h3 class="cat-head"><span data-lang="en">Nonprofit Organizations</span><span data-lang="zh">非營利組織</span><span data-lang="es">Organizaciones sin fines de lucro</span></h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div class="card overflow-hidden">
           <img src="imgs/web/1Exxihq3GW0vXpW33fZBvBE2KU7WB5Bvj.jpg" alt="SOS" class="w-full h-60 object-cover object-top">
@@ -70,12 +87,12 @@
               <a href="https://sos-commons.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
                 <h4 class="font-semibold text-xl">Sustainability Of Sustainability</h4>
               </a>
-              <span class="text-sm text-gray-500 italic whitespace-nowrap">Cambridge, MA</span>
+              <span class="text-sm text-gray-500 italic whitespace-nowrap"><span data-lang="en">Cambridge, MA</span><span data-lang="zh">美國麻州劍橋</span><span data-lang="es">Cambridge (Massachusetts)</span></span>
             </div>
-            <p class="text-sm text-gray-400 italic">2025 – Now</p>
-            <p class="text-sm text-gray-600 italic mt-2">"Sustainability isn't self-sustaining"</p>
-            <p class="text-gray-600 mt-2">SOS builds shared meaning, readable patterns, and working mechanisms so sustainability can persist and scale in the real world.</p>
-            <p class="tag-line italic mt-3">Meaning · Pattern · Mechanism</p>
+            <p class="text-sm text-gray-400 italic"><span data-lang="en">2025 – Now</span><span data-lang="zh">2025 年至今</span><span data-lang="es">2025 – actualidad</span></p>
+            <p class="text-sm text-gray-600 italic mt-2"><span data-lang="en">"Sustainability isn't self-sustaining"</span><span data-lang="zh">「永續，不會自己延續」</span><span data-lang="es">“La sostenibilidad no se sostiene sola”</span></p>
+            <p class="text-gray-600 mt-2"><span data-lang="en">SOS builds shared meaning, readable patterns, and working mechanisms so sustainability can persist and scale in the real world.</span><span data-lang="zh">SOS 建立共享的意義、可解讀的模式與可運作的機制，讓永續在真實世界中得以延續、擴大。</span><span data-lang="es">SOS construye significados compartidos, patrones legibles y mecanismos que funcionan, para que la sostenibilidad perdure y crezca en el mundo real.</span></p>
+            <p class="tag-line italic mt-3"><span data-lang="en">Meaning · Pattern · Mechanism</span><span data-lang="zh">意義 · 模式 · 機制</span><span data-lang="es">Significado · Patrón · Mecanismo</span></p>
           </div>
         </div>
       </div>
@@ -83,19 +100,19 @@
 
     <!-- Start-Ups -->
     <div class="mb-16 reveal">
-      <h3 class="cat-head">Start-Ups</h3>
+      <h3 class="cat-head"><span data-lang="en">Start-Ups</span><span data-lang="zh">新創公司</span><span data-lang="es">Startups</span></h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="card overflow-hidden">
           <img src="imgs/web/bionarr-logo.jpg" alt="BioNarr" class="w-full h-52 object-contain bg-white p-3">
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
               <h4 class="font-semibold text-xl">BioNarr</h4>
-              <span class="text-sm text-gray-500 italic whitespace-nowrap">Delaware, USA</span>
+              <span class="text-sm text-gray-500 italic whitespace-nowrap"><span data-lang="en">Delaware, USA</span><span data-lang="zh">美國德拉瓦州</span><span data-lang="es">Delaware (EE.&nbsp;UU.)</span></span>
             </div>
-            <p class="text-sm text-gray-400 italic">2026 – Now</p>
-            <p class="text-sm text-gray-600 italic mt-2">"Sensing Nature Across Scales"</p>
-            <p class="text-gray-600 mt-2">Building portable and high-throughput systems to capture, digitize, and sense nature across micro, organismal, and landscape scales, in both terrestrial and marine environments.</p>
-            <p class="tag-line italic mt-3">High-Throughput Digitization · Environmental Sensing · Portable Hardware · Biodiversity Intelligence</p>
+            <p class="text-sm text-gray-400 italic"><span data-lang="en">2026 – Now</span><span data-lang="zh">2026 年至今</span><span data-lang="es">2026 – actualidad</span></p>
+            <p class="text-sm text-gray-600 italic mt-2"><span data-lang="en">"Sensing Nature Across Scales"</span><span data-lang="zh">「跨越尺度，感知自然」</span><span data-lang="es">“Percibir la naturaleza a todas las escalas”</span></p>
+            <p class="text-gray-600 mt-2"><span data-lang="en">Building portable and high-throughput systems to capture, digitize, and sense nature across micro, organismal, and landscape scales, in both terrestrial and marine environments.</span><span data-lang="zh">打造可攜式、高通量的系統，在陸域與海洋環境中，從微觀、個體到地景尺度，記錄、數位化並感測自然。</span><span data-lang="es">Sistemas portátiles de alto rendimiento para registrar, digitalizar y monitorear la naturaleza a escala microscópica, de organismo y de paisaje, tanto en entornos terrestres como marinos.</span></p>
+            <p class="tag-line italic mt-3"><span data-lang="en">High-Throughput Digitization · Environmental Sensing · Portable Hardware · Biodiversity Intelligence</span><span data-lang="zh">高通量數位化 · 環境感測 · 可攜式硬體 · 生物多樣性洞察</span><span data-lang="es">Digitalización de alto rendimiento · Monitoreo ambiental · Hardware portátil · Inteligencia sobre biodiversidad</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
@@ -103,12 +120,12 @@
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
               <h4 class="font-semibold text-xl">BioMuse-X</h4>
-              <span class="text-sm text-gray-500 italic whitespace-nowrap">Cambridge, MA</span>
+              <span class="text-sm text-gray-500 italic whitespace-nowrap"><span data-lang="en">Cambridge, MA</span><span data-lang="zh">美國麻州劍橋</span><span data-lang="es">Cambridge (Massachusetts)</span></span>
             </div>
             <p class="text-sm text-gray-400 italic">2023 – 2025</p>
-            <p class="text-sm text-gray-600 italic mt-2">"Preserving Nature, Serving the Future"</p>
-            <p class="text-gray-600 mt-2">Investigating sustainable, energy-efficient materials using a unique dataset derived from hyperspectral imaging and electron microscopy.</p>
-            <p class="tag-line italic mt-3">Functional Trait Analysis · Spectral Data · Scanning Electron Microscope</p>
+            <p class="text-sm text-gray-600 italic mt-2"><span data-lang="en">"Preserving Nature, Serving the Future"</span><span data-lang="zh">「保存自然，造福未來」</span><span data-lang="es">“Preservar la naturaleza, servir al futuro”</span></p>
+            <p class="text-gray-600 mt-2"><span data-lang="en">Investigating sustainable, energy-efficient materials using a unique dataset derived from hyperspectral imaging and electron microscopy.</span><span data-lang="zh">運用以高光譜影像與電子顯微鏡建立的獨特資料集，研究永續、節能的材料。</span><span data-lang="es">Investigación de materiales sostenibles y energéticamente eficientes a partir de un conjunto de datos único, obtenido con imágenes hiperespectrales y microscopía electrónica.</span></p>
+            <p class="tag-line italic mt-3"><span data-lang="en">Functional Trait Analysis · Spectral Data · Scanning Electron Microscope</span><span data-lang="zh">功能性狀分析 · 光譜資料 · 掃描式電子顯微鏡</span><span data-lang="es">Análisis de rasgos funcionales · Datos espectrales · Microscopía electrónica de barrido</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
@@ -116,12 +133,12 @@
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
               <h4 class="font-semibold text-xl">CropSky</h4>
-              <span class="text-sm text-gray-500 italic whitespace-nowrap">Taipei, Taiwan</span>
+              <span class="text-sm text-gray-500 italic whitespace-nowrap"><span data-lang="en">Taipei, Taiwan</span><span data-lang="zh">臺灣臺北</span><span data-lang="es">Taipéi (Taiwán)</span></span>
             </div>
             <p class="text-sm text-gray-400 italic">2017 – 2020</p>
-            <p class="text-sm text-gray-600 italic mt-2">"Empowering Agriculture with Data-Driven Insights"</p>
-            <p class="text-gray-600 mt-2">Applied machine learning and ecological modeling to optimize crop forecasting and disease management, delivering actionable insights for agriculture.</p>
-            <p class="tag-line italic mt-3">Machine Learning · Ecological Modeling · Crop Production · Scalable Analytics</p>
+            <p class="text-sm text-gray-600 italic mt-2"><span data-lang="en">"Empowering Agriculture with Data-Driven Insights"</span><span data-lang="zh">「以資料洞察驅動農業」</span><span data-lang="es">“Datos que impulsan la agricultura”</span></p>
+            <p class="text-gray-600 mt-2"><span data-lang="en">Applied machine learning and ecological modeling to optimize crop forecasting and disease management, delivering actionable insights for agriculture.</span><span data-lang="zh">運用機器學習與生態建模，改善作物產量預測與病害管理，為農業提供可實際運用的洞察。</span><span data-lang="es">Aplicación del aprendizaje automático y el modelado ecológico para mejorar la previsión de cosechas y el manejo de enfermedades, con información práctica para la agricultura.</span></p>
+            <p class="tag-line italic mt-3"><span data-lang="en">Machine Learning · Ecological Modeling · Crop Production · Scalable Analytics</span><span data-lang="zh">機器學習 · 生態建模 · 作物生產 · 可擴展分析</span><span data-lang="es">Aprendizaje automático · Modelado ecológico · Producción agrícola · Análisis escalable</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
@@ -129,12 +146,12 @@
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
               <h4 class="font-semibold text-xl">PathoTracter</h4>
-              <span class="text-sm text-gray-500 italic whitespace-nowrap">London, UK</span>
+              <span class="text-sm text-gray-500 italic whitespace-nowrap"><span data-lang="en">London, UK</span><span data-lang="zh">英國倫敦</span><span data-lang="es">Londres (Reino Unido)</span></span>
             </div>
             <p class="text-sm text-gray-400 italic">2015 – 2017</p>
-            <p class="text-sm text-gray-600 italic mt-2">"Innovating Pathogen Detection for a Safer Tomorrow"</p>
-            <p class="text-gray-600 mt-2">Leveraging advanced biochips, IoT-enabled sensors, and predictive analytics to revolutionize disease detection and forecast outbreaks with precision.</p>
-            <p class="tag-line italic mt-3">Machine Learning · Biochips · IoT-enabled Sensors · Disease Detection</p>
+            <p class="text-sm text-gray-600 italic mt-2"><span data-lang="en">"Innovating Pathogen Detection for a Safer Tomorrow"</span><span data-lang="zh">「創新病原檢測，守護更安全的明天」</span><span data-lang="es">“Innovar en la detección de patógenos para un mañana más seguro”</span></p>
+            <p class="text-gray-600 mt-2"><span data-lang="en">Leveraging advanced biochips, IoT-enabled sensors, and predictive analytics to revolutionize disease detection and forecast outbreaks with precision.</span><span data-lang="zh">結合先進的生物晶片、物聯網感測器與預測分析，革新疾病檢測方式，並精準預測疫情爆發。</span><span data-lang="es">Biochips avanzados, sensores conectados (IoT) y análisis predictivo para transformar la detección de enfermedades y anticipar brotes con precisión.</span></p>
+            <p class="tag-line italic mt-3"><span data-lang="en">Machine Learning · Biochips · IoT-enabled Sensors · Disease Detection</span><span data-lang="zh">機器學習 · 生物晶片 · 物聯網感測器 · 疾病檢測</span><span data-lang="es">Aprendizaje automático · Biochips · Sensores IoT · Detección de enfermedades</span></p>
           </div>
         </div>
       </div>
@@ -142,7 +159,7 @@
 
     <!-- High-Throughput Digitization -->
     <div class="mb-16 reveal">
-      <h3 class="cat-head">High-Throughput Digitization &amp; Morphological Quantification</h3>
+      <h3 class="cat-head"><span data-lang="en">High-Throughput Digitization &amp; Morphological Quantification</span><span data-lang="zh">高通量數位化與形態量化</span><span data-lang="es">Digitalización de alto rendimiento y cuantificación morfológica</span></h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="hidden md:block"></div>
         <div class="card overflow-hidden">
@@ -150,11 +167,11 @@
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
               <a href="https://www.nature.com/articles/s42003-022-04282-z" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-                <h4 class="font-semibold text-lg">A high throughput multispectral imaging system for museum specimens</h4>
+                <h4 class="font-semibold text-lg"><span data-lang="en">A high throughput multispectral imaging system for museum specimens</span><span data-lang="zh">博物館標本的高通量多光譜影像系統</span><span data-lang="es">Un sistema de imagen multiespectral de alto rendimiento para especímenes de museo</span></h4>
               </a>
               <span class="text-sm text-gray-500 italic">2017</span>
             </div>
-            <p class="tag-line mt-2">Multispectral Imaging · High-Throughput Systems · Parallel Computing</p>
+            <p class="tag-line mt-2"><span data-lang="en">Multispectral Imaging · High-Throughput Systems · Parallel Computing</span><span data-lang="zh">多光譜影像 · 高通量系統 · 平行運算</span><span data-lang="es">Imagen multiespectral · Sistemas de alto rendimiento · Computación paralela</span></p>
           </div>
         </div>
         <div class="hidden md:block"></div>
@@ -163,16 +180,16 @@
 
     <!-- Evolution and Animal Behavior -->
     <div class="mb-16 reveal">
-      <h3 class="cat-head">Evolution &amp; Animal Behavior</h3>
+      <h3 class="cat-head"><span data-lang="en">Evolution &amp; Animal Behavior</span><span data-lang="zh">演化與動物行為</span><span data-lang="es">Evolución y comportamiento animal</span></h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="card overflow-hidden">
           <img src="imgs/web/1pkgFn_Mh-dFkQ7bkGNECNe_UFiJtyAWQ.jpg" alt="Wing beat signatures in moths" class="w-full h-44 object-cover object-bottom">
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
-              <h4 class="font-semibold text-lg">Wing beat signatures in butterflies and moths: investigating variations across sex, age, and taxonomic groups</h4>
+              <h4 class="font-semibold text-lg"><span data-lang="en">Wing beat signatures in butterflies and moths: investigating variations across sex, age, and taxonomic groups</span><span data-lang="zh">蝶與蛾的振翅特徵：探討不同性別、年齡與分類群間的差異</span><span data-lang="es">La firma del aleteo en mariposas y polillas: variaciones según el sexo, la edad y el grupo taxonómico</span></h4>
               <span class="text-sm text-gray-500 italic">2024</span>
             </div>
-            <p class="tag-line mt-2">Computer Vision · Signal Processing · Statistical Modeling · Time-Series Analysis</p>
+            <p class="tag-line mt-2"><span data-lang="en">Computer Vision · Signal Processing · Statistical Modeling · Time-Series Analysis</span><span data-lang="zh">電腦視覺 · 訊號處理 · 統計建模 · 時間序列分析</span><span data-lang="es">Visión artificial · Procesamiento de señales · Modelado estadístico · Análisis de series temporales</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
@@ -180,11 +197,11 @@
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
               <a href="https://doi.org/10.1098/rspb.2025.2319" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-                <h4 class="font-semibold text-lg">Historical behavioural data disentangle evolutionary and environmental drivers of recent declines in insect attraction to light</h4>
+                <h4 class="font-semibold text-lg"><span data-lang="en">Historical behavioural data disentangle evolutionary and environmental drivers of recent declines in insect attraction to light</span><span data-lang="zh">以歷史行為資料釐清昆蟲趨光性近年下降的演化與環境成因</span><span data-lang="es">Datos históricos de comportamiento distinguen las causas evolutivas y ambientales del reciente declive de la atracción de los insectos por la luz</span></h4>
               </a>
               <span class="text-sm text-gray-500 italic">2025</span>
             </div>
-            <p class="tag-line mt-2">Experimental Design · Statistical Modeling · Environmental Data</p>
+            <p class="tag-line mt-2"><span data-lang="en">Experimental Design · Statistical Modeling · Environmental Data</span><span data-lang="zh">實驗設計 · 統計建模 · 環境資料</span><span data-lang="es">Diseño experimental · Modelado estadístico · Datos ambientales</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
@@ -192,21 +209,21 @@
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
               <a href="https://www.researchsquare.com/article/rs-7603116/v1" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-                <h4 class="font-semibold text-lg">Day versus night and the evolution of sexual dimorphism in Lepidoptera</h4>
+                <h4 class="font-semibold text-lg"><span data-lang="en">Day versus night and the evolution of sexual dimorphism in Lepidoptera</span><span data-lang="zh">日行與夜行：鱗翅目雌雄二型性的演化</span><span data-lang="es">Día y noche: la evolución del dimorfismo sexual en los lepidópteros</span></h4>
               </a>
               <span class="text-sm text-gray-500 italic">2022</span>
             </div>
-            <p class="tag-line mt-2">Multispectral Imaging · Evolution · High-Dimensional Data</p>
+            <p class="tag-line mt-2"><span data-lang="en">Multispectral Imaging · Evolution · High-Dimensional Data</span><span data-lang="zh">多光譜影像 · 演化 · 高維度資料</span><span data-lang="es">Imagen multiespectral · Evolución · Datos de alta dimensionalidad</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
           <img src="imgs/web/1C4GhxI5P8BP0UHbObtTlp9tMPd6AEb9p.jpg" alt="The evolution of the eyespot and false-head features in Lepidoptera" class="w-full h-44 object-cover object-bottom">
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
-              <h4 class="font-semibold text-lg">The evolution of the eyespot and false-head features in Lepidoptera</h4>
+              <h4 class="font-semibold text-lg"><span data-lang="en">The evolution of the eyespot and false-head features in Lepidoptera</span><span data-lang="zh">鱗翅目眼斑與假頭特徵的演化</span><span data-lang="es">La evolución de los ocelos y las falsas cabezas en los lepidópteros</span></h4>
               <span class="text-sm text-gray-500 italic">2022</span>
             </div>
-            <p class="tag-line mt-2">Computer Vision · Deep Learning · Evolutionary Modeling · Data Visualization</p>
+            <p class="tag-line mt-2"><span data-lang="en">Computer Vision · Deep Learning · Evolutionary Modeling · Data Visualization</span><span data-lang="zh">電腦視覺 · 深度學習 · 演化建模 · 資料視覺化</span><span data-lang="es">Visión artificial · Aprendizaje profundo · Modelado evolutivo · Visualización de datos</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
@@ -214,11 +231,11 @@
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
               <a href="https://www.researchsquare.com/article/rs-4203706/v1" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-                <h4 class="font-semibold text-lg">The evolution of sensory organs (antenna and eyes) in Lepidoptera</h4>
+                <h4 class="font-semibold text-lg"><span data-lang="en">The evolution of sensory organs (antenna and eyes) in Lepidoptera</span><span data-lang="zh">鱗翅目感覺器官（觸角與眼睛）的演化</span><span data-lang="es">La evolución de los órganos sensoriales (antenas y ojos) en los lepidópteros</span></h4>
               </a>
               <span class="text-sm text-gray-500 italic">2020</span>
             </div>
-            <p class="tag-line mt-2">Computer Vision · Visual Ecology · Numerical Modeling</p>
+            <p class="tag-line mt-2"><span data-lang="en">Computer Vision · Visual Ecology · Numerical Modeling</span><span data-lang="zh">電腦視覺 · 視覺生態學 · 數值建模</span><span data-lang="es">Visión artificial · Ecología visual · Modelado numérico</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
@@ -226,11 +243,11 @@
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
               <a href="https://www.researchsquare.com/article/rs-2968821/v1" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-                <h4 class="font-semibold text-lg">Selection on size has generated distinctive paired wing flight systems for butterfly flight</h4>
+                <h4 class="font-semibold text-lg"><span data-lang="en">Selection on size has generated distinctive paired wing flight systems for butterfly flight</span><span data-lang="zh">對體型的天擇，造就蝴蝶獨特的前後翅配對飛行系統</span><span data-lang="es">La selección sobre el tamaño ha dado lugar en las mariposas a sistemas de vuelo característicos con alas acopladas</span></h4>
               </a>
               <span class="text-sm text-gray-500 italic">2018</span>
             </div>
-            <p class="tag-line mt-2">Computer Vision · Evolutionary Modeling · Morphological Extraction</p>
+            <p class="tag-line mt-2"><span data-lang="en">Computer Vision · Evolutionary Modeling · Morphological Extraction</span><span data-lang="zh">電腦視覺 · 演化建模 · 形態特徵擷取</span><span data-lang="es">Visión artificial · Modelado evolutivo · Extracción morfológica</span></p>
           </div>
         </div>
       </div>
@@ -238,26 +255,26 @@
 
     <!-- Climate and Environmental Studies -->
     <div class="mb-16 reveal">
-      <h3 class="cat-head">Climate &amp; Environmental Studies</h3>
+      <h3 class="cat-head"><span data-lang="en">Climate &amp; Environmental Studies</span><span data-lang="zh">氣候與環境研究</span><span data-lang="es">Estudios climáticos y ambientales</span></h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="card overflow-hidden">
           <img src="imgs/web/1PzhILxW_cy5Hx7tbC_zYvDzWRtM01GMM.jpg" alt="Typhoon occurrence and impact" class="w-full h-44 object-cover object-bottom">
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
-              <h4 class="font-semibold text-lg">Analyzing Typhoon Patterns: Frequency, Intensity, and Routes in Taiwan</h4>
+              <h4 class="font-semibold text-lg"><span data-lang="en">Analyzing Typhoon Patterns: Frequency, Intensity, and Routes in Taiwan</span><span data-lang="zh">臺灣颱風模式分析：頻率、強度與路徑</span><span data-lang="es">Patrones de los tifones en Taiwán: frecuencia, intensidad y trayectorias</span></h4>
               <span class="text-sm text-gray-500 italic">2016</span>
             </div>
-            <p class="tag-line mt-2">Meteorological Data · Business Intelligence · Tableau</p>
+            <p class="tag-line mt-2"><span data-lang="en">Meteorological Data · Business Intelligence · Tableau</span><span data-lang="zh">氣象資料 · 商業智慧 · Tableau</span><span data-lang="es">Datos meteorológicos · Inteligencia de negocios · Tableau</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
           <img src="imgs/web/18u9VkHaB57YDCq1FnN0Cw0CgiRNQruzN.jpg" alt="Seasonal and diurnal temperature ranges in global mountains" class="w-full h-44 object-cover">
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
-              <h4 class="font-semibold text-lg">Seasonal and diurnal temperature ranges in global mountains</h4>
+              <h4 class="font-semibold text-lg"><span data-lang="en">Seasonal and diurnal temperature ranges in global mountains</span><span data-lang="zh">全球山區的季節溫差與日夜溫差</span><span data-lang="es">Amplitud térmica estacional y diaria en las montañas del mundo</span></h4>
               <span class="text-sm text-gray-500 italic">2015</span>
             </div>
-            <p class="tag-line mt-2">Climate Data · Satellite Image Analysis · Meta Analysis · Causal Inference</p>
+            <p class="tag-line mt-2"><span data-lang="en">Climate Data · Satellite Image Analysis · Meta Analysis · Causal Inference</span><span data-lang="zh">氣候資料 · 衛星影像分析 · 統合分析 · 因果推論</span><span data-lang="es">Datos climáticos · Análisis de imágenes satelitales · Metaanálisis · Inferencia causal</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
@@ -265,11 +282,11 @@
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
               <a href="https://doi.org/10.1038/s41586-024-07264-9" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-                <h4 class="font-semibold text-lg">The velocity of climate change in mountains worldwide</h4>
+                <h4 class="font-semibold text-lg"><span data-lang="en">The velocity of climate change in mountains worldwide</span><span data-lang="zh">全球山區的氣候變遷速度</span><span data-lang="es">La velocidad del cambio climático en las montañas del mundo</span></h4>
               </a>
               <span class="text-sm text-gray-500 italic">2014</span>
             </div>
-            <p class="tag-line mt-2">Climate Data · Satellite Image Analysis · High-Dimensional Data · Data Visualization</p>
+            <p class="tag-line mt-2"><span data-lang="en">Climate Data · Satellite Image Analysis · High-Dimensional Data · Data Visualization</span><span data-lang="zh">氣候資料 · 衛星影像分析 · 高維度資料 · 資料視覺化</span><span data-lang="es">Datos climáticos · Análisis de imágenes satelitales · Datos de alta dimensionalidad · Visualización de datos</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
@@ -277,31 +294,31 @@
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
               <a href="https://www.science.org/doi/abs/10.1126/science.aab4119" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
-                <h4 class="font-semibold text-lg">Opposite influences of seasonal and daily climatic variability on species range size</h4>
+                <h4 class="font-semibold text-lg"><span data-lang="en">Opposite influences of seasonal and daily climatic variability on species range size</span><span data-lang="zh">季節性與日尺度氣候變異對物種分布範圍的相反影響</span><span data-lang="es">Efectos opuestos de la variabilidad climática estacional y diaria sobre el tamaño del área de distribución de las especies</span></h4>
               </a>
               <span class="text-sm text-gray-500 italic">2013</span>
             </div>
-            <p class="tag-line mt-2">Climate Data · Satellite Image Analysis · High-Dimensional Data · Causal Inference</p>
+            <p class="tag-line mt-2"><span data-lang="en">Climate Data · Satellite Image Analysis · High-Dimensional Data · Causal Inference</span><span data-lang="zh">氣候資料 · 衛星影像分析 · 高維度資料 · 因果推論</span><span data-lang="es">Datos climáticos · Análisis de imágenes satelitales · Datos de alta dimensionalidad · Inferencia causal</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
           <img src="imgs/web/1mbsUv1ADeRGPuClu4tWI9RkrNGj6YfDv.jpg" alt="Increasing drought stress and climate variability in high mountain ecosystems in Taiwan" class="w-full h-44 object-cover">
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
-              <h4 class="font-semibold text-lg">Increasing drought stress and climate variability in high mountain ecosystems in Taiwan</h4>
+              <h4 class="font-semibold text-lg"><span data-lang="en">Increasing drought stress and climate variability in high mountain ecosystems in Taiwan</span><span data-lang="zh">臺灣高山生態系日益加劇的乾旱逆境與氣候變異</span><span data-lang="es">Aumento del estrés hídrico y de la variabilidad climática en los ecosistemas de alta montaña de Taiwán</span></h4>
               <span class="text-sm text-gray-500 italic">2012</span>
             </div>
-            <p class="tag-line mt-2">Climate Data · Time-Series Analysis · Tree Ring · Stable Isotope</p>
+            <p class="tag-line mt-2"><span data-lang="en">Climate Data · Time-Series Analysis · Tree Ring · Stable Isotope</span><span data-lang="zh">氣候資料 · 時間序列分析 · 樹輪 · 穩定同位素</span><span data-lang="es">Datos climáticos · Análisis de series temporales · Anillos de crecimiento · Isótopos estables</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
           <img src="imgs/web/1mKuLRJ_DYJEaNST_XaZeFuu55_2Ok6o4.jpg" alt="Stable oxygen isotope prediction" class="w-full h-44 object-cover object-bottom">
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
-              <h4 class="font-semibold text-lg">Regional scale high resolution δ18O prediction in precipitation using MODIS EVI</h4>
+              <h4 class="font-semibold text-lg"><span data-lang="en">Regional scale high resolution δ18O prediction in precipitation using MODIS EVI</span><span data-lang="zh">以 MODIS EVI 進行區域尺度高解析度降水 δ18O 預測</span><span data-lang="es">Predicción regional de alta resolución del δ18O en la precipitación a partir del EVI de MODIS</span></h4>
               <span class="text-sm text-gray-500 italic">2010</span>
             </div>
-            <p class="tag-line mt-2">Stable Isotope · Remote Sensing · Geospatial Modeling</p>
+            <p class="tag-line mt-2"><span data-lang="en">Stable Isotope · Remote Sensing · Geospatial Modeling</span><span data-lang="zh">穩定同位素 · 遙測 · 地理空間建模</span><span data-lang="es">Isótopos estables · Teledetección · Modelado geoespacial</span></p>
           </div>
         </div>
       </div>
@@ -309,46 +326,46 @@
 
     <!-- Interdisciplinary Studies and Projects -->
     <div class="mb-8 reveal">
-      <h3 class="cat-head">Interdisciplinary Studies &amp; Projects</h3>
+      <h3 class="cat-head"><span data-lang="en">Interdisciplinary Studies &amp; Projects</span><span data-lang="zh">跨領域研究與專案</span><span data-lang="es">Estudios y proyectos interdisciplinarios</span></h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="card overflow-hidden">
           <img src="imgs/web/1hLNXdlZJu7KJ-EFkhJ5ZSxc_OUFaMviF.jpg" alt="Exploring the history of blue through museum art pieces" class="w-full h-44 object-cover">
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
-              <h4 class="font-semibold text-lg">Exploring the history of blue through museum art pieces</h4>
+              <h4 class="font-semibold text-lg"><span data-lang="en">Exploring the history of blue through museum art pieces</span><span data-lang="zh">從博物館藝術品探索藍色的歷史</span><span data-lang="es">La historia del azul a través de obras de arte de museo</span></h4>
               <span class="text-sm text-gray-500 italic">2019</span>
             </div>
-            <p class="tag-line mt-2">Computer Vision · Business Intelligence · Data Visualization</p>
+            <p class="tag-line mt-2"><span data-lang="en">Computer Vision · Business Intelligence · Data Visualization</span><span data-lang="zh">電腦視覺 · 商業智慧 · 資料視覺化</span><span data-lang="es">Visión artificial · Inteligencia de negocios · Visualización de datos</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
           <img src="imgs/web/18UluKsiiPTcmyGjmKPyVimT3bMsdY5af.jpg" alt="Regional weather drives the topics of local news" class="w-full h-44 object-cover">
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
-              <h4 class="font-semibold text-lg">Regional weather drives the topics of local news</h4>
+              <h4 class="font-semibold text-lg"><span data-lang="en">Regional weather drives the topics of local news</span><span data-lang="zh">區域天氣左右地方新聞議題</span><span data-lang="es">Las condiciones meteorológicas regionales determinan los temas de las noticias locales</span></h4>
               <span class="text-sm text-gray-500 italic">2017</span>
             </div>
-            <p class="tag-line mt-2">Natural Language Processing · AI · Business Intelligence</p>
+            <p class="tag-line mt-2"><span data-lang="en">Natural Language Processing · AI · Business Intelligence</span><span data-lang="zh">自然語言處理 · AI · 商業智慧</span><span data-lang="es">Procesamiento del lenguaje natural · IA · Inteligencia de negocios</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
           <img src="imgs/web/1RA80WbUhliwaVL7FOleGpaui-ggBS0Y6.jpg" alt="Predicting aurora intensity using machine learning and space weather data" class="w-full h-44 object-cover">
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
-              <h4 class="font-semibold text-lg">Predicting aurora intensity using machine learning and space weather data</h4>
+              <h4 class="font-semibold text-lg"><span data-lang="en">Predicting aurora intensity using machine learning and space weather data</span><span data-lang="zh">運用機器學習與太空天氣資料預測極光強度</span><span data-lang="es">Predicción de la intensidad de las auroras con aprendizaje automático y datos de meteorología espacial</span></h4>
               <span class="text-sm text-gray-500 italic">2017</span>
             </div>
-            <p class="tag-line mt-2">Machine Learning · Space Weather · Predictive Analytics</p>
+            <p class="tag-line mt-2"><span data-lang="en">Machine Learning · Space Weather · Predictive Analytics</span><span data-lang="zh">機器學習 · 太空天氣 · 預測分析</span><span data-lang="es">Aprendizaje automático · Meteorología espacial · Análisis predictivo</span></p>
           </div>
         </div>
         <div class="card overflow-hidden">
           <img src="imgs/web/1ZgzXgE7GjYfS8uQ0nwXpJUlCJGLKuHPo.jpg" alt="Video tracking system for the corpus used by burying beetles" class="w-full h-44 object-cover">
           <div class="p-6">
             <div class="flex justify-between items-start gap-3">
-              <h4 class="font-semibold text-lg">Video tracking system for the corpus used by burying beetles</h4>
+              <h4 class="font-semibold text-lg"><span data-lang="en">Video tracking system for the corpus used by burying beetles</span><span data-lang="zh">埋葬蟲利用屍體行為的影像追蹤系統</span><span data-lang="es">Sistema de seguimiento por video del cadáver que utilizan los escarabajos enterradores</span></h4>
               <span class="text-sm text-gray-500 italic">2016</span>
             </div>
-            <p class="tag-line mt-2">Computer Vision · Behavioral Analysis · Optimization</p>
+            <p class="tag-line mt-2"><span data-lang="en">Computer Vision · Behavioral Analysis · Optimization</span><span data-lang="zh">電腦視覺 · 行為分析 · 最佳化</span><span data-lang="es">Visión artificial · Análisis del comportamiento · Optimización</span></p>
           </div>
         </div>
       </div>
@@ -360,14 +377,14 @@
   <footer class="wpc-footer">
     <div class="max-w-6xl mx-auto px-4 py-10 text-center">
       <p class="footer-brand">Wei-Ping Chan</p>
-      <p class="text-sm mt-1" style="color:#7a788a">Exploratory Data Scientist · Interdisciplinary Researcher</p>
+      <p class="text-sm mt-1" style="color:#7a788a"><span data-lang="en">Exploratory Data Scientist · Interdisciplinary Researcher</span><span data-lang="zh">探索型資料科學家 · 跨領域研究者</span><span data-lang="es">Científico de datos exploratorio · Investigador interdisciplinario</span></p>
       <div class="flex justify-center gap-6 mt-5">
         <a href="https://github.com/wpchanwork" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/wei-ping-chan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
         <a href="https://sos-commons.vercel.app/research" target="_blank" rel="noopener noreferrer">SOS Research</a>
       </div>
-      <p class="text-xs mt-6" style="color:#55536a">© 2026 Wei-Ping Chan. All rights reserved.</p>
+      <p class="text-xs mt-6" style="color:#55536a"><span data-lang="en">© 2026 Wei-Ping Chan. All rights reserved.</span><span data-lang="zh">© 2026 Wei-Ping Chan 版權所有</span><span data-lang="es">© 2026 Wei-Ping Chan. Todos los derechos reservados.</span></p>
     </div>
   </footer>
 
