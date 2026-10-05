@@ -8,20 +8,20 @@
      /es/index.html       Español   ┘ only their own language, <base href="../">
    <html data-page-lang> tells this script which version it is on.
 
-   Load it in <head> (not deferred). On the English pages it may send
-   a visitor to their language before first paint, first match wins:
-     1. ?lang=zh|es|en in the URL (old links)
-     2. the reader's own choice from clicking the switch (localStorage,
-        under the blog's key, so 中文 here also means 中文 on the blog;
-        the blog only has en/zh and shows English for "es")
-     3. their region, from an IP lookup cached for 30 days:
-        Taiwan / China / Hong Kong / Macau → 中文, Spain / Latin America → ES
-     4. the browser language (zh* → 中文, es* → ES), when the lookup fails
-     5. English
+   Load it in <head> (not deferred). On the English pages:
+     - ?lang=zh|es in the URL (old links) goes to that version;
+     - the reader's own earlier choice from the switch (localStorage,
+       under the blog's key, so 中文 here also means 中文 on the blog;
+       the blog only has en/zh and shows English for "es") goes to that
+       version before first paint;
+     - otherwise the page stays in English. If the visitor looks like a
+       中文 or Spanish reader, a small invitation offers their language:
+         their region, from an IP lookup cached for 30 days
+           (Taiwan / China / Hong Kong / Macau → 中文, Spain / Latin America → ES),
+         or the browser language (zh* / es*) when the lookup fails.
+       Closing it hides it for good.
    The 中文 and Spanish URLs never redirect (someone asked for them),
-   and crawlers are never redirected.
-   On a first visit the English page stays hidden until the lookup
-   answers (at most GEO_WAIT ms), so the language never visibly flips.
+   and crawlers get neither redirects nor the invitation.
 
    Static text:    <span data-lang="en">…</span><span data-lang="zh">…</span><span data-lang="es">…</span>
    Generated text: SiteLang.t({ en, zh, es }) returns the same three spans.
@@ -31,7 +31,12 @@ window.SiteLang = (function () {
   const KEY = 'wpc-blog-lang';          // manual choice, shared with the blog
   const GEO_KEY = 'wpc-geo-lang';       // { lang, t } from the IP lookup
   const GEO_URL = 'https://ipapi.co/country/';  // HTTPS, plain-text country code, free tier
-  const GEO_TTL = 30 * 864e5, GEO_RETRY = 864e5, GEO_WAIT = 800;
+  const GEO_TTL = 30 * 864e5, GEO_RETRY = 864e5;
+  const HINT_KEY = 'wpc-lang-hint-closed';   // the invitation was closed
+  const HINT = {
+    zh: { text: '這個網站也有繁體中文版。', go: '切換到中文', close: '關閉' },
+    es: { text: 'Este sitio también está disponible en español.', go: 'Ver en español', close: 'Cerrar' }
+  };
   const REGION = {
     zh: ['TW', 'CN', 'HK', 'MO'],
     es: ['ES', 'MX', 'GT', 'SV', 'HN', 'NI', 'CR', 'PA', 'CU', 'DO', 'PR', 'CO', 'VE', 'EC', 'PE', 'BO', 'CL', 'AR', 'UY', 'PY', 'BR']
@@ -76,41 +81,55 @@ window.SiteLang = (function () {
   }
   const cacheGeo = (lang, ttl) => store(GEO_KEY, JSON.stringify({ lang, t: Date.now() + ttl }));
 
-  function detect() {
-    root.classList.add('lang-pending');
-    let done = false;
-    const finish = (lang, ttl) => {
-      if (done) return; done = true;
-      if (ttl) cacheGeo(lang, ttl);
-      // A click on the switch while waiting wins over the lookup.
-      if (lang !== 'en' && !valid(store(KEY))) return go(lang);
-      root.classList.remove('lang-pending');
-    };
-    // Shown if the lookup is slow or blocked; not cached, so a late answer still counts next time.
-    setTimeout(() => finish(fromBrowser()), GEO_WAIT);
+  // The visitor's likely language: cached region, else an IP lookup (in the background, the page
+  // is already showing), else the browser language when the lookup fails.
+  function likelyLanguage(cb) {
+    const geo = cachedGeo();
+    if (geo) return cb(geo);
     const ctl = window.AbortController ? new AbortController() : null;
     if (ctl) setTimeout(() => ctl.abort(), 5000);
     fetch(GEO_URL, { signal: ctl && ctl.signal, credentials: 'omit' })
       .then(r => r.ok ? r.text() : Promise.reject(r.status))
       .then(cc => {
         if (!/^[A-Za-z]{2}$/.test(cc.trim())) throw cc;
-        done ? cacheGeo(fromCountry(cc), GEO_TTL) : finish(fromCountry(cc), GEO_TTL);
+        const lang = fromCountry(cc); cacheGeo(lang, GEO_TTL); cb(lang);
       })
-      // Lookup failed (offline, rate limit, blocker): use the browser language for a day, then try again.
-      .catch(() => { done ? cacheGeo(fromBrowser(), GEO_RETRY) : finish(fromBrowser(), GEO_RETRY); });
+      // Lookup failed (offline, rate limit, blocker): use the browser language, try again in a day.
+      .catch(() => { const lang = fromBrowser(); cacheGeo(lang, GEO_RETRY); cb(lang); });
+  }
+
+  // A small invitation in the visitor's language, offered instead of redirecting.
+  function offer(lang) {
+    const h = HINT[lang];
+    if (!h || valid(store(KEY)) || store(HINT_KEY)) return;
+    const box = document.createElement('div');
+    box.className = 'lang-hint';
+    box.setAttribute('role', 'region');
+    box.setAttribute('aria-label', h.text);
+    box.lang = HTML_LANG[lang];
+    box.innerHTML = '<p>' + esc(h.text) + '</p>' +
+      '<a class="lang-hint-go" href="' + esc(urlFor(lang)) + '">' + esc(h.go) + ' <i aria-hidden="true">→</i></a>' +
+      '<button type="button" class="lang-hint-close" aria-label="' + esc(h.close) + '">×</button>';
+    box.querySelector('.lang-hint-go').addEventListener('click', () => store(KEY, lang));
+    box.querySelector('.lang-hint-close').addEventListener('click', () => {
+      store(HINT_KEY, '1');
+      box.classList.remove('in');
+      setTimeout(() => box.remove(), 400);
+    });
+    document.body.appendChild(box);
+    setTimeout(() => box.classList.add('in'), 900);   // let the page settle first
   }
 
   // Runs now, in <head>, before first paint.
   root.setAttribute('data-reading', PAGE);
+  let offerOnReady = false;
   (function route() {
     const q = new URLSearchParams(location.search).get('lang');
     if (valid(q)) return q !== PAGE && go(q);       // an old ?lang= link: it is what the reader asked for
     if (PAGE !== 'en' || BOT.test(navigator.userAgent)) return;
     const own = store(KEY);
-    if (valid(own)) return own !== 'en' && go(own);
-    const geo = cachedGeo();
-    if (geo) return geo !== 'en' && go(geo);
-    detect();
+    if (valid(own)) return own !== 'en' && go(own);  // they chose before: take them there
+    offerOnReady = !store(HINT_KEY);
   })();
 
   // The blog only has en/zh and reads ?lang=, so pass this page's language along (Spanish → English).
@@ -127,11 +146,13 @@ window.SiteLang = (function () {
       b.addEventListener('click', () => {
         const lang = b.dataset.setLang;
         store(KEY, lang);                      // every click counts as the reader's own choice
+        const hint = document.querySelector('.lang-hint'); if (hint) hint.remove();
         if (lang !== PAGE) location.href = urlFor(lang);
       });
     });
     syncBlogLinks();
     listeners.forEach(fn => fn(PAGE));
+    if (offerOnReady) likelyLanguage(offer);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 
