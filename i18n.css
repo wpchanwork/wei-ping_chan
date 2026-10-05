@@ -43,8 +43,8 @@ html[data-reading="es"] .lang-toggle::before { transform: translateX(200%); }
 
 /* ---------- 中文 typography ---------- */
 /* Headings: CJK falls back from the Latin display face to a Traditional Chinese serif. */
-:is(h1, h2, h3, h4, .section-title, .cat-head, .group-head)[data-lang="zh"],
-:is(h1, h2, h3, h4, .section-title, .cat-head, .group-head) [data-lang="zh"] {
+:is(h1, h2, h3, h4, .section-title, .cat-head, .group-head, .wpc-nav-brand, .footer-brand)[data-lang="zh"],
+:is(h1, h2, h3, h4, .section-title, .cat-head, .group-head, .wpc-nav-brand, .footer-brand) [data-lang="zh"] {
   font-family: 'DM Serif Display', var(--f-zh-serif);
   font-weight: 700;
   letter-spacing: .04em;
