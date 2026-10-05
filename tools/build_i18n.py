@@ -1,0 +1,155 @@
+"""Build the 中文 and Spanish versions of the site pages.
+
+    python tools/build_i18n.py
+
+Run it after every edit to index.html, projects.html or collaborators.html
+(see I18N.md). It:
+  1. writes zh/<page> and es/<page>: only that language's text, translated
+     <title> and meta tags, self canonical, <base href="../"> so every
+     relative URL still points at the site root;
+  2. refreshes the hreflang / og:locale block in all nine pages;
+  3. refreshes the site-page entries in sitemap.xml (blog entries are kept).
+Standard library only.
+"""
+import datetime
+import html
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+SITE = 'https://wpchanwork.github.io/wei-ping_chan/'
+PAGES = ['index.html', 'projects.html', 'collaborators.html']
+LANGS = ['en', 'zh', 'es']
+HTML_LANG = {'en': 'en', 'zh': 'zh-Hant', 'es': 'es'}
+OG_LOCALE = {'en': 'en_US', 'zh': 'zh_TW', 'es': 'es_ES'}
+PRIORITY = {'index.html': '1.0', 'projects.html': '0.8', 'collaborators.html': '0.8'}
+BLOCK = re.compile(r'[ \t]*<!-- i18n:alternates -->.*?<!-- /i18n:alternates -->\n', re.S)
+
+
+def url(lang, page):
+    return SITE + ('' if lang == 'en' else lang + '/') + page
+
+
+def alternates(lang, page):
+    """hreflang links for all versions plus og:locale for this one."""
+    lines = [f'  <link rel="alternate" hreflang="{HTML_LANG[l]}" href="{url(l, page)}">' for l in LANGS]
+    lines.append(f'  <link rel="alternate" hreflang="x-default" href="{url("en", page)}">')
+    lines.append(f'  <meta property="og:locale" content="{OG_LOCALE[lang]}">')
+    lines += [f'  <meta property="og:locale:alternate" content="{OG_LOCALE[l]}">' for l in LANGS if l != lang]
+    return '  <!-- i18n:alternates -->\n' + '\n'.join(lines) + '\n  <!-- /i18n:alternates -->\n'
+
+
+def with_alternates(s, lang, page):
+    s = BLOCK.sub('', s)
+    m = re.search(r'[ \t]*<link rel="canonical"[^>]*>\n', s)
+    if not m:
+        sys.exit(f'{page}: no <link rel="canonical">')
+    return s[:m.end()] + alternates(lang, page) + s[m.end():]
+
+
+def outside_scripts(s, fn):
+    """Apply fn only to the markup, never inside <script>…</script>."""
+    parts = re.split(r'(<script\b.*?</script>)', s, flags=re.S)
+    return ''.join(p if i % 2 else fn(p) for i, p in enumerate(parts))
+
+
+def strip_other_languages(s, keep):
+    """Remove every element marked data-lang="<other language>", with its children."""
+    open_re = re.compile(r'<([a-zA-Z][\w-]*)\b[^>]*\bdata-lang="(en|zh|es)"[^>]*>')
+    out, pos = [], 0
+    while True:
+        m = open_re.search(s, pos)
+        if not m:
+            out.append(s[pos:]); break
+        tag, lang = m.group(1), m.group(2)
+        if lang == keep:
+            out.append(s[pos:m.end()]); pos = m.end(); continue
+        depth, i = 1, m.end()
+        tok = re.compile(rf'<(/?){tag}\b[^>]*>')
+        while depth:
+            t = tok.search(s, i)
+            if not t:
+                sys.exit(f'unclosed <{tag} data-lang="{lang}">')
+            depth += -1 if t.group(1) else 1
+            i = t.end()
+        out.append(s[pos:m.start()]); pos = i
+    return ''.join(out)
+
+
+def localize_head(s, lang, page):
+    def swap(m):  # <title data-zh=".." data-es="..">EN</title> and <meta data-zh data-es content="EN">
+        tag = m.group(0)
+        val = re.search(rf'\bdata-{lang}="([^"]*)"', tag).group(1)
+        tag = re.sub(r'\s+data-(zh|es)="[^"]*"', '', tag)
+        if tag.startswith('<title'):
+            return re.sub(r'>.*?<', '>' + val + '<', tag, count=1)
+        return re.sub(r'content="[^"]*"', 'content="' + val + '"', tag, count=1)
+    s = re.sub(r'<title\b[^>]*data-zh="[^"]*"[^>]*>.*?</title>', swap, s, count=1, flags=re.S)
+    s = re.sub(r'<meta\b[^>]*data-zh="[^"]*"[^>]*>', swap, s)
+    s = re.sub(r'(<link rel="canonical" href=")[^"]*(")', r'\g<1>' + url(lang, page) + r'\g<2>', s)
+    s = re.sub(r'(<meta property="og:url" content=")[^"]*(")', r'\g<1>' + url(lang, page) + r'\g<2>', s)
+    s = re.sub(r'<html\b[^>]*>', f'<html lang="{HTML_LANG[lang]}" data-reading="{lang}" data-page-lang="{lang}">', s, count=1)
+    s = s.replace('<head>', '<head>\n  <base href="../">', 1)
+    return s
+
+
+def localize_links(s, lang, page):
+    """Links between the site pages stay in this language (resolved against <base href="../">)."""
+    pages = '|'.join(re.escape(p) for p in PAGES)
+    s = re.sub(rf'href="({pages})(#[^"]*)?"', lambda m: f'href="{lang}/{m.group(1)}{m.group(2) or ""}"', s)
+    s = re.sub(r'href="(#[^"]+)"', lambda m: f'href="{lang}/{page}{m.group(1)}"', s)
+    if lang == 'zh':  # the blog has 中文; Spanish readers get its English version
+        s = re.sub(r'href="(blog[^"?#]*)(#[^"]*)?"', lambda m: f'href="{m.group(1)}?lang=zh{m.group(2) or ""}"', s)
+    return s
+
+
+def build_page(src, lang, page):
+    s = localize_head(src, lang, page)
+    s = outside_scripts(s, lambda p: localize_links(strip_other_languages(p, lang), lang, page))
+    s = s.replace('<!DOCTYPE html>', f'<!DOCTYPE html>\n<!-- Generated by tools/build_i18n.py from {page}. Do not edit: edit ../{page} and run the build. -->', 1)
+    markup = re.sub(r'<script\b.*?</script>', '', s, flags=re.S)
+    if re.search(r'data-lang="(?!' + lang + r')', markup):
+        sys.exit(f'{lang}/{page}: other-language markup left over')
+    if re.search(r'data-(zh|es)="', markup):
+        sys.exit(f'{lang}/{page}: untranslated title/meta left over')
+    return s
+
+
+def sitemap(today):
+    path = ROOT / 'sitemap.xml'
+    s = path.read_text(encoding='utf-8')
+    site_locs = {url(l, p) for l in LANGS for p in PAGES}
+    s = re.sub(r'[ \t]*<url>\s*<loc>([^<]+)</loc>.*?</url>\n', lambda m: '' if m.group(1) in site_locs else m.group(0), s, flags=re.S)
+    if 'xmlns:xhtml' not in s:
+        s = s.replace('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+                      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">')
+    blocks = []
+    for p in PAGES:
+        links = ''.join(f'\n    <xhtml:link rel="alternate" hreflang="{HTML_LANG[l]}" href="{url(l, p)}"/>' for l in LANGS)
+        links += f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{url("en", p)}"/>'
+        for l in LANGS:
+            blocks.append(f'  <url>\n    <loc>{url(l, p)}</loc>\n    <lastmod>{today}</lastmod>\n    <priority>{PRIORITY[p]}</priority>{links}\n  </url>\n')
+    s = re.sub(r'(<urlset[^>]*>\n)', lambda m: m.group(1) + ''.join(blocks), s, count=1)
+    path.write_text(s, encoding='utf-8', newline='\n')
+
+
+def main():
+    today = datetime.date.today().isoformat()
+    for page in PAGES:
+        src_path = ROOT / page
+        src = src_path.read_text(encoding='utf-8')
+        src = with_alternates(src, 'en', page)
+        src_path.write_text(src, encoding='utf-8', newline='\n')
+        for lang in ('zh', 'es'):
+            out = with_alternates(build_page(src, lang, page), lang, page)
+            dest = ROOT / lang / page
+            dest.parent.mkdir(exist_ok=True)
+            dest.write_text(out, encoding='utf-8', newline='\n')
+            print('wrote', dest.relative_to(ROOT))
+    sitemap(today)
+    print('updated sitemap.xml')
+
+
+if __name__ == '__main__':
+    main()
