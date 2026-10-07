@@ -131,6 +131,7 @@ html[data-reading="zh"] .lang-toggle::before { transform: translateX(100%); }
 @keyframes word-in { to { opacity: 1; transform: none; filter: blur(0); } }
 
 .post-excerpt { margin-top: 1.4rem; max-width: 40rem; font-size: 1.08rem; line-height: 1.7; color: rgba(255,255,255,.72); }
+.post-excerpt .excerpt-em { font-weight: 700; color: rgba(255,255,255,.95); white-space: nowrap; }
 .post-excerpt:lang(zh) { font-family: var(--f-zh-sans); line-height: 1.95; letter-spacing: .03em; }
 
 .byline { margin-top: 2rem; display: flex; align-items: center; gap: .85rem; }

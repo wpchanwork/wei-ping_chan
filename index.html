@@ -465,7 +465,7 @@
             '<span class="blog-kicker">' + t({ en: 'Latest post · ' + BlogLang.formatDate(p.date, 'en'), zh: '最新文章 · ' + BlogLang.formatDate(p.date, 'zh'), es: 'Última publicación · ' + SiteLang.date(p.date, 'es') }) + '</span>' +
             '<h3 class="blog-feature-title">' + t({ en: p.title.en, zh: zh, es: p.title.en }) + '</h3>' +
             (p.title.zh ? '<p class="blog-feature-zh" data-lang="en" lang="zh-Hant">' + esc(p.title.zh) + '</p>' : '') +
-            '<p class="blog-feature-excerpt">' + t({ en: p.excerpt.en, zh: p.excerpt.zh || p.excerpt.en, es: p.excerpt.en }) + '</p>' +
+            '<p class="blog-feature-excerpt">' + t({ en: BlogLang.rich(p.excerpt.en), zh: BlogLang.rich(p.excerpt.zh || p.excerpt.en), es: BlogLang.rich(p.excerpt.en) }, true) + '</p>' +
             '<span class="blog-feature-cta">' + t({ en: 'Read more', zh: '閱讀全文', es: 'Leer en inglés' }) + ' <i>→</i></span>' +
           '</div>' +
         '</a>';
