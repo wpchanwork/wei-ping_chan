@@ -135,6 +135,13 @@ html[data-reading="zh"] .lang-toggle::before { transform: translateX(100%); }
 
 .byline { margin-top: 2rem; display: flex; align-items: center; gap: .85rem; }
 .byline img { width: 42px; height: 42px; border-radius: 9999px; object-fit: cover; box-shadow: 0 0 0 2px rgba(255,255,255,.85); }
+/* Co-authored posts: stacked avatars; an initials badge stands in when there is no photo */
+.byline-avatars { display: flex; flex-shrink: 0; }
+.byline-avatars > * + * { margin-left: -.55rem; }
+.avatar-initials { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-family: var(--f-mono); font-weight: 600; letter-spacing: .04em; color: #fff;
+  background: linear-gradient(135deg, #0d9488, #0c1525); }
+.byline .avatar-initials { width: 42px; height: 42px; border-radius: 9999px; font-size: .68rem; box-shadow: 0 0 0 2px rgba(255,255,255,.85); }
 .byline-name { font-size: .9rem; font-weight: 600; color: #fff; }
 .byline-meta { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; color: rgba(255,255,255,.55); margin-top: .15rem; }
 
@@ -362,6 +369,8 @@ html[data-reading="zh"] .lang-toggle::before { transform: translateX(100%); }
 }
 .ac-art { position: relative; overflow: hidden; flex-shrink: 0; width: 4.5rem; height: 4.5rem; border-radius: .6rem; border: 1px solid rgba(255,255,255,.2); }
 .ac-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ac-arts { display: flex; gap: .5rem; flex-shrink: 0; }
+.ac-art.avatar-initials { font-size: 1.05rem; }
 .ac-body { flex: 1; min-width: 9rem; }
 .ac-kicker { display: block; font-family: var(--f-mono); font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: #5eead4; }
 .ac-name { display: block; margin-top: .2rem; font-family: var(--f-display); font-size: 1.5rem; line-height: 1.1; }
