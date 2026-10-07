@@ -16,8 +16,8 @@ window.BLOG_POSTS = [
     slug: 'will-ai-destroy-humanity',
     url: 'blog/will-ai-destroy-humanity.html',
     date: '2026-10-08',
-    cover: 'imgs/web/splash-bg.jpg',   // placeholder until the real cover is added
-    coverPosition: '72% 60%',
+    cover: 'imgs/web/blog-ai-humanity-cover.jpg',
+    coverPosition: '62% 35%',
     tags: ['AI', 'Society', 'Ethics'],
     title: {
       en: 'Will AI Destroy Humanity?',
