@@ -25,7 +25,7 @@ window.BLOG_POSTS = [
     },
     excerpt: {
       en: 'The debate over whether AI could destroy humanity usually asks what AI might want. I think the missing variable is war: the capabilities we choose to teach it, and the lines we let slip when we are afraid.',
-      zh: '討論 AI 會不會毀滅人類時，我們常問 AI 想要什麼。但我認為被漏掉的變數是戰爭：我們主動教給它的能力，以及我們在恐懼中一步步退後的底線。'
+      zh: '討論 AI 會不會毀滅人類時，我們常問 AI 要什麼。但其實被漏掉的變數是戰爭：我們主動教給它的能力，以及我們在恐懼中一步步退後的底線。'
     }
   },
   {
