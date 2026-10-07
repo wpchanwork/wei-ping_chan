@@ -316,8 +316,8 @@
           <div class="essay-meta">${bi(BlogLang.formatDate(p.date, 'en'), BlogLang.formatDate(p.date, 'zh'))}${tags}</div>
           <h2 class="essay-title" lang="en" data-lang="en"><a class="essay-link" data-url="${esc(p.url)}" href="${esc(p.url)}">${esc(p.title.en)}</a></h2>
           <h2 class="essay-title" lang="zh-Hant" data-lang="zh"><a class="essay-link" data-url="${esc(p.url)}" href="${esc(p.url)}">${esc(p.title.zh || p.title.en)}</a></h2>
-          <p class="essay-excerpt" lang="en" data-lang="en">${BlogLang.rich(p.excerpt.en)}</p>
-          <p class="essay-excerpt" lang="zh-Hant" data-lang="zh">${BlogLang.rich(p.excerpt.zh || p.excerpt.en)}</p>
+          <p class="essay-excerpt" lang="en" data-lang="en">${esc(p.excerpt.en)}</p>
+          <p class="essay-excerpt" lang="zh-Hant" data-lang="zh">${esc(p.excerpt.zh || p.excerpt.en)}</p>
           <div class="essay-foot">
             <span class="essay-read">${bi('Read more', '閱讀全文')} <i>→</i></span>
             <button type="button" class="essay-share" aria-haspopup="menu" aria-expanded="false">${SHARE_ICON}${bi('Share', '轉貼')}</button>

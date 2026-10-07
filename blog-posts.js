@@ -7,10 +7,6 @@
      2. Replace the title, excerpt, cover and both language bodies
      3. Add an entry at the TOP of BLOG_POSTS below (newest first)
 
-   Excerpts may wrap a key word in **double asterisks**: it is shown
-   bold and never split across lines (use <strong class="excerpt-em">
-   for the same word in the post's hero excerpt).
-
    Paths (cover, url) are relative to the site root; pages inside
    blog/ prefix them with "../" automatically.
    ============================================================ */
@@ -29,7 +25,7 @@ window.BLOG_POSTS = [
     },
     excerpt: {
       en: 'The debate over whether AI could destroy humanity usually asks what AI might want. I think the missing variable is war: the capabilities we choose to teach it, and the lines we let slip when we are afraid.',
-      zh: '討論 AI 會不會毀滅人類時，我們常問 AI 想要什麼。但我認為被漏掉的變數是**戰爭**：我們主動教給它的能力，以及我們在恐懼中一步步退後的底線。'
+      zh: '討論 AI 會不會毀滅人類時，我們常問 AI 想要什麼。但我認為被漏掉的變數是戰爭：我們主動教給它的能力，以及我們在恐懼中一步步退後的底線。'
     }
   },
   {
@@ -83,11 +79,6 @@ window.BlogLang = (function () {
         ? d.getFullYear() + ' 年 ' + (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日'
         : d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     },
-    tag(t, lang) { return lang === 'zh' ? (window.BLOG_TAG_ZH[t] || t) : t; },
-    // Excerpt as safe HTML: escaped, with **word** turned into a bold word that never breaks.
-    rich(text) {
-      return String(text || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-        .replace(/\*\*(.+?)\*\*/g, '<strong style="font-weight:700;color:rgba(255,255,255,.95);white-space:nowrap">$1</strong>');
-    }
+    tag(t, lang) { return lang === 'zh' ? (window.BLOG_TAG_ZH[t] || t) : t; }
   };
 })();
