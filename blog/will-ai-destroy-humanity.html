@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" data-reading="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will AI Destroy Humanity? | Wei-Ping Chan</title>
+  <meta name="description" content="The debate over whether AI could destroy humanity usually asks what AI might want. The missing variable may be war. A blog post by Wei-Ping Chan." />
+  <link rel="canonical" href="https://wpchanwork.github.io/wei-ping_chan/blog/will-ai-destroy-humanity.html">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:title" content="Will AI Destroy Humanity?">
+  <meta property="og:description" content="The debate over whether AI could destroy humanity usually asks what AI might want. The missing variable may be war.">
+  <meta property="og:image" content="https://wpchanwork.github.io/wei-ping_chan/imgs/web/splash-bg.jpg">
+  <meta property="og:url" content="https://wpchanwork.github.io/wei-ping_chan/blog/will-ai-destroy-humanity.html">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-10-08">
+  <meta property="article:author" content="Wei-Ping Chan">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Will AI Destroy Humanity?">
+  <meta name="twitter:image" content="https://wpchanwork.github.io/wei-ping_chan/imgs/web/splash-bg.jpg">
+  <!-- Pick the reading language before first paint so the page never flashes the wrong one. -->
+  <script>
+    (function () {
+      var l = new URLSearchParams(location.search).get('lang');
+      if (l !== 'en' && l !== 'zh') { try { l = localStorage.getItem('wpc-blog-lang'); } catch (e) {} }
+      if (l !== 'en' && l !== 'zh') l = 'en';
+      document.documentElement.setAttribute('data-reading', l);
+      document.documentElement.lang = l === 'zh' ? 'zh-Hant' : 'en';
+    })();
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../share.css">
+  <link rel="stylesheet" href="blog-post.css">
+</head>
+<body class="post-page">
+
+  <div class="read-progress" id="read-progress" aria-hidden="true"></div>
+
+  <!-- ===================== NAVBAR (shared across pages) ===================== -->
+  <header class="wpc-nav sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="../index.html" class="wpc-nav-brand">Wei-Ping Chan</a>
+      <div class="md:hidden">
+        <button id="menu-toggle" aria-label="Toggle menu" class="focus:outline-none" style="color:var(--c-text)">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+      <nav id="menu" class="hidden md:flex md:items-center md:space-x-1 absolute md:static top-16 left-0 right-0 bg-white md:bg-transparent shadow md:shadow-none flex-col md:flex-row px-3 md:px-0 py-3 md:py-0 space-y-1 md:space-y-0">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../projects.html" class="nav-link">Projects</a>
+        <a href="../collaborators.html" class="nav-link">Collaborations</a>
+        <a href="../blog.html" class="nav-active" style="text-decoration:none">Blog</a>
+        <a href="../index.html#talks" class="nav-link">Talks</a>
+        <a href="../index.html#background" class="nav-link">Background</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('menu').classList.toggle('hidden'));</script>
+
+  <main>
+
+    <!-- ===================== HERO (cover is scanned in) ===================== -->
+    <header class="essay-hero" id="essay-hero">
+      <div class="essay-hero-media" aria-hidden="true">
+        <!-- Cover: both <img> must use the same src (mono + colour layers of the scan reveal) -->
+        <!-- TODO(Ping): placeholder cover (site splash image). Swap in the real image here, in og:image / twitter:image, and in blog-posts.js. -->
+        <img class="hero-img hero-img--mono" src="../imgs/web/splash-bg.jpg" alt="" style="object-position:72% 60%">
+        <img class="hero-img hero-img--color" src="../imgs/web/splash-bg.jpg" alt="" style="object-position:72% 60%">
+        <span class="scan-line"></span>
+      </div>
+      <div class="essay-hero-shade"></div>
+
+      <div class="hero-top">
+        <a href="../blog.html" class="post-back fade-up" id="back-link" style="--d:.1s">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span data-lang="en">All posts</span><span data-lang="zh">所有文章</span>
+        </a>
+        <div class="lang-toggle fade-up" role="group" aria-label="Choose a language" style="--d:.2s">
+          <button type="button" data-set-lang="en" title="English">EN</button>
+          <button type="button" data-set-lang="zh" title="繁體中文">中文</button>
+        </div>
+      </div>
+
+      <div class="essay-hero-inner">
+        <div class="specimen-row fade-up" id="specimen-row" style="--d:.4s"></div>
+
+        <h1 class="post-title" lang="en" data-lang="en" data-split>Will AI Destroy Humanity?</h1>
+        <h1 class="post-title" lang="zh-Hant" data-lang="zh" data-split>AI 會毀滅人類嗎？</h1>
+
+        <p class="post-excerpt fade-up" lang="en" data-lang="en" style="--d:1.1s">The debate over whether AI could destroy humanity usually asks what AI might want. I think the missing variable is war: the capabilities we choose to teach it, and the lines we let slip when we are afraid.</p>
+        <p class="post-excerpt fade-up" lang="zh-Hant" data-lang="zh" style="--d:1.1s">討論 AI 會不會毀滅人類時，我們常問 AI 想要什麼。但我認為被漏掉的變數是戰爭：我們主動教給它的能力，以及我們在恐懼中一步步退後的底線。</p>
+
+        <div class="byline fade-up" style="--d:1.3s">
+          <img src="../imgs/web/1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME.jpg" alt="Wei-Ping Chan">
+          <div>
+            <div class="byline-name">Wei-Ping Chan</div>
+            <div class="byline-meta"><time datetime="2026-10-08" id="post-date">October 8, 2026</time> · <span id="read-time"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-cue" aria-hidden="true"><span data-lang="en">Scroll</span><span data-lang="zh">往下讀</span><i></i></div>
+      <div class="hero-spectrum" aria-hidden="true"></div>
+    </header>
+
+    <!-- ===================== BODY ===================== -->
+    <div class="essay-body">
+      <div class="essay-grid">
+        <aside class="essay-rail" aria-label="Table of contents">
+          <div class="rail-inner">
+            <div class="rail-count"><span class="rail-num" id="rail-num">00</span><small id="rail-total">/ 00</small></div>
+            <p class="rail-label"><span data-lang="en">In this post</span><span data-lang="zh">本文段落</span></p>
+            <nav class="toc"><span class="toc-fill" id="toc-fill"></span><ol id="toc-list"></ol></nav>
+            <div class="rail-share">
+              <p class="rail-label"><span data-lang="en">Share</span><span data-lang="zh">轉貼</span></p>
+              <div class="share-kit share-kit--compact" data-share data-compact></div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="essay-main" id="essay-main">
+
+        <!-- ========== ENGLISH ========== -->
+        <article class="reading-card prose-post" lang="en" data-lang="en">
+          <p class="lead">The question of whether AI might one day destroy humanity has returned to the center of public debate. In September 2026, Jacob Coxon, a researcher who had just left Anthropic, warned publicly that some of the people building the most advanced AI systems genuinely believe AI could pose an existential threat to humanity in the not-too-distant future. Evan Hubinger, a researcher on Anthropic’s alignment team, has also said openly that he does not consider the probability of such a catastrophe within the next decade to be negligible.</p>
+          <p>A few days later, President Donald Trump dismissed the idea outright on social media, calling “AI taking over the World, destroying Humanity” a HOAX. Around the same time, Nvidia CEO Jensen Huang pushed back against the doomsday narrative in an interview with CBS News. Asked whether an AI-driven end of the world was possible by 2030, he was blunt: “0% chance.” But Huang’s full argument was more careful than that line suggests. He was not saying AI could never be dangerous. He was saying that whether AI is safe depends on how humans design it, constrain it, and use it.</p>
+          <p>The two sides appear to be arguing about opposite things. One holds that AI could destroy humanity. The other holds that AI will not somehow drift into becoming an entity that decides to wipe us out. I have long suspected that both claims can be true at once. What the debate leaves out is one factor, overlooked by accident or ignored on purpose.</p>
+
+          <h2 id="en-why">Why would AI destroy humanity?</h2>
+          <p>To me, this is a basic question in the whole debate, and one that is easily skipped.</p>
+          <p>An AI that grows more intelligent does not, by that fact alone, need to learn how to destroy humanity. We want AI to understand language, do science, design machines, forecast the climate, write code, operate machinery, and even make sense of a world far more complex than the one we live in today. Any of these abilities could make AI extraordinarily powerful. None of them requires it to learn how to harm people.</p>
+          <p class="key"><strong>So perhaps the question worth asking is not “Why would AI one day want to destroy us?” but “Why would AI ever become capable of destroying us?”</strong></p>
+          <p>The two questions sound alike, but they are entirely different. The first requires us to assume that AI develops goals or motives of its own. The second does not. There is a very simple explanation for how AI might acquire these capabilities: humans will ask it to learn them.</p>
+          <p class="key key--amber">And the most obvious setting is war.</p>
+
+          <h2 id="en-war">It is hard to keep AI out of war</h2>
+          <p>To ask today whether AI should be used for military purposes is, in a sense, already too late. AI can already recognize images, fuse sensor data, track objects, predict movements, pilot uncrewed vehicles, support decision-making, and carry out cyberattacks and cyber defense. These capabilities are enormously valuable in civilian life. They are just as valuable on the battlefield.</p>
+          <p>Military competition follows a logic that is very hard to escape. If AI lets one side find a target a second sooner, detect an attack a minute earlier, or put fewer of its own soldiers at risk, then even a country that does not want to push AI in this direction still has to ask: “What if we don’t use it, and they do?”</p>
+          <p>This, I think, is what discussions of AI’s catastrophic risks so often overlook. AI does not need to decide on its own to learn how to destroy humanity. As long as war exists, humans will have every reason to teach it, on purpose, how to identify an enemy, track an enemy, predict what an enemy will do, and carry out an attack more efficiently.</p>
+          <p class="key"><strong>In other words, AI never asked to be taught any of this. We are the ones who need it to know.</strong></p>
+
+          <h2 id="en-lines">War moves the lines we draw</h2>
+          <p>Turning tools toward violence is far older than modern technology. Humanity’s earliest blades were tools for survival, used to cut materials and process food and game, not designed for war between people. Yet the same ability to cut later became a way for people to hurt one another. The tool did not decide what it would be used for. People did.</p>
+          <p class="key key--amber"><strong>This is not a problem unique to AI. War has always had a dangerous power: it changes what we once considered unacceptable.</strong></p>
+          <p>Nuclear weapons are one of the most extreme examples. When Albert Einstein set out the equivalence of mass and energy in 1905, he was, of course, not designing an atomic bomb. Decades later, breakthroughs such as nuclear fission made the bomb possible, and the Second World War swiftly redirected how that knowledge would be used. In 1939, amid fears that Nazi Germany might develop nuclear weapons first, Einstein signed a letter to President Franklin D. Roosevelt warning that a uranium chain reaction could produce bombs of immense power. What makes this story worth remembering is not the responsibility of any single scientist. It is the question behind it, one we still know very well today: what if we don’t, and they do it first?</p>
+          <p>Humanity has also long tried to set limits on war. We have built international rules restricting chemical and biological weapons, landmines, cluster munitions, and other weapons capable of causing massive or indiscriminate harm. Yet once a war is underway, some weapons that were supposed to stay off the table come back. Not because war suddenly makes them more humane, but because war raises the cost of not using them.</p>
+          <p>But this is not only a matter of national strategy. It is also a matter of human nature. When war is still something on the news, it is easy to discuss calmly what is permissible and what is not. But when friends, comrades, and family members are hurt one after another, fear, grief, anger, and the desire for revenge can begin to reshape people’s judgment. Long conflicts throughout history have shown again and again that violence can harden into a cycle of retaliation and counter-retaliation: those who are victims today may be the ones most willing to cross a line tomorrow, and each new harm supplies the reason for the next round of revenge.</p>
+          <p>This is why I do not think “we will make rules” fully answers the question of AI. The hard part is not drawing a line in a peaceful conference room. It is asking every person to hold that line when their own city is under attack, when the people around them are dying, when they have begun to believe that there may be no tomorrow.</p>
+          <div class="pull"><p>What may make war most dangerous is that it allows the unacceptable to become, little by little, understandable.</p></div>
+
+          <h2 id="en-exception">Can we really be sure AI will be the exception?</h2>
+          <p>Today we are drawing lines for AI as well. We want important military decisions to keep a human in the loop. We want AI never to decide on its own to use lethal force against people. We want certain weapons and certain authorities to remain in human hands permanently. I fully support these limits, and I think they matter a great deal.</p>
+          <p>But the real test is not whether we are willing to make rules in peacetime. It is whether we will keep them once keeping them starts to cost us. What if an adversary’s AI can make a decision in a tenth of a second, while we insist on waiting ten seconds for human approval? What if an autonomous defense system could protect more of our own soldiers? What if a commander who lost comrades only yesterday believes that loosening the AI’s authority to strike could stop the same thing from happening tomorrow?</p>
+          <p>These decisions do not even have to come from an evil person. They may come from fear, duty, grief, or anger. They may come from someone who sincerely believes they are protecting others. This is what worries me more: <strong>every loosening of a restriction may come with a justification that, in the moment, seems entirely sensible, even deeply human.</strong></p>
+          <p>At first, AI can only identify and track. Later, it can recommend strikes. Later still, because humans react too slowly, it is allowed to fire back on its own under specific conditions. No single step requires anyone to announce, “We are done drawing lines.” The line may simply retreat a little at a time. And when we finally look back, we may find that we have built a remarkably intelligent AI, one that can identify people, track people, predict what people will do, plan attacks, coordinate swarms of uncrewed systems, and even be authorized to carry out lethal missions directly.</p>
+          <div class="flow" role="img" aria-label="Identify and track, then recommend strikes, then fire back on its own, then carry out lethal missions">
+            <div class="flow-steps">
+              <span class="flow-step"><b>01</b>Identify &amp; track</span><span class="flow-arrow">→</span>
+              <span class="flow-step"><b>02</b>Recommend strikes</span><span class="flow-arrow">→</span>
+              <span class="flow-step"><b>03</b>Fire back on its own</span><span class="flow-arrow">→</span>
+              <span class="flow-step flow-step--last"><b>04</b>Carry out lethal missions</span>
+            </div>
+            <p class="flow-caption">How a line can retreat, one small step at a time</p>
+          </div>
+          <div class="pull"><p>AI did not cross these lines on its own. We moved them back for it, one step at a time.</p></div>
+
+          <h2 id="en-locks">But the problem does not end there</h2>
+          <p>One key reason we are willing to hand these capabilities to military AI is our belief that it can still be controlled: restrict its permissions, isolate its networks, keep a human in the loop, and lock the most dangerous capabilities inside specific systems and environments. As long as AI lacks the ability to break through those restrictions, we can still believe that final control rests with humans, even if the AI knows how to carry out dangerous tasks.</p>
+          <p>But another line of AI development is advancing quickly at the same time. For the sake of cybersecurity, software development, and autonomous AI agents, we are making AI ever better at writing code, finding software vulnerabilities, operating computers, understanding complex systems, and completing digital tasks across systems on its own. These capabilities have very important legitimate uses. We need AI to find vulnerabilities precisely so that we can fix them before attackers exploit them.</p>
+          <p class="key"><strong>The problem is that a capability does not necessarily know the purpose we assigned to it.</strong></p>
+          <p>So we may be teaching AI two different things at once. In military systems, we teach it how to identify, track, and attack, and how to use systems of enormous destructive power more efficiently. In cybersecurity and the development of autonomous AI agents, we teach it how to find a system’s weak points, obtain the permissions it needs, operate across different digital environments, and find another way around when it hits an obstacle.</p>
+          <div class="pull"><p>We are less afraid of the first kind of capability because we believe we can lock it away. We need the second kind precisely because we want AI to get better and better at understanding how those locks work.</p></div>
+          <p>Today these two kinds of capability do not necessarily live in the same model, nor is it inevitable that they will ever be combined. What is truly worth worrying about is whether we can guarantee that they never meet.</p>
+          <p>If one day an AI capable of understanding and breaking through digital restrictions also gains access to military AI that humans have already trained, to weapons-control systems, or to other systems with enormous destructive power, it will not need to learn from scratch how to destroy humanity. Those capabilities may already exist. We had simply locked them away in separate places.</p>
+          <p>This is one important difference between AI and conventional weapons. Weapons can be locked in armories. Missiles can be kept on bases. Nuclear weapons can be isolated by layers of physical and procedural controls. But the most important parts of AI are software, models, and information. Once a capability has been learned, it may be far easier than any physical weapon to copy, modify, combine, or redeploy.</p>
+          <p class="key key--amber"><strong>So in the end the question is not only “Can we control a weapon?” It is this: while we teach AI how to use dangerous capabilities, and at the same time make it ever better at breaking through the restrictions of the digital world, how long can we keep those two things apart?</strong></p>
+
+          <h2 id="en-right">Perhaps everyone is right</h2>
+          <p>Looking back at the debate I began with, I do not think only one side has to be right.</p>
+          <p>Huang believes AI will not somehow stumble its way to the end of the world, and he may well be right. Trump’s view that an AI takeover that destroys humanity should not be treated as inevitable has its own logic. And Coxon, Hubinger, and other researchers who study AI existential risk worry that, beyond a certain level of capability, AI could bring catastrophe on human society as a whole. That worry, too, need not contradict the other two.</p>
+          <p class="key"><strong>There may be a variable in the middle that we have missed: war.</strong></p>
+          <p>AI does not need to develop a desire to destroy humanity on its own. As long as humans keep going to war with one another, we may actively ask AI to learn capabilities it otherwise had no reason to learn. And war does not only supply military reasons. It also brings fear, loss, anger, and revenge, which make the limits we once set for AI harder and harder to hold.</p>
+          <p>This is why I believe AI safety cannot, in the end, be only a conversation about AI itself. We can research AI alignment. We can build guardrails. We can require a human in the loop. We can isolate the most dangerous systems. All of these matter, and all of them should be done.</p>
+          <p class="key key--amber"><strong>But we must also face an older and possibly harder question: when humans go to war with one another, can we still hold the lines we drew for AI?</strong></p>
+          <p>If AI one day truly becomes a force capable of destroying humanity, we may call it an AI catastrophe, and then ask which model went rogue, which guardrail failed, which safety mechanism fell short.</p>
+          <p>But before we blame AI, perhaps we should remember:</p>
+          <p class="key"><strong>AI never asked to learn how to destroy us. We taught it.</strong></p>
+          <p>And what we should truly fear may not be that AI one day becomes too much like an enemy. It may be that, in the end, we will have taught it that too: the side of us that war brings out, at our most frightened, our most enraged, our most willing to stop at nothing.</p>
+          <div class="end-mark" aria-hidden="true"></div>
+        </article>
+
+        <!-- ========== 中文 ========== -->
+        <article class="reading-card prose-post" lang="zh-Hant" data-lang="zh">
+          <p class="lead">最近，「AI 是否有一天會毀滅人類」這個問題又重新成為討論焦點。2026 年 9 月，剛離開 Anthropic 的研究員雅各布・考克森（Jacob Coxon）公開警告，開發最先進 AI 的一些研究者確實相信，AI 可能在不久的未來對人類造成生存層級的威脅。Anthropic AI 對齊（alignment）團隊研究員埃文・胡賓格（Evan Hubinger）也公開表示，他認為未來十年出現這類災難性結果的機率並非可以忽略。</p>
+          <p>幾天之後，美國總統川普（Donald Trump）於社群媒體上直接反駁這種說法，稱「AI taking over the World, destroying Humanity」是一場騙局（HOAX）。Nvidia 執行長黃仁勳（Jensen Huang）在同一時期接受 CBS News 訪問時，也明確反對這種末日論述。當被問到 2030 年是否可能出現 AI 導致的世界末日時，他的回答非常直接：「0% chance。」但黃仁勳的完整論點其實比這句話細緻。他並不是說 AI 永遠不可能造成危險，而是認為 AI 是否安全，取決於人類如何設計、限制和使用它。</p>
+          <p>這兩邊看起來像是在爭論完全相反的事情。一邊認為 AI 有可能毀滅人類，另一邊認為 AI 不會莫名其妙地發展成一個決定消滅人類的存在。但我一直覺得，這兩種說法其實可以同時成立。在討論中缺少的，是一個無意或故意忽略的因子。</p>
+
+          <h2 id="zh-why">AI 為什麼要毀滅人類？</h2>
+          <p>這是我認為整場討論裡一個很基本、卻很容易被跳過的問題。</p>
+          <p>一個越來越聰明的 AI，並不代表它自然就需要學習如何毀滅人類。我們希望 AI 理解語言、進行科學研究、設計機械、預測氣候、寫程式、控制機器，甚至理解一個遠比今天更複雜的世界。這些能力都可能讓 AI 變得極其強大，但沒有任何一項能力要求它學習如何傷害人。</p>
+          <p class="key"><strong>所以，也許真正值得問的問題並不是「AI 有一天為什麼會想毀滅我們？」而是「AI 為什麼會具備毀滅我們的能力？」</strong></p>
+          <p>這兩個問題看起來很像，其實完全不同。前者需要我們假設 AI 自己產生某種目標或動機；後者卻不需要。因為有一個非常簡單的答案，可以解釋 AI 為什麼會獲得這些能力：人類會要求它學會。</p>
+          <p class="key key--amber">而最明顯的場景，就是戰爭。</p>
+
+          <h2 id="zh-war">很難不讓 AI 參與戰爭</h2>
+          <p>今天再討論「我們應不應該把 AI 用在軍事上」，某種程度上已經太晚了。AI 已經可以被用來辨識影像、整合感測資料、追蹤物體、預測行動、控制無人載具、協助決策，以及執行網路攻防。這些能力在民用世界有大量價值，在戰場上同樣具有巨大的價值。</p>
+          <p>而軍事競爭有一個很難逃脫的邏輯：如果 AI 能讓一方快一秒找到目標、早一分鐘發現攻擊，或減少自己士兵承擔的風險，那麼即使一個國家不希望把 AI 推向這個方向，它仍然必須問：「如果我們不用，而對方用了呢？」</p>
+          <p>這才是我認為 AI 毀滅性風險討論中經常被忽略的地方。AI 並不需要自己決定學習如何毀滅人類。只要戰爭仍然存在，人類就有非常強烈的理由主動教它如何辨識敵人、追蹤敵人、預測敵人的行動，以及如何更有效率地完成攻擊。</p>
+          <p class="key"><strong>換句話說，AI 並沒有要求我們教它這些事情。是我們需要它知道。</strong></p>
+
+          <h2 id="zh-lines">戰爭會讓原本的底線開始移動</h2>
+          <p>科技被轉向暴力用途，其實遠早於現代科技。人類最早的刀刃工具首先是生存工具，用來切割材料、處理食物與獵物，而不是專門為人與人之間的戰爭而設計；但同樣的切割能力，後來也成為人類彼此傷害的工具。工具本身沒有決定它最後會被用來做什麼，人類才有。</p>
+          <p class="key key--amber"><strong>這不是 AI 特有的問題。戰爭一直有一種很危險的能力：它會改變我們原本認為不可接受的事情。</strong></p>
+          <p>核武就是最極端的例子之一。1905 年愛因斯坦（Albert Einstein）提出質能等價關係時，他當然不是在設計原子彈；但幾十年後，核分裂等科學突破讓核武成為可能，而第二次世界大戰又迅速改變了這些知識被使用的方向。1939 年，面對納粹德國可能率先發展核武的疑慮，愛因斯坦簽署了致羅斯福總統（Franklin D. Roosevelt）的信，警告鈾鏈式反應可能產生威力極大的炸彈。這個故事真正值得注意的不是某個科學家的責任，而是背後那個我們今天依然非常熟悉的問題：如果我們不做，而敵人先做了呢？</p>
+          <p>人類也一直試圖替戰爭設定底線。我們建立國際規則，限制化學武器、生物武器、地雷與集束彈藥等可能造成巨大或無差別傷害的武器。然而真正進入戰爭後，一些原本被認為不應該使用的武器仍然會重新出現。不是因為戰爭讓它們突然變得比較人道，而是因為戰爭提高了「不用它」的代價。</p>
+          <p>但這件事情不只有國家戰略的一面，還有人性的一面。當戰爭還只是新聞，我們很容易冷靜地討論什麼可以做、什麼不可以做；可是當身邊的朋友、同袍與家人一個接一個受到傷害，恐懼、悲傷、憤怒和復仇心理就可能開始改變人的判斷。歷史上的長期衝突也一再顯示，暴力可以形成報復與反報復的循環：今天的受害者可能成為明天更願意跨越界線的人，而新的傷害又創造下一輪報復的理由。</p>
+          <p>這也是為什麼我認為「我們會制定規則」並不足以完全回答 AI 的問題。真正困難的並不是在和平的會議室裡決定底線，而是當自己的城市被攻擊、身邊的人死亡，甚至開始相信自己可能沒有明天時，仍然要求每一個人守住今天畫下的線。</p>
+          <div class="pull"><p>戰爭最危險的地方，也許就是它會讓原本不可接受的事情，一點一點變得可以被理解。</p></div>
+
+          <h2 id="zh-exception">那麼，我們真的能保證 AI 是例外嗎？</h2>
+          <p>今天我們同樣正在替 AI 畫線。我們希望重要的軍事決策維持「人類參與決策」（human-in-the-loop），希望 AI 不應該自行決定對人使用致命武力，也希望某些武器與權限永遠掌握在人類手中。我完全支持這些限制，而且認為它們非常重要。</p>
+          <p>但真正的考驗不是和平時期我們願不願意制定規則，而是當遵守規則開始產生代價時，我們還會不會遵守。如果敵人的 AI 可以在 0.1 秒內完成決策，而我們堅持等待人類批准需要十秒呢？如果自主防禦系統可以保護更多自己的士兵呢？如果昨天才失去同袍的指揮官相信，放寬 AI 的攻擊權限可以阻止同樣的事情明天再次發生呢？</p>
+          <p>這些決定甚至不需要來自一個邪惡的人。它們可能來自恐懼、責任、悲傷、憤怒，也可能來自一個人真誠地相信自己正在保護其他人。這才是我更擔心的地方：<strong>每一次放寬限制，都可能有一個在當下非常合理、甚至非常人性的理由。</strong></p>
+          <p>AI 原本只能辨識與追蹤；後來可以提出攻擊建議；再後來因為人類反應太慢，可以在特定條件下自行反擊。沒有任何一步需要某個人突然宣布「我們不要底線了」。底線可能只是一次退一點，最後回頭看的時候，我們卻可能已經建立了一套非常聰明、可以辨識人、追蹤人、預測人的行動、規劃攻擊、協調大量無人系統，甚至被授權直接執行致命任務的 AI。</p>
+          <div class="flow" role="img" aria-label="辨識與追蹤 → 提出攻擊建議 → 自行反擊 → 執行致命任務">
+            <div class="flow-steps">
+              <span class="flow-step"><b>01</b>辨識與追蹤</span><span class="flow-arrow">→</span>
+              <span class="flow-step"><b>02</b>提出攻擊建議</span><span class="flow-arrow">→</span>
+              <span class="flow-step"><b>03</b>自行反擊</span><span class="flow-arrow">→</span>
+              <span class="flow-step flow-step--last"><b>04</b>執行致命任務</span>
+            </div>
+            <p class="flow-caption">底線如何一次退一點</p>
+          </div>
+          <div class="pull"><p>AI 並沒有自己跨過這些線。是我們一次一次替它把線往後移。</p></div>
+
+          <h2 id="zh-locks">但問題還沒有結束</h2>
+          <p>我們之所以敢把這些能力交給軍事 AI，一個重要前提是相信它仍然可以被控制：限制權限、隔離網路、保留人類參與決策，把最危險的能力鎖在特定的系統與環境裡。只要 AI 不具備突破這些限制的能力，即使它知道如何執行危險的任務，我們仍然可以相信最後的控制權在人類手上。</p>
+          <p>但另一條 AI 發展路線正在同時快速前進。為了網路安全（cybersecurity）、程式開發與自主 AI 代理人（AI agents），我們正在讓 AI 越來越會寫程式、尋找軟體漏洞、操作電腦、理解複雜系統，以及自主完成跨系統的數位任務。這些能力本身有非常重要的正當用途：我們需要 AI 找出漏洞，正是為了在攻擊者利用它之前把漏洞修好。</p>
+          <p class="key"><strong>問題在於，能力本身未必知道我們替它劃分的用途。</strong></p>
+          <p>於是，我們可能正在同時教 AI 兩件不同的事情：在軍事系統裡，我們教它如何辨識、追蹤、攻擊，以及如何更有效率地使用具有巨大破壞力的系統；在網路安全與自主 AI 代理人的發展中，我們則教它如何尋找系統弱點、取得必要權限、操作不同的數位環境，以及在遇到障礙時找到另一條路。</p>
+          <div class="pull"><p>我們之所以不那麼害怕前一種能力，是因為相信可以把它鎖起來；我們之所以需要後一種能力，卻正是因為希望 AI 越來越擅長理解那些鎖是怎麼運作的。</p></div>
+          <p>這兩種能力今天不一定存在於同一個模型裡，也不代表它們未來必然會被結合。真正值得擔心的，是我們能不能保證它們永遠不會交會。</p>
+          <p>如果有一天，一個足以理解和突破數位限制的 AI，也能接觸到人類已經訓練好的軍事 AI、武器控制系統或其他具有巨大破壞能力的系統，那麼它不需要重新學習如何毀滅人類。那些能力可能早就已經存在，只是原本被我們關在不同的地方。</p>
+          <p>這也是 AI 和傳統武器一個很重要的差別。武器可以被鎖在倉庫裡，飛彈可以被放在基地裡，核武可以透過多重實體與程序限制來隔離；但 AI 最重要的部分是軟體、模型與資訊。當一種能力已經被學會，它可能比一件實體武器更容易被複製、修改、組合或重新部署。</p>
+          <p class="key key--amber"><strong>所以問題最後不只是「我們能不能控制一件武器」，而是：當我們一邊教 AI 如何使用危險的能力，一邊又讓 AI 越來越擅長突破數位世界的限制，我們究竟能把這兩件事情隔離多久？</strong></p>
+
+          <h2 id="zh-right">也許他們都是對的</h2>
+          <p>回頭看最開始的爭論，我覺得對的不一定只能是其中一方。</p>
+          <p>黃仁勳認為 AI 不會莫名其妙地走向世界末日，這個觀點可能是對的。川普認為「AI 接管世界、毀滅人類」不該被視為必然，也有其道理。而考克森、胡賓格和其他研究 AI 生存風險（AI existential risk）的研究者擔心，當 AI 的能力超過某個程度之後，它可能具備對整個人類社會造成災難性後果的能力，這個擔憂同樣不必然與前兩者矛盾。</p>
+          <p class="key"><strong>因為中間可能還有一個我們漏掉的變數：戰爭。</strong></p>
+          <p>AI 不需要自己產生毀滅人類的慾望。只要人類仍然彼此戰爭，我們就可能主動要求 AI 學習那些它原本沒有理由學習的能力；而戰爭不只提供軍事上的理由，也會帶來恐懼、失去、憤怒與復仇，讓我們原本替 AI 設定的限制變得越來越難維持。</p>
+          <p>這也是為什麼，我認為 AI 安全最終不能只討論 AI 本身。我們可以研究 AI 對齊（alignment），可以建立安全護欄（guardrails），可以要求人類參與決策，可以隔離最危險的系統。這些事情都重要，也都應該做。</p>
+          <p class="key key--amber"><strong>但我們同時必須面對一個更古老、也可能更困難的問題：當人類彼此進入戰爭時，我們自己是否還守得住替 AI 畫下的那些線？</strong></p>
+          <p>如果有一天 AI 真的成為足以毀滅人類的力量，我們或許會把它稱為一場 AI 災難，然後問是哪一個模型失控、哪一道安全護欄失效、哪一個安全機制沒有做好。</p>
+          <p>但在責怪 AI 以前，也許我們應該先記得：</p>
+          <p class="key"><strong>AI 並沒有要求學會如何毀滅我們。是我們教它的。</strong></p>
+          <p>而真正值得我們害怕的，也許不是 AI 有一天變得太像一個敵人，而是我們最終把人類在戰爭中最恐懼、最憤怒、最不顧一切的那一面，也教給了它。</p>
+          <div class="end-mark" aria-hidden="true"></div>
+        </article>
+
+          <!-- ===================== SHARE (rendered by ../share.js) ===================== -->
+          <div class="share-panel">
+            <div class="share-panel-head">
+              <span class="share-label"><span data-lang="en">Share this post</span><span data-lang="zh">轉貼這篇文章</span></span>
+            </div>
+            <div class="share-kit" data-share></div>
+          </div>
+          <!-- ===================== AUTHOR (compact sign-off) ===================== -->
+          <div class="author-wrap">
+            <div class="author-card">
+              <div class="ac-inner">
+                <div class="ac-art">
+                  <img src="../imgs/web/1H8cfLe6etziZYxbMBJC6BO2zcjhKFwME.jpg" alt="Wei-Ping Chan">
+                </div>
+                <div class="ac-body">
+                  <span class="ac-kicker"><span data-lang="en">Written by</span><span data-lang="zh">作者</span></span>
+                  <span class="ac-name">Wei-Ping Chan</span>
+                </div>
+                <div class="ac-foot">
+                  <a href="../index.html"><span data-lang="en">About</span><span data-lang="zh">關於我</span></a>
+                  <a href="https://www.linkedin.com/in/wei-ping-chan" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ===================== NEXT ===================== -->
+    <section class="essay-next">
+      <p class="next-kicker"><span data-lang="en">Thanks for reading</span><span data-lang="zh">謝謝閱讀</span></p>
+      <h2 class="next-title"><span lang="en" data-lang="en">More posts</span><span lang="zh-Hant" data-lang="zh">更多文章</span></h2>
+      <div class="more-grid" id="more-grid"></div>
+      <a href="../blog.html" class="btn-spectral" id="all-posts-btn">
+        <span data-lang="en">Browse all posts</span><span data-lang="zh">瀏覽所有文章</span><span class="arr">→</span>
+      </a>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER (shared across pages) ===================== -->
+  <footer class="wpc-footer">
+    <div class="max-w-6xl mx-auto px-4 py-10 text-center" style="border-top:1px solid rgba(255,255,255,.06)">
+      <p class="footer-brand">Wei-Ping Chan</p>
+      <p class="text-sm mt-1" style="color:#7a788a">Exploratory Data Scientist · Interdisciplinary Researcher</p>
+      <div class="flex justify-center gap-6 mt-5">
+        <a href="https://github.com/wpchanwork" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/wei-ping-chan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?user=4oeb2iEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+        <a href="https://sos-commons.vercel.app/research" target="_blank" rel="noopener noreferrer">SOS Research</a>
+      </div>
+      <p class="text-xs mt-6" style="color:#55536a">&copy; 2026 Wei-Ping Chan. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../blog-posts.js"></script>
+  <script src="../share.js"></script>
+  <script src="blog-post.js" data-slug="will-ai-destroy-humanity"></script>
+</body>
+</html>

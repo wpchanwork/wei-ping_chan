@@ -13,6 +13,22 @@
 
 window.BLOG_POSTS = [
   {
+    slug: 'will-ai-destroy-humanity',
+    url: 'blog/will-ai-destroy-humanity.html',
+    date: '2026-10-08',
+    cover: 'imgs/web/splash-bg.jpg',   // placeholder until the real cover is added
+    coverPosition: '72% 60%',
+    tags: ['AI', 'Society', 'Ethics'],
+    title: {
+      en: 'Will AI Destroy Humanity?',
+      zh: 'AI 會毀滅人類嗎？'
+    },
+    excerpt: {
+      en: 'The debate over whether AI could destroy humanity usually asks what AI might want. I think the missing variable is war: the capabilities we choose to teach it, and the lines we let slip when we are afraid.',
+      zh: '討論 AI 會不會毀滅人類時，我們常問 AI 想要什麼。但我認為被漏掉的變數是戰爭：我們主動教給它的能力，以及我們在恐懼中一步步退後的底線。'
+    }
+  },
+  {
     slug: 'what-if-research-and-learning-no-longer-revolve-around-universities',
     url: 'blog/what-if-research-and-learning-no-longer-revolve-around-universities.html',
     date: '2026-10-01',
@@ -34,7 +50,9 @@ window.BLOG_POSTS = [
 window.BLOG_TAG_ZH = {
   'Education': '教育',
   'AI': 'AI',
-  'Research': '研究'
+  'Research': '研究',
+  'Society': '社會',
+  'Ethics': '倫理'
 };
 
 /* Shared helpers ------------------------------------------------ */
